@@ -92,7 +92,6 @@
 <meta property="og:image" content="http://yoursite.com/2018/07/12/webpack/27.png">
 <meta property="og:image" content="http://yoursite.com/2018/07/12/webpack/6.png">
 <meta property="og:image" content="http://yoursite.com/2018/07/12/webpack/5.png">
-<meta property="og:image" content="http://yoursite.com/2018/07/12/webpack/xxx.jpg">
 <meta property="og:image" content="http://yoursite.com/2018/07/12/webpack/7.png">
 <meta property="og:image" content="http://yoursite.com/2018/07/12/webpack/8.png">
 <meta property="og:image" content="http://yoursite.com/2018/07/12/webpack/9.png">
@@ -112,7 +111,7 @@
 <meta property="og:image" content="http://yoursite.com/2018/07/12/webpack/29.png">
 <meta property="og:image" content="http://yoursite.com/2018/07/12/webpack/24.png">
 <meta property="og:image" content="http://yoursite.com/2018/07/12/webpack/30.png">
-<meta property="og:updated_time" content="2018-07-12T10:52:54.355Z">
+<meta property="og:updated_time" content="2018-07-12T11:00:35.756Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="&#39;webpack&#39;">
 <meta name="twitter:description" content="前言:webpack(3.x-4.x)学习1.安装webpack首先我们创建一个目录，初始化 npm，然后 在本地安装 webpack，(这里不推荐全局安装,全局安装会将你项目中的 webpack 锁定到指定版本，并且在使用不同的 webpack 版本的项目中，可能会导致构建失败)。创建一个工程目录:比如webpack-test然后进入webpack-test中1.npm init //此时文件目">
@@ -338,7 +337,7 @@ npm install --save-dev style-loader css-loader
 </code></pre><p><img src="/2018/07/12/webpack/10.png" alt="Alt text"></p>
 <h3 id="3-加载sass文件-注意sass文件以-scss结尾"><a href="#3-加载sass文件-注意sass文件以-scss结尾" class="headerlink" title="3.加载sass文件(注意sass文件以.scss结尾)"></a>3.加载sass文件(注意sass文件以.scss结尾)</h3><p>   sass的加载和less几乎一模一样就是在安装sass时需要 cnpm install node-sass sass-loader –save-dev,然后引入sass文件!sass分离出来和less一样把test:/\.scss$/即可</p>
 <h3 id="4-加载图片文件"><a href="#4-加载图片文件" class="headerlink" title="4.加载图片文件"></a>4.加载图片文件</h3><pre><code>加载图片是需要安装 cnpm install file-loader url-loader --save-dev, file-loader是是打包图片到webpack照片中,url-loader是配置limit的,当图片比这个值大的时候就在显示dist里,比这个值小就转成base64写到js代码里,url-loader自带了file-loader功能,且不依赖file-loader所以这里只写了url-loader
-</code></pre><p><img src="/2018/07/12/webpack/27.png" alt="Alt text"><br>    但是,当图片大于limit值得时候,图片生成在dist目录下,没有加载到js文件中,所以这时候图片的路径又会出错,这时候就需要使用绝对路径来处理图片(publicPath)<br><img src="/2018/07/12/webpack/6.png" alt="Alt text"><br><img src="/2018/07/12/webpack/5.png" alt="Alt text"><br>    如果我们在html页面中写入<img src="/2018/07/12/webpack/xxx.jpg">时,webpack不会打包html中的img标签,这个时候需要使用html-withimg-loader插件来解决这个问题<br>    首先cnpm install html-withimg-loader –save-dev ,然后<br><img src="/2018/07/12/webpack/7.png" alt="Alt text"><br>    有的时候我们需要css和js分离,虽然webpack并不希望我们这么做,我们可以使用extract-text-webpack-plugin插件来实现css和js分离有的时候我们需要css和js分离,虽然webpack并不希望我们这么做,我们可以使用extract-text-webpack-plugin插件来实现css和js分离<br>    首先 cnpm install extract-text-webpack-plugin –save-dev, 然后在webpack.config.js中引入const ExtractWebpackPlugin = require(‘extract-text-webpack-plugin’);//把css文件从js中分离出来(webpack4.0后这个插件的版本也要对应上( “extract-text-webpack-plugin”: “^4.0.0-beta.0”,)),在module的rules中<br><img src="/2018/07/12/webpack/8.png" alt="Alt text"><br>    在plugins中<br><img src="/2018/07/12/webpack/9.png" alt="Alt text"><br>    cnpm install –save-dev postcss-loader autoprefixer</p>
+</code></pre><p><img src="/2018/07/12/webpack/27.png" alt="Alt text"><br>    但是,当图片大于limit值得时候,图片生成在dist目录下,没有加载到js文件中,所以这时候图片的路径又会出错,这时候就需要使用绝对路径来处理图片(publicPath)<br><img src="/2018/07/12/webpack/6.png" alt="Alt text"><br><img src="/2018/07/12/webpack/5.png" alt="Alt text"><br>    如果我们在html页面中写入&lt;\img src=”xxx.jpg”&gt;时,webpack不会打包html中的img标签,这个时候需要使用html-withimg-loader插件来解决这个问题<br>    首先cnpm install html-withimg-loader –save-dev ,然后<br><img src="/2018/07/12/webpack/7.png" alt="Alt text"><br>    有的时候我们需要css和js分离,虽然webpack并不希望我们这么做,我们可以使用extract-text-webpack-plugin插件来实现css和js分离有的时候我们需要css和js分离,虽然webpack并不希望我们这么做,我们可以使用extract-text-webpack-plugin插件来实现css和js分离<br>    首先 cnpm install extract-text-webpack-plugin –save-dev, 然后在webpack.config.js中引入const ExtractWebpackPlugin = require(‘extract-text-webpack-plugin’);//把css文件从js中分离出来(webpack4.0后这个插件的版本也要对应上( “extract-text-webpack-plugin”: “^4.0.0-beta.0”,)),在module的rules中<br><img src="/2018/07/12/webpack/8.png" alt="Alt text"><br>    在plugins中<br><img src="/2018/07/12/webpack/9.png" alt="Alt text"><br>    cnpm install –save-dev postcss-loader autoprefixer</p>
 <h3 id="5-消除未使用的css-purifycss-webpack插件"><a href="#5-消除未使用的css-purifycss-webpack插件" class="headerlink" title="5.消除未使用的css(purifycss-webpack插件)"></a>5.消除未使用的css(purifycss-webpack插件)</h3><pre><code>安装插件:cnpm i -D purifycss-webpack purify-css(等同于cnpm install -save-dev purifycss-webpack purify-css),然后引入插件和全局的glob,在plugins中指定消除页面的路径
 </code></pre><p><img src="/2018/07/12/webpack/11.png" alt="Alt text"><br><img src="/2018/07/12/webpack/12.png" alt="Alt text"></p>
 <h3 id="6-给webpack增加babel支持"><a href="#6-给webpack增加babel支持" class="headerlink" title="6.给webpack增加babel支持"></a>6.给webpack增加babel支持</h3><pre><code>Babel其实是一个编译JavaScript的平台，它的强大之处表现在可以通过编译帮你达到以下目的：
