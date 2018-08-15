@@ -379,8 +379,14 @@ vue和react相同点:
  $router.push({path:&quot;name&quot;)
  $router.push({path:&quot;name?a=123&quot;})或者 $router.push({path:&quot;name&quot;,query:{a:123})
  $router.go(1)(前进) $router.go(-1)(后退) $router.go(0)(刷新)
-</code></pre><h4 id="1-router和-router区别"><a href="#1-router和-router区别" class="headerlink" title="1.$router和$router区别:"></a>1.$router和$router区别:</h4><pre><code>注意:传参是this.$router,接收参数是this.$route,这里千万要看清了！！！(接收参数的this可省略)
-$router为VueRouter实例，想要导航到不同URL，则使用$router.push方法,$router为当前router跳转对象，里面可以获取name、path、query、params等
+</code></pre><h4 id="1-router和-route区别"><a href="#1-router和-route区别" class="headerlink" title="1.$router和$route区别:"></a>1.$router和$route区别:</h4><pre><code>注意:传参是this.$router,接收参数是this.$route,这里千万要看清了！！！(接收参数的this可省略)
+$router为VueRouter实例，想要导航到不同URL，则使用$router.push方法,$route为当前router跳转对象，里面可以获取name、path、query、params等
+$router:
+    jump(){
+           this.$router.push({path:&apos;/cart?goodsId=query&apos;});
+        },
+$route:
+`&lt;span&gt;{{$route.params.id}}&lt;/span&gt;&lt;br&gt;`
 </code></pre><h4 id="2-params传参和query传参区别"><a href="#2-params传参和query传参区别" class="headerlink" title="2.params传参和query传参区别:"></a>2.params传参和query传参区别:</h4><pre><code>使用编程式路由的时候,传参要使用$router.push(&quot;xxx&quot;);接收参数要使用$route.query.xxx或者$route.params.xxx
   1..params方式传参和接收参数
       传参:
