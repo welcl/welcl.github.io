@@ -86,7 +86,7 @@
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="第一章:课程介绍:1.课程概述:1.课程主要讲了什么:   基于全栈开发一个简易的商城系统 2.课程涵盖了哪些功能:   商品列表,购物车,地址,结算,订单以及登录模块 3:课程使用到了哪些技术栈:   前端使用Vue全家桶和ES6   后端使用express框架,Mongodb 2.项目整体架构前端:    视图层: 商品列表,购物车,地址列表,商品结算,订单成功    公共组件:vue-rou">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-08-15T08:45:11.393Z">
+<meta property="og:updated_time" content="2018-08-15T09:19:46.712Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="vue2.0+node.js+mongodb">
 <meta name="twitter:description" content="第一章:课程介绍:1.课程概述:1.课程主要讲了什么:   基于全栈开发一个简易的商城系统 2.课程涵盖了哪些功能:   商品列表,购物车,地址,结算,订单以及登录模块 3:课程使用到了哪些技术栈:   前端使用Vue全家桶和ES6   后端使用express框架,Mongodb 2.项目整体架构前端:    视图层: 商品列表,购物车,地址列表,商品结算,订单成功    公共组件:vue-rou">
@@ -479,9 +479,10 @@ vue-resource中提供的方法
     })
     当我们请求的接口比较多,且路径都有公共的地址时,可以在mounted平级的地方写一个:
     http:{
+         //公共地址配置
               root:&apos;http://localhost:63342/vue2.0+node.js+mongodb/shopping/&apos;
             },
-     然后在get,post请求中,写入接下来的地址就可以了~
+     然后在get,post请求中,写入root路径后的地址就可以了~
 </code></pre><h3 id="2-axios基础介绍-axios并没有挂载到vue中-是个独立的"><a href="#2-axios基础介绍-axios并没有挂载到vue中-是个独立的" class="headerlink" title="2.axios基础介绍:axios并没有挂载到vue中,是个独立的"></a>2.axios基础介绍:axios并没有挂载到vue中,是个独立的</h3><pre><code>简书介绍(https://www.jianshu.com/p/df464b26ae58)
  vue-resource已不再是vue官方推荐的插件,取而代之的是axios.
 </code></pre><h4 id="1-get请求-1"><a href="#1-get请求-1" class="headerlink" title="1.get请求:"></a>1.get请求:</h4><pre><code>get(){
@@ -532,7 +533,9 @@ vue-resource中提供的方法
             this.msg=error;
           })
       }
-</code></pre><h4 id="4-全局拦截器配置"><a href="#4-全局拦截器配置" class="headerlink" title="4.全局拦截器配置:"></a>4.全局拦截器配置:</h4><pre><code>//请求之前
+</code></pre><h4 id="4-全局拦截器配置"><a href="#4-全局拦截器配置" class="headerlink" title="4.全局拦截器配置:"></a>4.全局拦截器配置:</h4><pre><code>  mounted(){
+  //全局拦截器配置  可以在这里写loading等效果
+  //请求之前
     axios.interceptors.request.use(function(config){
       console.log(&apos;request init&apos;);
       return config;
@@ -542,6 +545,8 @@ vue-resource中提供的方法
     console.log(&apos;response init&apos;);
     return response;
   })
+
+},
 </code></pre><h2 id="第五章-es6常用语法"><a href="#第五章-es6常用语法" class="headerlink" title="第五章:es6常用语法:"></a>第五章:es6常用语法:</h2><h3 id="es6常用命令介绍"><a href="#es6常用命令介绍" class="headerlink" title="es6常用命令介绍:"></a>es6常用命令介绍:</h3><h4 id="1-let和const命令"><a href="#1-let和const命令" class="headerlink" title="1:let和const命令:"></a>1:let和const命令:</h4><pre><code>var 和let的区别:
   console.log(&quot;a:&quot;+a); //a:undefined
   var a=1;
