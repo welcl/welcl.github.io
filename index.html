@@ -624,6 +624,8 @@ console.log(`i am ${username}`);
     console.log(&quot;newArr1:&quot;+newArr1);
 </code></pre><h4 id="6-promise的用法"><a href="#6-promise的用法" class="headerlink" title="6.promise的用法:"></a>6.promise的用法:</h4><pre><code>promise用法介绍可参考:(https://blog.csdn.net/shan1991fei/article/details/78966297);
  什么是promise(承诺):
+      Promise其实是一个构造函数。
+      当我们new一个Promise的时候其实Promise是会自动执行的,所以我们在使用的时候一般都是把它包裹在函数里,需要的时候再调用。
     Promise是异步编程的一种解决方案，比传统的解决方案（回调函数和事件）更合理更强大
     所谓Promise，简单说就是一个容器，里面保存着某个未来才会结束的事件 (通常是一个异步操作)的结果。
     从语法上说，Promise是一个对象，从它可以获取异步操作的消息

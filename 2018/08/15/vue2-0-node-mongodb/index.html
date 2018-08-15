@@ -86,7 +86,7 @@
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="第一章:课程介绍:1.课程概述:1.课程主要讲了什么:   基于全栈开发一个简易的商城系统 2.课程涵盖了哪些功能:   商品列表,购物车,地址,结算,订单以及登录模块 3:课程使用到了哪些技术栈:   前端使用Vue全家桶和ES6   后端使用express框架,Mongodb 2.项目整体架构前端:    视图层: 商品列表,购物车,地址列表,商品结算,订单成功    公共组件:vue-rou">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-08-15T10:19:34.454Z">
+<meta property="og:updated_time" content="2018-08-15T10:35:25.087Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="vue2.0+node.js+mongodb">
 <meta name="twitter:description" content="第一章:课程介绍:1.课程概述:1.课程主要讲了什么:   基于全栈开发一个简易的商城系统 2.课程涵盖了哪些功能:   商品列表,购物车,地址,结算,订单以及登录模块 3:课程使用到了哪些技术栈:   前端使用Vue全家桶和ES6   后端使用express框架,Mongodb 2.项目整体架构前端:    视图层: 商品列表,购物车,地址列表,商品结算,订单成功    公共组件:vue-rou">
@@ -623,6 +623,8 @@ console.log(`i am ${username}`);
     console.log(&quot;newArr1:&quot;+newArr1);
 </code></pre><h4 id="6-promise的用法"><a href="#6-promise的用法" class="headerlink" title="6.promise的用法:"></a>6.promise的用法:</h4><pre><code>promise用法介绍可参考:(https://blog.csdn.net/shan1991fei/article/details/78966297);
  什么是promise(承诺):
+      Promise其实是一个构造函数。
+      当我们new一个Promise的时候其实Promise是会自动执行的,所以我们在使用的时候一般都是把它包裹在函数里,需要的时候再调用。
     Promise是异步编程的一种解决方案，比传统的解决方案（回调函数和事件）更合理更强大
     所谓Promise，简单说就是一个容器，里面保存着某个未来才会结束的事件 (通常是一个异步操作)的结果。
     从语法上说，Promise是一个对象，从它可以获取异步操作的消息
