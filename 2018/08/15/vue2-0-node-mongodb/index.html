@@ -86,7 +86,7 @@
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="第一章:课程介绍:1.课程概述:1.课程主要讲了什么:   基于全栈开发一个简易的商城系统 2.课程涵盖了哪些功能:   商品列表,购物车,地址,结算,订单以及登录模块 3:课程使用到了哪些技术栈:   前端使用Vue全家桶和ES6   后端使用express框架,Mongodb 2.项目整体架构前端:    视图层: 商品列表,购物车,地址列表,商品结算,订单成功    公共组件:vue-rou">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-08-15T10:35:25.087Z">
+<meta property="og:updated_time" content="2018-08-16T03:13:40.103Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="vue2.0+node.js+mongodb">
 <meta name="twitter:description" content="第一章:课程介绍:1.课程概述:1.课程主要讲了什么:   基于全栈开发一个简易的商城系统 2.课程涵盖了哪些功能:   商品列表,购物车,地址,结算,订单以及登录模块 3:课程使用到了哪些技术栈:   前端使用Vue全家桶和ES6   后端使用express框架,Mongodb 2.项目整体架构前端:    视图层: 商品列表,购物车,地址列表,商品结算,订单成功    公共组件:vue-rou">
@@ -808,9 +808,9 @@ linux下的安装可自行百度
   })
 </code></pre><h3 id="5-利用node-js访问第三方接口-此时node-js相当于客户端-第三方接口相当于服务端"><a href="#5-利用node-js访问第三方接口-此时node-js相当于客户端-第三方接口相当于服务端" class="headerlink" title="5.利用node.js访问第三方接口,此时node.js相当于客户端,第三方接口相当于服务端,"></a>5.利用node.js访问第三方接口,此时node.js相当于客户端,第三方接口相当于服务端,</h3><pre><code>client.js:
   //注意https开头的网址要引入https,http开头的网址要引入http,
-  let http = require(&apos;https&apos;);
+  let https = require(&apos;https&apos;);
   let util = require(&apos;util&apos;);
-  http.get(&apos;https://www.imooc.com/u/loading&apos;,function(res){
+  https.get(&apos;https://www.imooc.com/u/loading&apos;,function(res){
     let data=&apos;&apos;;
     res.on(&quot;data&quot;,function(chunk){
       data+=chunk;
@@ -891,7 +891,7 @@ NoSQL用于超大规模数据的存储。（例如谷歌或Facebook每天为他�
       db.dropDatabase()
 4.创建集合:
     1.db.createCollection(&apos;user&apos;)//这种创建的是空集合
-    2.db.user.insert({id:&quot;101&quot;})//这种属于插入数据的同事创建了集合
+    2.db.user.insert({id:&quot;101&quot;})//这种属于插入数据的同时创建了集合
 5.查看集合:
     show collections
 6.删除集合:
@@ -907,7 +907,7 @@ NoSQL用于超大规模数据的存储。（例如谷歌或Facebook每天为他�
       db.user.find({&quot;likes&quot;:{$lte:50}}).pretty()//小于或等于50的数据
 
       db.user.find()//查看所有user表的数据
-      db.user,findOne()//它只返回一个文档。
+      db.user.findOne()//它只返回一个文档。
 9.更新文档:
     db.user.update({id:&quot;101&quot;},{$set:{id:&quot;110&quot;}})//会把id为101改成id110
 10.删除文档:
