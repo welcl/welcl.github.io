@@ -1009,142 +1009,288 @@ NoSQL用于超大规模数据的存储。（例如谷歌或Facebook每天为他�
               }
             },
       即可解决跨域问题了,这个时候GoodsList.vue中axios.get的数据就是mongodb中返回的数据了,页面中的内容也是从数据库中获取的
-</code></pre><h3 id="3-商品列表分页和排序功能实现"><a href="#3-商品列表分页和排序功能实现" class="headerlink" title="3.商品列表分页和排序功能实现:"></a>3.商品列表分页和排序功能实现:</h3><p> 1.商品列表分页:<br>      在routes/goods.js中修改:<br>        (根据前端返回的page,pageSize,sort进行分页,排序,这个时候我们前端页面还没有定义这些变量,可以在url中访问<br>          <a href="http://localhost:3000/goods/?page=1&amp;pageSize=8&amp;sort=-1" target="_blank" rel="noopener">http://localhost:3000/goods/?page=1&amp;pageSize=8&amp;sort=-1</a><br>        进行试验,试验的结果是商品降序排列)<br>        router.get(“/list”,function(req,res,next){<br>          //设置第几页<br>          let page = parseInt(req.query.page);<br>          //设置一页有几条数据<br>          let pageSize = parseInt(req.query.pageSize);<br>          //设置是升序还是降序,1升序,-1降序<br>          let sort = req.query.sortFlag;<br>          //设置跳过多少条数据<br>          let skip = (page-1)*pageSize;<br>          let params={};<br>          let goodsModel = Goods.find(params).skip(skip).limit(pageSize);<br>          goodsModel.sort({‘salePrice’:sort});<br>          console.log(req.query.page);<br>          console.log(req.params);<br>          // res.send(‘hello goods list’);这个时候运行node bin/www就可以访问到hello goods list<br>          goodsModel.exec(function(err,doc){<br>            if(err){<br>              res.json({<br>                status:1,<br>                msg:err.message<br>              })<br>            }else{<br>              res.json({<br>                status:0,<br>                msg:’’,<br>                result:{<br>                  count:doc.length,<br>                  list:doc<br>                }<br>              })<br>            }<br>          })<br>        })<br> 2.商品列表分页和排序进行前后端交互:<br>      商品分页时需要用到vue-infinite-scroll 插件来滚动加载下一页数据,<br>      可以到<a href="https://www.npmjs.com/package/vue-infinite-scroll查看用法" target="_blank" rel="noopener">https://www.npmjs.com/package/vue-infinite-scroll查看用法</a><br>      安装vue-infinite-scroll:cnpm install vue-infinite-scroll –save ,<br>      在router/index.js中:<br>                    //引入滚动刷新加载内容插件<br>                       import infiniteScroll from ‘vue-infinite-scroll’;<br>                       Vue.use(infiniteScroll);<br>       然后在需要的页面中使用<br>      在goodsList.vue中:<br>      1.//data()中添加:<br>         data(){<br>          return{<br>                //排序参数<br>                sortFlag:true,<br>                //分页<br>                page:1,<br>                 //页面内容个数<br>                pageSize:8,<br>                 //vue-infinite-scroll 插件中(infinite-scroll-disabled=”busy”)<br>                 //滚动是否开启,true不开启,false开启<br>                 busy:true,<br>          }<br>         }<br>         2.//在methods中getGoodsList修改,添加loadMore<br>          methods:{<br>              getGoodsList(flag){<br>                      let param={<br>                          page:this.page,<br>                          pageSize:this.pageSize,<br>                          sortFlag:this.sortFlag?1:-1<br>                        };<br>                      axios.get(‘/goods/list’,{<br>                        params:param<br>                      }).then((result)=&gt;{<br>                        let  res=result.data;<br>                        if(res.status==”0”){<br>                          if(flag){//falg为ture时,说明开始滚动加载了<br>                            //把刚开始页面加载的this.goodsList拼接上新的返回的数据<br>                            this.goodsList=this.goodsList.concat(res.result.list);<br>                            if(res.result.count&lt;this.pageSize){<br>                              this.busy=true;<br>                            }else{<br>                              this.busy=false;<br>                            }<br>                          }else{<br>                            this.goodsList=res.result.list;<br>                            //这个必须要设置this.busy=false,因为初始设置时this.busy=true<br>                            //是为了防止页面刚加载时滚动触发加载第二页,<br>                            // 所以在第一次调用getGoodsList()之后要设置为false开启滚动<br>                            this.busy=false;<br>                          }<br>                        }else{<br>                          this.goodsList=[];<br>                        }</p>
-<pre><code>               })
-             },
-             //滚动加载方法
-             loadMore: function() {
-               this.busy = true;
-               setTimeout(() =&gt; {
-                 this.page++;
-                 this.getGoodsList(true);
-                 //利用传值判断不同时期调用该函数
-               }, 500);
-             },
-}
-</code></pre><p> 3.价格过滤功能实现:<br>      实现思路:把价格的相关参数通过params对象传递到后端goods.js中,在goods.js中根据传递的值,<br>      设置对应价格区间,进行数据查找即可:<br>      后端操作:<br>          在routes/goods.js中添加价格过滤代码:<br>            …….<br>            let priceLevel =req.query.priceLevel;<br>            //定义价格大于,小于区间变量<br>            let priceGt =’’; let priceLt = ‘’;<br>            let params={};<br>            //判断前端传的值<br>            if(priceLevel != “all”){<br>              switch(priceLevel){<br>                case ‘0’: priceGt=0; priceLt=100;break;<br>                case ‘1’: priceGt=101; priceLt=500;break;<br>                case ‘2’: priceGt=501; priceLt=1000;break;<br>                case ‘3’: priceGt=1001; priceLt=5000;break;<br>              }<br>              params={<br>                salePrice:{<br>                  $gte:priceGt,<br>                  $lte:priceLt<br>                }<br>              }<br>            }else{<br>              params={};<br>            }<br>            //mongodb条件操作符，”$lt”, “$lte”, “$gt”, “$gte”, “$ne”就是全部的比较操作符，<br>            对应于”&lt;”, “&lt;=”, “&gt;”, “&gt;=”,”!=”<br>            let goodsModel = Goods.find(params).skip(skip).limit(pageSize);<br>            goodsModel.sort({‘salePrice’:sort});<br>            …….<br>          前端操作:<br>              点击价格区间调用接口,返回数据到前端页面:<br>                  //点击all<br>                     priceAll(){<br>                          this.priceChecked=’all’;<br>                          this.page=1;<br>                          this.getGoodsList();<br>                        },<br>                    //点击其他价格区间<br>                    setPriceFliter(index){<br>                          this.priceChecked=index;<br>                          this.filterBy=false;<br>                          this.overLayFlag=false;<br>                          //点击价格区间调用接口查询数据<br>                          this.page=1;<br>                          this.getGoodsList();<br>                        },<br>                loading图修改层svg图片的形式:<br>                    可以自己在github中搜索loading查找自己喜欢的loading图,下载后在div中插入loding图片并<br>                    进行恰当时刻的显示隐藏即可<br> 4.加入购物车功能实现:<br>      因为加入购物车的数据是要提交到后台的,为了安全我们用post方式来提交,设置购物车是goods下的子路由addCart,</p>
-<pre><code>后端代码:
-    1.首先也是要先设置user模型,在模型中定义用户信息字段:
-          models/user.js:
-            //创建一个用户的模型
-            var mongoose = require(&apos;mongoose&apos;);
-            var Schema = mongoose.Schema;
-            var userSchema = new Schema({
-                &quot;userId&quot;:String,
-                &quot;userName&quot;:String,
-                &quot;userPwd&quot;:String,
-                &quot;orderList&quot;:Array,
-                &quot;cartList&quot;:[
-                    {
-                    &quot;productId&quot;:String,
-                    &quot;productName&quot;:String,
-                    &quot;salePrice&quot;:String,
-                    &quot;productImage&quot;:String,
-                    &quot;checked&quot;:String,
-                    &quot;productNum&quot;:String
-                  }
-                ],
-                &quot;addressList&quot;:Array
-            });
-            module.exports=mongoose.model(&quot;user&quot;,userSchema);
-    2.在routes/goods.js中写子路由addCart的代码:实现添加到购物车的功能
-              ........
-              ......
-            //加入购物车(提交数据post安全)
-            router.post(&quot;/addCart&quot;,function(req,res,next){
-              //假设已经登录,根据用户id查询数据
-                let userId=&apos;100000077&apos;;
-                //获取商品id,post请求获取的方法是req.body,这时不能把前端上的所有商品数据传过来保存,
-                这样是不科学和危险的,我们应该根据商品id去数据库中拿到数据,修改数据库中的数据
-                let productId = req.body.productId;
-                //导入模型
-                let User = require(&apos;../models/user.js&apos;);
-                //在用户表中查找userId=userId(100000077)的用户,第一个userId是模型中定义的,和数据库
-                中的名称相同,第二个userId是用户id
-                User.findOne({userId:userId},function(err,userDoc){
-                    if(err){
-                        res.json({
-                          status:&quot;1&quot;,
-                          msg:err.message
-                        })
+</code></pre><h3 id="3-商品列表分页和排序功能实现"><a href="#3-商品列表分页和排序功能实现" class="headerlink" title="3.商品列表分页和排序功能实现:"></a>3.商品列表分页和排序功能实现:</h3><pre><code>  1.商品列表分页:
+  在routes/goods.js中修改:
+    (根据前端返回的page,pageSize,sort进行分页,排序,这个时候我们前端页面还没有定义这些变量,可以在url中访问
+      http://localhost:3000/goods/?page=1&amp;pageSize=8&amp;sort=-1
+    进行试验,试验的结果是商品降序排列)
+    router.get(&quot;/list&quot;,function(req,res,next){
+      //设置第几页
+      let page = parseInt(req.query.page);
+      //设置一页有几条数据
+      let pageSize = parseInt(req.query.pageSize);
+      //设置是升序还是降序,1升序,-1降序
+      let sort = req.query.sortFlag;
+      //设置跳过多少条数据
+      let skip = (page-1)*pageSize;
+      let params={};
+      let goodsModel = Goods.find(params).skip(skip).limit(pageSize);
+      goodsModel.sort({&apos;salePrice&apos;:sort});
+      console.log(req.query.page);
+      console.log(req.params);
+      // res.send(&apos;hello goods list&apos;);这个时候运行node bin/www就可以访问到hello goods list
+      goodsModel.exec(function(err,doc){
+        if(err){
+          res.json({
+            status:1,
+            msg:err.message
+          })
+        }else{
+          res.json({
+            status:0,
+            msg:&apos;&apos;,
+            result:{
+              count:doc.length,
+              list:doc
+            }
+          })
+        }
+      })
+    })
+2.商品列表分页和排序进行前后端交互:
+  商品分页时需要用到vue-infinite-scroll 插件来滚动加载下一页数据,
+  可以到https://www.npmjs.com/package/vue-infinite-scroll查看用法
+  安装vue-infinite-scroll:cnpm install vue-infinite-scroll --save ,
+  在router/index.js中:
+                //引入滚动刷新加载内容插件
+                   import infiniteScroll from &apos;vue-infinite-scroll&apos;;
+                   Vue.use(infiniteScroll);
+   然后在需要的页面中使用
+  在goodsList.vue中:
+  1.//data()中添加:
+     data(){
+      return{
+            //排序参数
+            sortFlag:true,
+            //分页
+            page:1,
+             //页面内容个数
+            pageSize:8,
+             //vue-infinite-scroll 插件中(infinite-scroll-disabled=&quot;busy&quot;)
+             //滚动是否开启,true不开启,false开启
+             busy:true,
+      }
+     }
+     2.//在methods中getGoodsList修改,添加loadMore
+      methods:{
+          getGoodsList(flag){
+                  let param={
+                      page:this.page,
+                      pageSize:this.pageSize,
+                      sortFlag:this.sortFlag?1:-1
+                    };
+                  axios.get(&apos;/goods/list&apos;,{
+                    params:param
+                  }).then((result)=&gt;{
+                    let  res=result.data;
+                    if(res.status==&quot;0&quot;){
+                      if(flag){//falg为ture时,说明开始滚动加载了
+                        //把刚开始页面加载的this.goodsList拼接上新的返回的数据
+                        this.goodsList=this.goodsList.concat(res.result.list);
+                        if(res.result.count&lt;this.pageSize){
+                          this.busy=true;
+                        }else{
+                          this.busy=false;
+                        }
+                      }else{
+                        this.goodsList=res.result.list;
+                        //这个必须要设置this.busy=false,因为初始设置时this.busy=true
+                        //是为了防止页面刚加载时滚动触发加载第二页,
+                        // 所以在第一次调用getGoodsList()之后要设置为false开启滚动
+                        this.busy=false;
+                      }
                     }else{
-                        console.log(`userDoc:${userDoc}`);
-                        //确认用户id存在后查找商品是否存在
-                        if(userDoc){
-                          //判断购物车中商品是否已经存在,如果存在则商品数量++,不存在保存商品所以信息
-                          let goodsItem = &apos;&apos;;
-                          userDoc.cartList.forEach(function(item){
-                            if(item.productId ==productId){
-                              goodsItem = item;
-                              item.productNum++;
-                            }
-                          });
-                          if(goodsItem){
-                            userDoc.save(function(err2,doc2){
-                              if(err2){
-                                res.json({
-                                  status:&quot;1&quot;,
-                                  msg:err2.message
-                                })
-                              }else{
-                                res.json({
-                                  status:&apos;0&apos;,
-                                  msg:&apos;&apos;,
-                                  result:&apos;success&apos;
-                                })
+                      this.goodsList=[];
+                    }
+
+                  })
+                },
+                //滚动加载方法
+                loadMore: function() {
+                  this.busy = true;
+                  setTimeout(() =&gt; {
+                    this.page++;
+                    this.getGoodsList(true);
+                    //利用传值判断不同时期调用该函数
+                  }, 500);
+                },
+   }
+3.价格过滤功能实现:
+  实现思路:把价格的相关参数通过params对象传递到后端goods.js中,在goods.js中根据传递的值,
+  设置对应价格区间,进行数据查找即可:
+  后端操作:
+      在routes/goods.js中添加价格过滤代码:
+        .......
+        let priceLevel =req.query.priceLevel;
+        //定义价格大于,小于区间变量
+        let priceGt =&apos;&apos;; let priceLt = &apos;&apos;;
+        let params={};
+        //判断前端传的值
+        if(priceLevel != &quot;all&quot;){
+          switch(priceLevel){
+            case &apos;0&apos;: priceGt=0; priceLt=100;break;
+            case &apos;1&apos;: priceGt=101; priceLt=500;break;
+            case &apos;2&apos;: priceGt=501; priceLt=1000;break;
+            case &apos;3&apos;: priceGt=1001; priceLt=5000;break;
+          }
+          params={
+            salePrice:{
+              $gte:priceGt,
+              $lte:priceLt
+            }
+          }
+        }else{
+          params={};
+        }
+        //mongodb条件操作符，&quot;$lt&quot;, &quot;$lte&quot;, &quot;$gt&quot;, &quot;$gte&quot;, &quot;$ne&quot;就是全部的比较操作符，
+        对应于&quot;&lt;&quot;, &quot;&lt;=&quot;, &quot;&gt;&quot;, &quot;&gt;=&quot;,&quot;!=&quot;
+        let goodsModel = Goods.find(params).skip(skip).limit(pageSize);
+        goodsModel.sort({&apos;salePrice&apos;:sort});
+        .......
+      前端操作:
+          点击价格区间调用接口,返回数据到前端页面:
+              //点击all
+                 priceAll(){
+                      this.priceChecked=&apos;all&apos;;
+                      this.page=1;
+                      this.getGoodsList();
+                    },
+                //点击其他价格区间
+                setPriceFliter(index){
+                      this.priceChecked=index;
+                      this.filterBy=false;
+                      this.overLayFlag=false;
+                      //点击价格区间调用接口查询数据
+                      this.page=1;
+                      this.getGoodsList();
+                    },
+            loading图修改层svg图片的形式:
+                可以自己在github中搜索loading查找自己喜欢的loading图,下载后在div中插入loding图片并
+                进行恰当时刻的显示隐藏即可
+4.加入购物车功能实现:
+  因为加入购物车的数据是要提交到后台的,为了安全我们用post方式来提交,设置购物车是goods下的子路由addCart,
+  后端代码:
+      1.首先也是要先设置user模型,在模型中定义用户信息字段:
+            models/user.js:
+              //创建一个用户的模型
+              var mongoose = require(&apos;mongoose&apos;);
+              var Schema = mongoose.Schema;
+              var userSchema = new Schema({
+                  &quot;userId&quot;:String,
+                  &quot;userName&quot;:String,
+                  &quot;userPwd&quot;:String,
+                  &quot;orderList&quot;:Array,
+                  &quot;cartList&quot;:[
+                      {
+                      &quot;productId&quot;:String,
+                      &quot;productName&quot;:String,
+                      &quot;salePrice&quot;:String,
+                      &quot;productImage&quot;:String,
+                      &quot;checked&quot;:String,
+                      &quot;productNum&quot;:String
+                    }
+                  ],
+                  &quot;addressList&quot;:Array
+              });
+              module.exports=mongoose.model(&quot;user&quot;,userSchema);
+      2.在routes/goods.js中写子路由addCart的代码:实现添加到购物车的功能
+                ........
+                ......
+              //加入购物车(提交数据post安全)
+              router.post(&quot;/addCart&quot;,function(req,res,next){
+                //假设已经登录,根据用户id查询数据
+                  let userId=&apos;100000077&apos;;
+                  //获取商品id,post请求获取的方法是req.body,这时不能把前端上的所有商品数据传过来保存,
+                  这样是不科学和危险的,我们应该根据商品id去数据库中拿到数据,修改数据库中的数据
+                  let productId = req.body.productId;
+                  //导入模型
+                  let User = require(&apos;../models/user.js&apos;);
+                  //在用户表中查找userId=userId(100000077)的用户,第一个userId是模型中定义的,和数据库
+                  中的名称相同,第二个userId是用户id
+                  User.findOne({userId:userId},function(err,userDoc){
+                      if(err){
+                          res.json({
+                            status:&quot;1&quot;,
+                            msg:err.message
+                          })
+                      }else{
+                          console.log(`userDoc:${userDoc}`);
+                          //确认用户id存在后查找商品是否存在
+                          if(userDoc){
+                            //判断购物车中商品是否已经存在,如果存在则商品数量++,不存在保存商品所以信息
+                            let goodsItem = &apos;&apos;;
+                            userDoc.cartList.forEach(function(item){
+                              if(item.productId ==productId){
+                                goodsItem = item;
+                                item.productNum++;
                               }
                             });
-                          }else{
-                            Goods.findOne({productId:productId},function(err1,doc1){
-                              if(err1){
-                                res.json({
-                                  status:&quot;1&quot;,
-                                  msg:err1.message
-                                })
-                              }else{
-                                //确认商品存在后,由于,数据库中的字段没有productNum(数量)和checked(是否被选中),所以我们要加进去保存
-                                if(doc1){
-                                  doc1.productNum=1;
-                                  doc1.checked=1;//1选中,0 未选中
-                                  //把商品中的数据和新加的数据加到User.carList中并保存
-                                  userDoc.cartList.push(doc1);
-                                  userDoc.save(function(err2,doc2){
-                                    if(err2){
-                                      res.json({
-                                        status:&quot;1&quot;,
-                                        msg:err2.message
-                                      })
-                                    }else{
-                                      res.json({
-                                        status:&apos;0&apos;,
-                                        msg:&apos;&apos;,
-                                        result:&apos;success&apos;
-                                      })
-                                    }
-                                  });
+                            if(goodsItem){
+                              userDoc.save(function(err2,doc2){
+                                if(err2){
+                                  res.json({
+                                    status:&quot;1&quot;,
+                                    msg:err2.message
+                                  })
+                                }else{
+                                  res.json({
+                                    status:&apos;0&apos;,
+                                    msg:&apos;&apos;,
+                                    result:&apos;success&apos;
+                                  })
                                 }
-                              }
-                            })
+                              });
+                            }else{
+                              Goods.findOne({productId:productId},function(err1,doc1){
+                                if(err1){
+                                  res.json({
+                                    status:&quot;1&quot;,
+                                    msg:err1.message
+                                  })
+                                }else{
+                                  //确认商品存在后,由于,数据库中的字段没有productNum(数量)和checked(是否被选中),所以我们要加进去保存
+                                  if(doc1){
+                                    doc1.productNum=1;
+                                    doc1.checked=1;//1选中,0 未选中
+                                    //把商品中的数据和新加的数据加到User.carList中并保存
+                                    userDoc.cartList.push(doc1);
+                                    userDoc.save(function(err2,doc2){
+                                      if(err2){
+                                        res.json({
+                                          status:&quot;1&quot;,
+                                          msg:err2.message
+                                        })
+                                      }else{
+                                        res.json({
+                                          status:&apos;0&apos;,
+                                          msg:&apos;&apos;,
+                                          result:&apos;success&apos;
+                                        })
+                                      }
+                                    });
+                                  }
+                                }
+                              })
+                            }
                           }
-                        }
-                    }
-                })
-            });
-前端代码:
-      在goodsList.vue中点击购物车,发送一个携带商品id的post请求,
-        //添加进购物车
-                  addCart(productId){
-                    axios.post(&apos;/goods/addCart&apos;,{
-                      productId:productId
-                    }).then((res)=&gt;{
-                      console.log(res);
-                      if(res.data.status==0){
-                        alert(&quot;加入购物车成功&quot;)
-                      }else{
-                        alert(`msg:${res.data.msg}`);
                       }
-                    })
-            }
+                  })
+              });
+  前端代码:
+        在goodsList.vue中点击购物车,发送一个携带商品id的post请求,
+          //添加进购物车
+                    addCart(productId){
+                      axios.post(&apos;/goods/addCart&apos;,{
+                        productId:productId
+                      }).then((res)=&gt;{
+                        console.log(res);
+                        if(res.data.status==0){
+                          alert(&quot;加入购物车成功&quot;)
+                        }else{
+                          alert(`msg:${res.data.msg}`);
+                        }
+                      })
+              }
 </code></pre><h2 id="第十章-登录模块实现"><a href="#第十章-登录模块实现" class="headerlink" title="第十章:登录模块实现"></a>第十章:登录模块实现</h2><h3 id="1-登录功能实现"><a href="#1-登录功能实现" class="headerlink" title="1.登录功能实现:"></a>1.登录功能实现:</h3><pre><code>登录功能属于users/login页面,所以我们需要在routes/users.js中书写后端登录逻辑
 后端代码:
     routes/users.js:
