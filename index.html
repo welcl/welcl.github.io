@@ -229,6 +229,400 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/24/js知识点/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/08/24/js知识点/" itemprop="url">js知识点</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-08-24T16:40:34+08:00">
+                2018-08-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="基础知识点"><a href="#基础知识点" class="headerlink" title="基础知识点:"></a>基础知识点:</h2><h3 id="1-css盒子模型"><a href="#1-css盒子模型" class="headerlink" title="1.css盒子模型:"></a>1.css盒子模型:</h3><pre><code>CSS盒子模型：网页设计中CSS技术所使用的一种思维模型。
+CSS盒子模型组成：外边距（margin）、边框（border）、内边距（padding）、内容（content）。
+CSS盒子模型分为：标准W3C盒子模型，IE盒子模型，注意在两种模型中宽（width）和高（height）包括属性的不同。
+</code></pre><h4 id="W3C模型中："><a href="#W3C模型中：" class="headerlink" title="W3C模型中："></a>W3C模型中：</h4><pre><code>W3C模型中ontent的宽度和高度就是content的宽和高
+　　CSS中的宽（width）=内容（content）的宽
+CSS中的高（height）=内容（content）的高
+</code></pre><h4 id="IE模型中："><a href="#IE模型中：" class="headerlink" title="IE模型中："></a>IE模型中：</h4><pre><code>        IE盒模型中content的宽度和高度包括了border和padding。
+ 　   CSS中的宽（width）=内容（content）的宽+（border+padding）*2
+        CSS中的高（height）=内容（content）的高+（border+padding）*2
+
+margin（外边界）虽不可见，但是它确实在文档中占据了空间，我们要区分两个概念即：盒子所占空间（计入margin ）
+和盒子实际的大小（不计入margin） 。
+</code></pre><h4 id="实例区分两种盒模型"><a href="#实例区分两种盒模型" class="headerlink" title="实例区分两种盒模型:"></a>实例区分两种盒模型:</h4><pre><code>        下面举个例子来区分两种盒模型：
+            一个盒子的 margin 为 20px，border 为 2px，padding 为 10px，content 的宽为 200px、高为 50px。
+        ie盒子模型:
+            盒子所占空间：width=20ｘ2+200=240      　　          height=20ｘ2+50=90
+            盒子实际大小：width=200        　　　　　　　            height=50
+        标准w3c盒子模型:
+            盒子所占空间：width=20ｘ2+2ｘ2+10ｘ2+200=264  　  height=20ｘ2+２ｘ2+10ｘ2 +50=114
+            盒子实际大小：width=200 +2ｘ2+10ｘ2 =224  　　　    height=50+2ｘ2+10ｘ2=74
+box-sizing和两种盒模型:
+        box-sizing有三个取值：
+                1、content-box:使元素遵循标准 w3c 盒子模型（默认值）。
+                2、border-box:使元素遵循ie 盒子模型。
+                3、 inherit： 规定应从父元素继承 box-sizing 属性的值
+        当我们设置box-sizing:content-box时候,如果设置div宽为200px,在设置border,padding等,实际宽度会是200+(border+padding)*2;
+        当我们设置box-sizing:border-box时候,如果设置div宽度为200px,在设置border,padding等,实际宽度会是就是200,只不过内容空间
+        变成了减去(padding+border)*2,
+现在还在用IE6以下的浏览器的用户已经很少了，所以目前浏览器大部分元素都是基于W3C标准盒子模型 上。所以我们平常说的盒子模型
+一般就是标准w3c 盒子模型 （但对于input、button元素默认border-box ，还是基于传统的ie 盒子模型）。一定有人会问，那我们怎样
+让我们的元素都遵循W3C标准盒子模型呢？哈哈，看看你html的文件头部是不是有一个&lt;!DOCTYPE html&gt; ，有这个，就说明你已经遵
+循W3C标准盒子模型了。
+</code></pre><h3 id="2-jsonp实现跨域获取数据"><a href="#2-jsonp实现跨域获取数据" class="headerlink" title="2.jsonp实现跨域获取数据:"></a>2.jsonp实现跨域获取数据:</h3><pre><code>参考:https://blog.csdn.net/hansexploration/article/details/80314948
+参考:https://www.cnblogs.com/chiangchou/p/jsonp.html
+这里列举下实现jsonp跨域的一个demo:
+    首先,你必须要有两个不同的协议,域名,端口都不同的url,只有这样才符合要跨域的基本条件,
+
+    在localhost:8080端口的index.html下:
+        .......
+              &lt;head&gt;
+                &lt;meta charset=&quot;utf-8&quot;&gt;
+                &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width,initial-scale=1.0&quot;&gt;
+                &lt;title&gt;shoppingSystem&lt;/title&gt;
+                &lt;script src=&quot;http://code.jquery.com/jquery-2.1.1.min.js&quot;&gt;&lt;/script&gt;
+                &lt;script type=&quot;text/javascript&quot;&gt;
+                    var localHandler = function(data){
+                        alert(&apos;我是本地函数，可以被跨域的jsonp.js文件调用，远程js带来的数据是：&apos; + data.result);
+                      };
+                      var url = &quot;http://localhost:3000/jsonp.js&quot;;
+                      // 创建script标签，设置其属性
+                      var script = document.createElement(&apos;script&apos;);
+                      script.setAttribute(&apos;src&apos;, url);
+                      // 把script标签加入head，此时调用开始
+                      document.getElementsByTagName(&apos;head&apos;)[0].appendChild(script);
+                    &lt;/script&gt;
+                &lt;!--&lt;/script&gt;--&gt;
+              &lt;/head&gt;
+        ......
+
+    在localhost:3000端口下的jsonp.js下:
+        localHandler({&quot;result&quot;,&quot;我是后端返回的数据&quot;});
+
+    此时页面就会弹出:    我是本地函数，可以被跨域的jsonp.js文件调用，远程js带来的数据是：我是后端返回的数据证明跨域
+    请求成功了!剩下的就是如何把代码封装一下，以便于与用户界面交互，从而实现多次和重复调用,jQuery如何实现jsonp调用？
+
+    在localhost:8080端口的index.html下:
+        jQuery(document).ready(function(){
+                $.ajax({
+                     type: &quot;get&quot;,
+                     async: false,
+                     url: &quot;http://localhost:3000/jsonp.js&quot;,
+                     dataType: &quot;jsonp&quot;,
+                     jsonp: &quot;callback&quot;,//传递给请求处理程序或页面的，用以获得jsonp回调函数名的参数名(一般默认为:callback)
+                     jsonpCallback:&quot;flightHandler&quot;,//自定义的jsonp回调函数名称，默认为jQuery自动生成的随机函数名，也可以写&quot;?&quot;，
+                                                                            //jQuery会自动为你处理数据
+                     success: function(json){
+                         alert(&apos;您查询到航班信息：票价： &apos; + json.price + &apos; 元，余票： &apos; + json.tickets + &apos; 张。&apos;);
+                     },
+                     error: function(){
+                         alert(&apos;fail&apos;);
+                     }
+                 });
+             });
+
+        在localhost:3000端口下的jsonp.js下:
+            flightHandler({
+              &quot;code&quot;: &quot;CA1998&quot;,
+              &quot;price&quot;: 1780,
+              &quot;tickets&quot;: 5
+            });
+
+        当页面中弹出您查询到航班信息：票价： 1780  元，余票： 5 张。
+</code></pre><h3 id="3-冒泡排序-选择排序-插入排序-数组去重"><a href="#3-冒泡排序-选择排序-插入排序-数组去重" class="headerlink" title="3.冒泡排序,选择排序,插入排序,数组去重:"></a>3.冒泡排序,选择排序,插入排序,数组去重:</h3><h4 id="去重排序"><a href="#去重排序" class="headerlink" title="去重排序"></a>去重排序</h4><pre><code>// 方法1:利用indexOf()
+Array.prototype.removeRepeat=function(){
+    var result=[];
+    for(var i=0;i&lt;this.length;i++){
+        if(result.indexOf(this[i])==-1){
+            result.push(this[i]);
+        }
+    }
+    return result;
+};
+var arr=[1,2,2,5,&quot;测试&quot;,&quot;test&quot;,&quot;测试&quot;];
+console.log(arr.removeRepeat());
+
+// 方法2:利用对象的key值是否存在判断
+Array.prototype.removeRepeat=function(){
+    var result=[];
+    var obj={};
+    for(var i=0;i&lt;this.length;i++){
+       if(!obj[this[i]]){
+            result.push(this[i]);
+            obj[this[i]]=1;
+       }
+    }
+    return result;
+};
+var arr=[1,2,2,5,&quot;测试&quot;,&quot;test&quot;,&quot;测试&quot;];
+console.log(arr.removeRepeat());
+</code></pre><h4 id="冒泡排序、插入排序、选择排序合称为简单排序。"><a href="#冒泡排序、插入排序、选择排序合称为简单排序。" class="headerlink" title="冒泡排序、插入排序、选择排序合称为简单排序。"></a>冒泡排序、插入排序、选择排序合称为简单排序。</h4><pre><code>//升序排序:
+方法1:利用sort方法排序
+var quickSort=function(arr){
+    function sortNumber(a,b){
+        return a-b;
+    }
+    return arr.sort(sortNumber);
+};
+arr=[1,4,65,21,2,222,111];
+console.log(quickSort(arr));
+
+//方法2:/***冒泡排序法***/
+//假设从大到小排序:
+//冒泡排序就是第一次循环时:从第一个元素开始和相邻后边元素比较,如果大于后一个元素,则和后一个元素互换位置
+//如果小于后一个元素,则用后一个元素和其相邻的后一个元素再比较,直到最后一个元素为当前数组中最大的元素
+var quickSort=function(arr){
+    var temp;
+    for(var i=0;i&lt;arr.length-1;i++){
+        for(var j=0;j&lt;arr.length-i-1;j++){
+            if(arr[j]&gt;arr[j+1]){
+                temp=arr[j];
+                arr[j]=arr[j+1];
+                arr[j+1]=temp;
+            }
+        }
+    }
+    return arr;
+};
+arr=[1,4,65,21,2,222,111];
+console.log(quickSort(arr));
+</code></pre><h5 id="选择排序"><a href="#选择排序" class="headerlink" title="选择排序"></a>选择排序</h5><pre><code>//选择排序假设从大到小排序:
+// 第一轮:首先先假设第一个元素的下标a[0]为记录的位置,当后边的元素大于这个记录的元素时,
+//更改记录的位置下标为大的元素的下标,以此类推,直到第一次循环找出最大元素的下标,然后把最大元素的和
+// 假设的第一个元素互换位置.
+//第二轮:重复第一轮过程,只不过此时假设第一个元素的下标为a[1],
+var quickSort=function(arr){
+    //因为数组没有直接获取最大值的方法,所以利用apply函数调用Math的max方法(虽然这里没有用到,但是要知道apply用法)
+    // var max=Math.max.apply(null,arr);
+    // console.log(max);
+    var temp;
+    var index;
+    for(var i=0;i&lt;arr.length;i++){
+        index=i;//这个就是假设第一个元素的下标
+            for(var j=i+1;j&lt;arr.length;j++){
+                if(arr[index]&lt;arr[j]){
+                    index=j;//这个就是最大元素的下标
+                }
+            }
+            //互换位置
+            temp=arr[index];
+            arr[index]=arr[i];
+            arr[i]=temp;
+    }
+    return arr;
+};
+arr=[1,4,65,21,2,222,111];
+console.log(quickSort(arr));
+</code></pre><h5 id="插入排序"><a href="#插入排序" class="headerlink" title="插入排序:"></a>插入排序:</h5><pre><code>// 在一个数组中我们不知道哪个是最小值，那么就假定第一个就是最小值，然后取第二个值与第一个值比较,产生排序后的序列，
+// 然后再取第三个值与排序后的序列进行比较插入到对应的位置，依次类推。
+var quickSort=function(arr){
+    var key;
+    for(var i=1;i&lt;arr.length;i++){
+         key=arr[i];
+         var  j=i-1;
+         while(arr[j]&gt;key){
+             arr[j+1]=arr[j];
+             j--;
+         }
+         arr[j+1]=key;
+    }
+    return arr;
+};
+arr=[1,4,65,21,2,222,111];
+console.log(quickSort(arr));
+</code></pre><h3 id="4-阻止冒泡事件和默认事件"><a href="#4-阻止冒泡事件和默认事件" class="headerlink" title="4.阻止冒泡事件和默认事件:"></a>4.阻止冒泡事件和默认事件:</h3><pre><code>        在jQuery中使用return false时，相当于同时使用event.preventDefault(阻止默认事件)和event.stopPropagation(阻止冒泡事件)，
+它会阻止冒泡也会阻止默认行为。但是使用原生js写时，return false只会阻止默认行为。
+</code></pre><h3 id="5-闭包"><a href="#5-闭包" class="headerlink" title="5.闭包:"></a>5.闭包:</h3><pre><code>参考:https://www.cnblogs.com/gitbo/p/6597733.html
+参考:https://www.liaoxuefeng.com/wiki/001434446689867b27157e896e74d51a89c25cc8b43bdb3000/00143449934543461c9d5dfeeb848f5b72bd012e1113d15000
+</code></pre><h4 id="1-什么是闭包"><a href="#1-什么是闭包" class="headerlink" title="1.什么是闭包;"></a>1.什么是闭包;</h4><pre><code>专业说法：
+        当一个内部函数被其外部函数之外的变量引用时，就形成了一个闭包。
+还可以这么理解：
+        闭包就是一个具有封闭功能与包裹功能的结构，是为了实现具有私有访问空间的函数的，函数可以构成闭包，
+        因为函数内部定义的数据函数外部无法访问，即函数具有封闭性；函数可以封装代码即具有包裹性，所以函数
+        可以构成闭包。建闭包的最常见的方式就是在一个函数内创建另一个函数，通过另一个函数访问这个函数的局部变量
+ 函数套函数就是闭包吗？不是！，当一个内部函数被其外部函数之外的变量引用时，才会形成了一个闭包。
+ 在本质上，闭包就是将函数内部和函数外部连接起来的一座桥梁。
+</code></pre><h4 id="2-闭包的作用"><a href="#2-闭包的作用" class="headerlink" title="2. 闭包的作用:"></a>2. 闭包的作用:</h4><pre><code>1.读取函数内部变量(一般情况下我们没法在函数外读取一个函数内的局部变量)
+2.让变量值始终保持在内存里(可以延长局部变量的生命周期,封装私有变量)
+3.避免污染全局变量(我们在函数内定义的a变量不会污染全局a变量)
+</code></pre><h4 id="3-闭包的缺点"><a href="#3-闭包的缺点" class="headerlink" title="3.闭包的缺点"></a>3.闭包的缺点</h4><pre><code>    闭包的缺点就是常驻内存，会增大内存使用量，使用不当很容易造成内存泄露。
+    删除闭包中保存的变量。函数销毁（主动把函数赋为null或者页面卸载）可以释放内存
+实例:
+有权访问另一个函数作用域内变量的函数都是闭包。
+这里 inc 函数访问了构造函数 a 里面的变量 n，所以形成了一个闭包。
+    function a(){
+        var n = 0;
+        function inc(){
+           n++;
+           console.log(n);
+        }
+        return inc;
+    }
+    var c = a();
+    c();    //控制台输出1
+    c();    //控制台输出2
+看看是怎么执行的：
+var c = a()，这一句 a()返回的是函数 inc，那这句等同于 var c = inc;
+c()，这一句等同于 inc();  注意，函数名只是一个标识（指向函数的指针），而()才是执行函数。
+后面三句翻译过来就是：  var c = inc;  inc();  inc();
+ 为啥要这样写呢:
+    我们知道，js的每个函数都是一个个小黑屋，它可以获取外界信息，但是外界却无法直接看到里面的内容。将变量 n 放进小黑屋里，
+    除了 inc 函数之外，没有其他办法能接触到变量 n,而且在函数 a 外定义同名的变量 n 也是互不影响的，这就是所谓的增强“封装性”。
+    而之所以要用 return 返回函数标识 inc，是因为在 a 函数外部无法直接调用 inc 函数，所以 return inc 与外部联系起来.
+ 实例:
+    //常见的闭包陷阱:返回10个10
+        function createFunctions(){
+            var result = new Array();
+            for (var i=0; i &lt; 10; i++){
+                result[i] = function(){
+                    return i;
+                };
+            }
+            return result;
+        }
+        var funcs = createFunctions();
+        console.log(funcs);
+        for (var i=0; i &lt; funcs.length; i++){
+            console.log(funcs[i]());
+        }
+        // //正常的闭包:返回0~9
+        function createFunctions1(){
+            var result = new Array();
+            for (var i=0; i &lt; 10; i++){
+                result[i] = (function(n){
+                    return function(){
+                        return n;
+                    };
+                })(i);
+            }
+            return result;
+        }
+        var funcs1= createFunctions1();
+        console.log(funcs1);
+        for (var i=0; i &lt; funcs1.length; i++){
+            console.log(funcs1[i]());
+        }
+</code></pre><h3 id="6-原型和原型链"><a href="#6-原型和原型链" class="headerlink" title="6.原型和原型链:"></a>6.原型和原型链:</h3><pre><code>要了解:构造函数,原型对象,实例对象之间的关系:
+普通对象
+        最普通的对象：有__proto__属性（指向其原型链），没有prototype属性。
+        原型对象(person.prototype 原型对象还有constructor属性（指向构造函数对象）)
+函数对象：
+       凡是通过new Function()创建的都是函数对象。
+       拥有__proto__、prototype属性（指向原型对象）。
+        Function、Object、Array、Date、String、自定义函数
+        特例： Function.prototype(是原型对象，却是函数对象，下面会有解释)
+        参考:https://blog.csdn.net/sinat_21274091/article/details/52741788
+</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/15/vue2-0-node-mongodb/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -3289,7 +3683,7 @@ document.getElementById(&quot;json&quot;).innerHTML= json.name;
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
