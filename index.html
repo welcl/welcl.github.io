@@ -229,6 +229,165 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/11/项目中关于url截取和rem/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/09/11/项目中关于url截取和rem/" itemprop="url">url截取和rem</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-11T11:17:12+08:00">
+                2018-09-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="1-关于截取url参数的方法"><a href="#1-关于截取url参数的方法" class="headerlink" title="1.关于截取url参数的方法:"></a>1.关于截取url参数的方法:</h3><pre><code>//当url传递参数加密带有等号的时候处理如下:
+//url地址Wie:www.baidu.com?adviserId=qTe+oWBY2QNNf/eRZ/9t6w==&amp;userId=ZA15nBxtd2iAWXFetHGzaJ0IJvB+pTXeJ45tRhXiCRFxmE8aSMm6w0YJLHzqPjMd
+ let obj={
+     params:{},
+     init:function(){
+         this.getParams();
+         },
+     getParams:function(){
+        // 获取参数
+        let data = window.location.href.split(&apos;?&apos;)[1];
+        let arr = data.split(&apos;&amp;&apos;);
+        console.log(arr);
+        let params = {};
+        for(let i = 0;i&lt;arr.length;i++){
+            params[arr[i].slice(0,arr[i].indexOf(&apos;=&apos;))]=arr[i].slice(arr[i].indexOf(&apos;=&apos;)+1,arr[i].length);
+        }
+        this.params = params;
+        console.log(params);
+    }
+ }
+ obj.init();
+ 返回的结果是:
+     //{adviserId: &quot;qTe+oWBY2QNNf/eRZ/9t6w==&quot;, userId: &quot;ZA15nBxtd2iAWXFetHGzaJ0IJvB+pTXeJ45tRhXiCRFxmE8aSMm6w0YJLHzqPjMd&quot;}
+这时候调接口的时候就可以吧this.params传进去即可.
+</code></pre><h3 id="2-rem布局"><a href="#2-rem布局" class="headerlink" title="2.rem布局:"></a>2.rem布局:</h3><pre><code>在用rem布局h5页面时,根据手机浏览器大小动态改变rem的大小,这里1rem=100px
+每个页面加载时调用
+    /*动态调整rem值,除以100*/
+  function setsize() {
+      var winW = document.documentElement.clientWidth,
+          winH = document.documentElement.clientHeight,
+          baseFontSize = 100,
+          baseWidth = 750,
+          winWidthSize = Math.min(winW, winH);
+      if (winWidthSize &lt; 270) {
+          winWidthSize = 270;
+      }
+      var _html = document.getElementsByTagName(&apos;html&apos;)[0];
+      _html.style.fontSize =winWidthSize / baseWidth * baseFontSize + &apos;px&apos;;
+  }
+  setsize();
+</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/24/js知识点/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -3683,7 +3842,7 @@ document.getElementById(&quot;json&quot;).innerHTML= json.name;
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-count">7</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
