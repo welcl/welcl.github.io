@@ -86,7 +86,7 @@
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="1.关于截取url参数的方法://当url传递参数加密带有等号的时候处理如下: //url地址Wie:www.baidu.com?adviserId=qTe+oWBY2QNNf/eRZ/9t6w==&amp;amp;userId=ZA15nBxtd2iAWXFetHGzaJ0IJvB+pTXeJ45tRhXiCRFxmE8aSMm6w0YJLHzqPjMd  let obj={      params:{">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-09-11T03:27:26.758Z">
+<meta property="og:updated_time" content="2018-09-12T01:14:00.317Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="url截取和rem">
 <meta name="twitter:description" content="1.关于截取url参数的方法://当url传递参数加密带有等号的时候处理如下: //url地址Wie:www.baidu.com?adviserId=qTe+oWBY2QNNf/eRZ/9t6w==&amp;amp;userId=ZA15nBxtd2iAWXFetHGzaJ0IJvB+pTXeJ45tRhXiCRFxmE8aSMm6w0YJLHzqPjMd  let obj={      params:{">
@@ -339,7 +339,67 @@
       _html.style.fontSize =winWidthSize / baseWidth * baseFontSize + &apos;px&apos;;
   }
   setsize();
-</code></pre>
+</code></pre><h3 id="3-h5页面上拉刷新加载更多数据"><a href="#3-h5页面上拉刷新加载更多数据" class="headerlink" title="3.h5页面上拉刷新加载更多数据:"></a>3.h5页面上拉刷新加载更多数据:</h3><p>  [借鉴H5下拉刷新和上拉加载实现原理浅析][1];<br>[1]:<a href="https://www.cnblogs.com/zuobaiquan01/p/8874305.html" target="_blank" rel="noopener">https://www.cnblogs.com/zuobaiquan01/p/8874305.html</a><br>  (function(window) {<br>     // 获取当前滚动条的位置<br>        function getScrollTop() {<br>            var scrollTop = 0;<br>            if (document.documentElement &amp;&amp; document.documentElement.scrollTop) {<br>                scrollTop = document.documentElement.scrollTop;<br>            } else if (document.body) {<br>                scrollTop = document.body.scrollTop;<br>            }<br>            return scrollTop;<br>        }</p>
+<pre><code>// 获取当前可视范围的高度
+function getClientHeight() {
+    var clientHeight = 0;
+    if (document.body.clientHeight &amp;&amp; document.documentElement.clientHeight) {
+        clientHeight = Math.min(document.body.clientHeight, document.documentElement.clientHeight);
+    }
+    else {
+        clientHeight = Math.max(document.body.clientHeight, document.documentElement.clientHeight);
+    }
+    return clientHeight;
+}
+
+// 获取文档完整的高度
+function getScrollHeight() {
+    return Math.max(document.body.scrollHeight, document.documentElement.scrollHeight);
+}
+
+var _text = document.querySelector(&apos;.refreshText&apos;),
+    _container = document.querySelector(&apos;.loan-content&apos;);
+
+// 节流函数
+var throttle = function(method, context){
+    clearTimeout(method.tId);
+    method.tId = setTimeout(function(){
+        method.call(context);
+    }, 1000);
+}
+function fetchData() {
+  //loanList.pageNumber当前页,loanList.pageTotal总页数
+    if(loanList.pageNumber&lt;=loanList.pageTotal){
+        customerLendList({
+            data:{data:{
+                    xxxx
+                }},
+            success:function(res){
+                console.log(&apos;xxx请求成功&apos;);
+                console.log(res)
+                  ......
+                  .......
+            },
+            fail:function(){
+                console.log(&apos;请求失败&apos;);
+            }
+        })
+    }else{
+        _text.innerText = &apos;没有数据啦，加油推广吧~&apos;;
+        loanList.loading=false;
+    }
+}
+window.onscroll = function() {
+  //首次加载完所有数据后loanList.loading为false
+    if(loanList.loading){
+        if (getScrollTop() + getClientHeight()+10 &gt;= getScrollHeight()) {
+                _text.innerText = &apos;加载中...&apos;;
+            throttle(fetchData);
+        }
+    }
+};
+</code></pre><p>  })(window)</p>
+
       
     </div>
     
@@ -503,7 +563,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-关于截取url参数的方法"><span class="nav-number">1.</span> <span class="nav-text">1.关于截取url参数的方法:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-rem布局"><span class="nav-number">2.</span> <span class="nav-text">2.rem布局:</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-关于截取url参数的方法"><span class="nav-number">1.</span> <span class="nav-text">1.关于截取url参数的方法:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-rem布局"><span class="nav-number">2.</span> <span class="nav-text">2.rem布局:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-h5页面上拉刷新加载更多数据"><span class="nav-number">3.</span> <span class="nav-text">3.h5页面上拉刷新加载更多数据:</span></a></li></ol></div>
             
 
           </div>
