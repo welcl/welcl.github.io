@@ -400,7 +400,21 @@ window.onscroll = function() {
     }
 };
 </code></pre><p>  })(window)</p>
-
+<h3 id="4-Array-filter-方法"><a href="#4-Array-filter-方法" class="headerlink" title="4.Array.filter()方法:"></a>4.Array.filter()方法:</h3><pre><code>利用array.filter()方法过滤符合条件的数据
+如:过滤年龄大于20岁的数据
+var data=[
+  {age:20,name:&apos;lcl&apos;},
+  {age:18,name:&apos;lcl&apos;},
+  {age:19,name:&apos;lcl&apos;},
+  {age:21,name:&apos;lcl&apos;},
+  {age:22,name:&apos;lcl&apos;}
+]
+var result=data.filter(function(item){
+  return data.age&gt;20;
+  })
+  console.log(result);
+  //{age: 21, name: &quot;lcl&quot;},{age: 22, name: &quot;lcl&quot;}
+</code></pre>
           
         
       

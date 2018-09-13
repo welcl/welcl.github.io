@@ -86,7 +86,7 @@
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="1.关于截取url参数的方法://当url传递参数加密带有等号的时候处理如下: //url地址Wie:www.baidu.com?adviserId=qTe+oWBY2QNNf/eRZ/9t6w==&amp;amp;userId=ZA15nBxtd2iAWXFetHGzaJ0IJvB+pTXeJ45tRhXiCRFxmE8aSMm6w0YJLHzqPjMd  let obj={      params:{">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-09-12T01:14:00.317Z">
+<meta property="og:updated_time" content="2018-09-13T09:43:06.992Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="url截取和rem">
 <meta name="twitter:description" content="1.关于截取url参数的方法://当url传递参数加密带有等号的时候处理如下: //url地址Wie:www.baidu.com?adviserId=qTe+oWBY2QNNf/eRZ/9t6w==&amp;amp;userId=ZA15nBxtd2iAWXFetHGzaJ0IJvB+pTXeJ45tRhXiCRFxmE8aSMm6w0YJLHzqPjMd  let obj={      params:{">
@@ -399,7 +399,21 @@ window.onscroll = function() {
     }
 };
 </code></pre><p>  })(window)</p>
-
+<h3 id="4-Array-filter-方法"><a href="#4-Array-filter-方法" class="headerlink" title="4.Array.filter()方法:"></a>4.Array.filter()方法:</h3><pre><code>利用array.filter()方法过滤符合条件的数据
+如:过滤年龄大于20岁的数据
+var data=[
+  {age:20,name:&apos;lcl&apos;},
+  {age:18,name:&apos;lcl&apos;},
+  {age:19,name:&apos;lcl&apos;},
+  {age:21,name:&apos;lcl&apos;},
+  {age:22,name:&apos;lcl&apos;}
+]
+var result=data.filter(function(item){
+  return data.age&gt;20;
+  })
+  console.log(result);
+  //{age: 21, name: &quot;lcl&quot;},{age: 22, name: &quot;lcl&quot;}
+</code></pre>
       
     </div>
     
@@ -563,7 +577,7 @@ window.onscroll = function() {
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-关于截取url参数的方法"><span class="nav-number">1.</span> <span class="nav-text">1.关于截取url参数的方法:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-rem布局"><span class="nav-number">2.</span> <span class="nav-text">2.rem布局:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-h5页面上拉刷新加载更多数据"><span class="nav-number">3.</span> <span class="nav-text">3.h5页面上拉刷新加载更多数据:</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-关于截取url参数的方法"><span class="nav-number">1.</span> <span class="nav-text">1.关于截取url参数的方法:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-rem布局"><span class="nav-number">2.</span> <span class="nav-text">2.rem布局:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-h5页面上拉刷新加载更多数据"><span class="nav-number">3.</span> <span class="nav-text">3.h5页面上拉刷新加载更多数据:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-Array-filter-方法"><span class="nav-number">4.</span> <span class="nav-text">4.Array.filter()方法:</span></a></li></ol></div>
             
 
           </div>
