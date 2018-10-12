@@ -477,6 +477,7 @@
     &lt;input type=&quot;text&quot; id=&quot;input&quot; /&gt;
     &lt;input type=&quot;button&quot; value=&quot;保存数据&quot; onclick=&quot;saveStorage(&apos;input&apos;);&quot; /&gt;
     &lt;input type=&quot;button&quot; value=&quot;读取数据&quot; onclick=&quot;loadStorage(&apos;msg&apos;);&quot; /&gt;
+    &lt;input type=&quot;button&quot; value=&quot;删除数据&quot; onclick=&quot;removeStorage(&apos;msg&apos;);&quot; /&gt;
     &lt;/body&gt;
 &lt;/html&gt;
 单击&quot;保存数据&quot;按钮时调用saveStorage方法保存数据，单击&quot;读取数据&quot;按钮时调用loadStorage方法调用数据，
@@ -494,6 +495,12 @@ function loadStorage(id){
     //或者var msg=sessionStorage.message;
     target.innerHTML=msg;
 }
+function removeStorage(id){
+    var target=document.getElementById(&quot;msg&quot;);
+    var msg=sessionStorage.removeItem (&quot;message&quot;);
+    //或者var msg=localStorage.message;
+    target.innerHTML=&quot;&quot;;
+}
 //localStorage 示例(可永久保存)    
 function saveStorage(id){
     var target=document.getElementById(id);
@@ -506,6 +513,12 @@ function loadStorage(id){
     var msg=localStorage.getItem(&quot;message&quot;);
     //或者var msg=localStorage.message;
     target.innerHTML=msg;
+}
+function removeStorage(id){
+    var target=document.getElementById(&quot;msg&quot;);
+    var msg=localStorage.removeItem (&quot;message&quot;);
+    //或者var msg=localStorage.message;
+    target.innerHTML=&quot;&quot;;
 }
 这个脚本文件分别使用了sessionStorage与localStorage两种方法。这两种方法都是当用户在input文本框中
 输入内容后单击&quot;保存数据&quot;按钮保存数据，单击&quot;读取数据&quot;按钮读取保存后的数据。但是两种方法对数据的处理
