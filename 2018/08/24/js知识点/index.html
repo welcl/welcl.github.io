@@ -79,17 +79,17 @@
 
 
 
-<meta name="description" content="基础知识点:1.css盒子模型:CSS盒子模型：网页设计中CSS技术所使用的一种思维模型。 CSS盒子模型组成：外边距（margin）、边框（border）、内边距（padding）、内容（content）。 CSS盒子模型分为：标准W3C盒子模型，IE盒子模型，注意在两种模型中宽（width）和高（height）包括属性的不同。 W3C模型中：W3C模型中ontent的宽度和高度就是conten">
+<meta name="description" content="基础知识点:1.css盒子模型:CSS盒子模型：网页设计中CSS技术所使用的一种思维模型。 CSS盒子模型组成：外边距（margin）、边框（border）、内边距（padding）、内容（content）。 CSS盒子模型分为：标准W3C盒子模型，IE盒子模型，注意在两种模型中宽（width）和高（height）包括属性的不同。 W3C模型中：W3C模型中content的宽度和高度就是conte">
 <meta property="og:type" content="article">
 <meta property="og:title" content="js知识点">
 <meta property="og:url" content="http://yoursite.com/2018/08/24/js知识点/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="基础知识点:1.css盒子模型:CSS盒子模型：网页设计中CSS技术所使用的一种思维模型。 CSS盒子模型组成：外边距（margin）、边框（border）、内边距（padding）、内容（content）。 CSS盒子模型分为：标准W3C盒子模型，IE盒子模型，注意在两种模型中宽（width）和高（height）包括属性的不同。 W3C模型中：W3C模型中ontent的宽度和高度就是conten">
+<meta property="og:description" content="基础知识点:1.css盒子模型:CSS盒子模型：网页设计中CSS技术所使用的一种思维模型。 CSS盒子模型组成：外边距（margin）、边框（border）、内边距（padding）、内容（content）。 CSS盒子模型分为：标准W3C盒子模型，IE盒子模型，注意在两种模型中宽（width）和高（height）包括属性的不同。 W3C模型中：W3C模型中content的宽度和高度就是conte">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-10-11T02:00:48.850Z">
+<meta property="og:updated_time" content="2018-10-22T07:52:17.644Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="js知识点">
-<meta name="twitter:description" content="基础知识点:1.css盒子模型:CSS盒子模型：网页设计中CSS技术所使用的一种思维模型。 CSS盒子模型组成：外边距（margin）、边框（border）、内边距（padding）、内容（content）。 CSS盒子模型分为：标准W3C盒子模型，IE盒子模型，注意在两种模型中宽（width）和高（height）包括属性的不同。 W3C模型中：W3C模型中ontent的宽度和高度就是conten">
+<meta name="twitter:description" content="基础知识点:1.css盒子模型:CSS盒子模型：网页设计中CSS技术所使用的一种思维模型。 CSS盒子模型组成：外边距（margin）、边框（border）、内边距（padding）、内容（content）。 CSS盒子模型分为：标准W3C盒子模型，IE盒子模型，注意在两种模型中宽（width）和高（height）包括属性的不同。 W3C模型中：W3C模型中content的宽度和高度就是conte">
 
 
 
@@ -302,7 +302,7 @@
         <h2 id="基础知识点"><a href="#基础知识点" class="headerlink" title="基础知识点:"></a>基础知识点:</h2><h3 id="1-css盒子模型"><a href="#1-css盒子模型" class="headerlink" title="1.css盒子模型:"></a>1.css盒子模型:</h3><pre><code>CSS盒子模型：网页设计中CSS技术所使用的一种思维模型。
 CSS盒子模型组成：外边距（margin）、边框（border）、内边距（padding）、内容（content）。
 CSS盒子模型分为：标准W3C盒子模型，IE盒子模型，注意在两种模型中宽（width）和高（height）包括属性的不同。
-</code></pre><h4 id="W3C模型中："><a href="#W3C模型中：" class="headerlink" title="W3C模型中："></a>W3C模型中：</h4><pre><code>W3C模型中ontent的宽度和高度就是content的宽和高
+</code></pre><h4 id="W3C模型中："><a href="#W3C模型中：" class="headerlink" title="W3C模型中："></a>W3C模型中：</h4><pre><code>W3C模型中content的宽度和高度就是content的宽和高
 　　CSS中的宽（width）=内容（content）的宽
 CSS中的高（height）=内容（content）的高
 </code></pre><h4 id="IE模型中："><a href="#IE模型中：" class="headerlink" title="IE模型中："></a>IE模型中：</h4><pre><code>        IE盒模型中content的宽度和高度包括了border和padding。
@@ -321,8 +321,8 @@ margin（外边界）虽不可见，但是它确实在文档中占据了空间�
             盒子实际大小：width=200 +2ｘ2+10ｘ2 =224  　　　    height=50+2ｘ2+10ｘ2=74
 box-sizing和两种盒模型:
         box-sizing有三个取值：
-                1、content-box:使元素遵循标准 w3c 盒子模型（默认值）。
-                2、border-box:使元素遵循ie 盒子模型。
+                1、content-box:使元素遵循标准 w3c 盒子模型（默认值）。(width+padding+border)
+                2、border-box:使元素遵循ie 盒子模型。(width)
                 3、 inherit： 规定应从父元素继承 box-sizing 属性的值
         当我们设置box-sizing:content-box时候,如果设置div宽为200px,在设置border,padding等,实际宽度会是200+(border+padding)*2;
         当我们设置box-sizing:border-box时候,如果设置div宽度为200px,在设置border,padding等,实际宽度会是就是200,只不过内容空间
@@ -687,7 +687,7 @@ c()，这一句等同于 inc();  注意，函数名只是一个标识（指向�
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-count">10</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>

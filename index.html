@@ -121,7 +121,7 @@
 
 
 
-  <title>lcl's blog</title>
+  <title>Hexo</title>
   
 
 
@@ -152,7 +152,7 @@
     <div class="custom-logo-site-title">
       <a href="/"  class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
-        <span class="site-title">lcl's blog</span>
+        <span class="site-title">Hexo</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
@@ -182,7 +182,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
-            首页
+            Home
           </a>
         </li>
       
@@ -192,7 +192,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
-            归档
+            Archives
           </a>
         </li>
       
@@ -215,6 +215,282 @@
           <div id="content" class="content">
             
   <section id="posts" class="posts-expand">
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/17/html-css知识点/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/10/17/html-css知识点/" itemprop="url">html+css相关知识点梳理</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-10-17T13:29:34+08:00">
+                2018-10-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="HTML"><a href="#HTML" class="headerlink" title="HTML"></a>HTML</h2><h3 id="一-清除浮动的四种方法"><a href="#一-清除浮动的四种方法" class="headerlink" title="一:清除浮动的四种方法:"></a>一:清除浮动的四种方法:</h3><pre><code>清除浮动的本质是为了父元素因为子元素浮动导致父元素内部高度为0的问题
+    &lt;div class=&quot;father&quot;&gt;
+        &lt;div style=&quot;float:left;width:200px;height:200px;&quot;&gt;左浮动&lt;/div&gt;
+        &lt;div style=&quot;float:left;width:200px;height:200px;&quot;&gt;左浮动&lt;/div&gt;
+        &lt;div class=&quot;empty&quot;&gt;&lt;/div&gt;
+    &lt;/div&gt;
+1:在浮动标签最后添加一个空的标签设置属性:clear:both;
+    .empty{clear:both;}
+    优点:通俗易懂,书写方便
+    缺点:添加许多无意义标签,结构比较差
+2:父级添加overflow属性方法;
+    给父级添加overflow方法如:overflow:hidden|auto|scroll 都可
+    .father{overflow:hidden}(前提父元素没有设置高度,如果设置了高度是不用清除的)
+    优点:
+    缺点:内容增多时候容易造成不会自动换行导致内容被隐藏掉,无法显示需要溢出的元素
+3:伪元素清除浮动:(父元素加)
+    :after方式为空元素的升级版,好处是不用单独加标签了
+    使用方法:(可以把下面代码写到reset.css中)
+        .clearfix:after{content:&apos;&apos;;display:block;height:0px;clear:both;visibility:hidden;}
+        .clearfix{*zoom:1;}/*IE6,7专有*/
+    优点:符合闭合浮动的思想,结构语义化正确
+    缺点:由于ie6,7不支持:after,需要使用zoom:1触发haslayout
+4:使用before和after双伪元素清除浮动
+    使用方法:
+        .clearfix:before, .clearfix:after{
+            content:&quot;&quot;;
+            display:table;/*这句话可以触发BFC,BFC可以清除浮动*/
+        }
+        .clearfix:after{
+            clear:both;
+        }
+        .clearfix{*zoom:1;}
+        优点:代码更简洁
+        缺点:由于IE6-7不支持:after,使用zoom:1触发haslayout
+</code></pre><h3 id="二-有趣的边框显示demo"><a href="#二-有趣的边框显示demo" class="headerlink" title="二:有趣的边框显示demo:"></a>二:有趣的边框显示demo:</h3><pre><code>/*需求:一列表格,边框为1px,(相邻的边框也是1px),鼠标经过的时候显示#f04颜色的边框(四个边都是#f04)*/
+css:
+    div{
+        width:250px;
+        height:300px;
+        border:1px solid #ccc;
+        float:left;
+        margin-left:-1px;/*处理相邻边框的border为1px,不加相邻边框border为2px*/
+    }
+    div:hover{
+        border:1px solid #f04;
+        position:relative;/*处理hover时候四个边框都是f04,相对定位也脱离标准流,且在上方显示,但是仍然占据空间,但是如果div已经有了position:relative,这时候再hover的时候不需要再加相对定位秩序加一个z-index:1提升显示层级即可*/
+    }
+html:
+    &lt;div&gt;&lt;/div&gt;
+    &lt;div&gt;&lt;/div&gt;
+    &lt;div&gt;&lt;/div&gt;
+    &lt;div&gt;&lt;/div&gt;
+    &lt;div&gt;&lt;/div&gt;
+效果:
+</code></pre><p><img src="/2018/10/17/html-css知识点/border_demo.png" alt="Alt text"></p>
+<h3 id="三-显示隐藏"><a href="#三-显示隐藏" class="headerlink" title="三:显示隐藏:"></a>三:显示隐藏:</h3><pre><code>display:隐藏后不再保留位置
+visibility:hidden|visible 隐藏之后,继续保留原有位置(停薪留职)
+opacity:为0之后,继续保留原有位置(停薪留职)
+</code></pre><h3 id="四-图片在div中会有3px空白问题"><a href="#四-图片在div中会有3px空白问题" class="headerlink" title="四:图片在div中会有3px空白问题:"></a>四:图片在div中会有3px空白问题:</h3><pre><code>vertical-align:top|middle|baseline|bottom(针对行内块和行内元素,块元素无此属性)
+对齐方式图解:
+</code></pre><p><img src="/2018/10/17/html-css知识点/vertical_demo.png" alt="Alt text"><br>    3px示意图:<br><img src="/2018/10/17/html-css知识点/vertical_demo_3px.png" alt="Alt text"><br>    原因:图片是行内块状元素,是以基线为对齐方式,所以在div显示会空出基线到底线的距离,为3px;<br>    示例:</p>
+<pre><code>css:
+    div{
+        border:1px solid red;
+    }
+    img {
+        /*方法1:设置图片对齐方式为非vertical-align:baseline即可*/
+        vertical-align: middle;
+        /*display: block*/
+        /*方法2:把img 转换块状元素display:block*/
+    }
+html:
+    &lt;div&gt;
+        &lt;img src=&quot;image.jpg&quot;&gt;hello yes
+    &lt;/div&gt;
+</code></pre><h3 id="五-精灵-雪碧-图的使用"><a href="#五-精灵-雪碧-图的使用" class="headerlink" title="五:精灵(雪碧)图的使用:"></a>五:精灵(雪碧)图的使用:</h3><pre><code>1.为什么要使用精灵图:
+    为了有效减少服务器接收和发送请求的的次数,提高页面的加载速度.
+2.精灵图技术的本质:
+    css精灵图是一种处理网页背景图像的方式,把一个页面设计到的所有零星的背景图像都集中到一个大图中,
+    然后将大图应用于网页,这样,当用户访问页面时,只需向服务器发送一次请求,网页中的背景图像即可全部展示
+    出来.
+注意:小公司,背景图片很少的情况,没有必要使用精灵技术,维护成本太高(修改费劲).
+使用:在需要使用背景图的地方写css(利用background-position定位)
+    x:需要的背景图片在精灵图中的x轴的位置
+    y:需要的背景图片在精灵图中的y轴的位置
+    background:url(&apos;xxx.jpg|png&apos;) no-repeat x y;
+</code></pre><h3 id="六-滑动门原理"><a href="#六-滑动门原理" class="headerlink" title="六:滑动门原理:"></a>六:滑动门原理:</h3><p>背景图片:<br><img src="/2018/10/17/html-css知识点/slideDoor.png" alt="Alt text"><br>完成效果图:<br><img src="/2018/10/17/html-css知识点/sliderdoor_demo.png" alt="Alt text"><br>    需求:在导航栏中,字体背景图(左右两边分别有一个闭合的标识)显示根据字体多少显示的时候,此时没法单纯的<br>    设置一个固定大小的背景图,只能使用滑动门的效果让背景图根据字体多少显示。<br>    1.原理：在a标签中设置背景图左标识显示的内容,在a标签中嵌套一个span标签,在span标签中显示背景图右侧的<br>    标识,不给a标签,span标签设置宽度,让他们根据字体大小撑开宽度<br>    使用:</p>
+<pre><code>css:
+    a{
+        margin-left:30px;
+        height:30px;
+        display: inline-block;
+        background:url(slideDoor.png) no-repeat;/*设置左侧标识背景图*/
+        color:#fff;
+        line-height: 30px;
+        font-size:16px;
+        padding-left:15px;
+    }
+    span{
+        display: inline-block;
+        height:30px;
+        padding-right:15px;
+        background: url(slideDoor.png) no-repeat right;/*设置右侧标识和其他部分背景图*/
+    }
+html:
+    &lt;a&gt;
+        &lt;span&gt;首页&lt;/span&gt;
+    &lt;/a&gt;
+    &lt;a&gt;
+        &lt;span&gt;首页啊啊啊啊&lt;/span&gt;
+    &lt;/a&gt;
+写完之后,当在span中输入不同数量的内容时,背景图一般也能完整的显示出来(除非宽度大于了背景图的长度),
+备注:结果图看起来有点错位是因为背景图是截屏截取的,不够准确
+</code></pre><h3 id="七-字体图标的使用"><a href="#七-字体图标的使用" class="headerlink" title="七:字体图标的使用"></a>七:字体图标的使用</h3><pre><code>图片是有诸多有点的,但是缺点也很明显,比如图片不但增加了总文件的大小,还增加了很多额外的&quot;http请求&quot;,这都会大大降低网页
+的性能,更重要的是图片不能很好的进行缩放,图片缩放会导致失真,然而,字体图标作为矢量图却是可以,改变颜色,自由缩放且不失真的
+字体图标的优点:
+    可以做出跟图片一样可以做的事情,改变透明度,旋转等
+    但是本质是文字,可以随意改变颜色,阴影,透明效果等..(因为是字体,改变大小用font-size)
+    本身体积更小,但携带的信息并没有削减
+    几乎支持所有的浏览器
+    移动端设备必备良药
+字体图标使用流程图:
+</code></pre><p><img src="/2018/10/17/html-css知识点/icon_demo.png" alt="Alt text"><br>    使用方法:<br>    1.如果设计给了svg,需要将svg图片转成文字图标样式。<br>        1.打开<a href="https://icomoon.io" target="_blank" rel="noopener">https://icomoon.io</a> 点击右上角iconMoon App<br>        2.进入新的页面后点击左上角import icons把svg图片导入进入生成icon图标<br>        3.选中图标,点击右下角generate font查看每个图标对应的class<br>        4.点击右下角download下载生成的内容载解压缩,找到style.css,存储的即为所需字体图标class样式<br>        5.在需要的地方 <i class="xxx"></i>即可<br>    2.如何实际没有个svg图,需要自己找。<br>        在第2步自己找到需要的图标继续操作即可<br>    注意:下载的sell-icon里共有如下文件夹:<br><img src="/2018/10/17/html-css知识点/sel-icon.png" alt="Alt text"><br>    fonts:存放的是四种字体的不同格式,(如果想在页面使用,需在合适的路径引入这个文件的内容)<br>    demo.html:存放的是下载的所以字体图标的对应编号(可以选择赋值空格来引入图标,也可以选择引入class来引入图标(style.css里有使用示例))<br>    selection.json:存放的是本次下载的图标所以的集合,在增加新图标的时候,可以导入这个文件获取以前的图标,然后在此基础上增加新图标<br>    style.css:存放的是引入fonts的路径和给每个图标写一个class类,可以直接引入html使用其中的class</p>
+<h3 id="八-初始化css样式文件"><a href="#八-初始化css样式文件" class="headerlink" title="八:初始化css样式文件:"></a>八:初始化css样式文件:</h3><pre><code>normalize.css和reset.css(可以去github上搜索并下载即可)
+    Normalize.css只是一个很小的css文件，但它在磨人的HTML元素样式上提供了跨浏览器的高度一致性。相比于传统的CSS 
+reset,Normalize.css是一种现代的、为HTML5准备的优质替代方案。总之，Normalize.css是一种CSS reset的替代方案。
+normalize与CSS Reset的区别:
+    1:保留有用的浏览器默认值，而不是删除它们。
+    2:规范化各种HTML元素的样式。
+    3:纠正错误和常见的浏览器不一致
+    4:通过微妙的改进提高可用性。
+    5:用注释和详细的文档来。
+注意：Normalize支持包括手机浏览器在内的超多浏览器，同时对HTML5元素、排版、列表、嵌入的内容、表单和表哥都进行了一般化。
+尽管这个项目基于一般化的原则，但我们还是在合适的地方使用了更实用的默认值。
+</code></pre><h3 id="九-三大标签的优化-SEO优化"><a href="#九-三大标签的优化-SEO优化" class="headerlink" title="九:三大标签的优化(SEO优化):"></a>九:三大标签的优化(SEO优化):</h3><pre><code>1.title标签:
+    网页标题title:title具有不可替代性,是我们的内页第一个重要的标签,是搜索引擎了解网页的入口,搜索引擎就很大部分是依靠网站title来判断你网站是关于什么内容的
+    如京东:
+    &lt;title&gt;京东(JD.COM)-正品低价、品质保障、配送及时、轻松购物！&lt;/title&gt;
+2.meta标签的 description:
+    description功能让搜索引擎是判断整个页面内容的，当中要写入的内容是你页面内容的简介。description一般不超过100个字符。
+    如京东:
+    &lt;meta name=&quot;description&quot; content=&quot;京东JD.COM-专业的综合网上购物商城,销售家电、数码通讯、电脑、家居百货、
+    服装服饰、母婴、图书、食品等数万个品牌优质商品.便捷、诚信的服务，为您提供愉悦的网上购物体验!&quot;&gt;
+3.meta标签的 Keyword关键字:
+    Keywords是页面关键字,是搜索引擎关注点之一。Keywords应该限制在6~8个关键字左右
+    如京东:
+    &lt;meta name=&quot;Keywords&quot; content=&quot;网上购物,网上商城,手机,笔记本,电脑,MP3,CD,VCD,DV,相机,数码,配件,手表,存储卡,京东&quot;&gt;
+</code></pre><h3 id="十-伪元素after和before用法"><a href="#十-伪元素after和before用法" class="headerlink" title="十:伪元素after和before用法:"></a>十:伪元素after和before用法:</h3><pre><code>css:
+    div::before{
+        content:&quot;我是before添加的内容&quot;;/*这个是必须要有的一个属性,以下的可有可无*/
+        display:block;/*通过伪元素添加的盒子是个行内盒子,可以转成块状盒子*/
+        width:50px;
+        height:50px;
+    }
+    通过before和after添加的盒子在div内部,并且div::before也可以写成div:before,如果要利用after清除浮动可以把高度设置为0
+html:
+    &lt;div&gt;before和after的用法&lt;/div&gt;
+</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
     
       
 
@@ -1145,7 +1421,7 @@ var result=data.filter(function(item){
             <h2 id="基础知识点"><a href="#基础知识点" class="headerlink" title="基础知识点:"></a>基础知识点:</h2><h3 id="1-css盒子模型"><a href="#1-css盒子模型" class="headerlink" title="1.css盒子模型:"></a>1.css盒子模型:</h3><pre><code>CSS盒子模型：网页设计中CSS技术所使用的一种思维模型。
 CSS盒子模型组成：外边距（margin）、边框（border）、内边距（padding）、内容（content）。
 CSS盒子模型分为：标准W3C盒子模型，IE盒子模型，注意在两种模型中宽（width）和高（height）包括属性的不同。
-</code></pre><h4 id="W3C模型中："><a href="#W3C模型中：" class="headerlink" title="W3C模型中："></a>W3C模型中：</h4><pre><code>W3C模型中ontent的宽度和高度就是content的宽和高
+</code></pre><h4 id="W3C模型中："><a href="#W3C模型中：" class="headerlink" title="W3C模型中："></a>W3C模型中：</h4><pre><code>W3C模型中content的宽度和高度就是content的宽和高
 　　CSS中的宽（width）=内容（content）的宽
 CSS中的高（height）=内容（content）的高
 </code></pre><h4 id="IE模型中："><a href="#IE模型中：" class="headerlink" title="IE模型中："></a>IE模型中：</h4><pre><code>        IE盒模型中content的宽度和高度包括了border和padding。
@@ -1164,8 +1440,8 @@ margin（外边界）虽不可见，但是它确实在文档中占据了空间�
             盒子实际大小：width=200 +2ｘ2+10ｘ2 =224  　　　    height=50+2ｘ2+10ｘ2=74
 box-sizing和两种盒模型:
         box-sizing有三个取值：
-                1、content-box:使元素遵循标准 w3c 盒子模型（默认值）。
-                2、border-box:使元素遵循ie 盒子模型。
+                1、content-box:使元素遵循标准 w3c 盒子模型（默认值）。(width+padding+border)
+                2、border-box:使元素遵循ie 盒子模型。(width)
                 3、 inherit： 规定应从父元素继承 box-sizing 属性的值
         当我们设置box-sizing:content-box时候,如果设置div宽为200px,在设置border,padding等,实际宽度会是200+(border+padding)*2;
         当我们设置box-sizing:border-box时候,如果设置div宽度为200px,在设置border,padding等,实际宽度会是就是200,只不过内容空间
@@ -4525,7 +4801,7 @@ document.getElementById(&quot;json&quot;).innerHTML= json.name;
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-count">10</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
