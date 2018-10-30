@@ -345,7 +345,7 @@ css:
     }
     div:hover{
         border:1px solid #f04;
-        position:relative;/*处理hover时候四个边框都是f04,相对定位也脱离标准流,且在上方显示,但是仍然占据空间,但是如果div已经有了position:relative,这时候再hover的时候不需要再加相对定位秩序加一个z-index:1提升显示层级即可*/
+        position:relative;/*处理hover时候四个边框都是f04,相对定位的元素不会脱离文档流。但是如果div已经有了position:relative,这时候再hover的时候不需要再加相对定位秩序加一个z-index:1提升显示层级即可*/
     }
 html:
     &lt;div&gt;&lt;/div&gt;
@@ -422,7 +422,7 @@ html:
     几乎支持所有的浏览器
     移动端设备必备良药
 字体图标使用流程图:
-</code></pre><p><img src="/2018/10/17/html-css知识点/icon_demo.png" alt="Alt text"><br>    使用方法:<br>    1.如果设计给了svg,需要将svg图片转成文字图标样式。<br>        1.打开<a href="https://icomoon.io" target="_blank" rel="noopener">https://icomoon.io</a> 点击右上角iconMoon App<br>        2.进入新的页面后点击左上角import icons把svg图片导入进入生成icon图标<br>        3.选中图标,点击右下角generate font查看每个图标对应的class<br>        4.点击右下角download下载生成的内容载解压缩,找到style.css,存储的即为所需字体图标class样式<br>        5.在需要的地方 <i class="xxx"></i>即可<br>    2.如何实际没有个svg图,需要自己找。<br>        在第2步自己找到需要的图标继续操作即可<br>    注意:下载的sell-icon里共有如下文件夹:<br><img src="/2018/10/17/html-css知识点/sel-icon.png" alt="Alt text"><br>    fonts:存放的是四种字体的不同格式,(如果想在页面使用,需在合适的路径引入这个文件的内容)<br>    demo.html:存放的是下载的所以字体图标的对应编号(可以选择赋值空格来引入图标,也可以选择引入class来引入图标(style.css里有使用示例))<br>    selection.json:存放的是本次下载的图标所以的集合,在增加新图标的时候,可以导入这个文件获取以前的图标,然后在此基础上增加新图标<br>    style.css:存放的是引入fonts的路径和给每个图标写一个class类,可以直接引入html使用其中的class</p>
+</code></pre><p><img src="/2018/10/17/html-css知识点/icon_demo.png" alt="Alt text"><br>    使用方法:<br>    1.如果设计给了svg,需要将svg图片转成文字图标样式。<br>        1.打开<a href="https://icomoon.io" target="_blank" rel="noopener">https://icomoon.io</a> 点击右上角iconMoon App<br>        2.进入新的页面后点击左上角import icons把svg图片导入进入生成icon图标<br>        3.选中图标,点击右下角generate font查看每个图标对应的class<br>        4.点击右下角download下载生成的内容载解压缩,找到style.css,存储的即为所需字体图标class样式<br>        5.在需要的地方 <i class="xxx"></i>即可<br>    2.如何实际没有个svg图,需要自己找。<br>        在第2步自己找到需要的图标继续操作即可<br>    注意:下载的sell-icon里共有如下文件夹:<br><img src="/2018/10/17/html-css知识点/sell-icon.png" alt="Alt text"><br>    fonts:存放的是四种字体的不同格式,(如果想在页面使用,需在合适的路径引入这个文件的内容)<br>    demo.html:存放的是下载的所以字体图标的对应编号(可以选择赋值空格来引入图标,也可以选择引入class来引入图标(style.css里有使用示例))<br>    selection.json:存放的是本次下载的图标所以的集合,在增加新图标的时候,可以导入这个文件获取以前的图标,然后在此基础上增加新图标<br>    style.css:存放的是引入fonts的路径和给每个图标写一个class类,可以直接引入html使用其中的class</p>
 <h3 id="八-初始化css样式文件"><a href="#八-初始化css样式文件" class="headerlink" title="八:初始化css样式文件:"></a>八:初始化css样式文件:</h3><pre><code>normalize.css和reset.css(可以去github上搜索并下载即可)
     Normalize.css只是一个很小的css文件，但它在磨人的HTML元素样式上提供了跨浏览器的高度一致性。相比于传统的CSS 
 reset,Normalize.css是一种现代的、为HTML5准备的优质替代方案。总之，Normalize.css是一种CSS reset的替代方案。
@@ -462,6 +462,58 @@ html:
 3.当成功生成favicon.ico图像文件后,浏览器会自动弹出一个zip的压缩文件将压缩文件中的favicon.ico图像
 放在根目录下(也可以是其他目录)在页面源文件的&lt;head&gt;&lt;/head&gt;标签之间插入
 &lt;link rel=&quot;shortcut icon&quot; href=&quot; /favicon.ico&quot; /&gt; 
+</code></pre><h3 id="十二-css3的flex布局-弹性布局"><a href="#十二-css3的flex布局-弹性布局" class="headerlink" title="十二:css3的flex布局(弹性布局)"></a>十二:css3的flex布局(弹性布局)</h3><pre><code>使用flex布局需要考虑到兼容性问题,pc端兼容性不好,移动端兼容性很好,在移动端使用较多,
+1.通常使用flex布局来实现均分一行或者一列的元素,缩放时也保持对应比例
+    &lt;div class=&quot;father&quot;&gt;
+        &lt;div class=&quot;son&quot;&gt;1&lt;/div&gt;
+        &lt;div&gt;2&lt;/div&gt;
+        &lt;div&gt;3&lt;/div&gt;
+    &lt;/div
+    .father{
+        display:flex;/*规定.father元素使用felx布局*/
+    }
+    .father div{
+        flex:1;/*在一行内显示并且均分*/
+    }
+2.也可以固定.son的宽度,其他的div按着felx布局显示
+    .son{width:200px}
+3.flex布局默认水平分布,也改更改为垂直分布:
+    flex-direction:column;/*水平分布*/
+    flex-direction:row;/*垂直分布*/
+4.其他使用可以参考官方文档即可
+</code></pre><h3 id="十三-background-size背景缩放-css3"><a href="#十三-background-size背景缩放-css3" class="headerlink" title="十三:background-size背景缩放(css3)"></a>十三:background-size背景缩放(css3)</h3><pre><code>1.background-size:80px 100px;/*背景图宽高分别为80px 100px*/
+2.background-size:80px/*背景图宽为80px,高auto(自动根据比例缩放)*/
+3.background-size:cover;/*按背景图比例缩放,以最小的宽或者高为基准,直到最小的那个铺满div才停止缩放,div一定被背景图铺满*/
+4.background-size:contain/*按背景图比例缩放,以最大的宽或者高为基准,直到最大的那个铺满div才停止缩放,div不一定被背景图铺满*/
+注意:
+    如果在开发中遇到了精灵图是实际需要的图的2倍的时候(ios,安卓差异),可以利用background-size:104px;
+把背景图宽高设置成精灵图的一半,然后用background:url(images/xxx.png) no-repeat x y;/*x(y)缩小后
+需要使用图片的x(y)轴上的位置)*/
+例如:原精灵图宽208px高自动,我们需要宽104px的精灵图
+    background:url(images/xxx.png) no-repeat x y;
+    background-size:104px;
+</code></pre><h3 id="十四-多背景-css3"><a href="#十四-多背景-css3" class="headerlink" title="十四:多背景(css3)"></a>十四:多背景(css3)</h3><pre><code>div{
+    background:url(images/xxx.png) no-repeat , url(images/xxx.png) no-repeat;
+}
+以逗号分隔可以设置多背景,可用于自适应布局。
+注意:如果div本身还有背景色,此时应该在下面继续写background:blue;不能把这个颜色写在url那行,因为会重叠覆盖
+例子:
+    background: url(images/paopao.png)  no-repeat top left, url(images/paopao.png) no-repeat right bottom;
+    background-color: blue;  /*多背景颜色写到下面 防止被叠加*/
+</code></pre><h3 id="十五-浏览器前缀"><a href="#十五-浏览器前缀" class="headerlink" title="十五:浏览器前缀"></a>十五:浏览器前缀</h3><pre><code>浏览器前缀                浏览器
+-webkit-                 google Chrome,safari,Android Browser
+-moz-                    Firfox
+-o-                        Opera
+-ms-                    Internet Explorer,Edge
+-khtml-                    Konqueror
+</code></pre><h3 id="十六-盒子半透明"><a href="#十六-盒子半透明" class="headerlink" title="十六:盒子半透明"></a>十六:盒子半透明</h3><pre><code>在没有css3的background:rgba(255,255,255,0.5)的时候,盒子半透明是使用opacity:0.5,但是这样使用会把盒子内的
+文字也半透明,以前的处理方法是在div中嵌套一个div和一个p标签,把div中的div大小设置和外层div一样大,设置
+opacity:0.5,把p标签定位到内层div上,这样就可以实现div半透明,而里面的字不是半透明的效果,在有css3的情况下我们
+可以直接background:rgba(255,255,255,0.5);即可
+html结构:&lt;div&gt;
+            &lt;div&gt;&lt;/div&gt;
+            &lt;p&gt;hello&lt;/p&gt;
+        &lt;/div&gt;
 </code></pre>
           
         
