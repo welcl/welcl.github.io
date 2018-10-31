@@ -93,7 +93,7 @@
 <meta property="og:image" content="http://yoursite.com/2018/10/17/html-css知识点/sliderdoor_demo.png">
 <meta property="og:image" content="http://yoursite.com/2018/10/17/html-css知识点/icon_demo.png">
 <meta property="og:image" content="http://yoursite.com/2018/10/17/html-css知识点/sell-icon.png">
-<meta property="og:updated_time" content="2018-10-29T10:32:11.902Z">
+<meta property="og:updated_time" content="2018-10-30T09:42:07.099Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="html+css相关知识点梳理">
 <meta name="twitter:description" content="HTML一:清除浮动的四种方法:清除浮动的本质是为了父元素因为子元素浮动导致父元素内部高度为0的问题     &amp;lt;div class=&amp;quot;father&amp;quot;&amp;gt;         &amp;lt;div style=&amp;quot;float:left;width:200px;height:200px;&amp;quot;&amp;gt;左浮动&amp;lt;/div&amp;gt;         &amp;lt;div st">
@@ -521,6 +521,38 @@ html结构:&lt;div&gt;
             &lt;div&gt;&lt;/div&gt;
             &lt;p&gt;hello&lt;/p&gt;
         &lt;/div&gt;
+</code></pre><h3 id="十七-css盒子模型"><a href="#十七-css盒子模型" class="headerlink" title="十七:css盒子模型:"></a>十七:css盒子模型:</h3><pre><code>CSS盒子模型：网页设计中CSS技术所使用的一种思维模型。
+CSS盒子模型组成：外边距（margin）、边框（border）、内边距（padding）、内容（content）。
+CSS盒子模型分为：标准W3C盒子模型，IE盒子模型，注意在两种模型中宽（width）和高（height）包括属性的不同。
+</code></pre><h4 id="W3C模型中："><a href="#W3C模型中：" class="headerlink" title="W3C模型中："></a>W3C模型中：</h4><pre><code>W3C模型中content的宽度和高度就是content的宽和高
+　　CSS中的宽（width）=内容（content）的宽
+CSS中的高（height）=内容（content）的高
+</code></pre><h4 id="IE模型中："><a href="#IE模型中：" class="headerlink" title="IE模型中："></a>IE模型中：</h4><pre><code>        IE盒模型中content的宽度和高度包括了border和padding。
+ 　   CSS中的宽（width）=内容（content）的宽+（border+padding）*2
+        CSS中的高（height）=内容（content）的高+（border+padding）*2
+
+margin（外边界）虽不可见，但是它确实在文档中占据了空间，我们要区分两个概念即：盒子所占空间（计入margin ）
+和盒子实际的大小（不计入margin） 。
+</code></pre><h4 id="实例区分两种盒模型"><a href="#实例区分两种盒模型" class="headerlink" title="实例区分两种盒模型:"></a>实例区分两种盒模型:</h4><pre><code>        下面举个例子来区分两种盒模型：
+            一个盒子的 margin 为 20px，border 为 2px，padding 为 10px，content 的宽为 200px、高为 50px。
+        ie盒子模型:
+            盒子所占空间：width=20ｘ2+200=240      　　          height=20ｘ2+50=90
+            盒子实际大小：width=200        　　　　　　　            height=50
+        标准w3c盒子模型:
+            盒子所占空间：width=20ｘ2+2ｘ2+10ｘ2+200=264  　  height=20ｘ2+２ｘ2+10ｘ2 +50=114
+            盒子实际大小：width=200 +2ｘ2+10ｘ2 =224  　　　    height=50+2ｘ2+10ｘ2=74
+box-sizing和两种盒模型:
+        box-sizing有三个取值：
+                1、content-box:使元素遵循标准 w3c 盒子模型（默认值）。(width+padding+border)
+                2、border-box:使元素遵循ie 盒子模型。(width)
+                3、 inherit： 规定应从父元素继承 box-sizing 属性的值
+        当我们设置box-sizing:content-box时候,如果设置div宽为200px,在设置border,padding等,实际宽度会是200+(border+padding)*2;
+        当我们设置box-sizing:border-box时候,如果设置div宽度为200px,在设置border,padding等,实际宽度会是就是200,只不过内容空间
+        变成了减去(padding+border)*2,
+现在还在用IE6以下的浏览器的用户已经很少了，所以目前浏览器大部分元素都是基于W3C标准盒子模型 上。所以我们平常说的盒子模型
+一般就是标准w3c 盒子模型 （但对于input、button元素默认border-box ，还是基于传统的ie 盒子模型）。一定有人会问，那我们怎样
+让我们的元素都遵循W3C标准盒子模型呢？哈哈，看看你html的文件头部是不是有一个&lt;!DOCTYPE html&gt; ，有这个，就说明你已经遵
+循W3C标准盒子模型了。
 </code></pre>
       
     </div>
@@ -685,7 +717,7 @@ html结构:&lt;div&gt;
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#HTML"><span class="nav-number">1.</span> <span class="nav-text">HTML</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#一-清除浮动的四种方法"><span class="nav-number">1.1.</span> <span class="nav-text">一:清除浮动的四种方法:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二-有趣的边框显示demo"><span class="nav-number">1.2.</span> <span class="nav-text">二:有趣的边框显示demo:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三-显示隐藏"><span class="nav-number">1.3.</span> <span class="nav-text">三:显示隐藏:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#四-图片在div中会有3px空白问题"><span class="nav-number">1.4.</span> <span class="nav-text">四:图片在div中会有3px空白问题:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#五-精灵-雪碧-图的使用"><span class="nav-number">1.5.</span> <span class="nav-text">五:精灵(雪碧)图的使用:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#六-滑动门原理"><span class="nav-number">1.6.</span> <span class="nav-text">六:滑动门原理:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#七-字体图标的使用"><span class="nav-number">1.7.</span> <span class="nav-text">七:字体图标的使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#八-初始化css样式文件"><span class="nav-number">1.8.</span> <span class="nav-text">八:初始化css样式文件:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#九-三大标签的优化-SEO优化"><span class="nav-number">1.9.</span> <span class="nav-text">九:三大标签的优化(SEO优化):</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#十-伪元素after和before用法"><span class="nav-number">1.10.</span> <span class="nav-text">十:伪元素after和before用法:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#十一-转换网页title栏的ico图标"><span class="nav-number">1.11.</span> <span class="nav-text">十一:转换网页title栏的ico图标:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#十二-css3的flex布局-弹性布局"><span class="nav-number">1.12.</span> <span class="nav-text">十二:css3的flex布局(弹性布局)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#十三-background-size背景缩放-css3"><span class="nav-number">1.13.</span> <span class="nav-text">十三:background-size背景缩放(css3)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#十四-多背景-css3"><span class="nav-number">1.14.</span> <span class="nav-text">十四:多背景(css3)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#十五-浏览器前缀"><span class="nav-number">1.15.</span> <span class="nav-text">十五:浏览器前缀</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#十六-盒子半透明"><span class="nav-number">1.16.</span> <span class="nav-text">十六:盒子半透明</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#HTML"><span class="nav-number">1.</span> <span class="nav-text">HTML</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#一-清除浮动的四种方法"><span class="nav-number">1.1.</span> <span class="nav-text">一:清除浮动的四种方法:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二-有趣的边框显示demo"><span class="nav-number">1.2.</span> <span class="nav-text">二:有趣的边框显示demo:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三-显示隐藏"><span class="nav-number">1.3.</span> <span class="nav-text">三:显示隐藏:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#四-图片在div中会有3px空白问题"><span class="nav-number">1.4.</span> <span class="nav-text">四:图片在div中会有3px空白问题:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#五-精灵-雪碧-图的使用"><span class="nav-number">1.5.</span> <span class="nav-text">五:精灵(雪碧)图的使用:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#六-滑动门原理"><span class="nav-number">1.6.</span> <span class="nav-text">六:滑动门原理:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#七-字体图标的使用"><span class="nav-number">1.7.</span> <span class="nav-text">七:字体图标的使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#八-初始化css样式文件"><span class="nav-number">1.8.</span> <span class="nav-text">八:初始化css样式文件:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#九-三大标签的优化-SEO优化"><span class="nav-number">1.9.</span> <span class="nav-text">九:三大标签的优化(SEO优化):</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#十-伪元素after和before用法"><span class="nav-number">1.10.</span> <span class="nav-text">十:伪元素after和before用法:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#十一-转换网页title栏的ico图标"><span class="nav-number">1.11.</span> <span class="nav-text">十一:转换网页title栏的ico图标:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#十二-css3的flex布局-弹性布局"><span class="nav-number">1.12.</span> <span class="nav-text">十二:css3的flex布局(弹性布局)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#十三-background-size背景缩放-css3"><span class="nav-number">1.13.</span> <span class="nav-text">十三:background-size背景缩放(css3)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#十四-多背景-css3"><span class="nav-number">1.14.</span> <span class="nav-text">十四:多背景(css3)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#十五-浏览器前缀"><span class="nav-number">1.15.</span> <span class="nav-text">十五:浏览器前缀</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#十六-盒子半透明"><span class="nav-number">1.16.</span> <span class="nav-text">十六:盒子半透明</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#十七-css盒子模型"><span class="nav-number">1.17.</span> <span class="nav-text">十七:css盒子模型:</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#W3C模型中："><span class="nav-number">1.17.1.</span> <span class="nav-text">W3C模型中：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#IE模型中："><span class="nav-number">1.17.2.</span> <span class="nav-text">IE模型中：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#实例区分两种盒模型"><span class="nav-number">1.17.3.</span> <span class="nav-text">实例区分两种盒模型:</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
