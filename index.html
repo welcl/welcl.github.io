@@ -1283,6 +1283,10 @@ console.log(copy);
          },
      getParams:function(){
         // 获取参数
+        //不存在参数的时候return掉
+        if(window.location.href.indexOf(&apos;?&apos;) === -1){
+                return
+         }
         let data = window.location.href.split(&apos;?&apos;)[1];
         let arr = data.split(&apos;&amp;&apos;);
         console.log(arr);
