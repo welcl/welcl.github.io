@@ -1941,64 +1941,65 @@ var obj={};//复杂类型,对象在堆,地址(引用)在栈
             //预解析中,变量的提升,只会在当前的作用域中提升,提前到当前的作用域的最上面
              //函数中的变量只会提前到函数的作用域中的最前面,不会出去
              //预解析会分段(多对的script标签中函数重名,预解析的时候不会冲突)              
-</code></pre><h3 id="十一object-对象-的相关知识-js高级教程Number-String-Date-Array-Boolean-Math-RegExp"><a href="#十一object-对象-的相关知识-js高级教程Number-String-Date-Array-Boolean-Math-RegExp" class="headerlink" title="十一object(对象)的相关知识:(js高级教程Number,String,Date,Array,Boolean,Math,RegExp)"></a>十一object(对象)的相关知识:(js高级教程Number,String,Date,Array,Boolean,Math,RegExp)</h3><pre><code>    什么是对象:
-        对象:有属性和方法,特指的某个事物
-        对象:一组无序属性的集合的键值对,属性的值可以是任意的类型
-一:创建对象的方法:
-        1.调用系统的构造函数创建对象
-             var 变量名= new Object(); Object 是系统的构造函数  Array
+</code></pre><h3 id="十一object-对象-的相关知识"><a href="#十一object-对象-的相关知识" class="headerlink" title="十一object(对象)的相关知识:"></a>十一object(对象)的相关知识:</h3><pre><code>(js高级教程Number,String,Date,Array,Boolean,Math,RegExp)
+          什么是对象:
+              对象:有属性和方法,特指的某个事物
+              对象:一组无序属性的集合的键值对,属性的值可以是任意的类型
+      一:创建对象的方法:
+              1.调用系统的构造函数创建对象
+                   var 变量名= new Object(); Object 是系统的构造函数  Array
 
-        2.自定义构造函数创建对象(结合第一种和需求通过工厂模式创建对象)
-         *  //工厂模式创建对象
-                function createObject(name,age) {
-                  var obj = new Object();//创建对象
-                  //添加属性
-                  obj.name = name;
-                  obj.age = age;
-                  //添加方法
-                  obj.sayHi = function () {
-                    console.log(&quot;阿涅哈斯诶呦,我叫:&quot; + this.name + &quot;我今年:&quot; + this.age);
-                  };
-                  return obj;
-                }
-                //创建人的对象
-                var per1 = createObject(&quot;小芳&quot;,20);
-                per1.sayHi();
+              2.自定义构造函数创建对象(结合第一种和需求通过工厂模式创建对象)
+               *  //工厂模式创建对象
+                      function createObject(name,age) {
+                        var obj = new Object();//创建对象
+                        //添加属性
+                        obj.name = name;
+                        obj.age = age;
+                        //添加方法
+                        obj.sayHi = function () {
+                          console.log(&quot;阿涅哈斯诶呦,我叫:&quot; + this.name + &quot;我今年:&quot; + this.age);
+                        };
+                        return obj;
+                      }
+                      //创建人的对象
+                      var per1 = createObject(&quot;小芳&quot;,20);
+                      per1.sayHi();
 
 
-             自定义构造函数创建对象,我要自己定义一个构造函数,自定义构造函数,创建对象
-               函数和构造函数的区别；名字是不是大写(首字母是大写)
-                function Person(name,age) {
-                  this.name=name;
-                  this.age=age;
-                  this.sayHi=function () {
-                    console.log(&quot;我叫:&quot;+this.name+&quot;,年龄是:&quot;+this.age);
-                  };
-                } 
-                //自定义构造函数创建对象:先自定义一个构造函数,创建对象
-                var obj=new Person(&quot;小明&quot;,10);
-                console.log(obj.name);
-                console.log(obj.age);
-                obj.sayHi();
+                   自定义构造函数创建对象,我要自己定义一个构造函数,自定义构造函数,创建对象
+                     函数和构造函数的区别；名字是不是大写(首字母是大写)
+                      function Person(name,age) {
+                        this.name=name;
+                        this.age=age;
+                        this.sayHi=function () {
+                          console.log(&quot;我叫:&quot;+this.name+&quot;,年龄是:&quot;+this.age);
+                        };
+                      } 
+                      //自定义构造函数创建对象:先自定义一个构造函数,创建对象
+                      var obj=new Person(&quot;小明&quot;,10);
+                      console.log(obj.name);
+                      console.log(obj.age);
+                      obj.sayHi();
 
-                自定义构造函数创建对象做了什么事?(new 的执行过程:)
-                        * 1. 在内存中开辟(申请一块空闲的空间)空间,存储创建的新的对象
-                        * 2. 把this设置为当前的对象
-                        * 3. 设置对象的属性和方法的值
-                        * 4. 把this这个对象返回
+                      自定义构造函数创建对象做了什么事?(new 的执行过程:)
+                              * 1. 在内存中开辟(申请一块空闲的空间)空间,存储创建的新的对象
+                              * 2. 把this设置为当前的对象
+                              * 3. 设置对象的属性和方法的值
+                              * 4. 把this这个对象返回
 
-         * 3.字面量的方式创建对象
-                var obj={};
-//遍历对象,是不能通过for循环遍历,因为无序要用for in
-    //key是一个变量,这个变量中存储的是该对象的所有的属性的名字
-    var json = {
-          &quot;name&quot;: &quot;小明&quot;,
-          &quot;age&quot;: &quot;10&quot;,
-          &quot;sex&quot;: &quot;男&quot;
-        };
-    for (var key in json) {
-      console.log(key + &quot;===========&quot; + json[key]);
-    }
+               * 3.字面量的方式创建对象
+                      var obj={};
+      //遍历对象,是不能通过for循环遍历,因为无序要用for in
+          //key是一个变量,这个变量中存储的是该对象的所有的属性的名字
+          var json = {
+                &quot;name&quot;: &quot;小明&quot;,
+                &quot;age&quot;: &quot;10&quot;,
+                &quot;sex&quot;: &quot;男&quot;
+              };
+          for (var key in json) {
+            console.log(key + &quot;===========&quot; + json[key]);
+          }
 </code></pre><h4 id="Math对象-是静态对象"><a href="#Math对象-是静态对象" class="headerlink" title="Math对象;(是静态对象)"></a>Math对象;(是静态对象)</h4><pre><code>实例对象:通过构造函数创建出来,实例化的对象
 静态对象:不需要创建,直接就是一个对象,方法(静态方法)直接通过这个对象名字调用,
 实例方法必须通过实例对象调用
