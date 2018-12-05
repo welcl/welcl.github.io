@@ -229,6 +229,183 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/05/vue遇到的问题/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/12/05/vue遇到的问题/" itemprop="url">vue开发中遇到的问题</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-12-05T17:22:32+08:00">
+                2018-12-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="1-input输入框type-”number”和type-”tel”在移动端都可以唤醒数字键盘-但是他们都还是可以输入小数点-并且"><a href="#1-input输入框type-”number”和type-”tel”在移动端都可以唤醒数字键盘-但是他们都还是可以输入小数点-并且" class="headerlink" title="1. input输入框type=”number”和type=”tel”在移动端都可以唤醒数字键盘,但是他们都还是可以输入小数点,+,-,并且,"></a>1. input输入框type=”number”和type=”tel”在移动端都可以唤醒数字键盘,但是他们都还是可以输入小数点,+,-,并且,</h3><pre><code>type=&quot;number&quot;输入的小数点在视图上可以看到,但是在控制台结果输出是没有的,这个时候如果用正则表达式截取小
+数点以前的数字就会出现问题,无法获取到想要的数据,type=&quot;number&quot;输入的小数点在视图上可以看到,在控制
+台结果也是有的,此时用正则表达式截取是完全ok的,
+参考:https://blog.csdn.net/qq_22509715/article/details/78993912
+</code></pre><h3 id="2-加密方式"><a href="#2-加密方式" class="headerlink" title="2. 加密方式:"></a>2. 加密方式:</h3><pre><code>参考:https://www.jianshu.com/p/3eaa7a527871
+base64加密属于可逆性的加密，意思就是既可以加密，也可以解密。而MD5加密属于不可逆性的加密，只能够给我们提供加密的方
+式，却没有解密的方式，一般情况多应用与登录注册界面。
+在vue中安装:
+    npm install --save js-base64
+    npm install --save js-md5
+引入和使用
+    引入:
+    import md5 from &apos;js-md5&apos;;
+    let Base64 = require(&apos;js-base64&apos;).Base64;
+    使用:
+    Base64.encode(&apos;dankogai&apos;);  // ZGFua29nYWk=
+    md5(&apos;中文&apos;); // a7bac2239fcdcb3a067903d8077c4a07
+</code></pre><h3 id="3-图形验证码"><a href="#3-图形验证码" class="headerlink" title="3.图形验证码:"></a>3.图形验证码:</h3><pre><code>data表示取得数据的协定名称，image/png 是数据类型名称，base64 是数据的编码方法，逗号后面就是这个image/
+png文件base64编码后的数据。
+根据接口返回的base64的图片,在调接口的时候拿到这个base64图片字段,然后添加到html中,
+注意:是base64格式的必须要加data:image/png;base64,+接口返回的字段,
+如在vue中&lt;img :src=&quot;base64Image&quot;&gt; base64Image=data:image/png;base64,+接口返回的字段,
+可参考:html img Src base64 图片显示(https://www.cnblogs.com/x-st/p/5220282.html)
+</code></pre><h3 id="4-Vue-nextTick-的原理和用途"><a href="#4-Vue-nextTick-的原理和用途" class="headerlink" title="4.Vue.nextTick 的原理和用途"></a>4.Vue.nextTick 的原理和用途</h3><pre><code>详细参考:(https://segmentfault.com/a/1190000012861862)
+用法:在下次 DOM 更新循环结束之后执行延迟回调。在修改数据之后立即使用这个方法，获取更新后的 DOM。
+疑问:
+    1.DOM 更新循环是指什么？
+    2.下次更新循环是什么时候？
+    3.修改数据之后使用，是加快了数据更新进度吗？
+    4.在什么情况下要用到？
+异步说明:Vue 实现响应式并不是数据发生变化之后 DOM 立即变化，而是按一定的策略进行 DOM 的更新。
+具体来说，异步执行的运行机制如下:
+    （1）所有同步任务都在主线程上执行，形成一个执行栈（execution context stack）。
+    （2）主线程之外，还存在一个&quot;任务队列&quot;（task queue）。只要异步任务有了运行结果，
+        就在&quot;任务队列&quot;之中放置一个事件。
+    （3）一旦&quot;执行栈&quot;中的所有同步任务执行完毕，系统就会读取&quot;任务队列&quot;，看看里面有哪些事件。
+        那些对应的异步任务，于是结束等待状态，进入执行栈，开始执行。
+    （4）主线程不断重复上面的第三步。
+事件循环说明:
+    简单来说，Vue 在修改数据后，视图不会立刻更新，而是等同一事件循环中的所有数据变化完成之后，
+    再统一进行视图更新。
+例子:(点击获取元素宽度)
+    &lt;div id=&quot;app&quot;&gt;
+        &lt;p ref=&quot;myWidth&quot; v-if=&quot;showMe&quot;&gt;{{ message }}&lt;/p&gt;
+        &lt;button @click=&quot;getMyWidth&quot;&gt;获取p元素宽度&lt;/button&gt;
+    &lt;/div&gt;
+        getMyWidth() {
+            this.showMe = true;
+            //this.message = this.$refs.myWidth.offsetWidth;
+            //报错 TypeError: this.$refs.myWidth is undefined
+            this.$nextTick(()=&gt;{
+                //dom元素更新后执行，此时能拿到p元素的属性
+                this.message = this.$refs.myWidth.offsetWidth;
+          })
+        }
+</code></pre><h3 id="5-vuex中store存的数据"><a href="#5-vuex中store存的数据" class="headerlink" title="5.vuex中store存的数据:"></a>5.vuex中store存的数据:</h3><pre><code>把vuex注册在根组件下,它的属性可以在单页面中任何地方使用,比如在登录页把手机号和验证码保存在vuex中,
+通过点击由去到别的页面,再回到登录页仍然可以通过vuex去到手机号和验证码,但是一刷新整个页面,属性值都
+会变成初始化状态
+</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/17/html-css知识点/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -5030,137 +5207,13 @@ document.getElementById(&quot;json&quot;).innerHTML= json.name;
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/21/hello-world/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/06/21/hello-world/" itemprop="url">Hello World</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-06-21T18:24:24+08:00">
-                2018-06-21
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
+  <nav class="pagination">
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+  </nav>
+
 
 
           </div>
@@ -5204,7 +5257,7 @@ document.getElementById(&quot;json&quot;).innerHTML= json.name;
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-count">11</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
