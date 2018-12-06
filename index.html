@@ -1495,6 +1495,46 @@ console.log(copy);
       _html.style.fontSize =winWidthSize / baseWidth * baseFontSize + &apos;px&apos;;
   }
   setsize();
+  &lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0&quot;&gt;
+    &lt;title&gt;&lt;/title&gt;
+    &lt;meta name=&quot;format-detection&quot; content=&quot;telephone=no&quot;&gt;
+    &lt;meta name=&quot;format-detection&quot; content=&quot;telephone=no&quot;&gt;
+    &lt;meta http-equiv=&quot;Pragma&quot; content=&quot;no-cache&quot;&gt;
+    &lt;meta http-equiv=&quot;cache-control&quot; content=&quot;no-cache&quot;&gt;
+    &lt;meta http-equiv=&quot;Expires&quot; content=&quot;0&quot;&gt;
+    &lt;meta name=&quot;HandheldFriendly&quot; content=&quot;true&quot;&gt;
+    &lt;meta name=&quot;MobileOptimized&quot; content=&quot;320&quot;&gt;
+    &lt;meta name=&quot;apple-mobile-web-app-capable&quot; content=&quot;yes&quot;&gt;
+    &lt;meta name=&quot;apple-mobile-web-app-status-bar-style&quot; content=&quot;black&quot;&gt;
+    &lt;meta name=&quot;screen-orientation&quot; content=&quot;portrait&quot;&gt;
+    &lt;meta name=&quot;x5-orientation&quot; content=&quot;portrait&quot;&gt;
+    &lt;link rel=&quot;shortcut icon&quot; type=&quot;image/x-icon&quot; href=&quot;favicon.ico&quot;/&gt;
+    &lt;script type=&quot;text/javascript&quot;&gt;
+      /*动态调整rem值,除以100*/
+      function setsize() {
+        var winW = document.documentElement.clientWidth,
+          winH = document.documentElement.clientHeight,
+          baseFontSize = 100,
+          baseWidth = 750,
+          winWidthSize = Math.min(winW, winH);
+        if (winWidthSize &lt; 270) {
+          winWidthSize = 270;
+        }else if(winWidthSize &gt; 750){
+          winWidthSize = 750;
+        }
+        var _html = document.getElementsByTagName(&apos;html&apos;)[0];
+        _html.style.fontSize = winWidthSize / baseWidth * baseFontSize + &apos;px&apos;;
+      }
+      setsize();
+    &lt;/script&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
 </code></pre><h3 id="3-h5页面上拉刷新加载更多数据"><a href="#3-h5页面上拉刷新加载更多数据" class="headerlink" title="3.h5页面上拉刷新加载更多数据:"></a>3.h5页面上拉刷新加载更多数据:</h3><p><a href="https://www.cnblogs.com/zuobaiquan01/p/8874305.html" target="_blank" rel="noopener">借鉴H5下拉刷新和上拉加载实现原理浅析</a><br>  (function(window) {<br>     // 获取当前滚动条的位置<br>        function getScrollTop() {<br>            var scrollTop = 0;<br>            if (document.documentElement &amp;&amp; document.documentElement.scrollTop) {<br>                scrollTop = document.documentElement.scrollTop;<br>            } else if (document.body) {<br>                scrollTop = document.body.scrollTop;<br>            }<br>            return scrollTop;<br>        }</p>
 <pre><code>// 获取当前可视范围的高度
 function getClientHeight() {
