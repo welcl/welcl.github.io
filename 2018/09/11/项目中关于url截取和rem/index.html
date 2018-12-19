@@ -79,17 +79,17 @@
 
 
 
-<meta name="description" content="1.关于截取url参数的方法://当url传递参数加密带有等号的时候处理如下: //url地址Wie:www.baidu.com?adviserId=qTe+oWBY2QNNf/eRZ/9t6w==&amp;amp;userId=ZA15nBxtd2iAWXFetHGzaJ0IJvB+pTXeJ45tRhXiCRFxmE8aSMm6w0YJLHzqPjMd  let obj={      params:{">
+<meta name="description" content="1.关于截取url参数的方法://当url传递参数加密带有等号的时候处理如下: //url地址Wie:www.baidu.com?adviserId=qTe+oWBY2QNNf/eRZ/9t6w==&amp;amp;userId=ZA15nBxtd2iAWXFetHGzaJ0IJvB+pTXeJ45tRhXiCRFxmE8aSMm6w0YJLHzqPjMd 123456789101112131415161">
 <meta property="og:type" content="article">
 <meta property="og:title" content="url截取和rem">
 <meta property="og:url" content="http://yoursite.com/2018/09/11/项目中关于url截取和rem/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="1.关于截取url参数的方法://当url传递参数加密带有等号的时候处理如下: //url地址Wie:www.baidu.com?adviserId=qTe+oWBY2QNNf/eRZ/9t6w==&amp;amp;userId=ZA15nBxtd2iAWXFetHGzaJ0IJvB+pTXeJ45tRhXiCRFxmE8aSMm6w0YJLHzqPjMd  let obj={      params:{">
+<meta property="og:description" content="1.关于截取url参数的方法://当url传递参数加密带有等号的时候处理如下: //url地址Wie:www.baidu.com?adviserId=qTe+oWBY2QNNf/eRZ/9t6w==&amp;amp;userId=ZA15nBxtd2iAWXFetHGzaJ0IJvB+pTXeJ45tRhXiCRFxmE8aSMm6w0YJLHzqPjMd 123456789101112131415161">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-12-06T10:07:20.958Z">
+<meta property="og:updated_time" content="2018-12-19T07:24:22.227Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="url截取和rem">
-<meta name="twitter:description" content="1.关于截取url参数的方法://当url传递参数加密带有等号的时候处理如下: //url地址Wie:www.baidu.com?adviserId=qTe+oWBY2QNNf/eRZ/9t6w==&amp;amp;userId=ZA15nBxtd2iAWXFetHGzaJ0IJvB+pTXeJ45tRhXiCRFxmE8aSMm6w0YJLHzqPjMd  let obj={      params:{">
+<meta name="twitter:description" content="1.关于截取url参数的方法://当url传递参数加密带有等号的时候处理如下: //url地址Wie:www.baidu.com?adviserId=qTe+oWBY2QNNf/eRZ/9t6w==&amp;amp;userId=ZA15nBxtd2iAWXFetHGzaJ0IJvB+pTXeJ45tRhXiCRFxmE8aSMm6w0YJLHzqPjMd 123456789101112131415161">
 
 
 
@@ -301,88 +301,12 @@
       
         <h3 id="1-关于截取url参数的方法"><a href="#1-关于截取url参数的方法" class="headerlink" title="1.关于截取url参数的方法:"></a>1.关于截取url参数的方法:</h3><pre><code>//当url传递参数加密带有等号的时候处理如下:
 //url地址Wie:www.baidu.com?adviserId=qTe+oWBY2QNNf/eRZ/9t6w==&amp;userId=ZA15nBxtd2iAWXFetHGzaJ0IJvB+pTXeJ45tRhXiCRFxmE8aSMm6w0YJLHzqPjMd
- let obj={
-     params:{},
-     init:function(){
-         this.getParams();
-         },
-     getParams:function(){
-        // 获取参数
-        //不存在参数的时候return掉
-        if(window.location.href.indexOf(&apos;?&apos;) === -1){
-                return
-         }
-        let data = window.location.href.split(&apos;?&apos;)[1];
-        let arr = data.split(&apos;&amp;&apos;);
-        console.log(arr);
-        let params = {};
-        for(let i = 0;i&lt;arr.length;i++){
-            params[arr[i].slice(0,arr[i].indexOf(&apos;=&apos;))]=arr[i].slice(arr[i].indexOf(&apos;=&apos;)+1,arr[i].length);
-        }
-        this.params = params;
-        console.log(params);
-    }
- }
- obj.init();
- 返回的结果是:
+</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">let obj=&#123;</span><br><span class="line">	params:&#123;&#125;,</span><br><span class="line">	init:function()&#123;</span><br><span class="line">		this.getParams();</span><br><span class="line">		&#125;,</span><br><span class="line">	getParams:function()&#123;</span><br><span class="line">          // 获取参数</span><br><span class="line">          //不存在参数的时候return掉</span><br><span class="line">          if(window.location.href.indexOf(&apos;?&apos;) === -1)&#123;</span><br><span class="line">                  return</span><br><span class="line">           &#125;</span><br><span class="line">          let data = window.location.href.split(&apos;?&apos;)[1];</span><br><span class="line">          let arr = data.split(&apos;&amp;&apos;);</span><br><span class="line">          console.log(arr);</span><br><span class="line">          let params = &#123;&#125;;</span><br><span class="line">          for(let i = 0;i&lt;arr.length;i++)&#123;</span><br><span class="line">              params[arr[i].slice(0,arr[i].indexOf(&apos;=&apos;))]=arr[i].slice(arr[i].indexOf(&apos;=&apos;)+1,arr[i].length);</span><br><span class="line">          &#125;</span><br><span class="line">          this.params = params;</span><br><span class="line">          console.log(params);</span><br><span class="line">      &#125;</span><br><span class="line">&#125;</span><br><span class="line">obj.init();</span><br></pre></td></tr></table></figure>
+<pre><code> 返回的结果是:
      //{adviserId: &quot;qTe+oWBY2QNNf/eRZ/9t6w==&quot;, userId: &quot;ZA15nBxtd2iAWXFetHGzaJ0IJvB+pTXeJ45tRhXiCRFxmE8aSMm6w0YJLHzqPjMd&quot;}
 这时候调接口的时候就可以吧this.params传进去即可.
-</code></pre><h3 id="2-rem布局"><a href="#2-rem布局" class="headerlink" title="2.rem布局:"></a>2.rem布局:</h3><pre><code>在用rem布局h5页面时,根据手机浏览器大小动态改变rem的大小,这里1rem=100px
-每个页面加载时调用
-    /*动态调整rem值,除以100*/
-  function setsize() {
-      var winW = document.documentElement.clientWidth,
-          winH = document.documentElement.clientHeight,
-          baseFontSize = 100,
-          baseWidth = 750,
-          winWidthSize = Math.min(winW, winH);
-      if (winWidthSize &lt; 270) {
-          winWidthSize = 270;
-      }
-      var _html = document.getElementsByTagName(&apos;html&apos;)[0];
-      _html.style.fontSize =winWidthSize / baseWidth * baseFontSize + &apos;px&apos;;
-  }
-  setsize();
-  &lt;!DOCTYPE html&gt;
-&lt;html&gt;
-  &lt;head&gt;
-    &lt;meta charset=&quot;UTF-8&quot;&gt;
-    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0&quot;&gt;
-    &lt;title&gt;&lt;/title&gt;
-    &lt;meta name=&quot;format-detection&quot; content=&quot;telephone=no&quot;&gt;
-    &lt;meta name=&quot;format-detection&quot; content=&quot;telephone=no&quot;&gt;
-    &lt;meta http-equiv=&quot;Pragma&quot; content=&quot;no-cache&quot;&gt;
-    &lt;meta http-equiv=&quot;cache-control&quot; content=&quot;no-cache&quot;&gt;
-    &lt;meta http-equiv=&quot;Expires&quot; content=&quot;0&quot;&gt;
-    &lt;meta name=&quot;HandheldFriendly&quot; content=&quot;true&quot;&gt;
-    &lt;meta name=&quot;MobileOptimized&quot; content=&quot;320&quot;&gt;
-    &lt;meta name=&quot;apple-mobile-web-app-capable&quot; content=&quot;yes&quot;&gt;
-    &lt;meta name=&quot;apple-mobile-web-app-status-bar-style&quot; content=&quot;black&quot;&gt;
-    &lt;meta name=&quot;screen-orientation&quot; content=&quot;portrait&quot;&gt;
-    &lt;meta name=&quot;x5-orientation&quot; content=&quot;portrait&quot;&gt;
-    &lt;script type=&quot;text/javascript&quot;&gt;
-      /*动态调整rem值,除以100*/
-      function setsize() {
-        var winW = document.documentElement.clientWidth,
-          winH = document.documentElement.clientHeight,
-          baseFontSize = 100,
-          baseWidth = 750,
-          winWidthSize = Math.min(winW, winH);
-        if (winWidthSize &lt; 270) {
-          winWidthSize = 270;
-        }else if(winWidthSize &gt; 750){
-          winWidthSize = 750;
-        }
-        var _html = document.getElementsByTagName(&apos;html&apos;)[0];
-        _html.style.fontSize = winWidthSize / baseWidth * baseFontSize + &apos;px&apos;;
-      }
-      setsize();
-    &lt;/script&gt;
-  &lt;/head&gt;
-  &lt;body&gt;
-  &lt;/body&gt;
-&lt;/html&gt;
-</code></pre><h3 id="3-h5页面上拉刷新加载更多数据"><a href="#3-h5页面上拉刷新加载更多数据" class="headerlink" title="3.h5页面上拉刷新加载更多数据:"></a>3.h5页面上拉刷新加载更多数据:</h3><p><a href="https://www.cnblogs.com/zuobaiquan01/p/8874305.html" target="_blank" rel="noopener">借鉴H5下拉刷新和上拉加载实现原理浅析</a><br>  (function(window) {<br>     // 获取当前滚动条的位置<br>        function getScrollTop() {<br>            var scrollTop = 0;<br>            if (document.documentElement &amp;&amp; document.documentElement.scrollTop) {<br>                scrollTop = document.documentElement.scrollTop;<br>            } else if (document.body) {<br>                scrollTop = document.body.scrollTop;<br>            }<br>            return scrollTop;<br>        }</p>
+</code></pre><h3 id="2-rem布局"><a href="#2-rem布局" class="headerlink" title="2.rem布局:"></a>2.rem布局:</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br></pre></td><td class="code"><pre><span class="line">	在用rem布局h5页面时,根据手机浏览器大小动态改变rem的大小,这里1rem=100px</span><br><span class="line">	每个页面加载时调用</span><br><span class="line">	/*注意,</span><br><span class="line">	1.有时候用rem回去屏幕宽度还会获取不到宽度显示0,这个时候需要给加个setTimeout延迟获取下,</span><br><span class="line">	    参考:(移动端rem布局，加载瞬间页面缩小)https://blog.csdn.net/maggie_live/article/details/80262312</span><br><span class="line">	2.一开始让body隐藏,初始化完rem的html字体大小后再显示body,可以防止head中的css样式和body中的并行加载</span><br><span class="line">	    参考:(Head标签中JS和CSS前后关系执行效率对比)https://blog.csdn.net/uohzoaix/article/details/7299054</span><br><span class="line">	*/</span><br><span class="line">	    /*动态调整rem值,除以100*/</span><br><span class="line">```$xslt</span><br><span class="line">      function setsize() &#123;</span><br><span class="line">          var winW = document.documentElement.clientWidth,</span><br><span class="line">              winH = document.documentElement.clientHeight,</span><br><span class="line">              baseFontSize = 100,</span><br><span class="line">              baseWidth = 750,</span><br><span class="line">              winWidthSize = Math.min(winW, winH);</span><br><span class="line">          if (winWidthSize &lt; 270) &#123;</span><br><span class="line">              winWidthSize = 270;</span><br><span class="line">          &#125;</span><br><span class="line">          var _html = document.getElementsByTagName(&apos;html&apos;)[0];</span><br><span class="line">          _html.style.fontSize =winWidthSize / baseWidth * baseFontSize + &apos;px&apos;;</span><br><span class="line">            /*处理rem偶尔获取不到屏幕宽度问题*/</span><br><span class="line">                  setTimeout(function()&#123;</span><br><span class="line">                    document.getElementsByTagName(&apos;body&apos;)[0].style.visibility=&apos;visible&apos;;</span><br><span class="line">                  &#125;,1)</span><br><span class="line">      &#125;</span><br><span class="line">      setTimeout(setsize,1);</span><br><span class="line">      &lt;!DOCTYPE html&gt;</span><br><span class="line">    &lt;html&gt;</span><br><span class="line">      &lt;head&gt;</span><br><span class="line">        &lt;meta charset=&quot;UTF-8&quot;&gt;</span><br><span class="line">        &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0&quot;&gt;</span><br><span class="line">        &lt;title&gt;&lt;/title&gt;</span><br><span class="line">        &lt;meta name=&quot;format-detection&quot; content=&quot;telephone=no&quot;&gt;</span><br><span class="line">        &lt;meta name=&quot;format-detection&quot; content=&quot;telephone=no&quot;&gt;</span><br><span class="line">        &lt;meta http-equiv=&quot;Pragma&quot; content=&quot;no-cache&quot;&gt;</span><br><span class="line">        &lt;meta http-equiv=&quot;cache-control&quot; content=&quot;no-cache&quot;&gt;</span><br><span class="line">        &lt;meta http-equiv=&quot;Expires&quot; content=&quot;0&quot;&gt;</span><br><span class="line">        &lt;meta name=&quot;HandheldFriendly&quot; content=&quot;true&quot;&gt;</span><br><span class="line">        &lt;meta name=&quot;MobileOptimized&quot; content=&quot;320&quot;&gt;</span><br><span class="line">        &lt;meta name=&quot;apple-mobile-web-app-capable&quot; content=&quot;yes&quot;&gt;</span><br><span class="line">        &lt;meta name=&quot;apple-mobile-web-app-status-bar-style&quot; content=&quot;black&quot;&gt;</span><br><span class="line">        &lt;meta name=&quot;screen-orientation&quot; content=&quot;portrait&quot;&gt;</span><br><span class="line">        &lt;meta name=&quot;x5-orientation&quot; content=&quot;portrait&quot;&gt;</span><br><span class="line">        &lt;script type=&quot;text/javascript&quot;&gt;</span><br><span class="line">          /*动态调整rem值,除以100*/</span><br><span class="line">          function setsize() &#123;</span><br><span class="line">            var winW = document.documentElement.clientWidth,</span><br><span class="line">              winH = document.documentElement.clientHeight,</span><br><span class="line">              baseFontSize = 100,</span><br><span class="line">              baseWidth = 750,</span><br><span class="line">              winWidthSize = Math.min(winW, winH);</span><br><span class="line">            if (winWidthSize &lt; 270) &#123;</span><br><span class="line">              winWidthSize = 270;</span><br><span class="line">            &#125;else if(winWidthSize &gt; 750)&#123;</span><br><span class="line">              winWidthSize = 750;</span><br><span class="line">            &#125;</span><br><span class="line">            var _html = document.getElementsByTagName(&apos;html&apos;)[0];</span><br><span class="line">            _html.style.fontSize = winWidthSize / baseWidth * baseFontSize + &apos;px&apos;;</span><br><span class="line">            /*处理rem偶尔获取不到屏幕宽度问题*/</span><br><span class="line">                              setTimeout(function()&#123;</span><br><span class="line">                                document.getElementsByTagName(&apos;body&apos;)[0].style.visibility=&apos;visible&apos;;</span><br><span class="line">                              &#125;,1)</span><br><span class="line">          &#125;</span><br><span class="line">           setTimeout(setsize,1);</span><br><span class="line">        &lt;/script&gt;</span><br><span class="line">      &lt;/head&gt;</span><br><span class="line">      &lt;body style=&quot;visibility:hidden;&quot;&gt;</span><br><span class="line">      &lt;/body&gt;</span><br><span class="line">    &lt;/html&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="3-h5页面上拉刷新加载更多数据"><a href="#3-h5页面上拉刷新加载更多数据" class="headerlink" title="3.h5页面上拉刷新加载更多数据:"></a>3.h5页面上拉刷新加载更多数据:</h3><p><a href="https://www.cnblogs.com/zuobaiquan01/p/8874305.html" target="_blank" rel="noopener">借鉴H5下拉刷新和上拉加载实现原理浅析</a><br>  (function(window) {<br>     // 获取当前滚动条的位置<br>        function getScrollTop() {<br>            var scrollTop = 0;<br>            if (document.documentElement &amp;&amp; document.documentElement.scrollTop) {<br>                scrollTop = document.documentElement.scrollTop;<br>            } else if (document.body) {<br>                scrollTop = document.body.scrollTop;<br>            }<br>            return scrollTop;<br>        }</p>
 <pre><code>// 获取当前可视范围的高度
 function getClientHeight() {
     var clientHeight = 0;
