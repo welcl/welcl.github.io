@@ -229,6 +229,244 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/20/兼容性代码合集/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/12/20/兼容性代码合集/" itemprop="url">兼容性代码合集</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-12-20T09:58:23+08:00">
+                2018-12-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="这里放的都是关于浏览器兼容性代码的函数封装总结"><a href="#这里放的都是关于浏览器兼容性代码的函数封装总结" class="headerlink" title="这里放的都是关于浏览器兼容性代码的函数封装总结!"></a>这里放的都是关于浏览器兼容性代码的函数封装总结!</h2><h3 id="浏览器兼容性的判断思路"><a href="#浏览器兼容性的判断思路" class="headerlink" title="浏览器兼容性的判断思路:"></a>浏览器兼容性的判断思路:</h3><pre><code>如果这个属性在浏览器中不支持,那么这个属性的类型是undefined
+判断这个属性的类型 是不是undefined,就知道浏览器是否支持
+</code></pre><h3 id="一-innerText-textContent-innerHTML的区别和兼容性"><a href="#一-innerText-textContent-innerHTML的区别和兼容性" class="headerlink" title="一:innerText,textContent,innerHTML的区别和兼容性"></a>一:innerText,textContent,innerHTML的区别和兼容性</h3><h4 id="1-innerText和textContent兼容代码"><a href="#1-innerText和textContent兼容代码" class="headerlink" title="1.innerText和textContent兼容代码:"></a>1.innerText和textContent兼容代码:</h4><pre><code>    设置标签中的文本内容,应该使用innerText属性,谷歌,火狐,IE8都支持,
+    设置标签中的文本内容,应该使用textContent属性,谷歌,火狐支持,IE8不支持
+    目前的浏览器都支持innerText,应该是属于ie的标准,textContent本身是火狐支持,IE8不支持
+    设置任意的标签中间的任意文本内容,两个参数(标签元素,文本内容)
+  function setInnerText(element,text) {
+    //判断浏览器是否支持这个属性
+    if(typeof element.textContent ==&quot;undefined&quot;){//不支持
+      element.innerText=text;
+    }else{//支持这个属性
+      element.textContent=text;
+    }
+  }
+  setInnerText(document.getElementById(&apos;id名&apos;),&apos;你好啊&apos;);
+  //获取任意标签中间的文本内容,一个参数(标签元素)
+  function getInnerText(element) {
+    if(typeof element.textContent==&quot;undefined&quot;){
+     return element.innerText;
+    }else{
+      return element.textContent;
+    }
+  }
+2.innerText,textContent,innerHTML区别:
+    想要设置标签内容(可以带标签),使用innerHTML,想要设置文本内容,innerText或者textContent,
+或者innerHTML,推荐用innerHTML
+</code></pre><h3 id="二-获取节点和元素的方法以及兼容性代码"><a href="#二-获取节点和元素的方法以及兼容性代码" class="headerlink" title="二:获取节点和元素的方法以及兼容性代码"></a>二:获取节点和元素的方法以及兼容性代码</h3><pre><code>1.获取节点和元素的方法:
+</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;div id=&quot;dv&quot;&gt;哦哦</span><br><span class="line">  &lt;span&gt;这是div中的第一个span标签&lt;/span&gt;</span><br><span class="line">  &lt;p&gt;这是div中的第二个元素,第一个p标签&lt;/p&gt;</span><br><span class="line">  &lt;ul id=&quot;uu&quot;&gt;</span><br><span class="line">    &lt;li&gt;这是ul中的第一个标签&lt;/li&gt;</span><br><span class="line">    &lt;li&gt;这是ul中的第二个标签&lt;/li&gt;</span><br><span class="line">    &lt;li id=&apos;three&apos;&gt;这是ul中的第三个标签&lt;/li&gt;</span><br><span class="line">    &lt;li&gt;这是ul中的第四个标签&lt;/li&gt;</span><br><span class="line">    &lt;li&gt;这是ul中的第五个标签&lt;/li&gt;</span><br><span class="line">  &lt;/ul&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+<pre><code>//12行代码:都是获取节点和元素的
+//ul
+var ulObj=document.getElementById(&quot;uu&quot;);
+//父级节点
+console.log(ulObj.parentNode);//
+//父级元素
+console.log(ulObj.parentElement);
+//子节点
+console.log(ulObj.childNodes);
+//子元素
+console.log(ulObj.children);
+console.log(&quot;==============================================&quot;);
+//第一个子节点
+console.log(ulObj.firstChild);//------------------------IE8中是第一个子元素
+//第一个子元素
+console.log(ulObj.firstElementChild);//-----------------IE8中不支持
+//最后一个子节点
+console.log(ulObj.lastChild);//------------------------IE8中是第一个子元素
+//最后一个子元素
+console.log(ulObj.lastElementChild);//-----------------IE8中不支持
+//某个元素的前一个兄弟节点
+console.log(threeObj.previousSibling);//------------------------IE8中是第一个子元素
+//某个元素的前一个兄弟元素
+console.log(threeObj.previousElementSibling);//-----------------IE8中不支持
+//某个元素的后一个兄弟节点
+console.log(threeObj.nextSibling);//------------------------IE8中是第一个子元素
+//某个元素的后一个兄弟元素
+console.log(threeObj.nextElementSibling);//-----------------IE8中不支持
+
+总结:凡是获取节点的代码在谷歌和火狐得到的都是相关的节点
+    凡是获取元素的代码在谷歌和火狐得到的都是相关的元素
+    从子节点和兄弟节点开始,凡是获取节点的代码在IE8中得到的是元素,获取元素的相关代码,在IE8中
+    得到的是undefined----元素的代码,iE中不支持
+</code></pre><h4 id="兼容代码"><a href="#兼容代码" class="headerlink" title="兼容代码:"></a>兼容代码:</h4><pre><code>以获取任意一个父级元素的第一个子级元素为例写兼容性代码,(其他的都一样):
+function getFirstElementChild(element) {
+    if(element.firstElementChild){//true---&gt;支持
+        return element.firstElementChild;
+    }else{
+        var node=element.firstChild;//第一个节点
+        while (node&amp;&amp;node.nodeType!=1){
+            node=node.nextSibling;
+        }
+        return node;
+    }
+}
+</code></pre><h3 id="三-为元素绑定事件写入兼容代码"><a href="#三-为元素绑定事件写入兼容代码" class="headerlink" title="三:为元素绑定事件写入兼容代码:"></a>三:为元素绑定事件写入兼容代码:</h3><pre><code>为元素绑定事件(DOM):一种,但是不兼容,有两种
+    1 对象.addEventListener(&quot;事件类型&quot;,事件处理函数,false);--谷歌和火狐支持,IE8不支持
+    2 对象.attachEvent(&quot;有on的事件类型&quot;,事件处理函数)--谷歌不支持,火狐不支持,IE8支持
+以onclick事件为例,如果我们需要在一个标签中注入多个点击事件,使用:多个
+document.getElementById(&apos;id名&apos;).onclick=function(){}写的话会出现后注册的点击事件覆
+盖先注册的点击事件,这个时候我们需要用addEventListener来为元素元素绑定多个事件,然而
+addEventListener存在兼容性问题,再ie上需要attachEvent
+addEventListener:
+    参数1:事件的类型---事件的名字,没有on
+    参数2:事件处理函数---函数(命名函数,匿名函数)
+    参数3:布尔类型,目前就写false
+        document.getElementById(&apos;id名&apos;).addEventListener(&quot;click&quot;,function () {
+            console.log(&quot;我是点击事件1&quot;);
+        },false);
+        document.getElementById(&apos;id名&apos;).addEventListener(&quot;click&quot;,function () {
+            console.log(&quot;我是点击事件2&quot;);
+        },false);
+attachEvent:
+    参数1:事件类型---事件名字，有on
+    参数2:事件处理函数---函数(命名函数,匿名函数)
+        document.getElementById(&apos;id名&apos;).attachEvent(&quot;onclick&quot;,function () {
+            console.log(&quot;我是点击事件1&quot;);
+        });
+        document.getElementById(&apos;id名&apos;).attachEvent(&quot;onclick&quot;,function () {
+            console.log(&quot;我是点击事件2&quot;);
+        });
+</code></pre><h4 id="兼容代码-1"><a href="#兼容代码-1" class="headerlink" title="兼容代码:"></a>兼容代码:</h4><pre><code>//为任意元素.绑定任意的事件, 参数:(任意的元素,事件的类型,事件处理函数)
+ function addEventListener(element,type,fn) {
+   //判断浏览器是否支持这个方法
+   if(element.addEventListener){
+     element.addEventListener(type,fn,false);
+   }else if(element.attachEvent){
+     element.attachEvent(&quot;on&quot;+type,fn);
+   }else{
+     element[&quot;on&quot;+type]=fn;
+   }
+ }
+ addEventListener(document.getElementById(&apos;id名&apos;),&quot;click&quot;,function () {
+   console.log(&quot;哦1&quot;);
+ });
+ addEventListener(document.getElementById(&apos;id名&apos;),&quot;click&quot;,function () {
+   console.log(&quot;哦2&quot;);
+ });
+ addEventListener(document.getElementById(&apos;id名&apos;),&quot;click&quot;,function () {
+   console.log(&quot;哦3&quot;);
+ });
+</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/05/vue遇到的问题/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -5028,152 +5266,6 @@ document.getElementById(&quot;json&quot;).innerHTML= json.name;
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/22/个人博客搭建/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/06/22/个人博客搭建/" itemprop="url">个人博客搭建</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-06-22T09:49:36+08:00">
-                2018-06-22
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/默认分类/" itemprop="url" rel="index">
-                    <span itemprop="name">默认分类</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          附加一段文章摘要，字数最好在140字以内，会出现在meta的description里面
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/06/22/个人博客搭建/">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -5224,7 +5316,7 @@ document.getElementById(&quot;json&quot;).innerHTML= json.name;
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-count">12</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
