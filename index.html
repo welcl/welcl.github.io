@@ -2476,6 +2476,64 @@ var obj={};//复杂类型,对象在堆,地址(引用)在栈
 * 3.浏览器对象---
         DOM:文档对象模型
         BOM:浏览器对象模型
+</code></pre><h3 id="十三-webapi的知识点"><a href="#十三-webapi的知识点" class="headerlink" title="十三:webapi的知识点:"></a>十三:webapi的知识点:</h3><h4 id="一-节点-元素相关知识点"><a href="#一-节点-元素相关知识点" class="headerlink" title="一.节点,元素相关知识点:"></a>一.节点,元素相关知识点:</h4><pre><code>文档:document
+元素:页面中所有的标签,元素---element,  标签----元素---对象
+节点:页面中所有的内容(标签,属性,文本(文字,换行,空格,回车)),Node
+根元素:html标签
+</code></pre><h5 id="1-节点的属性"><a href="#1-节点的属性" class="headerlink" title="1.节点的属性:"></a>1.节点的属性:</h5><pre><code>可以使用标签--元素.出来,可以使用属性节点.出来,文本节点.点出来
+nodeType:节点的类型:1----标签,2---属性,3---文本
+nodeName:节点的名字:标签节点--大写的标签名字,属性节点--小写的属性名字,文本节点--#text
+nodeValue:节点的值:标签节点---null,属性节点---属性值,文本节点---文本内容
+使用:
+  ulObj=my$(&quot;uu&quot;);ulObj.nodeType,ulObj.nodeName,ulObj.nodeValue,
+  利用nodeType判断是标签是属性还是文本,
+  利用nodeName获取指定标签,
+获取节点的方法:
+  //12行代码:都是获取节点和元素的
+  //ul
+  var ulObj=document.getElementById(&quot;uu&quot;);
+  var threeObj=document.getElementById(&quot;three&quot;);
+  //父级节点
+  console.log(ulObj.parentNode);
+  //父级元素
+  console.log(ulObj.parentElement);
+  //子节点
+  console.log(ulObj.childNodes);
+  //子元素
+  console.log(ulObj.children);
+  console.log(&quot;==============================================&quot;);
+  //第一个子节点
+  console.log(ulObj.firstChild);//------------------------IE8中是第一个子元素
+  //第一个子元素
+  console.log(ulObj.firstElementChild);//-----------------IE8中不支持
+  //最后一个子节点
+  console.log(ulObj.lastChild);//------------------------IE8中是第一个子元素
+  //最后一个子元素
+  console.log(ulObj.lastElementChild);//-----------------IE8中不支持
+  //某个元素的前一个兄弟节点
+  console.log(threeObj.previousSibling);//------------------------IE8中是第一个子元素
+  //某个元素的前一个兄弟元素
+  console.log(threeObj.previousElementSibling);//-----------------IE8中不支持
+  //某个元素的后一个兄弟节点
+  console.log(threeObj.nextSibling);//------------------------IE8中是第一个子元素
+  //某个元素的后一个兄弟元素
+  console.log(threeObj.nextElementSibling);//-----------------IE8中不支持
+  //总结:凡是获取节点的代码在谷歌和火狐得到的都是  相关的节点
+  //凡是获取元素的代码在谷歌和火狐得到的都是   相关的元素
+  //从子节点和兄弟节点开始,凡是获取节点的代码在IE8中得到的是元素,获取元素的相关代码,在IE8中得到的是undefined----元素的代码,iE中不支持
+</code></pre><h5 id="2-元素的创建"><a href="#2-元素的创建" class="headerlink" title="2.元素的创建:"></a>2.元素的创建:</h5><pre><code>元素创建-----为了提高用户的体验
+元素创建的三种方式:
+1. document.write(&quot;标签的代码及内容&quot;);
+  document.write()创建元素,缺陷:如果是在页面加载完毕后,此时通过这种方式创建元素,
+  那么页面上存在的所有的内容全部被干掉
+2. 对象.innerHTML=&quot;标签及代码&quot;;
+    document.getElementById(&apos;idm名&apos;).innerHTML=&quot;&lt;p&gt;窗前明月光,疑是地上霜,举头望明月,低头思故乡&lt;/p&gt;&quot;;
+3. document.createElement(&quot;标签的名字&quot;);
+  1.首先创建元素(可根据需要在元素中增加内容 元素对象.innerHTML=&apos;xxx&apos;)
+  2.把元素追加到父级元素中
+  //document.createElement(&quot;标签名字&quot;);
+  var pObj = document.createElement(&quot;p&quot;);
+   document.getElementById(&apos;id名&apos;).appendChild(pObj);
 </code></pre>
           
         

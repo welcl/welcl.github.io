@@ -86,7 +86,7 @@
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="一:jsonp实现跨域获取数据:参考:https://blog.csdn.net/hansexploration/article/details/80314948 参考:https://www.cnblogs.com/chiangchou/p/jsonp.html 这里列举下实现jsonp跨域的一个demo:     首先,你必须要有两个不同的协议,域名,端口都不同的url,只有这样才符合要跨域的">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-12-18T03:31:51.663Z">
+<meta property="og:updated_time" content="2018-12-20T05:46:35.205Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="js知识点">
 <meta name="twitter:description" content="一:jsonp实现跨域获取数据:参考:https://blog.csdn.net/hansexploration/article/details/80314948 参考:https://www.cnblogs.com/chiangchou/p/jsonp.html 这里列举下实现jsonp跨域的一个demo:     首先,你必须要有两个不同的协议,域名,端口都不同的url,只有这样才符合要跨域的">
@@ -884,6 +884,64 @@ var obj={};//复杂类型,对象在堆,地址(引用)在栈
 * 3.浏览器对象---
         DOM:文档对象模型
         BOM:浏览器对象模型
+</code></pre><h3 id="十三-webapi的知识点"><a href="#十三-webapi的知识点" class="headerlink" title="十三:webapi的知识点:"></a>十三:webapi的知识点:</h3><h4 id="一-节点-元素相关知识点"><a href="#一-节点-元素相关知识点" class="headerlink" title="一.节点,元素相关知识点:"></a>一.节点,元素相关知识点:</h4><pre><code>文档:document
+元素:页面中所有的标签,元素---element,  标签----元素---对象
+节点:页面中所有的内容(标签,属性,文本(文字,换行,空格,回车)),Node
+根元素:html标签
+</code></pre><h5 id="1-节点的属性"><a href="#1-节点的属性" class="headerlink" title="1.节点的属性:"></a>1.节点的属性:</h5><pre><code>可以使用标签--元素.出来,可以使用属性节点.出来,文本节点.点出来
+nodeType:节点的类型:1----标签,2---属性,3---文本
+nodeName:节点的名字:标签节点--大写的标签名字,属性节点--小写的属性名字,文本节点--#text
+nodeValue:节点的值:标签节点---null,属性节点---属性值,文本节点---文本内容
+使用:
+  ulObj=my$(&quot;uu&quot;);ulObj.nodeType,ulObj.nodeName,ulObj.nodeValue,
+  利用nodeType判断是标签是属性还是文本,
+  利用nodeName获取指定标签,
+获取节点的方法:
+  //12行代码:都是获取节点和元素的
+  //ul
+  var ulObj=document.getElementById(&quot;uu&quot;);
+  var threeObj=document.getElementById(&quot;three&quot;);
+  //父级节点
+  console.log(ulObj.parentNode);
+  //父级元素
+  console.log(ulObj.parentElement);
+  //子节点
+  console.log(ulObj.childNodes);
+  //子元素
+  console.log(ulObj.children);
+  console.log(&quot;==============================================&quot;);
+  //第一个子节点
+  console.log(ulObj.firstChild);//------------------------IE8中是第一个子元素
+  //第一个子元素
+  console.log(ulObj.firstElementChild);//-----------------IE8中不支持
+  //最后一个子节点
+  console.log(ulObj.lastChild);//------------------------IE8中是第一个子元素
+  //最后一个子元素
+  console.log(ulObj.lastElementChild);//-----------------IE8中不支持
+  //某个元素的前一个兄弟节点
+  console.log(threeObj.previousSibling);//------------------------IE8中是第一个子元素
+  //某个元素的前一个兄弟元素
+  console.log(threeObj.previousElementSibling);//-----------------IE8中不支持
+  //某个元素的后一个兄弟节点
+  console.log(threeObj.nextSibling);//------------------------IE8中是第一个子元素
+  //某个元素的后一个兄弟元素
+  console.log(threeObj.nextElementSibling);//-----------------IE8中不支持
+  //总结:凡是获取节点的代码在谷歌和火狐得到的都是  相关的节点
+  //凡是获取元素的代码在谷歌和火狐得到的都是   相关的元素
+  //从子节点和兄弟节点开始,凡是获取节点的代码在IE8中得到的是元素,获取元素的相关代码,在IE8中得到的是undefined----元素的代码,iE中不支持
+</code></pre><h5 id="2-元素的创建"><a href="#2-元素的创建" class="headerlink" title="2.元素的创建:"></a>2.元素的创建:</h5><pre><code>元素创建-----为了提高用户的体验
+元素创建的三种方式:
+1. document.write(&quot;标签的代码及内容&quot;);
+  document.write()创建元素,缺陷:如果是在页面加载完毕后,此时通过这种方式创建元素,
+  那么页面上存在的所有的内容全部被干掉
+2. 对象.innerHTML=&quot;标签及代码&quot;;
+    document.getElementById(&apos;idm名&apos;).innerHTML=&quot;&lt;p&gt;窗前明月光,疑是地上霜,举头望明月,低头思故乡&lt;/p&gt;&quot;;
+3. document.createElement(&quot;标签的名字&quot;);
+  1.首先创建元素(可根据需要在元素中增加内容 元素对象.innerHTML=&apos;xxx&apos;)
+  2.把元素追加到父级元素中
+  //document.createElement(&quot;标签名字&quot;);
+  var pObj = document.createElement(&quot;p&quot;);
+   document.getElementById(&apos;id名&apos;).appendChild(pObj);
 </code></pre>
       
     </div>
@@ -1052,7 +1110,7 @@ var obj={};//复杂类型,对象在堆,地址(引用)在栈
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#一-jsonp实现跨域获取数据"><span class="nav-number">1.</span> <span class="nav-text">一:jsonp实现跨域获取数据:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二-冒泡排序-选择排序-插入排序-数组去重"><span class="nav-number">2.</span> <span class="nav-text">二:冒泡排序,选择排序,插入排序,数组去重:</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#去重排序"><span class="nav-number">2.1.</span> <span class="nav-text">去重排序</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#冒泡排序、插入排序、选择排序合称为简单排序。"><span class="nav-number">2.2.</span> <span class="nav-text">冒泡排序、插入排序、选择排序合称为简单排序。</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#选择排序"><span class="nav-number">2.2.1.</span> <span class="nav-text">选择排序</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#插入排序"><span class="nav-number">2.2.2.</span> <span class="nav-text">插入排序:</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三-阻止冒泡事件和默认事件"><span class="nav-number">3.</span> <span class="nav-text">三:阻止冒泡事件和默认事件:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#四-闭包"><span class="nav-number">4.</span> <span class="nav-text">四:闭包:</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-什么是闭包"><span class="nav-number">4.1.</span> <span class="nav-text">1.什么是闭包;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-闭包的作用"><span class="nav-number">4.2.</span> <span class="nav-text">2. 闭包的作用:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-闭包的缺点"><span class="nav-number">4.3.</span> <span class="nav-text">3.闭包的缺点</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#五-原型和原型链"><span class="nav-number">5.</span> <span class="nav-text">五.原型和原型链:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#六-js是一门什么样的语言"><span class="nav-number">6.</span> <span class="nav-text">六.js是一门什么样的语言:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#七-js代码注意问题"><span class="nav-number">7.</span> <span class="nav-text">七:js代码注意问题:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#八-js中的数据类型"><span class="nav-number">8.</span> <span class="nav-text">八:js中的数据类型:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#九-基本包装类型"><span class="nav-number">9.</span> <span class="nav-text">九 基本包装类型:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#十-函数的相关知识点"><span class="nav-number">10.</span> <span class="nav-text">十 函数的相关知识点:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#十一object-对象-的相关知识"><span class="nav-number">11.</span> <span class="nav-text">十一object(对象)的相关知识:</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Math对象-是静态对象"><span class="nav-number">11.1.</span> <span class="nav-text">Math对象;(是静态对象)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Date对象"><span class="nav-number">11.2.</span> <span class="nav-text">Date对象:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#String对象"><span class="nav-number">11.3.</span> <span class="nav-text">String对象:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Array对象"><span class="nav-number">11.4.</span> <span class="nav-text">Array对象:</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#十二-js学习中三种对象"><span class="nav-number">12.</span> <span class="nav-text">十二: js学习中三种对象:</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#一-jsonp实现跨域获取数据"><span class="nav-number">1.</span> <span class="nav-text">一:jsonp实现跨域获取数据:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二-冒泡排序-选择排序-插入排序-数组去重"><span class="nav-number">2.</span> <span class="nav-text">二:冒泡排序,选择排序,插入排序,数组去重:</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#去重排序"><span class="nav-number">2.1.</span> <span class="nav-text">去重排序</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#冒泡排序、插入排序、选择排序合称为简单排序。"><span class="nav-number">2.2.</span> <span class="nav-text">冒泡排序、插入排序、选择排序合称为简单排序。</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#选择排序"><span class="nav-number">2.2.1.</span> <span class="nav-text">选择排序</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#插入排序"><span class="nav-number">2.2.2.</span> <span class="nav-text">插入排序:</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三-阻止冒泡事件和默认事件"><span class="nav-number">3.</span> <span class="nav-text">三:阻止冒泡事件和默认事件:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#四-闭包"><span class="nav-number">4.</span> <span class="nav-text">四:闭包:</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-什么是闭包"><span class="nav-number">4.1.</span> <span class="nav-text">1.什么是闭包;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-闭包的作用"><span class="nav-number">4.2.</span> <span class="nav-text">2. 闭包的作用:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-闭包的缺点"><span class="nav-number">4.3.</span> <span class="nav-text">3.闭包的缺点</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#五-原型和原型链"><span class="nav-number">5.</span> <span class="nav-text">五.原型和原型链:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#六-js是一门什么样的语言"><span class="nav-number">6.</span> <span class="nav-text">六.js是一门什么样的语言:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#七-js代码注意问题"><span class="nav-number">7.</span> <span class="nav-text">七:js代码注意问题:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#八-js中的数据类型"><span class="nav-number">8.</span> <span class="nav-text">八:js中的数据类型:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#九-基本包装类型"><span class="nav-number">9.</span> <span class="nav-text">九 基本包装类型:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#十-函数的相关知识点"><span class="nav-number">10.</span> <span class="nav-text">十 函数的相关知识点:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#十一object-对象-的相关知识"><span class="nav-number">11.</span> <span class="nav-text">十一object(对象)的相关知识:</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Math对象-是静态对象"><span class="nav-number">11.1.</span> <span class="nav-text">Math对象;(是静态对象)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Date对象"><span class="nav-number">11.2.</span> <span class="nav-text">Date对象:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#String对象"><span class="nav-number">11.3.</span> <span class="nav-text">String对象:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Array对象"><span class="nav-number">11.4.</span> <span class="nav-text">Array对象:</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#十二-js学习中三种对象"><span class="nav-number">12.</span> <span class="nav-text">十二: js学习中三种对象:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#十三-webapi的知识点"><span class="nav-number">13.</span> <span class="nav-text">十三:webapi的知识点:</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#一-节点-元素相关知识点"><span class="nav-number">13.1.</span> <span class="nav-text">一.节点,元素相关知识点:</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-节点的属性"><span class="nav-number">13.1.1.</span> <span class="nav-text">1.节点的属性:</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-元素的创建"><span class="nav-number">13.1.2.</span> <span class="nav-text">2.元素的创建:</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
