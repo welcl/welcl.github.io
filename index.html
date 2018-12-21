@@ -361,7 +361,7 @@ console.log(threeObj.nextElementSibling);//-----------------IE8中不支持
     凡是获取元素的代码在谷歌和火狐得到的都是相关的元素
     从子节点和兄弟节点开始,凡是获取节点的代码在IE8中得到的是元素,获取元素的相关代码,在IE8中
     得到的是undefined----元素的代码,iE中不支持
-</code></pre><h4 id="兼容代码"><a href="#兼容代码" class="headerlink" title="兼容代码:"></a>兼容代码:</h4><pre><code>以获取任意一个父级元素的第一个子级元素为例写兼容性代码,(其他的都一样):
+</code></pre><h4 id="兼容代码"><a href="#兼容代码" class="headerlink" title="兼容代码:"></a>兼容代码:</h4><pre><code>以获取第一个子级元素为例写兼容性代码,(其他的都一样):
 function getFirstElementChild(element) {
     if(element.firstElementChild){//true---&gt;支持
         return element.firstElementChild;
@@ -373,9 +373,18 @@ function getFirstElementChild(element) {
         return node;
     }
 }
-</code></pre><h3 id="三-为元素绑定事件写入兼容代码"><a href="#三-为元素绑定事件写入兼容代码" class="headerlink" title="三:为元素绑定事件写入兼容代码:"></a>三:为元素绑定事件写入兼容代码:</h3><pre><code>为元素绑定事件(DOM):一种,但是不兼容,有两种
-    1 对象.addEventListener(&quot;事件类型&quot;,事件处理函数,false);--谷歌和火狐支持,IE8不支持
-    2 对象.attachEvent(&quot;有on的事件类型&quot;,事件处理函数)--谷歌不支持,火狐不支持,IE8支持
+</code></pre><h3 id="三-为元素绑定事件写入兼容代码"><a href="#三-为元素绑定事件写入兼容代码" class="headerlink" title="三:为元素绑定事件写入兼容代码:"></a>三:为元素绑定事件写入兼容代码:</h3><pre><code>为元素绑定事件(DOM):一种,但是不兼容.
+addEventListener和attachEvent的区别:
+相同点:都可以为元素绑定事件
+不同点:
+    1.方法名不一样,
+    2.参数个数不一样addEventListener三个参数,attachEvent两个参数
+    3.谷歌和火狐支持,ie11支持,IE8不支持
+        谷歌不支持,火狐不支持,ie11不支持,IE8支持
+    4.this指向不同:
+        addEventListener中的this是指向当前绑定事件对象,
+        attachEvent中的this指向window
+    5.addEventListener中事件的类型没有on,attachEvent中的事件类型有on
 以onclick事件为例,如果我们需要在一个标签中注入多个点击事件,使用:多个
 document.getElementById(&apos;id名&apos;).onclick=function(){}写的话会出现后注册的点击事件覆
 盖先注册的点击事件,这个时候我们需要用addEventListener来为元素元素绑定多个事件,然而
@@ -383,7 +392,7 @@ addEventListener存在兼容性问题,再ie上需要attachEvent
 addEventListener:
     参数1:事件的类型---事件的名字,没有on
     参数2:事件处理函数---函数(命名函数,匿名函数)
-    参数3:布尔类型,目前就写false
+    参数3:布尔类型,目前就写false://addEventListener中第三个参数是控制事件阶段的
         document.getElementById(&apos;id名&apos;).addEventListener(&quot;click&quot;,function () {
             console.log(&quot;我是点击事件1&quot;);
         },false);
@@ -399,7 +408,7 @@ attachEvent:
         document.getElementById(&apos;id名&apos;).attachEvent(&quot;onclick&quot;,function () {
             console.log(&quot;我是点击事件2&quot;);
         });
-</code></pre><h4 id="兼容代码-1"><a href="#兼容代码-1" class="headerlink" title="兼容代码:"></a>兼容代码:</h4><pre><code>//为任意元素.绑定任意的事件, 参数:(任意的元素,事件的类型,事件处理函数)
+</code></pre><h4 id="绑定事件兼容代码"><a href="#绑定事件兼容代码" class="headerlink" title="绑定事件兼容代码:"></a>绑定事件兼容代码:</h4><pre><code>//为任意元素.绑定任意的事件, 参数:(任意的元素,事件的类型,事件处理函数)
  function addEventListener(element,type,fn) {
    //判断浏览器是否支持这个方法
    if(element.addEventListener){
@@ -419,6 +428,83 @@ attachEvent:
  addEventListener(document.getElementById(&apos;id名&apos;),&quot;click&quot;,function () {
    console.log(&quot;哦3&quot;);
  });
+</code></pre><h3 id="四-为元素解绑事件写入兼容代码"><a href="#四-为元素解绑事件写入兼容代码" class="headerlink" title="四:为元素解绑事件写入兼容代码:"></a>四:为元素解绑事件写入兼容代码:</h3><pre><code>removeEventListener:谷歌和火狐支持,ie11支持,IE8不支持
+detachEvent:谷歌不支持,火狐不支持,ie11不支持,IE8支持,
+解绑事件方式:
+注意:用什么方式绑定事件,就应该用对应的方式解绑事件
+1.解绑事件
+    对象.on事件名字=事件处理函数---&gt;绑定事件
+    对象.on事件名字=null;
+2.解绑事件(注意必须是命名函数,匿名函数会没办法解绑)
+    对象.addEventListener(&quot;没有on的事件类型&quot;,命名函数,false);---绑定事件
+    对象.removeEventListener(&quot;没有on的事件类型&quot;,函数名字,false);
+3.解绑事件(注意必须是命名函数,匿名函数会没办法解绑)
+    对象.attachEvent(&quot;on事件类型&quot;,命名函数);---绑定事件
+    对象.detachEvent(&quot;on事件类型&quot;,函数名字);
+</code></pre><h4 id="解绑事件兼容代码"><a href="#解绑事件兼容代码" class="headerlink" title="解绑事件兼容代码:"></a>解绑事件兼容代码:</h4><pre><code> //为任意元素解绑任意的事件, 参数:(任意的元素,事件的类型,命名函数)
+ function removeEventListener(element,type,fnName){
+     if(element.removeEventListener){
+         element.removeEventListener(type,fnName,false);
+     }else if(element.detachEvent){
+         element.detachEvent(&apos;on&apos;+type,fnName);
+     }else{
+         element[&apos;on&apos;+type]=null;
+     }
+ }
+removeEventListener(document.getElementById(&apos;id名&apos;),&apos;click&apos;,fnName);
+function fnName(){
+    console.log(&apos;我要被解绑了&apos;);
+}
+</code></pre><h3 id="五-事件冒泡-事件阶段-事件的完整流程及事件冒泡的兼容性代码"><a href="#五-事件冒泡-事件阶段-事件的完整流程及事件冒泡的兼容性代码" class="headerlink" title="五:事件冒泡,事件阶段,事件的完整流程及事件冒泡的兼容性代码:"></a>五:事件冒泡,事件阶段,事件的完整流程及事件冒泡的兼容性代码:</h3><h4 id="事件冒泡"><a href="#事件冒泡" class="headerlink" title="事件冒泡:"></a>事件冒泡:</h4><pre><code>原理:多个元素嵌套,有层次关系,这些元素都注册了相同的事件,如果里面的元素的事件触发了,
+外面的元素的该事件自动的触发了.
+如何阻止事件冒泡:
+    window.event.cancelBubble=true;IE特有的,谷歌支持,火狐不支持
+    e.stopPropagation(); 谷歌和火狐支持,
+    e.stopProgation()是火狐支持的,原理是正确的,e代表了处理事件,在处理事件上增加一个方法来禁用事件冒泡
+    window.event.cancelBubble=true是ie支持的,因为:
+        addEventListener中的this是指向当前绑定事件对象,(火狐)
+        attachEvent中的this指向window(ie),
+    ie的this指向的是window,所以使用了window.event,其实和火狐的e代表的是一样的,都是事件触发对象,
+    不过火狐用的e(是对象).方法来阻止事件冒泡,ie用的是window.event(是对象).属性来阻止事件冒泡,所以
+    兼容性代码的原理也是如此:
+    function f1(e){
+        //在火狐浏览器下,会用e对象,在ie浏览器下没有e会用window.event对象,这样就解决了兼容性问题
+        var e=window.event||e;
+    }
+</code></pre><h4 id="事件阶段"><a href="#事件阶段" class="headerlink" title="事件阶段:"></a>事件阶段:</h4><pre><code> 事件有三个阶段:
+1.事件捕获阶段  :从外向内
+2.事件目标阶段  :最开始选择的那个
+3.事件冒泡阶段  : 从里向外
+</code></pre><h4 id="一个元素绑定事件的完整流程"><a href="#一个元素绑定事件的完整流程" class="headerlink" title="一个元素绑定事件的完整流程:"></a>一个元素绑定事件的完整流程:</h4><pre><code>* addEventListener(&quot;没有on的事件类型&quot;,事件处理函数,控制事件阶段的)
+* 事件触发的过程中,可能会出现事件冒泡的效果,为了阻止事件冒泡---&gt;
+* window.event.cancelBubble=true;谷歌,IE8支持,火狐不支持
+* window.event就是一个对象,是IE中的标准
+* e.stopPropagation();阻止事件冒泡----&gt;谷歌和火狐支持
+* window.event和e都是事件参数对象,一个是IE的标准,一个是火狐的标准
+* 事件参数e在IE8的浏览器中是不存在,此时用window.event来代替
+* addEventListener中第三个参数是控制事件阶段的
+* 事件的阶段有三个:
+* 通过e.eventPhase这个属性可以知道当前的事件是什么阶段的
+* 如果这个属性的值是:
+* 1----&gt;捕获阶段
+* 2----&gt;目标阶段
+* 3----&gt;冒泡阶段
+    捕获阶段和冒泡阶段只可能出现一个
+例如:
+   //同时注册点击事件
+ var objs = [my$(&quot;dv3&quot;), my$(&quot;dv2&quot;), my$(&quot;dv1&quot;)];
+ //遍历注册事件
+ objs.forEach(function (ele) {
+   //为每个元素绑定事件
+   ele.addEventListener(&quot;click&quot;, function (e) {
+     console.log(this.id+&quot;====&gt;&quot;+e.eventPhase);
+
+   }, true);
+
+ });
+* 一般默认都是冒泡阶段,很少用捕获阶段
+* 冒泡阶段:从里向外
+* 捕获阶段:从外向内
 </code></pre>
           
         
@@ -1205,7 +1291,11 @@ box-sizing和两种盒模型:
         var arr1 = document.cookie.split(&apos;;&apos;);  
         for(var i=0; i&lt;arr1.length; i++){
             var arr2 = arr1[i].split(&apos;=&apos;);
-            if(arr2[0]==key){
+            &lt;!-- if(arr2[0]==key){
+                return decodeURI(arr2[1]);
+            } --&gt;
+            /*浏览器截取cookie会给key加一个空格,需要去除*/
+            if(arr2[0].trim()==key){
                 return decodeURI(arr2[1]);
             }
         }
@@ -2476,7 +2566,7 @@ var obj={};//复杂类型,对象在堆,地址(引用)在栈
 * 3.浏览器对象---
         DOM:文档对象模型
         BOM:浏览器对象模型
-</code></pre><h3 id="十三-webapi的知识点"><a href="#十三-webapi的知识点" class="headerlink" title="十三:webapi的知识点:"></a>十三:webapi的知识点:</h3><h4 id="一-节点-元素相关知识点"><a href="#一-节点-元素相关知识点" class="headerlink" title="一.节点,元素相关知识点:"></a>一.节点,元素相关知识点:</h4><pre><code>文档:document
+</code></pre><h3 id="十三-webapi的知识点"><a href="#十三-webapi的知识点" class="headerlink" title="十三:webapi的知识点:"></a>十三:webapi的知识点:</h3><h4 id="一-节点-元素-自定义属性相关知识点"><a href="#一-节点-元素-自定义属性相关知识点" class="headerlink" title="一.节点,元素,自定义属性相关知识点:"></a>一.节点,元素,自定义属性相关知识点:</h4><pre><code>文档:document
 元素:页面中所有的标签,元素---element,  标签----元素---对象
 节点:页面中所有的内容(标签,属性,文本(文字,换行,空格,回车)),Node
 根元素:html标签
@@ -2534,6 +2624,17 @@ nodeValue:节点的值:标签节点---null,属性节点---属性值,文本节点
   //document.createElement(&quot;标签名字&quot;);
   var pObj = document.createElement(&quot;p&quot;);
    document.getElementById(&apos;id名&apos;).appendChild(pObj);
+   父级元素.appendChild(子级元素对象)
+    //在父级元素后追加
+   父级元素.insertBefore(新的子级元素对象,参照的子级对象);
+    //在参照子级元素前添加新子级对象
+    父级元素.removeChild(要删除的子级对象);
+</code></pre><h5 id="3-自定义属性的操作"><a href="#3-自定义属性的操作" class="headerlink" title="3.自定义属性的操作"></a>3.自定义属性的操作</h5><pre><code>自定义属性:标签原本没有这个属性,为了存储数据,程序员自己添加的属性
+自定义属性无法直接通过DOM对象的方式获取或者设置
+对象.getAttribute(&quot;自定义属性名字&quot;);获取自定义属性的值
+对象.setAttribute(&quot;属性名字&quot;,&quot;值&quot;);设置自定义属性及值
+移除自定义属性
+对象.removeAttribute(&quot;属性的名字&quot;);    
 </code></pre>
           
         

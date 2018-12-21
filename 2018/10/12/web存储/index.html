@@ -88,7 +88,7 @@
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://yoursite.com/2018/10/12/web存储/cookie.png">
 <meta property="og:image" content="http://yoursite.com/2018/10/12/web存储/difference.png">
-<meta property="og:updated_time" content="2018-10-12T05:33:27.476Z">
+<meta property="og:updated_time" content="2018-12-21T09:08:17.094Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="cookies、sessionStorage和localStorage解释及区别">
 <meta name="twitter:description" content="一.HTML4的本地存储 (cookie)浏览器的缓存机制提供了可以将用户数据存储在客户端上的方式，可以利用cookie,session等跟服务端进行数据交互cookie和sessioncookie和session都是用来跟踪浏览器用户身份的会话方式。 cookie和session区别：1、保持状态：cookie保存在浏览器端，session保存在服务器端 2、使用方式：     (1）cooki">
@@ -425,7 +425,11 @@
         var arr1 = document.cookie.split(&apos;;&apos;);  
         for(var i=0; i&lt;arr1.length; i++){
             var arr2 = arr1[i].split(&apos;=&apos;);
-            if(arr2[0]==key){
+            &lt;!-- if(arr2[0]==key){
+                return decodeURI(arr2[1]);
+            } --&gt;
+            /*浏览器截取cookie会给key加一个空格,需要去除*/
+            if(arr2[0].trim()==key){
                 return decodeURI(arr2[1]);
             }
         }
