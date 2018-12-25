@@ -86,7 +86,7 @@
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="这里放的都是关于浏览器兼容性代码的函数封装总结!浏览器兼容性的判断思路:如果这个属性在浏览器中不支持,那么这个属性的类型是undefined 判断这个属性的类型 是不是undefined,就知道浏览器是否支持 一:innerText,textContent,innerHTML的区别和兼容性1.innerText和textContent兼容代码:    设置标签中的文本内容,应该使用innerTex">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-12-21T05:40:03.069Z">
+<meta property="og:updated_time" content="2018-12-21T09:14:46.432Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="兼容性代码合集">
 <meta name="twitter:description" content="这里放的都是关于浏览器兼容性代码的函数封装总结!浏览器兼容性的判断思路:如果这个属性在浏览器中不支持,那么这个属性的类型是undefined 判断这个属性的类型 是不是undefined,就知道浏览器是否支持 一:innerText,textContent,innerHTML的区别和兼容性1.innerText和textContent兼容代码:    设置标签中的文本内容,应该使用innerTex">
@@ -497,9 +497,7 @@ function fnName(){
    //为每个元素绑定事件
    ele.addEventListener(&quot;click&quot;, function (e) {
      console.log(this.id+&quot;====&gt;&quot;+e.eventPhase);
-
    }, true);
-
  });
 * 一般默认都是冒泡阶段,很少用捕获阶段
 * 冒泡阶段:从里向外
@@ -537,6 +535,10 @@ function fnName(){
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/12/25/经典案例收集/" rel="prev" title="经典案例收集">
+                经典案例收集 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -613,7 +615,7 @@ function fnName(){
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-count">13</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
