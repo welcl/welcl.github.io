@@ -229,6 +229,629 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/08/js之基础知识/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/01/08/js之基础知识/" itemprop="url">js之基础知识</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-01-08T15:53:22+08:00">
+                2019-01-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="一-js是一门什么样的语言"><a href="#一-js是一门什么样的语言" class="headerlink" title="一.js是一门什么样的语言:"></a>一.js是一门什么样的语言:</h3><pre><code>js是脚本语言,解释性语言,弱类型语言,基于对象,动态语言
+脚本语言:脚本语言是一个不需要显示编译的编程语言
+解释性语言:当浏览器解析这行代码的时候,才知道这个变量具体是什么类型,
+弱类型语言:声明都用var,没有其他类型的变量声明
+基于对象:直接使用系统当中的对象,而不是自己创建对象
+动态语言:动态语言是在运行时确定数据类型的语言
+ 扩展:
+   静态语言是指在编译时变量的数据类型即可确定的语言，多数静态类型语言要求在使用变量之前必须声明数据类型
+   编译语言:需要把代码翻译成计算机所认知的二进制语言,才能够执行
+</code></pre><h3 id="二-js代码注意问题"><a href="#二-js代码注意问题" class="headerlink" title="二:js代码注意问题:"></a>二:js代码注意问题:</h3><pre><code>1.在一对script的标签中有错误的js代码,那么该错误的代码后面的js代码不会执行
+2.如果第一对的script标签中有错误,不会影响后面的script标签中的js代码执行
+3.script标签一般是放在body的标签的最后的,这样浏览器渲染时先渲染html文件,之后才走script中的内容,可以提高效率
+</code></pre><h3 id="三-js中的数据类型"><a href="#三-js中的数据类型" class="headerlink" title="三:js中的数据类型:"></a>三:js中的数据类型:</h3><pre><code>js中的原始数据类型:number,string,boolean,null,undefined,object
+     * number:数字类型(整数和小数)
+     * string:字符串类型(的值一般都是用单引号或者是双引号括起来)  &quot;34&quot;
+     * boolean:布尔类型(值只有两个,true(真1),false(假0))
+     * null:空类型,值只有一个:null,一个对象指向为空了,此时可以赋值为null
+     * undefined:未定义,值只有一个:undefined
+     * object:对象
+基本类型(简单类型),值类型: number,string,boolean
+复杂类型(引用类型):object
+空类型:undefined,null
+
+值类型的值在哪一块空间中存储? 栈中存储
+引用类型的值在哪一块空间中存储?对象在堆上存储,地址在栈上存储
+
+var num=10;//值类型,值在栈上
+var obj={};//复杂类型,对象在堆,地址(引用)在栈
+
+值类型之间传递,传递的是值
+引用类型之间传递,传递的是地址(引用)
+
+值类型作为函数的参数,传递的是值
+引用类型作为函数的参数,传递的是地址
+
+类型转换:
+    一:其他类型转数字类型:
+           总结:想要转整数用parseInt(),想要转小数用parseFloat()
+                    想要转数字:Number();要比上面的两种方式严格
+                    例如:
+                            1.parseInt();//转整数  console.log(parseInt(&quot;10.98fdsfd&quot;));//10
+                            2.parseFloat()//转小数 console.log(parseFloat(&quot;10.98fdsfd&quot;));//10.98
+                            3.Number();//转数字  console.log(Number(&quot;10.98fdsfd&quot;));//NaN
+    二:其他类型转字符串类型:
+           如果变量有意义调用.toString()使用转换
+           如果变量没有意义使用String()转换
+           例如:
+               1.变量无意义
+                   var num2;
+                   console.log(String(num2));
+                   var num3=null;
+                   console.log(String(num3));
+               2.变量有意义
+                   var num2=20;
+                   console.log(num2.toString());
+    三:其他类型转布尔类型:
+        console.log(Boolean(1));//true
+        console.log(Boolean(&quot;哈哈&quot;));//true
+        console.log(Boolean(0));//false
+        console.log(Boolean(&quot;&quot;));//false
+        console.log(Boolean(null));//false
+        console.log(Boolean(undefined));//false
+     break关键字:如果在循环中使用,遇到了break,则立刻跳出当前所在的循环
+     continue:在循环中如果遇到continue关键字,直接开始下一次循环
+</code></pre><h3 id="四-基本包装类型"><a href="#四-基本包装类型" class="headerlink" title="四:基本包装类型:"></a>四:基本包装类型:</h3><pre><code>//基本包装类型
+
+    //普通变量不能直接调用属性或者方法
+    //对象可以直接调用属性和方法
+
+    //基本包装类型:本身是基本类型,但是在执行代码的过程中,如果这种类型的变量调用了属性或者是方法,
+    那么这种类型就不再是基本类型了,而是基本包装类型,这个变量也不是普通的变量了,而是基本包装类型对象
+    基本包装类型对象:string number boolean
+    例子:
+        //    var str=&quot;hello&quot;;
+        //    str=str.replace(&quot;ll&quot;,&quot;HH&quot;);
+        //    console.log(str);
+
+        //    var str=new String(&quot;hello&quot;);
+        //    str=str.replace(&quot;ll&quot;,&quot;HH&quot;);
+        //    console.log(str);
+        //    str=null;
+
+        //    var num=10;//number----&gt;
+        //    console.log(num.toString());
+</code></pre><h3 id="五-函数的相关知识点"><a href="#五-函数的相关知识点" class="headerlink" title="五:函数的相关知识点:"></a>五:函数的相关知识点:</h3><pre><code>一:函数需要先定义,然后才能使用
+    函数名字:要遵循驼峰命名法
+    函数一旦重名,后面的会把前面的函数覆盖
+    命名函数:函数如果有名字,就是命名函数
+     匿名函数:函数如果没有名字,就是匿名函数
+    函数定义:
+         * 1. 函数声明--函数定义
+         * function 函数名(){
+         *     函数体
+         * }
+         2.函数表达式:
+              * 把一个函数给一个变量,此时形成了函数表达式
+              * var 变量=匿名函数;
+              * 例子:
+              * var f1=function (){
+              *
+              * };
+              * 如果是函数表达式,那么此时前面的变量中存储的就是一个函数,而这个变量就相当于是一个函数,就可以直接加小括号调用了
+              * f1();
+         3.函数的自调用,没有名字,调用---声明的同时,直接调用(一次性的)
+                (function(){console.log(&quot;嘎嘎&quot;)})();
+
+    1.函数可以作为参数使用,
+        如果一个函数作为参数,那么我们说这个参数(函数)可以叫回调函数
+       只要是看到一个函数作为参数使用了,那就是回调函数
+    2.:函数是可以作为返回值使用的:(闭包)
+             function f1() {
+                   console.log(&quot;f1函数调用了&quot;);
+                   return function () {
+                     console.log(&quot;这是一个函数&quot;);
+                   };
+                 }
+                 var ff=f1();//调用
+                      //ff就是一个函数了
+                 ff();
+
+    Ctrl +鼠标左键----&gt;转到定义
+    * 形参:函数定义的时候函数名字后面的小括号里的变量就是参数,是不需要写var
+    * 实参:函数在调用的时候小括号里传入的值叫实参,实参可以是变量也可以是值
+    * 如果一个函数中有return ,那么这个函数就有返回值
+    * 如果一个函数中没有return,那么这个函数就没有返回值
+    * 如果一个函数中没有明确的返回值,那么调用的时候接收了,结果就是undefined
+    * (没有明确返回值:函数中没有return,函数中有return,但是return后面没有任何内容)
+    arguments-----&gt;数组使用------伪数组---
+        * arguments-----&gt;可以获取函数调用的时候,传入的实参的个数
+        * arguments是一个对象,是一个伪数组
+        * arguments.length---&gt;是实参的个数
+        * arguments[索引]----&gt;实参的值
+    function f1() {
+          var sum=0;
+          for(var i=0;i&lt;arguments.length;i++){
+            sum+=arguments[i];
+          }
+          return sum;
+        }
+    console.log(f1(10,20,30));
+
+二:作用域和作用域链:
+        1.作用域：变量可以起作用的范围
+            作用域:使用范围
+            /*
+            *
+            * 全局变量:声明的变量是使用var声明的,那么这个变量就是全局变量,全局变量可以在页面的任何位置使用
+            * 除了函数以外,其他的任何位置定义的变量都是全局变量
+            * 局部变量:在函数内部定义的变量,是局部变量,外面不能使用
+            * 全局变量,如果页面不关闭,那么就不会释放,就会占空间,消耗内存
+            *
+            * 全局作用域:全局变量的使用范围
+            * 局部作用域:局部变量的使用范围
+            *
+            * 块级作用域:一对大括号就可以看成是一块,在这块区域中定义的变量,只能在这个区域中使用,但是在js中在这个块级作用域中定义的变量,外面也能使用;
+            * 说明:js没有块级作用域,只有函数除外
+            *
+            * 隐式全局变量:声明的变量没有var,就叫隐式全局变量
+            * 全局变量是不能被删除的,隐式全局变量是可以被删除的
+            * 定义变量使用var是不会被删除的,没有var是可以删除的
+            */
+        2.作用域链:
+            将这样的所有的作用域列出来，可以有一个结构: 函数内指向函数外的链式结构。就称作作用域链。
+             var num=10;
+                function f1() {
+                  var num=20;
+                  function f2() {
+                    var num=30;
+                    function f3() {
+                      var num=50;
+                      console.log(num);
+                    }
+                    f3();
+                  }
+                  f2();
+                }
+                f1();
+三:预解析:
+        1.提前解析代码
+            * 预解析:就是在解析代码之前
+            * 预解析做什么事?
+            * 把变量的声明提前了----提前到当前所在的作用域的最上面
+            * 函数的声明也会被提前---提前到当前所在的作用域的最上面
+        2.预解析分段问题的局部作用域问题:         
+            //预解析中,变量的提升,只会在当前的作用域中提升,提前到当前的作用域的最上面
+             //函数中的变量只会提前到函数的作用域中的最前面,不会出去
+             //预解析会分段(多对的script标签中函数重名,预解析的时候不会冲突)              
+</code></pre><h3 id="六-object-对象-的相关知识"><a href="#六-object-对象-的相关知识" class="headerlink" title="六:object(对象)的相关知识:"></a>六:object(对象)的相关知识:</h3><pre><code>(js高级教程Number,String,Date,Array,Boolean,Math,RegExp)
+          什么是对象:
+              对象:有属性和方法,特指的某个事物
+              对象:一组无序属性的集合的键值对,属性的值可以是任意的类型
+      一:创建对象的方法:
+              1.调用系统的构造函数创建对象
+                   var 变量名= new Object(); Object 是系统的构造函数  Array
+
+              2.自定义构造函数创建对象(结合第一种和需求通过工厂模式创建对象)
+               *  //工厂模式创建对象
+                      function createObject(name,age) {
+                        var obj = new Object();//创建对象
+                        //添加属性
+                        obj.name = name;
+                        obj.age = age;
+                        //添加方法
+                        obj.sayHi = function () {
+                          console.log(&quot;阿涅哈斯诶呦,我叫:&quot; + this.name + &quot;我今年:&quot; + this.age);
+                        };
+                        return obj;
+                      }
+                      //创建人的对象
+                      var per1 = createObject(&quot;小芳&quot;,20);
+                      per1.sayHi();
+
+
+                   自定义构造函数创建对象,我要自己定义一个构造函数,自定义构造函数,创建对象
+                     函数和构造函数的区别；名字是不是大写(首字母是大写)
+                      function Person(name,age) {
+                        this.name=name;
+                        this.age=age;
+                        this.sayHi=function () {
+                          console.log(&quot;我叫:&quot;+this.name+&quot;,年龄是:&quot;+this.age);
+                        };
+                      } 
+                      //自定义构造函数创建对象:先自定义一个构造函数,创建对象
+                      var obj=new Person(&quot;小明&quot;,10);
+                      console.log(obj.name);
+                      console.log(obj.age);
+                      obj.sayHi();
+
+                      自定义构造函数创建对象做了什么事?(new 的执行过程:)
+                              * 1. 在内存中开辟(申请一块空闲的空间)空间,存储创建的新的对象
+                              * 2. 把this设置为当前的对象
+                              * 3. 设置对象的属性和方法的值
+                              * 4. 把this这个对象返回
+
+               * 3.字面量的方式创建对象
+                      var obj={};
+      //遍历对象,是不能通过for循环遍历,因为无序要用for in
+          //key是一个变量,这个变量中存储的是该对象的所有的属性的名字
+          var json = {
+                &quot;name&quot;: &quot;小明&quot;,
+                &quot;age&quot;: &quot;10&quot;,
+                &quot;sex&quot;: &quot;男&quot;
+              };
+          for (var key in json) {
+            console.log(key + &quot;===========&quot; + json[key]);
+          }
+</code></pre><h4 id="Math对象-是静态对象"><a href="#Math对象-是静态对象" class="headerlink" title="Math对象;(是静态对象)"></a>Math对象;(是静态对象)</h4><pre><code>实例对象:通过构造函数创建出来,实例化的对象
+静态对象:不需要创建,直接就是一个对象,方法(静态方法)直接通过这个对象名字调用,
+实例方法必须通过实例对象调用
+静态方法必须通过大写的对象调用
+    常用的:
+    Math.PI----π---
+    Math.E----常数的底数
+    Math.abs(值)-----绝对值
+    Math.ceil(值)----向上取整
+    Math.floor(值)---向下取整
+    Math.max(x,y,z,...,n)---返回 x,y,z,...,n 中的最高值。
+    Math.min(x,y,z,...,n)---返回 x,y,z,...,n 中的最小值。
+    Math.pow(x,y)---返回 x 的 y 次幂。
+    Math.random()---返回 0 ~ 1 之间的随机数。
+    Math.round(x)---四舍五入。
+    Math.sqrt(x)---返回数的平方根。
+</code></pre><h4 id="Date对象"><a href="#Date对象" class="headerlink" title="Date对象:"></a>Date对象:</h4><pre><code>1.创建date对象:
+    var dt = new Date(); 
+2.常用方法:
+     dt.getFullYear();//年
+     dt.getMonth();//月---从0开始
+     dt.getDate();//日
+     dt.getHours();//小时
+     dt.getMinutes();//分钟
+     dt.getSeconds();//秒
+     dt.getDay();//星期---从0开始
+     dt.toDateString();//日期
+     dt.toLocaleDateString();//日期
+     dt.toTimeString();//时间
+     dt.toLocaleTimeString();//时间
+     dt.valueOf();//毫秒
+</code></pre><h4 id="String对象"><a href="#String对象" class="headerlink" title="String对象:"></a>String对象:</h4><pre><code>1.String----&gt;是一个对象
+    * 字符串可以看成是字符组成的数组,但是js中没有字符类型
+    * 字符是一个一个的,在别的语言中字符用一对单引号括起来
+    * 在js中字符串可以使用单引号也可以使用双引号
+    * 因为字符串可以看成是数组,所以,可以通过for循环进行遍历
+    *
+    * 字符串特性:不可变性,字符串的值是不能改变
+    *
+    * 字符串的值之所以看起来是改变的,那是因为指向改变了,并不是真的值改变了
+2.常用属性:
+     * 字符串的常用属性:
+         * .length------&gt;字符串的长度
+         * .charAt(索引),返回值是指定索引位置的字符串,超出索引,结果是空字符串
+         * .fromCharCode(数字值,可以是多个参数),返回的是ASCII码对应的值
+         * .concat(字符串1,字符串2,...);返回的是拼接之后的新的字符串
+         * .indexOf(要找的字符串,从某个位置开始的索引);返回的是这个字符串的索引值,没找到则返回-1
+         * .lastIndexOf(要找的字符串);从后向前找,但是索引仍然是从左向右的方式,找不到则返回-1
+         * .replace(&quot;原来的字符串&quot;,&quot;新的字符串&quot;);用来替换字符串的
+         * .slice(开始的索引,结束的索引); 从索引5的位置开始提取,到索引为10的前一个结束,没有10，并返回这个提取后的字符串
+         * .split(&quot;要干掉的字符串&quot;,切割后留下的个数);切割字符串
+         * .substr(开始的位置,个数);返回的是截取后的新的字符串
+         * .substring(开始的索引,结束的索引),返回截取后的字符串,不包含结束的索引的字符串
+         * .toLocaleLowerCase();转小写
+         * .toLowerCase();转小写
+         * .toLocaleUpperCase()转大写
+         * .toUpperCase();转大写
+         * .trim();干掉字符串两端的空格
+</code></pre><h4 id="Array对象"><a href="#Array对象" class="headerlink" title="Array对象:"></a>Array对象:</h4><pre><code>1.数组:一组有序的数据
+        数组的作用:可以一次性存储多个数据
+        如何创建数组:
+            1. 通过构造函数创建数组
+                var 数组名=new Array();//定义了一个数组
+            2. 通过字面量的方式创建数组
+                var 数组名=[];//空数组
+        数组可以存储的各种类型:
+                var arr=[10,&quot;哈哈&quot;,true,null,undefined,new Object()];
+         冒泡排序:上面有示例
+2.判断是不是数组2种方法:
+    1.Array.isArray(对象)----&gt;判断这个对象是不是数组
+    2. instanceof关键字
+3.常用属性:
+        * .concat(数组,数组,数组,...) 组合一个新的数组
+         * .every(函数)--返回值是布尔类型,函数作为参数使用,函数中有三个参数,第一个参数是元素的值，第二个参数是索引值,第三个参数是原来的数组(没用)
+         * 如果这个数组中的每个元素的值都符合条件,最后才返回的是true
+         *
+         * .filter(函数);返回的是数组中每一个元素都复合条件的元素,组成了一个新的数组
+         *
+         * .push(值);---&gt;把值追加到数组中,加到最后了---返回值也是追加数据之后的数组长度
+         * .pop();---&gt;删除数组中最后一个元素,返回值就是删除的这个值
+         * .shift();---&gt;删除数组中第一个元素,返回值就是删除的这个值
+         * .unshift();---&gt;向数组的第一个元素前面插入一个新的元素,----返回值是插入后的程度
+         * .forEach(函数)方法---遍历数组用---相当于for循环
+         * .indexOf(元素值);返回的是索引,没有则是-1
+         * .join(&quot;字符串&quot;);----返回的是一个字符串
+         * .map(函数);---&gt;数组中的每个元素都要执行这个函数,把执行后的结果重新的全部的放在一个新的数组中
+         * .reverse();-----&gt;反转数组
+         * .sort();---排序的,可能不稳定,如果不稳定,请写MDN中的那个固定的代码
+         * .arr.slice(开始的索引,结束的索引);把截取的数组的值放在一个新的数组中,但是不包含结束的索引对应的元素值
+         * .splice(开始的位置,要删除的个数,替换的元素的值);一般是用于删除数组中的元素,或者是替换元素,或者是插入元素
+</code></pre><p>###七:js学习中三种对象:</p>
+<pre><code>* 1.内置对象----js系统自带的对象
+        Math, Date, String, Array, Object
+* 2.自定义对象---自己定义的构造函数创建的对象
+* 3.浏览器对象---
+        DOM:Document Object Model 文档对象模型,操作页面元素的
+        BOM:Browser Object Model 浏览器对象模型,操作浏览器的
+</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/08/js之webapi/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/01/08/js之webapi/" itemprop="url">js之webapi</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-01-08T15:44:03+08:00">
+                2019-01-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="webapi的知识点"><a href="#webapi的知识点" class="headerlink" title="webapi的知识点:"></a>webapi的知识点:</h1><h2 id="一-节点-元素-自定义属性相关知识点"><a href="#一-节点-元素-自定义属性相关知识点" class="headerlink" title="一.节点,元素,自定义属性相关知识点:"></a>一.节点,元素,自定义属性相关知识点:</h2><pre><code>文档:document
+元素:页面中所有的标签,元素---element,  标签----元素---对象
+节点:页面中所有的内容(标签,属性,文本(文字,换行,空格,回车)),Node
+根元素:html标签
+</code></pre><p>###1.节点的属性:<br>        可以使用标签–元素.出来,可以使用属性节点.出来,文本节点.点出来<br>        nodeType:节点的类型:1—-标签,2—属性,3—文本<br>        nodeName:节点的名字:标签节点–大写的标签名字,属性节点–小写的属性名字,文本节点–#text<br>        nodeValue:节点的值:标签节点—null,属性节点—属性值,文本节点—文本内容<br>        使用:<br>          ulObj=my$(“uu”);ulObj.nodeType,ulObj.nodeName,ulObj.nodeValue,<br>          利用nodeType判断是标签是属性还是文本,<br>          利用nodeName获取指定标签,<br>        获取节点的方法:<br>          //12行代码:都是获取节点和元素的<br>          //ul<br>          var ulObj=document.getElementById(“uu”);<br>          var threeObj=document.getElementById(“three”);<br>          //父级节点<br>          console.log(ulObj.parentNode);<br>          //父级元素<br>          console.log(ulObj.parentElement);<br>          //子节点<br>          console.log(ulObj.childNodes);<br>          //子元素<br>          console.log(ulObj.children);<br>          console.log(“==============================================”);<br>          //第一个子节点<br>          console.log(ulObj.firstChild);//————————IE8中是第一个子元素<br>          //第一个子元素<br>          console.log(ulObj.firstElementChild);//—————–IE8中不支持<br>          //最后一个子节点<br>          console.log(ulObj.lastChild);//————————IE8中是第一个子元素<br>          //最后一个子元素<br>          console.log(ulObj.lastElementChild);//—————–IE8中不支持<br>          //某个元素的前一个兄弟节点<br>          console.log(threeObj.previousSibling);//————————IE8中是第一个子元素<br>          //某个元素的前一个兄弟元素<br>          console.log(threeObj.previousElementSibling);//—————–IE8中不支持<br>          //某个元素的后一个兄弟节点<br>          console.log(threeObj.nextSibling);//————————IE8中是第一个子元素<br>          //某个元素的后一个兄弟元素<br>          console.log(threeObj.nextElementSibling);//—————–IE8中不支持<br>          //总结:凡是获取节点的代码在谷歌和火狐得到的都是  相关的节点<br>          //凡是获取元素的代码在谷歌和火狐得到的都是   相关的元素<br>          //从子节点和兄弟节点开始,凡是获取节点的代码在IE8中得到的是元素,获取元素的相关代码,在IE8中得到的是undefined—-元素的代码,iE中不支持</p>
+<h3 id="2-元素的创建"><a href="#2-元素的创建" class="headerlink" title="2.元素的创建:"></a>2.元素的创建:</h3><pre><code>元素创建-----为了提高用户的体验
+元素创建的三种方式:
+1. document.write(&quot;标签的代码及内容&quot;);
+  document.write()创建元素,缺陷:如果是在页面加载完毕后,此时通过这种方式创建元素,
+  那么页面上存在的所有的内容全部被干掉
+2. 对象.innerHTML=&quot;标签及代码&quot;;
+    document.getElementById(&apos;idm名&apos;).innerHTML=&quot;&lt;p&gt;窗前明月光,疑是地上霜,举头望明月,低头思故乡&lt;/p&gt;&quot;;
+3. document.createElement(&quot;标签的名字&quot;);
+  1.首先创建元素(可根据需要在元素中增加内容 元素对象.innerHTML=&apos;xxx&apos;)
+  2.把元素追加到父级元素中
+  //document.createElement(&quot;标签名字&quot;);
+  var pObj = document.createElement(&quot;p&quot;);
+   document.getElementById(&apos;id名&apos;).appendChild(pObj);
+   父级元素.appendChild(子级元素对象)
+    //在父级元素后追加
+   父级元素.insertBefore(新的子级元素对象,参照的子级对象);
+    //在参照子级元素前添加新子级对象
+    父级元素.removeChild(要删除的子级对象);
+</code></pre><h3 id="3-自定义属性的操作"><a href="#3-自定义属性的操作" class="headerlink" title="3.自定义属性的操作"></a>3.自定义属性的操作</h3><pre><code>自定义属性:标签原本没有这个属性,为了存储数据,程序员自己添加的属性
+自定义属性无法直接通过DOM对象的方式获取或者设置
+对象.getAttribute(&quot;自定义属性名字&quot;);获取自定义属性的值
+对象.setAttribute(&quot;属性名字&quot;,&quot;值&quot;);设置自定义属性及值
+移除自定义属性
+对象.removeAttribute(&quot;属性的名字&quot;);    
+</code></pre><h2 id="二-JS浏览器BOM对象中的属性和方法"><a href="#二-JS浏览器BOM对象中的属性和方法" class="headerlink" title="二:JS浏览器BOM对象中的属性和方法:"></a>二:JS浏览器BOM对象中的属性和方法:</h2><h3 id="1-location对象"><a href="#1-location对象" class="headerlink" title="1.location对象:"></a>1.location对象:</h3><pre><code>location对象中的属性和方法:console.log(window.location);
+</code></pre><p><img src="/2019/01/08/js之webapi/location.jpg" alt="Alt text">;<br>        例如一个地址为:localhost:8080/index.html#12580<br>        地址栏上#及后面的内容:window.location.hash<br>          console.log(window.location.hash);//12580<br>        主机名及端口号:window.location.host<br>          console.log(window.location.host);//localhost:8080<br>        主机名:window.location.hostname<br>          console.log(window.location.hostname);//localhost<br>        文件的路径—相对路径:window.location.pathname<br>          console.log(window.location.pathname);//index.html<br>        端口号:window.location.port<br>          console.log(window.location.port);//8080<br>        协议:window.location.protocol<br>          console.log(window.location.protocol);//http<br>        搜索的内容:window.location.search<br>          console.log(window.location.search);//是url后边?号跟的搜索的内容<br>        设置跳转的页面的地址<br>          location.href=”<a href="http://www.jd.com&quot;;//属性-----&gt;必须记住,有历史记录,浏览器返回按钮呢可点" target="_blank" rel="noopener">http://www.jd.com&quot;;//属性-----&gt;必须记住,有历史记录,浏览器返回按钮呢可点</a><br>          location.assign(“<a href="http://www.jd.com&quot;);//方法--&gt;有历史记录,浏览器返回按钮呢可点" target="_blank" rel="noopener">http://www.jd.com&quot;);//方法--&gt;有历史记录,浏览器返回按钮呢可点</a><br>          location.reload();//重新加载–刷新<br>          location.replace(“<a href="http://www.jd.com&quot;);//没有历史记录,所以浏览器中返回按钮不可点" target="_blank" rel="noopener">http://www.jd.com&quot;);//没有历史记录,所以浏览器中返回按钮不可点</a></p>
+<h3 id="2-history对象"><a href="#2-history对象" class="headerlink" title="2.history对象:"></a>2.history对象:</h3><pre><code>/*必须需要先有路径跳转后前进后退才能生效*/
+  window.history.forward()//前进
+  window.history.back();//后退
+  window.history.go();// go()方法只有一个参数，可以是整数、负数。如果是正数，就前进。负数就是后退。
+  history.go(-1)和history.back()的区别:
+    history.go(-1)表示后退与刷新。如数据有改变也随之改变
+    history.back()只是单纯的返回到上一页
+</code></pre><h3 id="3-navigator对象"><a href="#3-navigator对象" class="headerlink" title="3.navigator对象:"></a>3.navigator对象:</h3><pre><code>window.navigator.userAgent
+/*通过userAgent可以判断用户浏览器的类型*/
+window.navigator.platform
+/*通过platform可以判断浏览器所在的系统平台类型.*/
+</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/25/经典案例收集/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -419,9 +1042,9 @@
       
         
           
-            <h2 id="这里放的都是关于浏览器兼容性代码的函数封装总结"><a href="#这里放的都是关于浏览器兼容性代码的函数封装总结" class="headerlink" title="这里放的都是关于浏览器兼容性代码的函数封装总结!"></a>这里放的都是关于浏览器兼容性代码的函数封装总结!</h2><h3 id="浏览器兼容性的判断思路"><a href="#浏览器兼容性的判断思路" class="headerlink" title="浏览器兼容性的判断思路:"></a>浏览器兼容性的判断思路:</h3><pre><code>如果这个属性在浏览器中不支持,那么这个属性的类型是undefined
+            <h1 id="这里放的都是关于浏览器兼容性代码的函数封装总结"><a href="#这里放的都是关于浏览器兼容性代码的函数封装总结" class="headerlink" title="这里放的都是关于浏览器兼容性代码的函数封装总结!"></a>这里放的都是关于浏览器兼容性代码的函数封装总结!</h1><h2 id="浏览器兼容性的判断思路"><a href="#浏览器兼容性的判断思路" class="headerlink" title="浏览器兼容性的判断思路:"></a>浏览器兼容性的判断思路:</h2><pre><code>如果这个属性在浏览器中不支持,那么这个属性的类型是undefined
 判断这个属性的类型 是不是undefined,就知道浏览器是否支持
-</code></pre><h3 id="一-innerText-textContent-innerHTML的区别和兼容性"><a href="#一-innerText-textContent-innerHTML的区别和兼容性" class="headerlink" title="一:innerText,textContent,innerHTML的区别和兼容性"></a>一:innerText,textContent,innerHTML的区别和兼容性</h3><h4 id="1-innerText和textContent兼容代码"><a href="#1-innerText和textContent兼容代码" class="headerlink" title="1.innerText和textContent兼容代码:"></a>1.innerText和textContent兼容代码:</h4><pre><code>    设置标签中的文本内容,应该使用innerText属性,谷歌,火狐,IE8都支持,
+</code></pre><h2 id="一-innerText-textContent-innerHTML的区别和兼容性"><a href="#一-innerText-textContent-innerHTML的区别和兼容性" class="headerlink" title="一:innerText,textContent,innerHTML的区别和兼容性"></a>一:innerText,textContent,innerHTML的区别和兼容性</h2><h3 id="1-innerText和textContent兼容代码"><a href="#1-innerText和textContent兼容代码" class="headerlink" title="1.innerText和textContent兼容代码:"></a>1.innerText和textContent兼容代码:</h3><pre><code>    设置标签中的文本内容,应该使用innerText属性,谷歌,火狐,IE8都支持,
     设置标签中的文本内容,应该使用textContent属性,谷歌,火狐支持,IE8不支持
     目前的浏览器都支持innerText,应该是属于ie的标准,textContent本身是火狐支持,IE8不支持
     设置任意的标签中间的任意文本内容,两个参数(标签元素,文本内容)
@@ -445,7 +1068,7 @@
 2.innerText,textContent,innerHTML区别:
     想要设置标签内容(可以带标签),使用innerHTML,想要设置文本内容,innerText或者textContent,
 或者innerHTML,推荐用innerHTML
-</code></pre><h3 id="二-获取节点和元素的方法以及兼容性代码"><a href="#二-获取节点和元素的方法以及兼容性代码" class="headerlink" title="二:获取节点和元素的方法以及兼容性代码"></a>二:获取节点和元素的方法以及兼容性代码</h3><pre><code>1.获取节点和元素的方法:
+</code></pre><h2 id="二-获取节点和元素的方法以及兼容性代码"><a href="#二-获取节点和元素的方法以及兼容性代码" class="headerlink" title="二:获取节点和元素的方法以及兼容性代码"></a>二:获取节点和元素的方法以及兼容性代码</h2><pre><code>1.获取节点和元素的方法:
 </code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;div id=&quot;dv&quot;&gt;哦哦</span><br><span class="line">  &lt;span&gt;这是div中的第一个span标签&lt;/span&gt;</span><br><span class="line">  &lt;p&gt;这是div中的第二个元素,第一个p标签&lt;/p&gt;</span><br><span class="line">  &lt;ul id=&quot;uu&quot;&gt;</span><br><span class="line">    &lt;li&gt;这是ul中的第一个标签&lt;/li&gt;</span><br><span class="line">    &lt;li&gt;这是ul中的第二个标签&lt;/li&gt;</span><br><span class="line">    &lt;li id=&apos;three&apos;&gt;这是ul中的第三个标签&lt;/li&gt;</span><br><span class="line">    &lt;li&gt;这是ul中的第四个标签&lt;/li&gt;</span><br><span class="line">    &lt;li&gt;这是ul中的第五个标签&lt;/li&gt;</span><br><span class="line">  &lt;/ul&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
 <pre><code>//12行代码:都是获取节点和元素的
 //ul
@@ -480,7 +1103,7 @@ console.log(threeObj.nextElementSibling);//-----------------IE8中不支持
     凡是获取元素的代码在谷歌和火狐得到的都是相关的元素
     从子节点和兄弟节点开始,凡是获取节点的代码在IE8中得到的是元素,获取元素的相关代码,在IE8中
     得到的是undefined----元素的代码,iE中不支持
-</code></pre><h4 id="兼容代码"><a href="#兼容代码" class="headerlink" title="兼容代码:"></a>兼容代码:</h4><pre><code>以获取第一个子级元素为例写兼容性代码,(其他的都一样):
+</code></pre><h3 id="兼容代码"><a href="#兼容代码" class="headerlink" title="兼容代码:"></a>兼容代码:</h3><pre><code>以获取第一个子级元素为例写兼容性代码,(其他的都一样):
 function getFirstElementChild(element) {
     if(element.firstElementChild){//true---&gt;支持
         return element.firstElementChild;
@@ -492,7 +1115,7 @@ function getFirstElementChild(element) {
         return node;
     }
 }
-</code></pre><h3 id="三-为元素绑定事件写入兼容代码"><a href="#三-为元素绑定事件写入兼容代码" class="headerlink" title="三:为元素绑定事件写入兼容代码:"></a>三:为元素绑定事件写入兼容代码:</h3><pre><code>为元素绑定事件(DOM):一种,但是不兼容.
+</code></pre><h2 id="三-为元素绑定事件写入兼容代码"><a href="#三-为元素绑定事件写入兼容代码" class="headerlink" title="三:为元素绑定事件写入兼容代码:"></a>三:为元素绑定事件写入兼容代码:</h2><pre><code>为元素绑定事件(DOM):一种,但是不兼容.
 addEventListener和attachEvent的区别:
 相同点:都可以为元素绑定事件
 不同点:
@@ -527,7 +1150,7 @@ attachEvent:
         document.getElementById(&apos;id名&apos;).attachEvent(&quot;onclick&quot;,function () {
             console.log(&quot;我是点击事件2&quot;);
         });
-</code></pre><h4 id="绑定事件兼容代码"><a href="#绑定事件兼容代码" class="headerlink" title="绑定事件兼容代码:"></a>绑定事件兼容代码:</h4><pre><code>//为任意元素.绑定任意的事件, 参数:(任意的元素,事件的类型,事件处理函数)
+</code></pre><h3 id="绑定事件兼容代码"><a href="#绑定事件兼容代码" class="headerlink" title="绑定事件兼容代码:"></a>绑定事件兼容代码:</h3><pre><code>//为任意元素.绑定任意的事件, 参数:(任意的元素,事件的类型,事件处理函数)
  function addEventListener(element,type,fn) {
    //判断浏览器是否支持这个方法
    if(element.addEventListener){
@@ -547,7 +1170,7 @@ attachEvent:
  addEventListener(document.getElementById(&apos;id名&apos;),&quot;click&quot;,function () {
    console.log(&quot;哦3&quot;);
  });
-</code></pre><h3 id="四-为元素解绑事件写入兼容代码"><a href="#四-为元素解绑事件写入兼容代码" class="headerlink" title="四:为元素解绑事件写入兼容代码:"></a>四:为元素解绑事件写入兼容代码:</h3><pre><code>removeEventListener:谷歌和火狐支持,ie11支持,IE8不支持
+</code></pre><h2 id="四-为元素解绑事件写入兼容代码"><a href="#四-为元素解绑事件写入兼容代码" class="headerlink" title="四:为元素解绑事件写入兼容代码:"></a>四:为元素解绑事件写入兼容代码:</h2><pre><code>removeEventListener:谷歌和火狐支持,ie11支持,IE8不支持
 detachEvent:谷歌不支持,火狐不支持,ie11不支持,IE8支持,
 解绑事件方式:
 注意:用什么方式绑定事件,就应该用对应的方式解绑事件
@@ -560,7 +1183,7 @@ detachEvent:谷歌不支持,火狐不支持,ie11不支持,IE8支持,
 3.解绑事件(注意必须是命名函数,匿名函数会没办法解绑)
     对象.attachEvent(&quot;on事件类型&quot;,命名函数);---绑定事件
     对象.detachEvent(&quot;on事件类型&quot;,函数名字);
-</code></pre><h4 id="解绑事件兼容代码"><a href="#解绑事件兼容代码" class="headerlink" title="解绑事件兼容代码:"></a>解绑事件兼容代码:</h4><pre><code> //为任意元素解绑任意的事件, 参数:(任意的元素,事件的类型,命名函数)
+</code></pre><h3 id="解绑事件兼容代码"><a href="#解绑事件兼容代码" class="headerlink" title="解绑事件兼容代码:"></a>解绑事件兼容代码:</h3><pre><code> //为任意元素解绑任意的事件, 参数:(任意的元素,事件的类型,命名函数)
  function removeEventListener(element,type,fnName){
      if(element.removeEventListener){
          element.removeEventListener(type,fnName,false);
@@ -574,7 +1197,7 @@ removeEventListener(document.getElementById(&apos;id名&apos;),&apos;click&apos;
 function fnName(){
     console.log(&apos;我要被解绑了&apos;);
 }
-</code></pre><h3 id="五-事件冒泡-事件阶段-事件的完整流程及事件冒泡的兼容性代码"><a href="#五-事件冒泡-事件阶段-事件的完整流程及事件冒泡的兼容性代码" class="headerlink" title="五:事件冒泡,事件阶段,事件的完整流程及事件冒泡的兼容性代码:"></a>五:事件冒泡,事件阶段,事件的完整流程及事件冒泡的兼容性代码:</h3><h4 id="事件冒泡"><a href="#事件冒泡" class="headerlink" title="事件冒泡:"></a>事件冒泡:</h4><pre><code>原理:多个元素嵌套,有层次关系,这些元素都注册了相同的事件,如果里面的元素的事件触发了,
+</code></pre><h2 id="五-事件冒泡-事件阶段-事件的完整流程及事件冒泡的兼容性代码"><a href="#五-事件冒泡-事件阶段-事件的完整流程及事件冒泡的兼容性代码" class="headerlink" title="五:事件冒泡,事件阶段,事件的完整流程及事件冒泡的兼容性代码:"></a>五:事件冒泡,事件阶段,事件的完整流程及事件冒泡的兼容性代码:</h2><h3 id="事件冒泡"><a href="#事件冒泡" class="headerlink" title="事件冒泡:"></a>事件冒泡:</h3><pre><code>原理:多个元素嵌套,有层次关系,这些元素都注册了相同的事件,如果里面的元素的事件触发了,
 外面的元素的该事件自动的触发了.
 如何阻止事件冒泡:
     window.event.cancelBubble=true;IE特有的,谷歌支持,火狐不支持
@@ -590,11 +1213,11 @@ function fnName(){
         //在火狐浏览器下,会用e对象,在ie浏览器下没有e会用window.event对象,这样就解决了兼容性问题
         var e=window.event||e;
     }
-</code></pre><h4 id="事件阶段"><a href="#事件阶段" class="headerlink" title="事件阶段:"></a>事件阶段:</h4><pre><code> 事件有三个阶段:
+</code></pre><h3 id="事件阶段"><a href="#事件阶段" class="headerlink" title="事件阶段:"></a>事件阶段:</h3><pre><code> 事件有三个阶段:
 1.事件捕获阶段  :从外向内
 2.事件目标阶段  :最开始选择的那个
 3.事件冒泡阶段  : 从里向外
-</code></pre><h4 id="一个元素绑定事件的完整流程"><a href="#一个元素绑定事件的完整流程" class="headerlink" title="一个元素绑定事件的完整流程:"></a>一个元素绑定事件的完整流程:</h4><pre><code>* addEventListener(&quot;没有on的事件类型&quot;,事件处理函数,控制事件阶段的)
+</code></pre><h3 id="一个元素绑定事件的完整流程"><a href="#一个元素绑定事件的完整流程" class="headerlink" title="一个元素绑定事件的完整流程:"></a>一个元素绑定事件的完整流程:</h3><pre><code>* addEventListener(&quot;没有on的事件类型&quot;,事件处理函数,控制事件阶段的)
 * 事件触发的过程中,可能会出现事件冒泡的效果,为了阻止事件冒泡---&gt;
 * window.event.cancelBubble=true;谷歌,IE8支持,火狐不支持
 * window.event就是一个对象,是IE中的标准
@@ -2341,2955 +2964,7 @@ c()，这一句等同于 inc();  注意，函数名只是一个标识（指向�
         Function、Object、Array、Date、String、自定义函数
         特例： Function.prototype(是原型对象，却是函数对象，下面会有解释)
         参考:https://blog.csdn.net/sinat_21274091/article/details/52741788
-</code></pre><h3 id="六-js是一门什么样的语言"><a href="#六-js是一门什么样的语言" class="headerlink" title="六.js是一门什么样的语言:"></a>六.js是一门什么样的语言:</h3><pre><code>js是脚本语言,解释性语言,弱类型语言,基于对象,动态语言
-脚本语言:脚本语言是一个不需要显示编译的编程语言
-解释性语言:当浏览器解析这行代码的时候,才知道这个变量具体是什么类型,
-弱类型语言:声明都用var,没有其他类型的变量声明
-基于对象:直接使用系统当中的对象,而不是自己创建对象
-动态语言:动态语言是在运行时确定数据类型的语言
- 扩展:
-   静态语言是指在编译时变量的数据类型即可确定的语言，多数静态类型语言要求在使用变量之前必须声明数据类型
-   编译语言:需要把代码翻译成计算机所认知的二进制语言,才能够执行
-</code></pre><h3 id="七-js代码注意问题"><a href="#七-js代码注意问题" class="headerlink" title="七:js代码注意问题:"></a>七:js代码注意问题:</h3><pre><code>1.在一对script的标签中有错误的js代码,那么该错误的代码后面的js代码不会执行
-2.如果第一对的script标签中有错误,不会影响后面的script标签中的js代码执行
-3.script标签一般是放在body的标签的最后的,这样浏览器渲染时先渲染html文件,之后才走script中的内容,可以提高效率
-</code></pre><h3 id="八-js中的数据类型"><a href="#八-js中的数据类型" class="headerlink" title="八:js中的数据类型:"></a>八:js中的数据类型:</h3><pre><code>js中的原始数据类型:number,string,boolean,null,undefined,object
-     * number:数字类型(整数和小数)
-     * string:字符串类型(的值一般都是用单引号或者是双引号括起来)  &quot;34&quot;
-     * boolean:布尔类型(值只有两个,true(真1),false(假0))
-     * null:空类型,值只有一个:null,一个对象指向为空了,此时可以赋值为null
-     * undefined:未定义,值只有一个:undefined
-     * object:对象
-基本类型(简单类型),值类型: number,string,boolean
-复杂类型(引用类型):object
-空类型:undefined,null
-
-值类型的值在哪一块空间中存储? 栈中存储
-引用类型的值在哪一块空间中存储?对象在堆上存储,地址在栈上存储
-
-var num=10;//值类型,值在栈上
-var obj={};//复杂类型,对象在堆,地址(引用)在栈
-
-值类型之间传递,传递的是值
-引用类型之间传递,传递的是地址(引用)
-
-值类型作为函数的参数,传递的是值
-引用类型作为函数的参数,传递的是地址
-
-类型转换:
-    一:其他类型转数字类型:
-           总结:想要转整数用parseInt(),想要转小数用parseFloat()
-                    想要转数字:Number();要比上面的两种方式严格
-                    例如:
-                            1.parseInt();//转整数  console.log(parseInt(&quot;10.98fdsfd&quot;));//10
-                            2.parseFloat()//转小数 console.log(parseFloat(&quot;10.98fdsfd&quot;));//10.98
-                            3.Number();//转数字  console.log(Number(&quot;10.98fdsfd&quot;));//NaN
-    二:其他类型转字符串类型:
-           如果变量有意义调用.toString()使用转换
-           如果变量没有意义使用String()转换
-           例如:
-               1.变量无意义
-                   var num2;
-                   console.log(String(num2));
-                   var num3=null;
-                   console.log(String(num3));
-               2.变量有意义
-                   var num2=20;
-                   console.log(num2.toString());
-    三:其他类型转布尔类型:
-        console.log(Boolean(1));//true
-        console.log(Boolean(&quot;哈哈&quot;));//true
-        console.log(Boolean(0));//false
-        console.log(Boolean(&quot;&quot;));//false
-        console.log(Boolean(null));//false
-        console.log(Boolean(undefined));//false
-     break关键字:如果在循环中使用,遇到了break,则立刻跳出当前所在的循环
-     continue:在循环中如果遇到continue关键字,直接开始下一次循环
-</code></pre><h3 id="九-基本包装类型"><a href="#九-基本包装类型" class="headerlink" title="九 基本包装类型:"></a>九 基本包装类型:</h3><pre><code>//基本包装类型
-
-    //普通变量不能直接调用属性或者方法
-    //对象可以直接调用属性和方法
-
-    //基本包装类型:本身是基本类型,但是在执行代码的过程中,如果这种类型的变量调用了属性或者是方法,
-    那么这种类型就不再是基本类型了,而是基本包装类型,这个变量也不是普通的变量了,而是基本包装类型对象
-    基本包装类型对象:string number boolean
-    例子:
-        //    var str=&quot;hello&quot;;
-        //    str=str.replace(&quot;ll&quot;,&quot;HH&quot;);
-        //    console.log(str);
-
-        //    var str=new String(&quot;hello&quot;);
-        //    str=str.replace(&quot;ll&quot;,&quot;HH&quot;);
-        //    console.log(str);
-        //    str=null;
-
-        //    var num=10;//number----&gt;
-        //    console.log(num.toString());
-</code></pre><h3 id="十-函数的相关知识点"><a href="#十-函数的相关知识点" class="headerlink" title="十 函数的相关知识点:"></a>十 函数的相关知识点:</h3><pre><code>一:函数需要先定义,然后才能使用
-    函数名字:要遵循驼峰命名法
-    函数一旦重名,后面的会把前面的函数覆盖
-    命名函数:函数如果有名字,就是命名函数
-     匿名函数:函数如果没有名字,就是匿名函数
-    函数定义:
-         * 1. 函数声明--函数定义
-         * function 函数名(){
-         *     函数体
-         * }
-         2.函数表达式:
-              * 把一个函数给一个变量,此时形成了函数表达式
-              * var 变量=匿名函数;
-              * 例子:
-              * var f1=function (){
-              *
-              * };
-              * 如果是函数表达式,那么此时前面的变量中存储的就是一个函数,而这个变量就相当于是一个函数,就可以直接加小括号调用了
-              * f1();
-         3.函数的自调用,没有名字,调用---声明的同时,直接调用(一次性的)
-                (function(){console.log(&quot;嘎嘎&quot;)})();
-
-    1.函数可以作为参数使用,
-        如果一个函数作为参数,那么我们说这个参数(函数)可以叫回调函数
-       只要是看到一个函数作为参数使用了,那就是回调函数
-    2.:函数是可以作为返回值使用的:(闭包)
-             function f1() {
-                   console.log(&quot;f1函数调用了&quot;);
-                   return function () {
-                     console.log(&quot;这是一个函数&quot;);
-                   };
-                 }
-                 var ff=f1();//调用
-                      //ff就是一个函数了
-                 ff();
-
-    Ctrl +鼠标左键----&gt;转到定义
-    * 形参:函数定义的时候函数名字后面的小括号里的变量就是参数,是不需要写var
-    * 实参:函数在调用的时候小括号里传入的值叫实参,实参可以是变量也可以是值
-    * 如果一个函数中有return ,那么这个函数就有返回值
-    * 如果一个函数中没有return,那么这个函数就没有返回值
-    * 如果一个函数中没有明确的返回值,那么调用的时候接收了,结果就是undefined
-    * (没有明确返回值:函数中没有return,函数中有return,但是return后面没有任何内容)
-    arguments-----&gt;数组使用------伪数组---
-        * arguments-----&gt;可以获取函数调用的时候,传入的实参的个数
-        * arguments是一个对象,是一个伪数组
-        * arguments.length---&gt;是实参的个数
-        * arguments[索引]----&gt;实参的值
-    function f1() {
-          var sum=0;
-          for(var i=0;i&lt;arguments.length;i++){
-            sum+=arguments[i];
-          }
-          return sum;
-        }
-    console.log(f1(10,20,30));
-
-二:作用域和作用域链:
-        1.作用域：变量可以起作用的范围
-            作用域:使用范围
-            /*
-            *
-            * 全局变量:声明的变量是使用var声明的,那么这个变量就是全局变量,全局变量可以在页面的任何位置使用
-            * 除了函数以外,其他的任何位置定义的变量都是全局变量
-            * 局部变量:在函数内部定义的变量,是局部变量,外面不能使用
-            * 全局变量,如果页面不关闭,那么就不会释放,就会占空间,消耗内存
-            *
-            * 全局作用域:全局变量的使用范围
-            * 局部作用域:局部变量的使用范围
-            *
-            * 块级作用域:一对大括号就可以看成是一块,在这块区域中定义的变量,只能在这个区域中使用,但是在js中在这个块级作用域中定义的变量,外面也能使用;
-            * 说明:js没有块级作用域,只有函数除外
-            *
-            * 隐式全局变量:声明的变量没有var,就叫隐式全局变量
-            * 全局变量是不能被删除的,隐式全局变量是可以被删除的
-            * 定义变量使用var是不会被删除的,没有var是可以删除的
-            */
-        2.作用域链:
-            将这样的所有的作用域列出来，可以有一个结构: 函数内指向函数外的链式结构。就称作作用域链。
-             var num=10;
-                function f1() {
-                  var num=20;
-                  function f2() {
-                    var num=30;
-                    function f3() {
-                      var num=50;
-                      console.log(num);
-                    }
-                    f3();
-                  }
-                  f2();
-                }
-                f1();
-三:预解析:
-        1.提前解析代码
-            * 预解析:就是在解析代码之前
-            * 预解析做什么事?
-            * 把变量的声明提前了----提前到当前所在的作用域的最上面
-            * 函数的声明也会被提前---提前到当前所在的作用域的最上面
-        2.预解析分段问题的局部作用域问题:         
-            //预解析中,变量的提升,只会在当前的作用域中提升,提前到当前的作用域的最上面
-             //函数中的变量只会提前到函数的作用域中的最前面,不会出去
-             //预解析会分段(多对的script标签中函数重名,预解析的时候不会冲突)              
-</code></pre><h3 id="十一object-对象-的相关知识"><a href="#十一object-对象-的相关知识" class="headerlink" title="十一object(对象)的相关知识:"></a>十一object(对象)的相关知识:</h3><pre><code>(js高级教程Number,String,Date,Array,Boolean,Math,RegExp)
-          什么是对象:
-              对象:有属性和方法,特指的某个事物
-              对象:一组无序属性的集合的键值对,属性的值可以是任意的类型
-      一:创建对象的方法:
-              1.调用系统的构造函数创建对象
-                   var 变量名= new Object(); Object 是系统的构造函数  Array
-
-              2.自定义构造函数创建对象(结合第一种和需求通过工厂模式创建对象)
-               *  //工厂模式创建对象
-                      function createObject(name,age) {
-                        var obj = new Object();//创建对象
-                        //添加属性
-                        obj.name = name;
-                        obj.age = age;
-                        //添加方法
-                        obj.sayHi = function () {
-                          console.log(&quot;阿涅哈斯诶呦,我叫:&quot; + this.name + &quot;我今年:&quot; + this.age);
-                        };
-                        return obj;
-                      }
-                      //创建人的对象
-                      var per1 = createObject(&quot;小芳&quot;,20);
-                      per1.sayHi();
-
-
-                   自定义构造函数创建对象,我要自己定义一个构造函数,自定义构造函数,创建对象
-                     函数和构造函数的区别；名字是不是大写(首字母是大写)
-                      function Person(name,age) {
-                        this.name=name;
-                        this.age=age;
-                        this.sayHi=function () {
-                          console.log(&quot;我叫:&quot;+this.name+&quot;,年龄是:&quot;+this.age);
-                        };
-                      } 
-                      //自定义构造函数创建对象:先自定义一个构造函数,创建对象
-                      var obj=new Person(&quot;小明&quot;,10);
-                      console.log(obj.name);
-                      console.log(obj.age);
-                      obj.sayHi();
-
-                      自定义构造函数创建对象做了什么事?(new 的执行过程:)
-                              * 1. 在内存中开辟(申请一块空闲的空间)空间,存储创建的新的对象
-                              * 2. 把this设置为当前的对象
-                              * 3. 设置对象的属性和方法的值
-                              * 4. 把this这个对象返回
-
-               * 3.字面量的方式创建对象
-                      var obj={};
-      //遍历对象,是不能通过for循环遍历,因为无序要用for in
-          //key是一个变量,这个变量中存储的是该对象的所有的属性的名字
-          var json = {
-                &quot;name&quot;: &quot;小明&quot;,
-                &quot;age&quot;: &quot;10&quot;,
-                &quot;sex&quot;: &quot;男&quot;
-              };
-          for (var key in json) {
-            console.log(key + &quot;===========&quot; + json[key]);
-          }
-</code></pre><h4 id="Math对象-是静态对象"><a href="#Math对象-是静态对象" class="headerlink" title="Math对象;(是静态对象)"></a>Math对象;(是静态对象)</h4><pre><code>实例对象:通过构造函数创建出来,实例化的对象
-静态对象:不需要创建,直接就是一个对象,方法(静态方法)直接通过这个对象名字调用,
-实例方法必须通过实例对象调用
-静态方法必须通过大写的对象调用
-    常用的:
-    Math.PI----π---
-    Math.E----常数的底数
-    Math.abs(值)-----绝对值
-    Math.ceil(值)----向上取整
-    Math.floor(值)---向下取整
-    Math.max(x,y,z,...,n)---返回 x,y,z,...,n 中的最高值。
-    Math.min(x,y,z,...,n)---返回 x,y,z,...,n 中的最小值。
-    Math.pow(x,y)---返回 x 的 y 次幂。
-    Math.random()---返回 0 ~ 1 之间的随机数。
-    Math.round(x)---四舍五入。
-    Math.sqrt(x)---返回数的平方根。
-</code></pre><h4 id="Date对象"><a href="#Date对象" class="headerlink" title="Date对象:"></a>Date对象:</h4><pre><code>1.创建date对象:
-    var dt = new Date(); 
-2.常用方法:
-     dt.getFullYear();//年
-     dt.getMonth();//月---从0开始
-     dt.getDate();//日
-     dt.getHours();//小时
-     dt.getMinutes();//分钟
-     dt.getSeconds();//秒
-     dt.getDay();//星期---从0开始
-     dt.toDateString();//日期
-     dt.toLocaleDateString();//日期
-     dt.toTimeString();//时间
-     dt.toLocaleTimeString();//时间
-     dt.valueOf();//毫秒
-</code></pre><h4 id="String对象"><a href="#String对象" class="headerlink" title="String对象:"></a>String对象:</h4><pre><code>1.String----&gt;是一个对象
-    * 字符串可以看成是字符组成的数组,但是js中没有字符类型
-    * 字符是一个一个的,在别的语言中字符用一对单引号括起来
-    * 在js中字符串可以使用单引号也可以使用双引号
-    * 因为字符串可以看成是数组,所以,可以通过for循环进行遍历
-    *
-    * 字符串特性:不可变性,字符串的值是不能改变
-    *
-    * 字符串的值之所以看起来是改变的,那是因为指向改变了,并不是真的值改变了
-2.常用属性:
-     * 字符串的常用属性:
-         * .length------&gt;字符串的长度
-         * .charAt(索引),返回值是指定索引位置的字符串,超出索引,结果是空字符串
-         * .fromCharCode(数字值,可以是多个参数),返回的是ASCII码对应的值
-         * .concat(字符串1,字符串2,...);返回的是拼接之后的新的字符串
-         * .indexOf(要找的字符串,从某个位置开始的索引);返回的是这个字符串的索引值,没找到则返回-1
-         * .lastIndexOf(要找的字符串);从后向前找,但是索引仍然是从左向右的方式,找不到则返回-1
-         * .replace(&quot;原来的字符串&quot;,&quot;新的字符串&quot;);用来替换字符串的
-         * .slice(开始的索引,结束的索引); 从索引5的位置开始提取,到索引为10的前一个结束,没有10，并返回这个提取后的字符串
-         * .split(&quot;要干掉的字符串&quot;,切割后留下的个数);切割字符串
-         * .substr(开始的位置,个数);返回的是截取后的新的字符串
-         * .substring(开始的索引,结束的索引),返回截取后的字符串,不包含结束的索引的字符串
-         * .toLocaleLowerCase();转小写
-         * .toLowerCase();转小写
-         * .toLocaleUpperCase()转大写
-         * .toUpperCase();转大写
-         * .trim();干掉字符串两端的空格
-</code></pre><h4 id="Array对象"><a href="#Array对象" class="headerlink" title="Array对象:"></a>Array对象:</h4><pre><code>1.数组:一组有序的数据
-        数组的作用:可以一次性存储多个数据
-        如何创建数组:
-            1. 通过构造函数创建数组
-                var 数组名=new Array();//定义了一个数组
-            2. 通过字面量的方式创建数组
-                var 数组名=[];//空数组
-        数组可以存储的各种类型:
-                var arr=[10,&quot;哈哈&quot;,true,null,undefined,new Object()];
-         冒泡排序:上面有示例
-2.判断是不是数组2种方法:
-    1.Array.isArray(对象)----&gt;判断这个对象是不是数组
-    2. instanceof关键字
-3.常用属性:
-        * .concat(数组,数组,数组,...) 组合一个新的数组
-         * .every(函数)--返回值是布尔类型,函数作为参数使用,函数中有三个参数,第一个参数是元素的值，第二个参数是索引值,第三个参数是原来的数组(没用)
-         * 如果这个数组中的每个元素的值都符合条件,最后才返回的是true
-         *
-         * .filter(函数);返回的是数组中每一个元素都复合条件的元素,组成了一个新的数组
-         *
-         * .push(值);---&gt;把值追加到数组中,加到最后了---返回值也是追加数据之后的数组长度
-         * .pop();---&gt;删除数组中最后一个元素,返回值就是删除的这个值
-         * .shift();---&gt;删除数组中第一个元素,返回值就是删除的这个值
-         * .unshift();---&gt;向数组的第一个元素前面插入一个新的元素,----返回值是插入后的程度
-         * .forEach(函数)方法---遍历数组用---相当于for循环
-         * .indexOf(元素值);返回的是索引,没有则是-1
-         * .join(&quot;字符串&quot;);----返回的是一个字符串
-         * .map(函数);---&gt;数组中的每个元素都要执行这个函数,把执行后的结果重新的全部的放在一个新的数组中
-         * .reverse();-----&gt;反转数组
-         * .sort();---排序的,可能不稳定,如果不稳定,请写MDN中的那个固定的代码
-         * .arr.slice(开始的索引,结束的索引);把截取的数组的值放在一个新的数组中,但是不包含结束的索引对应的元素值
-         * .splice(开始的位置,要删除的个数,替换的元素的值);一般是用于删除数组中的元素,或者是替换元素,或者是插入元素
-</code></pre><h3 id="十二-js学习中三种对象"><a href="#十二-js学习中三种对象" class="headerlink" title="十二: js学习中三种对象:"></a>十二: js学习中三种对象:</h3><pre><code>* 1.内置对象----js系统自带的对象
-        Math, Date, String, Array, Object
-* 2.自定义对象---自己定义的构造函数创建的对象
-* 3.浏览器对象---
-        DOM:Document Object Model 文档对象模型,操作页面元素的
-        BOM:Browser Object Model 浏览器对象模型,操作浏览器的
-</code></pre><h3 id="十三-webapi的知识点"><a href="#十三-webapi的知识点" class="headerlink" title="十三:webapi的知识点:"></a>十三:webapi的知识点:</h3><h4 id="一-节点-元素-自定义属性相关知识点"><a href="#一-节点-元素-自定义属性相关知识点" class="headerlink" title="一.节点,元素,自定义属性相关知识点:"></a>一.节点,元素,自定义属性相关知识点:</h4><pre><code>文档:document
-元素:页面中所有的标签,元素---element,  标签----元素---对象
-节点:页面中所有的内容(标签,属性,文本(文字,换行,空格,回车)),Node
-根元素:html标签
-</code></pre><h5 id="1-节点的属性"><a href="#1-节点的属性" class="headerlink" title="1.节点的属性:"></a>1.节点的属性:</h5><pre><code>可以使用标签--元素.出来,可以使用属性节点.出来,文本节点.点出来
-nodeType:节点的类型:1----标签,2---属性,3---文本
-nodeName:节点的名字:标签节点--大写的标签名字,属性节点--小写的属性名字,文本节点--#text
-nodeValue:节点的值:标签节点---null,属性节点---属性值,文本节点---文本内容
-使用:
-  ulObj=my$(&quot;uu&quot;);ulObj.nodeType,ulObj.nodeName,ulObj.nodeValue,
-  利用nodeType判断是标签是属性还是文本,
-  利用nodeName获取指定标签,
-获取节点的方法:
-  //12行代码:都是获取节点和元素的
-  //ul
-  var ulObj=document.getElementById(&quot;uu&quot;);
-  var threeObj=document.getElementById(&quot;three&quot;);
-  //父级节点
-  console.log(ulObj.parentNode);
-  //父级元素
-  console.log(ulObj.parentElement);
-  //子节点
-  console.log(ulObj.childNodes);
-  //子元素
-  console.log(ulObj.children);
-  console.log(&quot;==============================================&quot;);
-  //第一个子节点
-  console.log(ulObj.firstChild);//------------------------IE8中是第一个子元素
-  //第一个子元素
-  console.log(ulObj.firstElementChild);//-----------------IE8中不支持
-  //最后一个子节点
-  console.log(ulObj.lastChild);//------------------------IE8中是第一个子元素
-  //最后一个子元素
-  console.log(ulObj.lastElementChild);//-----------------IE8中不支持
-  //某个元素的前一个兄弟节点
-  console.log(threeObj.previousSibling);//------------------------IE8中是第一个子元素
-  //某个元素的前一个兄弟元素
-  console.log(threeObj.previousElementSibling);//-----------------IE8中不支持
-  //某个元素的后一个兄弟节点
-  console.log(threeObj.nextSibling);//------------------------IE8中是第一个子元素
-  //某个元素的后一个兄弟元素
-  console.log(threeObj.nextElementSibling);//-----------------IE8中不支持
-  //总结:凡是获取节点的代码在谷歌和火狐得到的都是  相关的节点
-  //凡是获取元素的代码在谷歌和火狐得到的都是   相关的元素
-  //从子节点和兄弟节点开始,凡是获取节点的代码在IE8中得到的是元素,获取元素的相关代码,在IE8中得到的是undefined----元素的代码,iE中不支持
-</code></pre><h5 id="2-元素的创建"><a href="#2-元素的创建" class="headerlink" title="2.元素的创建:"></a>2.元素的创建:</h5><pre><code>元素创建-----为了提高用户的体验
-元素创建的三种方式:
-1. document.write(&quot;标签的代码及内容&quot;);
-  document.write()创建元素,缺陷:如果是在页面加载完毕后,此时通过这种方式创建元素,
-  那么页面上存在的所有的内容全部被干掉
-2. 对象.innerHTML=&quot;标签及代码&quot;;
-    document.getElementById(&apos;idm名&apos;).innerHTML=&quot;&lt;p&gt;窗前明月光,疑是地上霜,举头望明月,低头思故乡&lt;/p&gt;&quot;;
-3. document.createElement(&quot;标签的名字&quot;);
-  1.首先创建元素(可根据需要在元素中增加内容 元素对象.innerHTML=&apos;xxx&apos;)
-  2.把元素追加到父级元素中
-  //document.createElement(&quot;标签名字&quot;);
-  var pObj = document.createElement(&quot;p&quot;);
-   document.getElementById(&apos;id名&apos;).appendChild(pObj);
-   父级元素.appendChild(子级元素对象)
-    //在父级元素后追加
-   父级元素.insertBefore(新的子级元素对象,参照的子级对象);
-    //在参照子级元素前添加新子级对象
-    父级元素.removeChild(要删除的子级对象);
-</code></pre><h5 id="3-自定义属性的操作"><a href="#3-自定义属性的操作" class="headerlink" title="3.自定义属性的操作"></a>3.自定义属性的操作</h5><pre><code>自定义属性:标签原本没有这个属性,为了存储数据,程序员自己添加的属性
-自定义属性无法直接通过DOM对象的方式获取或者设置
-对象.getAttribute(&quot;自定义属性名字&quot;);获取自定义属性的值
-对象.setAttribute(&quot;属性名字&quot;,&quot;值&quot;);设置自定义属性及值
-移除自定义属性
-对象.removeAttribute(&quot;属性的名字&quot;);    
-</code></pre><h4 id="二-JS浏览器BOM对象中的属性和方法"><a href="#二-JS浏览器BOM对象中的属性和方法" class="headerlink" title="二:JS浏览器BOM对象中的属性和方法:"></a>二:JS浏览器BOM对象中的属性和方法:</h4><h5 id="1-location对象"><a href="#1-location对象" class="headerlink" title="1.location对象:"></a>1.location对象:</h5><pre><code>location对象中的属性和方法:console.log(window.location);
-</code></pre><p><img src="/2018/08/24/js知识点/location.jpg" alt="Alt text">;<br>        例如一个地址为:localhost:8080/index.html#12580<br>        地址栏上#及后面的内容:window.location.hash<br>          console.log(window.location.hash);//12580<br>        主机名及端口号:window.location.host<br>          console.log(window.location.host);//localhost:8080<br>        主机名:window.location.hostname<br>          console.log(window.location.hostname);//localhost<br>        文件的路径—相对路径:window.location.pathname<br>          console.log(window.location.pathname);//index.html<br>        端口号:window.location.port<br>          console.log(window.location.port);//8080<br>        协议:window.location.protocol<br>          console.log(window.location.protocol);//http<br>        搜索的内容:window.location.search<br>          console.log(window.location.search);//是url后边?号跟的搜索的内容<br>        设置跳转的页面的地址<br>          location.href=”<a href="http://www.jd.com&quot;;//属性-----&gt;必须记住,有历史记录,浏览器返回按钮呢可点" target="_blank" rel="noopener">http://www.jd.com&quot;;//属性-----&gt;必须记住,有历史记录,浏览器返回按钮呢可点</a><br>          location.assign(“<a href="http://www.jd.com&quot;);//方法--&gt;有历史记录,浏览器返回按钮呢可点" target="_blank" rel="noopener">http://www.jd.com&quot;);//方法--&gt;有历史记录,浏览器返回按钮呢可点</a><br>          location.reload();//重新加载–刷新<br>          location.replace(“<a href="http://www.jd.com&quot;);//没有历史记录,所以浏览器中返回按钮不可点" target="_blank" rel="noopener">http://www.jd.com&quot;);//没有历史记录,所以浏览器中返回按钮不可点</a></p>
-<h5 id="2-history对象"><a href="#2-history对象" class="headerlink" title="2.history对象:"></a>2.history对象:</h5><pre><code>/*必须需要先有路径跳转后前进后退才能生效*/
-  window.history.forward()//前进
-  window.history.back();//后退
-  window.history.go();// go()方法只有一个参数，可以是整数、负数。如果是正数，就前进。负数就是后退。
-  history.go(-1)和history.back()的区别:
-    history.go(-1)表示后退与刷新。如数据有改变也随之改变
-    history.back()只是单纯的返回到上一页
-</code></pre><h5 id="3-navigator对象"><a href="#3-navigator对象" class="headerlink" title="3.navigator对象:"></a>3.navigator对象:</h5><pre><code>window.navigator.userAgent
-/*通过userAgent可以判断用户浏览器的类型*/
-window.navigator.platform
-/*通过platform可以判断浏览器所在的系统平台类型.*/
 </code></pre>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/15/vue2-0-node-mongodb/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/08/15/vue2-0-node-mongodb/" itemprop="url">vue2.0+node.js+mongodb</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-08-15T11:38:41+08:00">
-                2018-08-15
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="第一章-课程介绍"><a href="#第一章-课程介绍" class="headerlink" title="第一章:课程介绍:"></a>第一章:课程介绍:</h2><h3 id="1-课程概述"><a href="#1-课程概述" class="headerlink" title="1.课程概述:"></a>1.课程概述:</h3><pre><code>1.课程主要讲了什么:
-  基于全栈开发一个简易的商城系统
-2.课程涵盖了哪些功能:
-  商品列表,购物车,地址,结算,订单以及登录模块
-3:课程使用到了哪些技术栈:
-  前端使用Vue全家桶和ES6
-  后端使用express框架,Mongodb
-</code></pre><h3 id="2-项目整体架构"><a href="#2-项目整体架构" class="headerlink" title="2.项目整体架构"></a>2.项目整体架构</h3><pre><code>前端:
-   视图层: 商品列表,购物车,地址列表,商品结算,订单成功
-   公共组件:vue-router,Axios,Vuex,Util,依赖, Vue,js-MVVM
-   工具支持:vue-cli,webpack .....
-后端:node   express
-数据库:MongoDB
- MVC:
-       视图（View）：用户界面.
-       控制器（Controller）：业务逻辑
-       模型（Model）：数据保存
-     各部分之间的通信方式如下:
-       view-&gt;controller-&gt;model-&gt;view;
-       1.View 传送指令到 Controller
-       2.Controller 完成业务逻辑后，要求 Model 改变状态
-       3.Model 将新的数据发送到 View，用户得到反馈
-       所有通信都是单向的
-       接受用户指令时，MVC 可以分成两种方式。一种是通过 View 接受指令，传递给 Controller。
-       另一种是直接通过controller接受指令。
- MVP:
-       MVP 模式将 Controller 改名为 Presenter，同时改变了通信方向。
-       view&lt;--&gt;persenter&lt;--&gt;Model
-       1. 各部分之间的通信，都是双向的
-       2. View 与 Model 不发生联系，都通过 Presenter 传递。
-       3. View 非常薄，不部署任何业务逻辑，称为&quot;被动视图&quot;（Passive View），即没有任何主动性，而 Presenter非常厚，所有逻辑都部署在那里。
- MVVM:
-       MVVM 模式将 Presenter 改名为 ViewModel，基本上与 MVP 模式完全一致。
-       view&lt;--&gt;viewModel&lt;--&gt;model
-       唯一的区别是，它采用双向绑定（data-binding）：View的变动，自动反映在 ViewModel，反之亦然。Angular 和 Ember 都采用这种模式
-</code></pre><h3 id="3-vue概况以及核心思想"><a href="#3-vue概况以及核心思想" class="headerlink" title="3.vue概况以及核心思想"></a>3.vue概况以及核心思想</h3><pre><code>1.vue本身并不是一个框架
-2.vue结合周边生态构成一个灵活的,渐进式的框架
-3.核心思想:
-  1.数据驱动
-  2.组件化
-</code></pre><h3 id="4-vue的优点和缺点"><a href="#4-vue的优点和缺点" class="headerlink" title="4.vue的优点和缺点"></a>4.vue的优点和缺点</h3><pre><code>Angular提供的更多的是一整套解决方案,而vue更像是一个生态
-</code></pre><h4 id="vue和react对比"><a href="#vue和react对比" class="headerlink" title="vue和react对比:"></a>vue和react对比:</h4><pre><code>  vue和react目前都是用了Virtual Dom
-  speed        vue            react
-  fastest        23ms        63ms
-  median        42ms        81ms
-  average        51ms        94ms
-  95th perc    73ms        164ms
-  slowest        343ms        453ms
-
-vue :                              react:
-   1模板和渲染函数的弹性选择         1.更适合大型应用和更好的可测试性
-   2.简单的语法以及项目创建          2.同时适用于web端和原生App
-   3.更快的渲染速度和更小的体积      3.更大的生态圈带来的更多支持和工具
-
-vue和react相同点:
-    1.利用虚拟dom实现快速渲染
-    2.轻量级
-    3.响应式组件
-    4.支持服务器端渲染
-    5.易于集成路由工具,打包工具以及状态管理工具
-    6.优秀的支持和社区
-</code></pre><h2 id="第二章-vue基础"><a href="#第二章-vue基础" class="headerlink" title="第二章: vue基础"></a>第二章: vue基础</h2><p><a href="https://cn.vuejs.org/v2/guide/" target="_blank" rel="noopener">vuejs官网</a></p>
-<h2 id="第三章-vue-router"><a href="#第三章-vue-router" class="headerlink" title="第三章: vue-router"></a>第三章: vue-router</h2><h3 id="1-路由基础介绍"><a href="#1-路由基础介绍" class="headerlink" title="(1)路由基础介绍:"></a>(1)路由基础介绍:</h3><pre><code>1.什么是前端路由:
-    路由是根据不同的url地址展示不同的页面或内容
-    前端路由就是把不同路由对应不同的内容或页面的任务交给前端来做,后端路由是通过
-    服务器根据url的不同返回不同的页面实现的
-2.什么时候使用前端路由?
-     在单页面应用,大部分页面结构不变,只改变部分内容的时候使用
-</code></pre><h3 id="2-前端路由优缺点"><a href="#2-前端路由优缺点" class="headerlink" title="(2)前端路由优缺点:"></a>(2)前端路由优缺点:</h3><pre><code>优点:用户体验好,不需要每次都从服务器全部获取,能快速展现给用户
-缺点:
-    1.不利于SEO
-</code></pre><h3 id="3-动态路由匹配"><a href="#3-动态路由匹配" class="headerlink" title="(3)动态路由匹配:"></a>(3)动态路由匹配:</h3><pre><code>动态路由:即根据路由的约定来实现页面的显示,比如在router/index.js中如果设置path: &apos;/goods ,则你只需要输入goods路径
-      去匹配,后边随便输入都可访问到页面,如果设置了path: &apos;/goods/:id/user/:username&apos;,这种匹配条件很多的,则你必须在路径中输入goods后加id并且user后加username后才可访问到此页面,
-</code></pre><h3 id="4-嵌套路由-路由嵌套路由-一般用在有层级结构的地方-比如三级目录等"><a href="#4-嵌套路由-路由嵌套路由-一般用在有层级结构的地方-比如三级目录等" class="headerlink" title="(4)嵌套路由:(路由嵌套路由:一般用在有层级结构的地方,比如三级目录等)"></a>(4)嵌套路由:(路由嵌套路由:一般用在有层级结构的地方,比如三级目录等)</h3><pre><code>嵌套路由记得要在父路由中写上&lt;router-view&gt;&lt;/router-view&gt;,只有这样才能跳转到子路由
-</code></pre><h3 id="5-编程式路由"><a href="#5-编程式路由" class="headerlink" title="(5)编程式路由:"></a>(5)编程式路由:</h3><h4 id="什么是编程式路由"><a href="#什么是编程式路由" class="headerlink" title="什么是编程式路由:"></a>什么是编程式路由:</h4><pre><code>通过js来实现页面跳转:
- $router.push(&quot;name&quot;)
- $router.push({path:&quot;name&quot;)
- $router.push({path:&quot;name?a=123&quot;})或者 $router.push({path:&quot;name&quot;,query:{a:123})
- $router.go(1)(前进) $router.go(-1)(后退) $router.go(0)(刷新)
-</code></pre><h4 id="1-router和-route区别"><a href="#1-router和-route区别" class="headerlink" title="1.$router和$route区别:"></a>1.$router和$route区别:</h4><pre><code>注意:传参是this.$router,接收参数是this.$route,这里千万要看清了！！！(接收参数的this可省略)
-$router为VueRouter实例，想要导航到不同URL，则使用$router.push方法,$route为当前router跳转对象，里面可以获取name、path、query、params等
-$router:
-    jump(){
-           this.$router.push({path:&apos;/cart?goodsId=query&apos;});
-        },
-$route:
-`&lt;span&gt;{{$route.params.id}}&lt;/span&gt;&lt;br&gt;`
-</code></pre><h4 id="2-params传参和query传参区别"><a href="#2-params传参和query传参区别" class="headerlink" title="2.params传参和query传参区别:"></a>2.params传参和query传参区别:</h4><pre><code>使用编程式路由的时候,传参要使用$router.push(&quot;xxx&quot;);接收参数要使用$route.query.xxx或者$route.params.xxx
-  1..params方式传参和接收参数
-      传参:
-      this.$router.push({
-              name:&apos;xxx&apos;  //name为你在router/index.js中设置的,
-              params:{
-                id:123
-              }
-            })
-      接收参数:
-      this.$route.params.id
-      注意:params传参，push里面只能是 name:&apos;xxxx&apos;,不能是path:&apos;/xxx&apos;,因为params只能用name来引入路由，如果这里写成了path，接收参数页面会是undefined！！！
-  2.query方式传参和接收参数
-        传参:
-        this.$router.push({
-                path:&apos;/xxx&apos;
-                query:{
-                  id:456
-                }
-              })
-        接收参数:
-        this.$route.query.id
-        注意:
-        1.二者还有点区别，直白的来说query相当于get请求，页面跳转的时候，可以在地址栏看到请求参数，而params相当于post请求，参数不会再地址栏中显示
-        2.通过query接收的参数,在页面刷新时依然存在,但是通过params接收的参数,在页面刷新的时候就会消失
-</code></pre><h3 id="6-命名路由和命名视图"><a href="#6-命名路由和命名视图" class="headerlink" title="(6)命名路由和命名视图"></a>(6)命名路由和命名视图</h3><p>  命名路由:就是 <code>&lt;router-link  :to=&quot;{name:&#39;cart&#39;,params:{id:666}}&quot;&gt;</code>命名路由的跳转<code>&lt;/router-link&gt;</code>通过name命名路径跳转,<br>  命名视图:就是 <code>&lt;router-view&gt;&lt;/router-view&gt;
-                &lt;router-view class=&quot;left&quot; name=&quot;title&quot;&gt;&lt;/router-view&gt;
-              &lt;router-view class=&quot;right&quot; name=&quot;img&quot;&gt;&lt;/router-view&gt;</code><br>     需要在router/index.js中设置路径下的components:{default:GoodsList,title:Title,img:Img}</p>
-<h2 id="第四章-Vue-resource和Axios"><a href="#第四章-Vue-resource和Axios" class="headerlink" title="第四章:Vue-resource和Axios"></a>第四章:Vue-resource和Axios</h2><h3 id="1-vue-resource-vue-resource插件已将挂载到vue中了"><a href="#1-vue-resource-vue-resource插件已将挂载到vue中了" class="headerlink" title="1.vue-resource: vue-resource插件已将挂载到vue中了"></a>1.vue-resource: vue-resource插件已将挂载到vue中了</h3><pre><code>简书介绍(https://www.jianshu.com/p/ed9e98731d96)
-vue-resource中提供的方法
-    get(url, [options])
-    head(url, [options])
-    delete(url, [options])
-    jsonp(url, [options])
-    post(url, [body], [options])
-    put(url, [body], [options])
-    patch(url, [body], [options])
-  options对象:
-  发送请求时的options选项对象包含以下属性
-        参数                          类型                          描述
-        url                                  string                     请求的URL
-        method                    string                     请求的HTTP方法，例如：&apos;GET&apos;, &apos;POST&apos;或其他HTTP方法
-        body                      Object, FormData string     request body
-        params                    Object                     请求的URL参数对象
-        headers                    Object                     request header
-        timeout                    number                     单位为毫秒的请求超时时间 (0 表示无超时时间)
-        before                    function(request)           请求发送前的处理函数，类似于jQuery的beforeSend函数
-        progress                  function(event)             ProgressEvent回调处理函数
-        credientials            boolean                     表示跨域请求时是否需要使用凭证
-        emulateHTTP                boolean                     发送PUT, PATCH, DELETE请求时以HTTP POST的方式发送，并设置请求头的X-HTTP-Method-Override
-        emulateJSON                boolean                    将request body以application/x-www-form-urlencoded content type发送
-</code></pre><h4 id="1-get请求"><a href="#1-get请求" class="headerlink" title="1.get请求:"></a>1.get请求:</h4><pre><code>get(){
-      this.$http.get(&apos;package.json&apos;,{
-          params:{
-            userId:101,
-          },
-        headers:{
-            token:&apos;abcdefg&apos;
-        }
-      }).then(res =&gt;{
-        this.msg=res.data;
-      },error=&gt;{
-        this.msg=error;
-      })
-  },
-</code></pre><h4 id="2-post请求"><a href="#2-post请求" class="headerlink" title="2.post请求:"></a>2.post请求:</h4><pre><code>post(){
-        this.$http.post(&apos;package.json&apos;,{
-          userId:102
-        },{
-          headers:{
-            access_token:&apos;aaaaa&apos;
-          }
-        }).then(res=&gt;{
-          this.msg=res.data;
-        },error=&gt;{
-          this.msg=error;
-        })
-      },
-</code></pre><h4 id="3-jsonp请求"><a href="#3-jsonp请求" class="headerlink" title="3.jsonp请求:"></a>3.jsonp请求:</h4><pre><code>jsonp(){
-           this.$http.jsonp(&apos;http://www.imooc.com/course/AjaxCourseMembers?ids=796&apos;).then(res=&gt;{
-             this.msg=res.data;
-           })
-         }
-</code></pre><h4 id="4-全局拦截器"><a href="#4-全局拦截器" class="headerlink" title="4.全局拦截器:"></a>4.全局拦截器:</h4><pre><code>在mounted:中使用:
-    Vue.http.interceptors.push(function (request,next){
-         console.log(&quot;request init:请求完成之前调用可以在这里写一些loading处理&quot;);
-        next(function(response){
-            console.log(&quot;response init:请求完成之后调用&quot;);
-          return response;
-        })
-    })
-    当我们请求的接口比较多,且路径都有公共的地址时,可以在mounted平级的地方写一个:
-    http:{
-         //公共地址配置
-              root:&apos;http://localhost:63342/vue2.0+node.js+mongodb/shopping/&apos;
-            },
-     然后在get,post请求中,写入root路径后的地址就可以了~
-</code></pre><h3 id="2-axios基础介绍-axios并没有挂载到vue中-是个独立的"><a href="#2-axios基础介绍-axios并没有挂载到vue中-是个独立的" class="headerlink" title="2.axios基础介绍:axios并没有挂载到vue中,是个独立的"></a>2.axios基础介绍:axios并没有挂载到vue中,是个独立的</h3><pre><code>简书介绍(https://www.jianshu.com/p/df464b26ae58)
- vue-resource已不再是vue官方推荐的插件,取而代之的是axios.
-</code></pre><h4 id="1-get请求-1"><a href="#1-get请求-1" class="headerlink" title="1.get请求:"></a>1.get请求:</h4><pre><code>get(){
-  axios.get(&apos;../package.json&apos;,{
-    params:{
-      userId:123
-    },
-    headers:{
-      token:&apos;abc&apos;
-    }
-  }).then((res)=&gt;{
-    this.msg=res.data;
-  }).catch((error)=&gt;{
-   this.msg=error;
-  })
-},
-</code></pre><h4 id="2-post请求-1"><a href="#2-post请求-1" class="headerlink" title="2.post请求:"></a>2.post请求:</h4><pre><code>post(){
-      axios.post(&apos;../package.json&apos;,{
-        userId:456
-      },{
-          headers:{
-            token:&apos;def&apos;
-          }
-      }).then((res)=&gt;{
-        this.msg=res.data;
-      }).catch((error)=&gt;{
-        this.msg=error;
-      })
-  },
-</code></pre><h4 id="3-http-全局配置请求"><a href="#3-http-全局配置请求" class="headerlink" title="3.http(全局配置请求):"></a>3.http(全局配置请求):</h4><pre><code>http(){
-        //通过配置使用axios
-          axios({
-            url:&apos;../package.json&apos;,
-            method:&apos;get&apos;,
-            data:{
-              //只有在用post请求时data这样的userId才能渠道,用get取不到
-              userId:456
-            },
-            params:{
-              userId:123
-            },
-            headers:{
-              token:&apos;def&apos;
-            }
-          }).then(res=&gt;{
-            this.msg=res.data;
-          }).catch(error=&gt;{
-            this.msg=error;
-          })
-      }
-</code></pre><h4 id="4-全局拦截器配置"><a href="#4-全局拦截器配置" class="headerlink" title="4.全局拦截器配置:"></a>4.全局拦截器配置:</h4><pre><code>  mounted(){
-  //全局拦截器配置  可以在这里写loading等效果
-  //请求之前
-    axios.interceptors.request.use(function(config){
-      console.log(&apos;request init&apos;);
-      return config;
-    });
-  //请求成功后
-  axios.interceptors.response.use(function(response){
-    console.log(&apos;response init&apos;);
-    return response;
-  })
-
-},
-</code></pre><h2 id="第五章-es6常用语法"><a href="#第五章-es6常用语法" class="headerlink" title="第五章:es6常用语法:"></a>第五章:es6常用语法:</h2><h3 id="es6常用命令介绍"><a href="#es6常用命令介绍" class="headerlink" title="es6常用命令介绍:"></a>es6常用命令介绍:</h3><h4 id="1-let和const命令"><a href="#1-let和const命令" class="headerlink" title="1:let和const命令:"></a>1:let和const命令:</h4><pre><code>var 和let的区别:
-  console.log(&quot;a:&quot;+a); //a:undefined
-  var a=1;
-  console.log(&quot;b:&quot;+b);//b报错 b is not  defined
-  let b=2;
-  //为什么会出现这种情况呢?主要是var 具有变量提升的作用,提升为
-  // var a;
-  // console.log(&quot;a:&quot;+a);
-  // a=1;
-  // 而用let定义的是块作用域,没有变量提升的功能
-  //块级作用域
-  {
-    let a =1;
-    var b =2;
-  }
-  console.log(&quot;b:&quot;+b); //b:2
-  console.log(&apos;a:&apos;+a);// a is not defined
-//因为let是块级作用域,var是函数级作用域,所以var在块级外还能生效,而let则脱离块级作用域就失效了
-
-let和const的区别:
-let  a=1;
-const b=2;
-a=3;
-console.log(a); //a=3;
-b=4;//Assignment to constant variable.报错:不能被改变
-console.log(b);
-//let定义的变量可以被改变,const定义的是常量:一般无法改变,除非定义的是对象;可以改变对象里的值,但是不能改变对象的引用
-const b={a:1};
-b.a=2;
-console.log(b.a);//2
-b={c:1}//就会报错,因为这改变了对象的引用地址
-</code></pre><h4 id="2-模板语言"><a href="#2-模板语言" class="headerlink" title="2:模板语言:"></a>2:模板语言:</h4><pre><code>1.用` `来拼接字符串
-2.用${变量名}来输出变量
-   //模板语言
-let username = &apos;jack&apos;;
-console.log(`i am ${username}`);
-</code></pre><h4 id="3-字符串-对象-数组和函数的解构"><a href="#3-字符串-对象-数组和函数的解构" class="headerlink" title="3:字符串,对象,数组和函数的解构"></a>3:字符串,对象,数组和函数的解构</h4><pre><code>//数组,字符串,对象,函数的解构
-   // ES6 允许按照一定模式，从数组和对象中提取值，对变量进行赋值，这被称为解构（Destructuring）, 而数组的解构赋值是从数组中提取值，按照对应位置，对变量赋值。
-    //数组的解构
-    var [a,b] = [1,2];
-    console.log(&quot;a:&quot;+a,&quot;b:&quot;+b);//a:1,b:2
-    //字符串的解构
-    var [x,y,z] =&quot;vue&quot;;
-    console.log(`x:${x} y:${y} z;${z}`);//x:v y:u z;e
-    //对象的解构
-    var {m,n} ={m:10,n:20};
-    console.log(`m:${m} n;${n}`);//m:10 n;20
-    //函数的解构
-    function sum([q,w]){
-      return q+w;
-    }
-    var total=sum([15,25]);
-    console.log(`total:${total}`);//total:40
-</code></pre><h4 id="4-rest参数和函数的扩展"><a href="#4-rest参数和函数的扩展" class="headerlink" title="4.rest参数和函数的扩展"></a>4.rest参数和函数的扩展</h4><pre><code>//函数的默认参数
-  function add(flag=true){
-    if(flag){
-      return &apos;true&apos;;
-    }else{
-      return &apos;false&apos;;
-    }
-  }
-  console.log(add());
-  //在这个函数中,如果不舍这flag=true的话,一旦调用函数时忘记了传flag=true或者flag=false这个参数函数就会报错
-  //这个时候设置一个默认参数在函数声明的时候,可以有效的防止这种事情的发生.
-</code></pre><h4 id="5-箭头函数"><a href="#5-箭头函数" class="headerlink" title="5.箭头函数"></a>5.箭头函数</h4><pre><code>//箭头函数
-    //使用箭头函数不会创建新的作用域,所以不会出现以前那种var _that=this,在新函数中更使用_that的情况
-    var  arr=[3,6,9];
-    var newArr=arr.map(function(item){
-      return item+2;
-    })
-    console.log(&quot;newArr:&quot;+newArr);
-    //使用箭头函数后
-    var newArr1=arr.map((item)=&gt; item+2);
-    console.log(&quot;newArr1:&quot;+newArr1);
-</code></pre><h4 id="6-promise的用法"><a href="#6-promise的用法" class="headerlink" title="6.promise的用法:"></a>6.promise的用法:</h4><pre><code>promise用法介绍可参考:(https://blog.csdn.net/shan1991fei/article/details/78966297);
- 什么是promise(承诺):
-      Promise其实是一个构造函数。
-      当我们new一个Promise的时候其实Promise是会自动执行的,所以我们在使用的时候一般都是把它包裹在函数里,需要的时候再调用。
-    Promise是异步编程的一种解决方案，比传统的解决方案（回调函数和事件）更合理更强大
-    所谓Promise，简单说就是一个容器，里面保存着某个未来才会结束的事件 (通常是一个异步操作)的结果。
-    从语法上说，Promise是一个对象，从它可以获取异步操作的消息
-    有三种状态：Pending(进行中)、Resolved(已完成)和Rejected(已失败)
-    有了Promise对象，就可以把异步操作以同步操作的流程表达出来，避免了层层嵌套的回调函数。此外，Promise对象提供了统一的接口，使得控制异步操作更加容易。
-    promise是一个构造函数,自身有resolve,reject,all这几个眼熟的方法:原型上有then,catch等眼熟的方法
-    示例:判断缓存中是否有userId,如果有则显示登陆成功,没有则报错(这里为了演示没有适合调用reject,其实正常来说reject是在接口,或者服务器报错中使用的)
-  &lt;script&gt;
-          let checkLogin = function(){
-             return  new Promise(function (resolve,reject){
-               let  flag = document.cookie.indexOf(&apos;userId&apos;)?true:false;
-               if(flag){
-                 resolve({
-                   status:0,
-                   result:true
-                 })
-               }else{
-                 //reject()报错是指代码运行中的报错,和登录失败报错不一样,登录失败报错,服务器和接口都是返回正常,reject报错可能是接口错误或者服务器挂了
-                 reject(&quot;error&quot;);
-               }
-             })
-          }
-          let getUserInfo = ()=&gt;{
-            return new Promise((resolve,reject) =&gt;{
-              let userInfo = {
-                userId : &quot;101&quot;
-              };
-              resolve(userInfo);
-            })
-          }
-          //链式操作的用法
-          checkLogin().then((res1)=&gt;{
-            if(res1.status==0){
-              console.log(&quot;login success&quot;);
-              console.log(`res1:${res1.status}`);
-              return getUserInfo();
-            }
-          }).catch((error)=&gt;{
-            console.log(`error:${error}`)
-          }).then((res2) =&gt;{
-            console.log(`res2:${res2.userId}`);
-          })
-          //Promise的all方法提供了并行执行异步操作的能力，并且在所有异步操作执行完后才执行回调。
-          //用Promise.all来执行，all接收一个数组参数，里面的值最终都算返回Promise对象
-                  Promise.all([checkLogin(),getUserInfo()]).then(([res1,res2]) =&gt;{
-                   console.log(`res1:${res1.status},res2:${res2.userId}`);
-            })
-  &lt;/script&gt;
-</code></pre><h4 id="7-模块化开发-export-export-default-import"><a href="#7-模块化开发-export-export-default-import" class="headerlink" title="7.模块化开发:export,export default , import"></a>7.模块化开发:export,export default , import</h4><h5 id="1-export和import-export和import（一个导出一个导入）"><a href="#1-export和import-export和import（一个导出一个导入）" class="headerlink" title="1:export和import    export和import（一个导出一个导入）"></a>1:export和import    export和import（一个导出一个导入）</h5><pre><code>export用于对外输出本模块（一个文件可以理解为一个模块）变量的接口
-import用于在一个模块中加载另一个含有export接口的模块.
-也就是说使用export命令定义了模块的对外接口以后，其他JS文件就可以通过import命令加载这个模块（文件）。这几个都是ES6的语法
-</code></pre><h5 id="2-export与export-default"><a href="#2-export与export-default" class="headerlink" title="2:export与export default:"></a>2:export与export default:</h5><pre><code>1、export与export default均可用于导出常量、函数、文件、模块等
-2、你可以在其它文件或模块中通过import+(常量 | 函数 | 文件 | 模块)名的方式，将其导入，以便能够对其进行使用
-3、在一个文件或模块中，export、import可以有多个，export default仅有一个
-4、通过export方式导出，在导入时要加{ }，export default则不需要
-</code></pre><h4 id="8-AMD-CMD-CommonJs和ES6对比"><a href="#8-AMD-CMD-CommonJs和ES6对比" class="headerlink" title="8.AMD,CMD,CommonJs和ES6对比:"></a>8.AMD,CMD,CommonJs和ES6对比:</h4><h5 id="1-AMD"><a href="#1-AMD" class="headerlink" title="1.AMD"></a>1.AMD</h5><pre><code>AMD是RequireJs在推广过程中对模块定义的规范化产出。
-特点是：依赖前置,异步模块定义
-</code></pre><h5 id="2-CMD"><a href="#2-CMD" class="headerlink" title="2.CMD"></a>2.CMD</h5><pre><code>CMD是SeaJs在推广过程中对模块定义的规范化产出。
-特点是：淘宝团队提供，依赖就近，同步概念即用即加载模块。
-</code></pre><h5 id="3-CommonJs规范，"><a href="#3-CommonJs规范，" class="headerlink" title="3.CommonJs规范，"></a>3.CommonJs规范，</h5><pre><code>为JS的表现来制定规范，因为js没有模块的功能所以CommonJS应运而生，它希望js可以在任何地方运行，不只是浏览器中。
-同步
-CommonJS规范 通过model.exports定义的，在前端浏览器中并不支持,特点是nodeJs后台采用的规范
-NodeJS是CommonJS规范的实现，webpack 也是以CommonJS的形式来书写的
-CommonJS定义的模块分为: 模块引用(require) ； 模块定义(exports) ； 模块标识(module)
-</code></pre><h5 id="4-ES6特性export-import"><a href="#4-ES6特性export-import" class="headerlink" title="4.ES6特性export/import"></a>4.ES6特性export/import</h5><pre><code>上面的AMD,CMD,CommonJs都是ES5时期的。
-  ES6中无需引入别的js文件，ES6 在语言标准的层面上，实现了模块功能，而且实现得相当简单，完全可以取代 CommonJS 和 AMD 规范，成为浏览器和服务器通用的模块解决方案。
-  ES6 模块的设计思想是尽量的静态化，使得编译时就能确定模块的依赖关系，以及输入和输出的变量。CommonJS 和 AMD 模块，都只能在运行时确定这些东西
-</code></pre><h2 id="第六章-商品列表模块实现"><a href="#第六章-商品列表模块实现" class="headerlink" title="第六章:商品列表模块实现:"></a>第六章:商品列表模块实现:</h2><h3 id="1-mock数据"><a href="#1-mock数据" class="headerlink" title="1.mock数据:"></a>1.mock数据:</h3><pre><code>开发中为了提高开发效率,通常采用前后端分离的开发方式,这时候前端就要使用mock数据来模拟后端数据了!
-vue2.0中只有(webpack.dev.conf.js)情况下,在webpack.dev.conf.js中操作流程:
-  1.通常利用express搭建服务器,
-  var express = require(&apos;express&apos;);
-  2.声明一个express对象:
-  var app= express();
-  3.引入mock的xxx.json文件
-  var goodsData = require(&apos;../../xxx.json&apos;);
-  4.创建路由
-   var router = express.Router();
-  5.调用路由
-   app.use(&apos;/api&apos;, router);
-  6.在devServer: {}内部写入before(){}
-  devServer:{
-   before(app){
-        app.get(&apos;/api/goods&apos;,function(req,res){
-          res.json(goodsData);
-        })
-      }
-  }
-  7.在组件中利用vue-resource或者axios获取数据(记得在组件中先引入对应插件)
-  vue-resource:
-    this.$http.get(&apos;/api/goods&apos;).then((res)=&gt;{
-      console.log(res.body.data);//将数据转化为json形式
-    })
-  axios:
-      axios.get(&apos;/api/goods&apos;).then((res)=&gt;{
-                  console.log(res.data);
-        })
-     }
-</code></pre><h3 id="2-图片懒加载插件-vue-lazyload"><a href="#2-图片懒加载插件-vue-lazyload" class="headerlink" title="2.图片懒加载插件(vue-lazyload)"></a>2.图片懒加载插件(vue-lazyload)</h3><pre><code>vue-lazyload插件的npm地址:https://www.npmjs.com/package/vue-lazyload
-插件使用方法:
-  1.npm安装:cnpm install vue-lazyload --save
-  2.main.js或者index.js引入插件:
-      import VueLazyload from &apos;vue-lazyload&apos;;
-  3.使用插件
-      Vue.use(VueLazyload,{
-          loading:&apos;static/loading-svg/loading-bars.svg&apos;,
-          //loading的地址
-      })
-   4.在需要图片懒加载的地方把v-bind:src改为v-lazy
-   v-lazy有一个重中之重的坑需要填。
-       当图片的数据更新时，举个栗子，你设置了翻页功能，且每一页都是请求的数据进行渲染。
-      你会发现一个神奇的事情，那就是其他的数据都变了，唯独图片还是原来的图片。需要加一个：key值才可以
-</code></pre><h2 id="第七章-Node-js学习"><a href="#第七章-Node-js学习" class="headerlink" title="第七章:Node.js学习"></a>第七章:Node.js学习</h2><h3 id="1-node-js安装"><a href="#1-node-js安装" class="headerlink" title="1.node.js安装:"></a>1.node.js安装:</h3><pre><code>windows和mac系统的安装都是在官网下载后傻瓜式安装,唯有linux系统下安装比较特殊
-linux下的安装可自行百度
-</code></pre><h3 id="2-node基础编程"><a href="#2-node基础编程" class="headerlink" title="2.node基础编程:"></a>2.node基础编程:</h3><pre><code>1.基于Chrome V8引擎
-2.单线程
-3.使用JavaScript开发后端代码
-4.非阻塞的IO
-</code></pre><h3 id="3-利用node-js搭建一个服务器"><a href="#3-利用node-js搭建一个服务器" class="headerlink" title="3.利用node.js搭建一个服务器:"></a>3.利用node.js搭建一个服务器:</h3><pre><code>Demo.js:
-  //引入http模块
-  let  http = require(&apos;http&apos;);
-  //引入url网址模块
-  let  url = require (&apos;url&apos;);
-  //引入实用工具
-  let util = require (&apos;util&apos;);
-  //新建一个服务器,设置请求参数,监听端口
-   let  server = http.createServer((req,res)=&gt;{
-     res.statusCode =200;
-     res.setHeader(&quot;Content-Type&quot;,&quot;text/plain; charset=utf-8&quot;);
-     console.log(&quot;url:&quot;+req.url);// /heoll.html?a=123
-     //url.parse()把url网址转成对象
-     console.log(&quot;url.parse:&quot;+url.parse(req.url));//[object Object]
-     //util.inspect把url网址转成字符串形式,主要用于调试,实际开发没啥用
-     console.log(&quot;url.inspect:&quot;+util.inspect(url.parse(req.url)));
-     // Url {
-     // protocol: null,
-     //   slashes: null,
-     //   auth: null,
-     //   host: null,
-     //   port: null,
-     //   hostname: null,
-     //   hash: null,
-     //   search: &apos;?a=123&apos;,
-     //   query: &apos;a=123&apos;,
-     //   pathname: &apos;/heoll.html&apos;,
-     //   path: &apos;/heoll.html?a=123&apos;,
-     //   href: &apos;/heoll.html?a=123&apos; }
-  res.end(util.inspect(url.parse(&apos;http://127.0.0.1:3000/heoll.html?a=123&apos;)));
-   })
-  server.listen(3000,&apos;127.0.0.1&apos;,()=&gt;{
-    console.log(&quot;服务器已经运行,请打开浏览器,输入http://127.0.0.1:3000 访问&quot; );
-  })
-</code></pre><h3 id="4-node-js定义路由方式-当我们在目录中有相应路由的文件-在客户端访问的时候-fs会把内容读取到并返回到页面上"><a href="#4-node-js定义路由方式-当我们在目录中有相应路由的文件-在客户端访问的时候-fs会把内容读取到并返回到页面上" class="headerlink" title="4.node.js定义路由方式,(当我们在目录中有相应路由的文件,在客户端访问的时候,fs会把内容读取到并返回到页面上)"></a>4.node.js定义路由方式,(当我们在目录中有相应路由的文件,在客户端访问的时候,fs会把内容读取到并返回到页面上)</h3><pre><code>Server.js:
-  //利用fs模块访问index.html文件,并且把内容输出到客户端,(定义路由的方式)
-  //引入http模块
-  let  http = require(&apos;http&apos;);
-  //引入url网址模块
-  let  url = require (&apos;url&apos;);
-  //引入实用工具
-  let util = require (&apos;util&apos;);
-  //引入系统文件模块
-  let fs = require (&apos;fs&apos;);
-  let  server = http.createServer((req,res)=&gt;{
-   let pathname=url.parse(req.url).pathname;
-   console.log(pathname.substring(1));
-   fs.readFile(pathname.substring(1),function(err,data){
-     if(err){
-       res.writeHead(404,{
-         &apos;Context-Type&apos;:&apos;text/html&apos;
-       });
-     }else{
-       res.writeHead(200,{
-         &apos;Context-Type&apos;:&apos;text/html&apos;
-       })
-       res.write(data.toString());
-     }
-     res.end();
-   })
-  })
-  server.listen(3000,&apos;127.0.0.1&apos;,()=&gt;{
-    console.log(&quot;服务器已经运行,请打开浏览器,输入http://127.0.0.1:3000 访问&quot; );
-  })
-</code></pre><h3 id="5-利用node-js访问第三方接口-此时node-js相当于客户端-第三方接口相当于服务端"><a href="#5-利用node-js访问第三方接口-此时node-js相当于客户端-第三方接口相当于服务端" class="headerlink" title="5.利用node.js访问第三方接口,此时node.js相当于客户端,第三方接口相当于服务端,"></a>5.利用node.js访问第三方接口,此时node.js相当于客户端,第三方接口相当于服务端,</h3><pre><code>client.js:
-  //注意https开头的网址要引入https,http开头的网址要引入http,
-  let https = require(&apos;https&apos;);
-  let util = require(&apos;util&apos;);
-  https.get(&apos;https://www.imooc.com/u/loading&apos;,function(res){
-    let data=&apos;&apos;;
-    res.on(&quot;data&quot;,function(chunk){
-      data+=chunk;
-    });
-    res.on(&quot;end&quot;,function(){
-      let result = JSON.parse(data);
-      console.log(&quot;result:&quot;+util.inspect(result));
-    })
-  })
-</code></pre><h3 id="6-express基于-Node-js-平台，快速、开放、极简的-web-开发框架"><a href="#6-express基于-Node-js-平台，快速、开放、极简的-web-开发框架" class="headerlink" title="6.express基于 Node.js 平台，快速、开放、极简的 web 开发框架"></a>6.express基于 Node.js 平台，快速、开放、极简的 web 开发框架</h3><p>  搭建基于express框架的运行环境:(后端内容)<br>     1.首先需要全局安装express,这样才能在命令行中使用express<br>     2.express的安装:<br>        必须要以管理员身份运行cmd后cnpm install -g express-generator才可安装成功,否则会报错<br>     3.安装完后使用express –version可以查看是否安装成功,会显示版本号<br>     4.这个时候我们就要起一个express服务了,运行:<br>        express server<br>        会出现一个server文件夹,里面包含我们需要的很多文件<br>        bin/www: 启动express服务是需要运行  node bin/www<br>        public:里面存放各种公共资源<br>        routes:里面存放路由的配置<br>        views:存放index,error.layout页面,默认是jade格式的,但是jade已更名为pug,这里我们自己更改为html文件<br>              更改的方法是:<br>                1.首先安装ejs插件,cnpm install ejs –save<br>                2.在app.js中<br>                    var ejs= require(‘ejs’);<br>                    app.engine(‘.html’,ejs.__express);<br>                    app.set(‘view engine’, ‘html’);//注释掉app.set(‘view engine’, ‘jade’);<br>                 3.在views中新建一个html文件,<br>                 4.运行node bin/www后在浏览器打开地址即可看到html文件中的内容<br>         app.js:文件入口<br>         package.json:可以和前端的package.json内容合并</p>
-<h2 id="第八章-MongoDB介绍"><a href="#第八章-MongoDB介绍" class="headerlink" title="第八章:MongoDB介绍:"></a>第八章:MongoDB介绍:</h2><h3 id="1-什么是MongoDB-NoSQL非关系型数据库"><a href="#1-什么是MongoDB-NoSQL非关系型数据库" class="headerlink" title="1.什么是MongoDB:(NoSQL非关系型数据库)"></a>1.什么是MongoDB:(NoSQL非关系型数据库)</h3><pre><code>MongoDB 是一个基于分布式文件存储的数据库。由 C++ 语言编写。旨在为 WEB 应用提供可扩展的高性能数据存储解决方案。
-MongoDB 是一个介于关系数据库和非关系数据库之间的产品，是非关系数据库当中功能最丰富，最像关系数据库的。
-</code></pre><h3 id="2-什么是NoSQL"><a href="#2-什么是NoSQL" class="headerlink" title="2.什么是NoSQL?"></a>2.什么是NoSQL?</h3><pre><code>NoSQL，指的是非关系型的数据库。NoSQL有时也称作Not Only SQL的缩写，是对不同于传统的关系型数据库的数据库管理系统的统称。
-NoSQL用于超大规模数据的存储。（例如谷歌或Facebook每天为他们的用户收集万亿比特的数据）。这些类型的数据存储不需要固定的模式，无需多余操作就可以横向扩展。
-谁在使用NOSQL:Google,Facebook,Mozilla,Adobe,Foursquare
-</code></pre><h3 id="3-windows下的mongodb安装-http-www-imooc-com-article-18438"><a href="#3-windows下的mongodb安装-http-www-imooc-com-article-18438" class="headerlink" title="3.windows下的mongodb安装:(http://www.imooc.com/article/18438)"></a>3.windows下的mongodb安装:(<a href="http://www.imooc.com/article/18438" target="_blank" rel="noopener">http://www.imooc.com/article/18438</a>)</h3><pre><code>1.下载安装包:
-    在https://pan.baidu.com/s/1mhPejwO百度网盘中下载mongodb安装包和相关软件
-2.安装安装包到本地电脑:
-    下载到本地,点击适合自己电脑系统的双击安装,在C:\Program Files\MongoDB\的位置，到此只是安装了MongoDB ,我们还需要进行一系列的配置。
-3.配置MongoDB:
-    1.在c:\MongoDB（可随意起）下面建一个data文件夹 c:\MongoDB\data(存数据)
-    2.在c:\MongoDB（可随意起）下面建一个logs文件夹 c:\MongoDB\logs ，在里面建一个文件mongodb.log(存日志)
-    3.在c:\MongoDB（可随意起）下面建一个etc(随意起，放配置文件)文件夹 c:\MongoDB\etc ,在里面建一个文件mongo.conf(存配置)
-    4.打开mongo.conf文件，修改如下：
-      #数据库路径
-      dbpath=c:\MongoDB\data\
-      #日志输出文件路径
-      logpath=c:\MongoDB\logs\mongodb.log
-      #错误日志采用追加模式，配置这个选项后mongodb的日志会追加到现有的日志文件，而不是从新创建一个新文件
-      logappend=true
-      #启用日志文件，默认启用
-      journal=true
-      #这个选项可以过滤掉一些无用的日志信息，若需要调试使用请设置为false
-      quiet=false
-      #端口号 默认为27017
-      port=27017
-      #指定存储引擎（默认先不加此引擎，如果报错了，大家在加进去）
-      storageEngine=mmapv1
-     完成以上操作后，我们就可以启动我们的mongo数据库了
-    5.启动mongo数据库:
-        以管理员身份运行cmd,进入到安装mongodb的bin目录下运行:
-        mongod --dbpath c:\MongoDB\data
-        这时,当我们看到waiting for connections on port 27017说明启动成功,就可以在浏览器输入localhost:27017访问了
-    6,配置环境变量:
-         点击我的电脑&gt;属性&gt;高级系统管理&gt;环境变量&gt;系统变量&gt;path添加 bin的完整目录
-    7.这时mongo数据可已经启动了,如果想要操作数据库,需要再起一个cmd命令输入mongo就可以对数据库进行操作
-    8.如果我们不想每次都在命令行启动mongodb,我们可以把它配置到管理的服务中去,这样可以手动启动或者关闭mongodb
-        1.进入到mongodb的安装目录 下面的bin目录中：
-        2.输入命令，启动mongo
-            mongod --config c:\MongoDB\etc\mongo.conf --install --serviceName &quot;MongoDB&quot;
-            这是就可以在管理&gt;服务中看到多了一个mongodb
-        3.如果不想在服务中启动mongodb可以删除:
-            删除服务命令：mongod --config c:\MongoDB\etc\mongo.conf --remove
-            然后在服务里面刷新一下，就会发现已经删掉了
-        备注:如果在首次启动mongodb时发现报错:
-            windows不能再本机启动mongodb服务错误代码 100
-            找到data文件夹db下面的mongod.lock文件，并删除掉。
-            找到data文件夹db下面的storage.bson文件，并删除掉。
-            再次启动即可
-</code></pre><h3 id="4-导入json数据到mongodb"><a href="#4-导入json数据到mongodb" class="headerlink" title="4.导入json数据到mongodb:"></a>4.导入json数据到mongodb:</h3><pre><code>   1.直接用命令行建一个数据库(database),插入数据
-    use demo1
-    db.goods.insert({&quot;production&quot;:&quot;10001&quot;,&quot;productName&quot;:&quot;aaa&quot;,&quot;salePrice&quot;:249,&quot;productImage&quot;:&quot;1.jpg&quot;})
-2.用mongoVue可视化工具,导入json文件,这种最快,适合导入大量数据
-      进入mongoVue中打开要导入的数据库,集合,上方菜单栏(collection),点击insert/import document,选择导入json文件还是json串, insert 后刷新即可
-3.使用命令行导入json文件:
-       mongoimport -d demo1 -c goods --file c:/soft/vuejs/vue2.0+node.js+mongodb/project/z1b8jp/mock/goods.json
-      //mongoimport -d demo1(数据库名称) -c goods(集合名称) --file c:/soft/vuejs/vue2.0+node.js+mongodb/project/z1b8jp/mock/goods.json(文件地址)
-      备注:命令行导入json文件的时候一定要退出mongo操作台,这样退出mongo环境才能成功
-</code></pre><h3 id="5-mongodb常用操作"><a href="#5-mongodb常用操作" class="headerlink" title="5.mongodb常用操作:"></a>5.mongodb常用操作:</h3><pre><code>1.创建数据库:
-      use demo(数据库名)
-      创建完之后必须要插入数据,否则不会添加进去所以需要继续
-      db.goods(集合名).insert({id:&quot;101&quot;})
-      这样才能创建数据库成功
-2.查看数据库:
-      show dbs
-3.删除数据库:
-      进入要删除的数据库:use 数据库名
-      db.dropDatabase()
-4.创建集合:
-    1.db.createCollection(&apos;user&apos;)//这种创建的是空集合
-    2.db.user.insert({id:&quot;101&quot;})//这种属于插入数据的同时创建了集合
-5.查看集合:
-    show collections
-6.删除集合:
-    db.user.drop()//user集合名
-    删除成功会返回true,失败返回false
-7.插入文档:
-      db.user.insert({id:&quot;101&quot;})//user集合名
-8.查看文档:
-      db.collection.find(query, projection)
-          query ：可选，使用查询操作符指定查询条件
-          projection ：可选，使用投影操作符指定返回的键。查询时返回文档中所有键值， 只需省略该参数即可（默认省略）。
-      pretty() 方法以格式化的方式来显示所有文档。
-      db.user.find({&quot;likes&quot;:{$lte:50}}).pretty()//小于或等于50的数据
-
-      db.user.find()//查看所有user表的数据
-      db.user.findOne()//它只返回一个文档。
-9.更新文档:
-    db.user.update({id:&quot;101&quot;},{$set:{id:&quot;110&quot;}})//会把id为101改成id110
-10.删除文档:
-    参数说明:
-        query :（可选）删除的文档的条件。
-        justOne : （可选）如果设为 true 或 1，则只删除一个文档。
-        writeConcern :（可选）抛出异常的级别
-    db.user.remove({title:&quot;hello&quot;})//删除集合中title为hello的数据
-    db.goods.remove({title:&quot;hello&quot;,},{justOne:1})//（可选）如果设为 true 或 1，则只删除一个文档。
-</code></pre><h2 id="第九章-基于Node-js开发商品列表接口"><a href="#第九章-基于Node-js开发商品列表接口" class="headerlink" title="第九章:基于Node.js开发商品列表接口"></a>第九章:基于Node.js开发商品列表接口</h2><h3 id="1-node-js启动调试方式"><a href="#1-node-js启动调试方式" class="headerlink" title="1.node.js启动调试方式:"></a>1.node.js启动调试方式:</h3><pre><code>1.通过node命令启动:
-     进入 server目录 node bin/www
-2.编译器(webstorm,idea)配置启动入口
-     使用idea配置启动入口,首先点击Edit Configurations,点击+选中node.js,修改name为项目名.JavaScript File要选中server/bin/www,然后apply,ok,在idea中点击run就可以启动
-3.pm2:(可以用来启动express的插件)
-       1.npm install pm2 -g
-       2.在server文件夹下pm2 start  bin/www
-</code></pre><h3 id="2-基于express开发商品列表查询接口"><a href="#2-基于express开发商品列表查询接口" class="headerlink" title="2.基于express开发商品列表查询接口"></a>2.基于express开发商品列表查询接口</h3><p><a href="https://www.cnblogs.com/xiaohuochai/p/7215067.html?utm_source=itdadao&amp;utm_medium=referral" target="_blank" rel="noopener">点击查看mongoose基础用法</a></p>
-<pre><code>1.安装mongoose:
-    1.mongoose介绍:
-            mongoose是mongoDB的一个对象模型工具，是基于node-mongodb-native开发的mongoDB的nodejs驱动，可以在异步的环境下执行。
-            同时它也是针对mongoDB操作的一个对象模型库，封装了mongoDB对文档的一些增删改查等常用方法，让nodejs操作mongoDB数据库变得更加容易
-    2.主要功能:
-      作为MongoDB驱动，可以连接MongoDB数据库;
-      作为MongoDB的对象模型库，可以直接操作MongoDB文档;
-    3.安装:
-        cnpm/npm install mongoose --save
-2.创建model:
-     新建一个models的文件夹,建一个goods.js存放模型
-     goods.js:
-        //引入mongoose插件
-        var mongoose  = require(&apos;mongoose&apos;);
-        //schema:
-        //Schema主要用于定义MongoDB中集合Collection里文档document的结构
-        var Schema = mongoose.Schema;
-        var productSchema = new Schema({
-              &quot;productId&quot;:String,
-              &quot;productName&quot;:String,
-              &quot;salePrice&quot;:Number,
-              &quot;productImage&quot;:String
-        });
-        //导出模型(productSchema)到Good中
-        //model:
-        //模型Model是根据Schema编译出的构造器，或者称为类，通过Model可以实例化出文档对象document文档,document的创建和检索都需要通过模型Model来处理
-        //mongoose.model()
-        //使用model()方法，将Schema编译为Model。model()方法的第一个参数是模型名称
-        //Mongoose会将集合名称设置为模型名称的小写版。如果名称的最后一个字符是字母，则会变成复数；如果名称的最后一个字符是数字，则不变；如果模型名称为&quot;MyModel&quot;，则集合名称为&quot;mymodels&quot;；如果模型名称为&quot;Model1&quot;，则集合名称为&quot;model1&quot;
-        module.exports=mongoose.model(&apos;Good&apos;,productSchema);
-3.创建路由:
-      app.js:
-          //新建一个goods路由,在routers文件夹下建一个goods.js文件
-        var goodsRouter = require(&apos;./routes/goods&apos;);
-        app.use(&apos;/goods&apos;, goodsRouter);
-       routes/goods.js:
-                var mongoose = require(&apos;mongoose&apos;);
-                //导入模型(js文件)
-                var Goods = require(&apos;../models/goods.js&apos;);
-                //连接mongoose数据库
-                mongoose.connect(&apos;mongodb://127.0.0.1:27017/dumall&apos;);
-                //连接成功
-                mongoose.connection.on(&quot;connected&quot;,function(){
-                  console.log(&apos;Mongodb connected sucess&apos;);
-                });
-                //连接失败
-                mongoose.connection.on(&quot;error&quot;,function(){
-                  console.log(&apos;Mongodb connected fail&apos;);
-                });
-                //连接断开
-                mongoose.connection.on(&quot;disconnected&quot;,function(){
-                  console.log(&apos;Mongodb connected disconnected&apos;);
-                });
-                router.get(&quot;/list&quot;,function(req,res,next){
-                  // res.send(&apos;hello goods list&apos;);这个时候运行node bin/www就可以访问到hello goods list
-                  Goods.find({},function(err,doc){
-                    if(err){
-                      res.json({
-                        status:1,
-                        msg:err.message
-                      })
-                    }else{
-                      res.json({
-                        status:0,
-                        msg:&apos;&apos;,
-                        result:{
-                          count:doc.length,
-                          list:doc
-                        }
-                      })
-                    }
-                  })
-                })
-                module.exports=router;
-4.完成以上三步操作后就可以在server路径下启动node  bin/www,在浏览器访问localhost:3000/goods就可以拿到mongodb中dumall数据库中的所有内容,
-      这个时候我们就不需要在mock数据了,在页面中就可以直接调用接口的数据!把webpack.dev.conf.js中的mock数据的代码注释掉,由于服务器拿到的数据在
-      localhost:3000/goods中,而我们项目运行在localhost:8080,要想获取接口数据要解决跨域问题,在config/index.js下:
-        proxyTable: {
-              &apos;/goods&apos;:{
-                target:&quot;http://localhost:3000&quot;
-              }
-            },
-      即可解决跨域问题了,这个时候GoodsList.vue中axios.get的数据就是mongodb中返回的数据了,页面中的内容也是从数据库中获取的
-</code></pre><h3 id="3-商品列表分页和排序功能实现"><a href="#3-商品列表分页和排序功能实现" class="headerlink" title="3.商品列表分页和排序功能实现:"></a>3.商品列表分页和排序功能实现:</h3><pre><code>  1.商品列表分页:
-  在routes/goods.js中修改:
-    (根据前端返回的page,pageSize,sort进行分页,排序,这个时候我们前端页面还没有定义这些变量,可以在url中访问
-      http://localhost:3000/goods/?page=1&amp;pageSize=8&amp;sort=-1
-    进行试验,试验的结果是商品降序排列)
-    router.get(&quot;/list&quot;,function(req,res,next){
-      //设置第几页
-      let page = parseInt(req.query.page);
-      //设置一页有几条数据
-      let pageSize = parseInt(req.query.pageSize);
-      //设置是升序还是降序,1升序,-1降序
-      let sort = req.query.sortFlag;
-      //设置跳过多少条数据
-      let skip = (page-1)*pageSize;
-      let params={};
-      let goodsModel = Goods.find(params).skip(skip).limit(pageSize);
-      goodsModel.sort({&apos;salePrice&apos;:sort});
-      console.log(req.query.page);
-      console.log(req.params);
-      // res.send(&apos;hello goods list&apos;);这个时候运行node bin/www就可以访问到hello goods list
-      goodsModel.exec(function(err,doc){
-        if(err){
-          res.json({
-            status:1,
-            msg:err.message
-          })
-        }else{
-          res.json({
-            status:0,
-            msg:&apos;&apos;,
-            result:{
-              count:doc.length,
-              list:doc
-            }
-          })
-        }
-      })
-    })
-2.商品列表分页和排序进行前后端交互:
-  商品分页时需要用到vue-infinite-scroll 插件来滚动加载下一页数据,
-  可以到https://www.npmjs.com/package/vue-infinite-scroll查看用法
-  安装vue-infinite-scroll:cnpm install vue-infinite-scroll --save ,
-  在router/index.js中:
-                //引入滚动刷新加载内容插件
-                   import infiniteScroll from &apos;vue-infinite-scroll&apos;;
-                   Vue.use(infiniteScroll);
-   然后在需要的页面中使用
-  在goodsList.vue中:
-  1.//data()中添加:
-     data(){
-      return{
-            //排序参数
-            sortFlag:true,
-            //分页
-            page:1,
-             //页面内容个数
-            pageSize:8,
-             //vue-infinite-scroll 插件中(infinite-scroll-disabled=&quot;busy&quot;)
-             //滚动是否开启,true不开启,false开启
-             busy:true,
-      }
-     }
-     2.//在methods中getGoodsList修改,添加loadMore
-      methods:{
-          getGoodsList(flag){
-                  let param={
-                      page:this.page,
-                      pageSize:this.pageSize,
-                      sortFlag:this.sortFlag?1:-1
-                    };
-                  axios.get(&apos;/goods/list&apos;,{
-                    params:param
-                  }).then((result)=&gt;{
-                    let  res=result.data;
-                    if(res.status==&quot;0&quot;){
-                      if(flag){//falg为ture时,说明开始滚动加载了
-                        //把刚开始页面加载的this.goodsList拼接上新的返回的数据
-                        this.goodsList=this.goodsList.concat(res.result.list);
-                        if(res.result.count&lt;this.pageSize){
-                          this.busy=true;
-                        }else{
-                          this.busy=false;
-                        }
-                      }else{
-                        this.goodsList=res.result.list;
-                        //这个必须要设置this.busy=false,因为初始设置时this.busy=true
-                        //是为了防止页面刚加载时滚动触发加载第二页,
-                        // 所以在第一次调用getGoodsList()之后要设置为false开启滚动
-                        this.busy=false;
-                      }
-                    }else{
-                      this.goodsList=[];
-                    }
-
-                  })
-                },
-                //滚动加载方法
-                loadMore: function() {
-                  this.busy = true;
-                  setTimeout(() =&gt; {
-                    this.page++;
-                    this.getGoodsList(true);
-                    //利用传值判断不同时期调用该函数
-                  }, 500);
-                },
-   }
-3.价格过滤功能实现:
-  实现思路:把价格的相关参数通过params对象传递到后端goods.js中,在goods.js中根据传递的值,
-  设置对应价格区间,进行数据查找即可:
-  后端操作:
-      在routes/goods.js中添加价格过滤代码:
-        .......
-        let priceLevel =req.query.priceLevel;
-        //定义价格大于,小于区间变量
-        let priceGt =&apos;&apos;; let priceLt = &apos;&apos;;
-        let params={};
-        //判断前端传的值
-        if(priceLevel != &quot;all&quot;){
-          switch(priceLevel){
-            case &apos;0&apos;: priceGt=0; priceLt=100;break;
-            case &apos;1&apos;: priceGt=101; priceLt=500;break;
-            case &apos;2&apos;: priceGt=501; priceLt=1000;break;
-            case &apos;3&apos;: priceGt=1001; priceLt=5000;break;
-          }
-          params={
-            salePrice:{
-              $gte:priceGt,
-              $lte:priceLt
-            }
-          }
-        }else{
-          params={};
-        }
-        //mongodb条件操作符，&quot;$lt&quot;, &quot;$lte&quot;, &quot;$gt&quot;, &quot;$gte&quot;, &quot;$ne&quot;就是全部的比较操作符，
-        对应于&quot;&lt;&quot;, &quot;&lt;=&quot;, &quot;&gt;&quot;, &quot;&gt;=&quot;,&quot;!=&quot;
-        let goodsModel = Goods.find(params).skip(skip).limit(pageSize);
-        goodsModel.sort({&apos;salePrice&apos;:sort});
-        .......
-      前端操作:
-          点击价格区间调用接口,返回数据到前端页面:
-              //点击all
-                 priceAll(){
-                      this.priceChecked=&apos;all&apos;;
-                      this.page=1;
-                      this.getGoodsList();
-                    },
-                //点击其他价格区间
-                setPriceFliter(index){
-                      this.priceChecked=index;
-                      this.filterBy=false;
-                      this.overLayFlag=false;
-                      //点击价格区间调用接口查询数据
-                      this.page=1;
-                      this.getGoodsList();
-                    },
-            loading图修改层svg图片的形式:
-                可以自己在github中搜索loading查找自己喜欢的loading图,下载后在div中插入loding图片并
-                进行恰当时刻的显示隐藏即可
-4.加入购物车功能实现:
-  因为加入购物车的数据是要提交到后台的,为了安全我们用post方式来提交,设置购物车是goods下的子路由addCart,
-  后端代码:
-      1.首先也是要先设置user模型,在模型中定义用户信息字段:
-            models/user.js:
-              //创建一个用户的模型
-              var mongoose = require(&apos;mongoose&apos;);
-              var Schema = mongoose.Schema;
-              var userSchema = new Schema({
-                  &quot;userId&quot;:String,
-                  &quot;userName&quot;:String,
-                  &quot;userPwd&quot;:String,
-                  &quot;orderList&quot;:Array,
-                  &quot;cartList&quot;:[
-                      {
-                      &quot;productId&quot;:String,
-                      &quot;productName&quot;:String,
-                      &quot;salePrice&quot;:String,
-                      &quot;productImage&quot;:String,
-                      &quot;checked&quot;:String,
-                      &quot;productNum&quot;:String
-                    }
-                  ],
-                  &quot;addressList&quot;:Array
-              });
-              module.exports=mongoose.model(&quot;user&quot;,userSchema);
-      2.在routes/goods.js中写子路由addCart的代码:实现添加到购物车的功能
-                ........
-                ......
-              //加入购物车(提交数据post安全)
-              router.post(&quot;/addCart&quot;,function(req,res,next){
-                //假设已经登录,根据用户id查询数据
-                  let userId=&apos;100000077&apos;;
-                  //获取商品id,post请求获取的方法是req.body,这时不能把前端上的所有商品数据传过来保存,
-                  这样是不科学和危险的,我们应该根据商品id去数据库中拿到数据,修改数据库中的数据
-                  let productId = req.body.productId;
-                  //导入模型
-                  let User = require(&apos;../models/user.js&apos;);
-                  //在用户表中查找userId=userId(100000077)的用户,第一个userId是模型中定义的,和数据库
-                  中的名称相同,第二个userId是用户id
-                  User.findOne({userId:userId},function(err,userDoc){
-                      if(err){
-                          res.json({
-                            status:&quot;1&quot;,
-                            msg:err.message
-                          })
-                      }else{
-                          console.log(`userDoc:${userDoc}`);
-                          //确认用户id存在后查找商品是否存在
-                          if(userDoc){
-                            //判断购物车中商品是否已经存在,如果存在则商品数量++,不存在保存商品所以信息
-                            let goodsItem = &apos;&apos;;
-                            userDoc.cartList.forEach(function(item){
-                              if(item.productId ==productId){
-                                goodsItem = item;
-                                item.productNum++;
-                              }
-                            });
-                            if(goodsItem){
-                              userDoc.save(function(err2,doc2){
-                                if(err2){
-                                  res.json({
-                                    status:&quot;1&quot;,
-                                    msg:err2.message
-                                  })
-                                }else{
-                                  res.json({
-                                    status:&apos;0&apos;,
-                                    msg:&apos;&apos;,
-                                    result:&apos;success&apos;
-                                  })
-                                }
-                              });
-                            }else{
-                              Goods.findOne({productId:productId},function(err1,doc1){
-                                if(err1){
-                                  res.json({
-                                    status:&quot;1&quot;,
-                                    msg:err1.message
-                                  })
-                                }else{
-                                  //确认商品存在后,由于,数据库中的字段没有productNum(数量)和checked(是否被选中),所以我们要加进去保存
-                                  if(doc1){
-                                    doc1.productNum=1;
-                                    doc1.checked=1;//1选中,0 未选中
-                                    //把商品中的数据和新加的数据加到User.carList中并保存
-                                    userDoc.cartList.push(doc1);
-                                    userDoc.save(function(err2,doc2){
-                                      if(err2){
-                                        res.json({
-                                          status:&quot;1&quot;,
-                                          msg:err2.message
-                                        })
-                                      }else{
-                                        res.json({
-                                          status:&apos;0&apos;,
-                                          msg:&apos;&apos;,
-                                          result:&apos;success&apos;
-                                        })
-                                      }
-                                    });
-                                  }
-                                }
-                              })
-                            }
-                          }
-                      }
-                  })
-              });
-  前端代码:
-        在goodsList.vue中点击购物车,发送一个携带商品id的post请求,
-          //添加进购物车
-                    addCart(productId){
-                      axios.post(&apos;/goods/addCart&apos;,{
-                        productId:productId
-                      }).then((res)=&gt;{
-                        console.log(res);
-                        if(res.data.status==0){
-                          alert(&quot;加入购物车成功&quot;)
-                        }else{
-                          alert(`msg:${res.data.msg}`);
-                        }
-                      })
-              }
-</code></pre><h2 id="第十章-登录模块实现"><a href="#第十章-登录模块实现" class="headerlink" title="第十章:登录模块实现"></a>第十章:登录模块实现</h2><h3 id="1-登录功能实现"><a href="#1-登录功能实现" class="headerlink" title="1.登录功能实现:"></a>1.登录功能实现:</h3><pre><code>登录功能属于users/login页面,所以我们需要在routes/users.js中书写后端登录逻辑
-后端代码:
-    routes/users.js:
-        router.post(&apos;/login&apos;,function(req,res,next){
-          var param ={
-            userName:req.body.userName,
-            userPwd:req.body.userPwd
-          };
-          console.log(param);
-          //根据账号密码查询数据库
-          User.findOne(param,function(err,doc){
-            if(err){
-              //没用符合查询条件的时候报错
-              res.json({
-                status:&quot;1&quot;,
-                msg:err.message
-              });
-            }else{
-              if(doc){
-                //保存到cookie,app.js中已经有引入 cookie-Parser了(做cookie处理)
-                //path:保存到根路径,maxAge:存储的周期时长
-                res.cookie(&quot;userId&quot;,doc.userId,{
-                  path:&apos;/&apos;,
-                  maxAge:1000*60*60
-                });
-                 res.cookie(&quot;userName&quot;,doc.userName,{
-                     path:&apos;/&apos;,
-                      maxAge:1000*60*60
-                 });
-                res.json({
-                  status:&quot;0&quot;,
-                  msg:&quot;&quot;,
-                  result:{
-                    userName:doc.userName
-                  }
-                })
-              }else{
-                //查询到用户名或者密码错误时执行
-                res.json({
-                  status:&quot;1&quot;,
-                  msg:&quot;用户名或者密码错误&quot;
-                });
-              }
-            }
-          })
-        })
-     前端代码:
-        login(){
-              if(!this.userName  || !this.userPwd){
-                this.errorTip=true;
-                return;
-              }
-              axios.post(&quot;/users/login&quot;,{
-                userName:this.userName,
-                userPwd:this.userPwd
-              }).then((response)=&gt;{
-                let res =response.data;
-                if(res.status==&quot;0&quot;){
-                  this.errorTip=false;
-                  this.loginModalFlag=false;
-                  this.nickName=res.result.userName;
-                }else{
-                  this.errorTip=true;
-                }
-              })
-            }
-            备注:记得在config/index.js文件中配置跨域请求:
-                    proxyTable: {
-                          &apos;/goods&apos;:{
-                            target:&quot;http://localhost:3000&quot;
-                          },
-                          &apos;/goods/*&apos;:{
-                            target:&quot;http://localhost:3000&quot;
-                          },
-                          &apos;/users&apos;:{
-                            target:&quot;http://localhost:3000&quot;
-                          },
-                          &apos;/users/*&apos;:{
-                            target:&quot;http://localhost:3000&quot;
-                          }
-                        },
-</code></pre><h3 id="2-登出功能的实现"><a href="#2-登出功能的实现" class="headerlink" title="2.登出功能的实现:"></a>2.登出功能的实现:</h3><pre><code>后端代码:
-    routes/users.js:
-        //登出路由(通过清除cookie的userid退出登录)
-        router.post(&apos;/logout&apos;,function(req,res,next){
-          res.cookie(&apos;userId&apos;,&apos;&apos;,{
-            path:&apos;/&apos;,
-            maxAge:-1
-          });
-          res.json({
-            status:&quot;0&quot;,
-            msg:&quot;&quot;,
-            result:&apos;&apos;
-          })
-        })
-前端代码:
-//点击登出:
-    logout(){
-      // this.loginModalFlag=true
-      axios.post(&apos;/users/logout&apos;).then((response)=&gt;{
-        let res= response.data;
-        if(res.status==&apos;0&apos;){
-          this.nickName=&apos;&apos;;
-        }else{
-
-        }
-      })
-    }
-</code></pre><h3 id="3-登录拦截"><a href="#3-登录拦截" class="headerlink" title="3.登录拦截:"></a>3.登录拦截:</h3><pre><code>1.登录拦截写在后端的server/app.js中:
-       .......
-      app.use(express.static(path.join(__dirname, &apos;public&apos;)));
-
-      //制作一个登录拦截器,当用户登录的时候可以加入购物车,否则提示请登录后再加入(app.use直接加函数会优先执行,这个函数位置不可以写太靠前,否则会没效果)
-      app.use(function(req,res,next){
-        if(req.cookies.userId){
-          next();
-        }else{
-          console.log(`${req.path} ~~~~${req.originalUrl}`);
-          //req.path:goods/list     req.originalUrl:goods/list?page=1&amp;pageSize=8&amp;sortFlag=1&amp;priceLevel=all
-          //在这里可以用req.path==&quot;/goods/list&quot; 或者 req.originalUrl.indexOf(&apos;/goods/list&apos;)&gt;-1
-          //满足下列条件的地址可以继续执行
-          if(req.originalUrl ==&apos;/users/login&apos;||req.originalUrl==&apos;users/logout&apos;||req.path==&quot;/goods/list&quot;){
-            next();
-          }else{
-            res.json({
-              status:&apos;10001&apos;,
-              msg:&quot;当前未登录&quot;,
-              result:&apos;&apos;
-            })
-          }
-        }
-      });
-
-      app.use(&apos;/&apos;, indexRouter);
-      ......
- 2.这时候我们已经可以拦截到数据了,但是当登录后我们刷新页面又要重新登录,所以写一个路由当页面加载时从缓存判断是否登录
-  后端代码:
-      routes/users.js:
-          //页面刷新判断是否登录,如果登录则保持登录
-          router.get(&quot;/checkLogin&quot;,function(req,res,next){
-            if(req.cookies.userId){
-              res.json({
-                status:&apos;0&apos;,
-                msg:&apos;&apos;,
-                result:req.cookies.userName
-              })
-            }else{
-                res.json({
-                  status:&apos;1&apos;,
-                  msg:&apos;未登录&apos;,
-                  result:&apos;&apos;
-                })
-            }
-          })
-    前端代码:
-        mounted(){
-            this.checkLogin();
-          },
-          methods:{
-            //刷新是否登录
-                checkLogin(){
-                  axios.get(&apos;users/checkLogin&apos;).then((response)=&gt;{
-                    let res=response.data;
-                    if(res.status==&apos;0&apos;){
-                      this.nickName=res.result;
-                    }else{
-                    }
-                  })
-                },
-          }
-     备注:主要实现的是在未登录的情况下没办法加入商品到购物车,只有登录后才可加入,当登录后刷新页面还是登录状态
-</code></pre><h3 id="4-全局模态框组件实现"><a href="#4-全局模态框组件实现" class="headerlink" title="4.全局模态框组件实现:"></a>4.全局模态框组件实现:</h3><pre><code>实现思路:新建一个modal.vue模块来实现模态框代码,在子组件中,使用slot插槽来实现模态框的复用,使用props接收父组件的数据,
-使用$emit()来像父组件传递数据,在父组件中 利用插槽插入数据,接收子组件传入的数据,操作数据传递给子组件
-     父组件代码(goodList.vue):
-              &lt;modal v-bind:mdShow=&quot;mdShowCart&quot; v-on:close=&quot;closeModal&quot;&gt;
-                  &lt;p slot=&quot;message&quot;&gt;
-                    &lt;svg class=&quot;icon-status-ok&quot;&gt;
-                      &lt;use xmlns:xlink=&quot;http://www.w3.org/1999/xlink&quot; xlink:href=&quot;#icon-status-ok&quot;&gt;&lt;/use&gt;
-                    &lt;/svg&gt;
-                    &lt;span&gt;加入购物车成功!&lt;/span&gt;
-                  &lt;/p&gt;
-                  &lt;div slot=&quot;btnGroup&quot;&gt;
-                    &lt;a class=&quot;btn btn-m&quot; @click=&quot;mdShowCart=false&quot; href=&quot;javascript:;&quot;&gt;继续购物 &lt;/a&gt;
-                    &lt;router-link  to=&quot;/cart&quot; class=&quot;btn btn-m&quot; &gt;查看购物车&lt;/router-link&gt;
-                  &lt;/div&gt;
-                &lt;/modal&gt;
-
-     子组件代码(modal.vue):
-        &lt;template&gt;
-            &lt;div&gt;
-              &lt;div class=&quot;md-modal modal-msg md-modal-transition &quot; :class=&quot;{&apos;md-show&apos;:mdShow}&quot;&gt;
-                &lt;div class=&quot;md-modal-inner&quot;&gt;
-                  &lt;div class=&quot;md-top&quot;&gt;
-                    &lt;div class=&quot;md-title&quot;&gt;Login in&lt;/div&gt;
-                    &lt;button class=&quot;md-close&quot; @click=&quot;closeModal&quot;&gt;Close&lt;/button&gt;
-                  &lt;/div&gt;
-                  &lt;div class=&quot;md-content&quot;&gt;
-                    &lt;div class=&quot;confirm-tips&quot;&gt;
-                      &lt;slot name=&quot;message&quot;&gt;&lt;/slot&gt;
-                    &lt;/div&gt;
-                    &lt;div class=&quot;btn-wrap&quot;&gt;
-                      &lt;slot name=&quot;btnGroup&quot;&gt;&lt;/slot&gt;
-                    &lt;/div&gt;
-                  &lt;/div&gt;
-                &lt;/div&gt;
-              &lt;/div&gt;
-              &lt;div class=&quot;md-overlay&quot; v-show=&quot;mdShow&quot; @click=&quot;closeModal&quot;&gt;&lt;/div&gt;
-            &lt;/div&gt;
-        &lt;/template&gt;
-        &lt;script type=&quot;text/ecmascript-6&quot;&gt;
-         export default{
-            props:[&quot;mdShow&quot;],
-             data(){
-                return{
-
-                }
-             },
-           methods:{
-             closeModal(){
-               this.$emit(&apos;close&apos;);
-             }
-           },
-         }
-        &lt;/script&gt;
-        &lt;style rel=&quot;stylesheet/less&quot; lang=&quot;less&quot; scoped&gt;
-        &lt;/style&gt;
-</code></pre><h2 id="第十一章-购物车模块"><a href="#第十一章-购物车模块" class="headerlink" title="第十一章:购物车模块"></a>第十一章:购物车模块</h2><h3 id="1-购物车模块实现"><a href="#1-购物车模块实现" class="headerlink" title="1.购物车模块实现:"></a>1.购物车模块实现:</h3><pre><code>实现思路:新建一个cart.vue购物车页面,当用户访问购物车页面的时候在mounted钩子函数中
-利用axios调用购物车接口,获取购物车中的数据:
-然后渲染到前端页面中:
-  后端代码routes/users.js:
-      //查询当前用户的购物车数据
-      router.get(&apos;/cartList&apos;,function(req,res,next){
-         let userId=req.cookies.userId;
-         User.findOne({userId:userId},function(err,doc){
-           if(err){
-             res.json({
-               status:&quot;1&quot;,
-               msg:err.message,
-               result:&apos;&apos;
-             });
-           }else{
-             if(doc){
-               res.json({
-                 status:&apos;0&apos;,
-                 msg:&apos;&apos;,
-                 result:doc.cartList
-               })
-             }
-           }
-         })
-      })
-  前端代码:
-      cart.vue:
-            mounted(){
-              this.init();
-            },
-            methods:{
-                init(){
-                  axios.get(&apos;/users/cartList&apos;).then((response)=&gt;{
-                    let res= response.data;
-                    this.cartList=res.result;
-                    if(res.status==&apos;0&apos;){
-                      console.log(this.cartList);
-                    }
-                  })
-                }
-              }
-          然后把获取的数据渲染到页面中
-</code></pre><h3 id="2-购物车删除功能实现"><a href="#2-购物车删除功能实现" class="headerlink" title="2.购物车删除功能实现:"></a>2.购物车删除功能实现:</h3><pre><code>实现思路:前端页面点击删除的时候,传递商品 productId,到后端代码中,在后端代码里从缓存中拿登录用户的userId,通过mongoose的删除更新方法
-搜索用户的商品id并删除掉,然后重新再前端获取/users/cartList接口数据渲染到页面
-后端代码routes/users.js:
-    //购物车删除
-    router.post(&apos;/cartDel&apos;,function(req,res,next){
-      let productId=req.body.productId;
-      let userId=req.cookies.userId;
-      User.update({userId:userId},{$pull:{&apos;cartList&apos;:{&apos;productId&apos;:productId}}},function(err,doc){
-        if(err){
-          res.json({
-            status:&apos;1&apos;,
-            msg:err.message,
-            result:&apos;&apos;
-          })
-        }else{
-          res.json({
-            status:&apos;0&apos;,
-            msg:&apos;&apos;,
-            result:&apos;suc&apos;
-          })
-        }
-      })
-    })
- 前端代码cart.vue:
-          closeModal(){
-            this.modalConfirm=false;
-          },
-          delCartConfirm(item){
-            this.delItem=item;
-            this.modalConfirm=true;
-          },
-          delCart(){
-            axios.post(&apos;users/cartDel&apos;,{
-              productId:this.delItem.productId
-            }).then((response)=&gt;{
-              let res=response.data;
-              if(res.status==&apos;0&apos;){
-                this.modalConfirm=false;
-                this.init();
-              }else{
-
-              }
-            })
-          }
-</code></pre><h3 id="3-商品修改功能"><a href="#3-商品修改功能" class="headerlink" title="3.商品修改功能:"></a>3.商品修改功能:</h3><pre><code>实现思路:点击前端页面,如增加,减少,选中商品时,把商品的id,是否选中商品数量通过post方式提交到后端,
-后端根据用户id,商品名称,进行商品数量和是否选中进行更改:
-后端代码routes/users.js:
-    //商品数量加减
-    router.post(&apos;/cartEdit&apos;,function(req,res,next){
-      let userId=req.cookies.userId,productId=req.body.productId,
-        productNum=req.body.productNum,checked=req.body.checked;
-      console.log(checked);
-      User.update(
-          {&quot;userId&quot;:userId,&quot;cartList.productId&quot;:productId},
-          {&quot;cartList.$.productNum&quot;:productNum,&quot;cartList.$.checked&quot;:checked},
-        function(err,doc){
-          if(err){
-            res.json({
-              status:&apos;1&apos;,
-              msg:err.message,
-              result:&apos;&apos;
-            })
-          }else{
-            res.json({
-              status:&apos;0&apos;,
-              msg:&apos;&apos;,
-              result:&apos;suc&apos;
-            })
-          }
-        })
-    })
- 前端代码cart.vue:
-    //商品是否选中按钮
-     &lt;a href=&quot;javascipt:;&quot; class=&quot;checkbox-btn item-check-btn&quot; v-bind:class=&quot;{&apos;checked&apos;:item.checked==&apos;1&apos;}&quot;  @click=&quot;editCart(&apos;checked&apos;,item)&quot;&gt;
-          svg class=&quot;icon icon-ok&quot;&gt;
-           &lt;use xlink:href=&quot;#icon-ok&quot;&gt;&lt;/use&gt;
-            &lt;/svg&gt;
-     &lt;/a&gt;
-
-      editCart(flag,item){
-            // item传入当前商品信息
-            if(flag==&quot;add&quot;){
-              item.productNum++;
-
-            }else if(flag==&apos;minu&apos;){
-              if(item.productNum&lt;=1){
-                return;
-              }
-              item.productNum--;
-            }else{
-              //如果item.checked=1则取0,否则取1(取反)
-              item.checked=item.checked==&apos;1&apos; ? &apos;0&apos;:&apos;1&apos;;
-            }
-            axios.post(&apos;/users/cartEdit&apos;,{
-                productNum:item.productNum,
-                productId:item.productId,
-                checked:item.checked
-            }).then((response)=&gt;{
-              let res=response.data;
-              if(res.status==&apos;0&apos;){
-                console.log(&apos;修改成功&apos;)
-              }else{
-                console.log(&apos;修改失败&apos;)
-              }
-            })
-          },
-</code></pre><h3 id="4-购物车全选和商品实时计算功能实现"><a href="#4-购物车全选和商品实时计算功能实现" class="headerlink" title="4.购物车全选和商品实时计算功能实现:"></a>4.购物车全选和商品实时计算功能实现:</h3><pre><code>1.购物车全选功能和总金额计算:
-      实现思路:全选功能相关的实现先通过点击全选按钮传递一个boolean值,遍历购物车中的checked属性,
-      把checked属性更改为跟随全选按钮变化,
-      通过post传递checked值到后端代码,然后把购物车每个商品的checked值存到数据库并保存,
-      这样就可以实现在前端操作后端也跟着变化,但是在
-      全选按钮上还要实现反选等操作,这块通过计算属性用购物车中商品被选中的个数和
-      购物车总商品数进行对比,如果相同,代表所有物品都已经选择,
-      全选按钮勾选上!总金额根据计算属性把所有商品单价和数量相乘累加起来即可
-     后端代码routes/users.js:
-          //商品全选和取消全选
-          router.post(&apos;/editCheckAll&apos;,function(req,res,next){
-            let userId=req.cookies.userId,checked=req.body.checked?&quot;1&quot;:&quot;0&quot;;
-            //操作购物车里所有商品的属性
-            User.findOne({userId:userId},function(err,user){
-              if(err){
-                res.json({
-                  status:&apos;1&apos;,
-                  msg:err.message,
-                  result:&apos;&apos;
-                })
-              }else{
-                if(user){
-                  user.cartList.forEach((item)=&gt;{
-                    item.checked=checked;
-                  });
-                  user.save(function(err1,doc){
-                    if(err1){
-                      res.json({
-                        status:&apos;1&apos;,
-                        msg:err1.message,
-                        result:&apos;&apos;
-                      })
-                    }else{
-                      res.json({
-                        status:&apos;0&apos;,
-                        msg:&apos;&apos;,
-                        result:&apos;suc&apos;
-                      })
-                    }
-                  })
-                }
-              }
-            })
-          })
-      前端代码cart.vue:
-       computed:{
-            checkAllFlag(){
-              return this.checkedCount==this.cartList.length;
-            },
-            checkedCount(){
-              let i=0;
-              this.cartList.forEach((item)=&gt;{
-                if(item.checked==&apos;1&apos;){
-                  i++;
-                }
-              });
-              return i;
-            },
-            //计算总金额
-            totalPrice(){
-              let money=0;
-              this.cartList.forEach((item)=&gt;{
-                if(item.checked==&apos;1&apos;){
-                  money+=parseInt(item.productNum)*parseFloat(item.salePrice);
-                }
-              })
-              return money;
-            }
-          },
-      methods中:
-          toggerCheckAll(){
-                  //this.checkAllFlag=!this.checkAllFlag
-                  //计算属性的数据是实时更新的,在全选的按钮中不能 this.checkAllFlag=!this.checkAllFlag,因为当所以物品都选中时,
-                  //你把全选按钮置为false,这时候它立马根据商品都已经选中又把按钮置为true,所以需要一个中间变量传递下
-                  let flag=!this.checkAllFlag;
-                  this.cartList.forEach((item)=&gt;{
-                    item.checked =flag;
-                  });
-                  axios.post(&apos;/users/editCheckAll&apos;,{
-                    checked:flag
-                  }).then((response)=&gt;{
-                    let res=response.data;
-                    if(res.status=&quot;0&quot;){
-                      console.log(&apos;修改成功&apos;)
-                    }else{
-                      console.log(&apos;修改失败&apos;)
-                    }
-                  })
-                }
-      2.金额过滤器插件(https://github.com/vuejs/vuex/blob/dev/examples/shopping-cart/currency.js)
-            使用步骤:
-              1.下载currence.js到项目中,本项目存在src/util/currency.js中
-                  局部注册:
-                        2.在cart.vue中引入资源:
-                       import {currency} from &apos;@/util/currency.js&apos;;
-                        //局部过滤器注册:
-                            filters:{
-                              currency:currency,
-                            },
-                   全局注册:
-                        2.在router/index.js中引入资源:
-                            // import {currency} from &apos;@/util/currency.js&apos;;
-                            // Vue.filter(&apos;currency&apos;,currency);
-              3.使用:
-                  &lt;div class=&quot;item-total&quot;&gt;
-                         Item total: &lt;span class=&quot;total-price&quot;&gt;{{this.totalPrice | currency('$')}}&lt;/span&gt;
-                   &lt;/div&gt;
-</code></pre><h2 id="第十二章-地址模块实现"><a href="#第十二章-地址模块实现" class="headerlink" title="第十二章:地址模块实现:"></a>第十二章:地址模块实现:</h2><h3 id="1-地址列表渲染实现"><a href="#1-地址列表渲染实现" class="headerlink" title="1.地址列表渲染实现:"></a>1.地址列表渲染实现:</h3><pre><code>实现思路:首先写一个静态address.vue页面,然后设置路由路径,在后端写一个接口获取地址列表,从前端获取数据,渲染到页面中
-后端代码routes/users.js:
-    //查询用户地址接口
-    router.get(&apos;/addressList&apos;,function(req,res,next){
-      let userId=req.cookies.userId;
-        User.findOne({userId:userId},function(err,doc){
-          if(err){
-            res.json({
-              status:&apos;1&apos;,
-              msg:err.message,
-              result:&apos;&apos;
-            })
-          }else{
-            res.json({
-              status:&apos;0&apos;,
-              msg:&quot;&quot;,
-              result:doc.addressList
-            })
-          }
-        })
-    })
- 前端代码 address.vue:
-      data(){
-            return{
-              addressList:[],
-            }
-          },
-      mounted(){
-            this.init();
-          },
-          methods:{
-            init(){
-              axios.get(&apos;/users/addressList&apos;).then((response)=&gt;{
-                let res=response.data;
-                if(res.status==&apos;0&apos;){
-                    this.addressList=res.result;
-                }else{
-
-                }
-              })
-            }
-          }
-</code></pre><h3 id="2-地址列表切换和展开功能实现"><a href="#2-地址列表切换和展开功能实现" class="headerlink" title="2.地址列表切换和展开功能实现:"></a>2.地址列表切换和展开功能实现:</h3><pre><code>实现思路:利用计算属性控制临界值数据,当页面显示三个地址时,点击more按钮,把limit改为this.addressList.length,
-这时候计算属性会立马截取新的数据变量到页面中,当地址全显示时点击more同理
-  computed:{
-        addressListFilter(){
-          return this.addressList.slice(0,this.limit);
-        }
-      },
-   methods:{
-      clickMore(){
-              if(this.limit==3){
-                this.limit=this.addressList.length;
-              }else{
-                this.limit=3;
-              }
-            },
-   }
-</code></pre><h3 id="3-地址设置默认功能实现"><a href="#3-地址设置默认功能实现" class="headerlink" title="3.地址设置默认功能实现:"></a>3.地址设置默认功能实现:</h3><pre><code>思想思路:想实现设置默认地址必须要和后端交互了,这个时候由于前面我们的用户模型(models/user.js)中的addressList还没有定义key.value,
-所以需要先根据后端接口定义下,然后在routes/users.js中写入设置默认地址接口,最后在前端调用后台接口,渲染页面
-models/user.js:
-    ......
-         &quot;addressList&quot;:[
-              {
-                &quot;addressId&quot;:String,
-                &quot;userName&quot;:String,
-                &quot;streetName&quot;:String,
-                &quot;postCode&quot;:Number,
-                &quot;tel&quot;:Number,
-                &quot;isDefault&quot;:Boolean
-              }
-            ]
-        ......
-routes/users.js:
-      //设置默认地址
-      router.post(&apos;/setDefault&apos;,function(req,res,next){
-        var userId=req.cookies.userId,addressId=req.body.addressId;
-        if(!addressId){
-          res.json({
-            status:&quot;10003&quot;,
-            msg:&quot;addressId is null&quot;,
-            result:&quot;&quot;
-          })
-        };
-        User.findOne({userId:userId},function(err,doc){
-          if(err){
-            res.json({
-              status:&quot;1&quot;,
-              msg:err.message,
-              result:&quot;&quot;
-            })
-          }else{
-            var addressList=doc.addressList;
-            addressList.forEach((item)=&gt;{
-                if(item.addressId==addressId){
-                  item.isDefault=true;
-                }else{
-                  item.isDefault=false;
-                }
-              })
-              doc.save(function(err1,doc1){
-                if(err1){
-                  res.json({
-                    status:&quot;1&quot;,
-                    msg:err.message,
-                    result:&quot;&quot;
-                  })
-                }else{
-                  res.json({
-                    status:&quot;0&quot;,
-                    msg:&quot;&quot;,
-                    result:&quot;&quot;
-                  })
-                }
-              })
-          }
-        })
-      })
-Address.vue:
-       setDefault(item){
-              axios.post(&apos;/users/setDefault&apos;,{
-                addressId:item.addressId
-              }).then((response)=&gt;{
-              let res=response.data;
-                if(res.status==&quot;0&quot;){
-                  this.init();
-                }
-              })
-            },
-</code></pre><h3 id="4-地址删除功能"><a href="#4-地址删除功能" class="headerlink" title="4.地址删除功能:"></a>4.地址删除功能:</h3><pre><code>后端代码:
-    routes/users.js:
-          //删除地址接口
-          router.post(&quot;/delAddress&quot;,function(req,res,next){
-            var userId=req.cookies.userId,addressId=req.body.addressId;
-            User.update({userId:userId},{$pull:{&quot;addressList&quot;:{&quot;addressId&quot;:addressId}}},function(err,doc){
-              if(err){
-                res.json({
-                  status:&quot;1&quot;,
-                  msg:err.message,
-                  result:&apos;&apos;
-                })
-              }else{
-                res.json({
-                  status:&quot;0&quot;,
-                  msg:&apos;&apos;,
-                  result:&apos;&apos;
-                })
-              }
-            })
-          });
-    前端代码:
-        Address.vue:
-          delAddress(){
-                  axios.post(&apos;/users/delAddress&apos;,{
-                    addressId:this.addressId,
-                  }).then((response)=&gt;{
-                    let res=response.data;
-                    if(res.status==&quot;0&quot;){
-                      this.isMdshow=false;
-                      this.init();
-                      console.log(&quot;删除成功&quot;)
-                    }
-                  })
-                }
-</code></pre><h2 id="第十三章-订单确认模块实现"><a href="#第十三章-订单确认模块实现" class="headerlink" title="第十三章:订单确认模块实现:"></a>第十三章:订单确认模块实现:</h2><h3 id="1-订单确认列表渲染功能实现"><a href="#1-订单确认列表渲染功能实现" class="headerlink" title="1.订单确认列表渲染功能实现:"></a>1.订单确认列表渲染功能实现:</h3><pre><code>实现思路:
-  获取购物车列表中选中的商品,把商品渲染到前端页面显示,然后遍历选中商品计算总价格
-  由于之前我们写了一个/users/cartList接口所以这里我们可以直接调用此接口,然后遍历出选中的商品
-  前端代码OrderConfirm.vue:
-      mounted(){
-          this.init();
-        },
-      methods:{
-            init(){
-              axios.get(&quot;/users/cartList&quot;).then((response)=&gt;{
-                let res=response.data;
-                if(res.status==&quot;0&quot;){
-                  this.cartList=res.result;
-                  this.cartList.forEach((item)=&gt;{
-                    if(item.checked==&apos;1&apos;){
-                     this.subTotal+=item.salePrice*item.productNum;
-                    }
-                  })
-                }
-                this.orderTotal=this.subTotal+this.shipping+this.discount+this.tax;
-              })
-            }
-          },
-</code></pre><h3 id="2-创建订单功能实现"><a href="#2-创建订单功能实现" class="headerlink" title="2.创建订单功能实现:"></a>2.创建订单功能实现:</h3><pre><code>实现思路:提交订单需要保存用户地址,用户的购物信息,生成用户订单和用户订单创建时间,这些都要在后端定义存储,
-生成订单的时候有个订单号,这里用到了util.js(日期格式化方法插件,前后端都可用),我们把它放在util/util.js中,在后端引用
-routes/users.js中 require(&apos;./../util/util.js&apos;);,然后在接口中调用
-后端代码routes/users.js:
-        //订单提交接口
-        router.post(&quot;/payMent&quot;,function(req,res,next){
-          var userId=req.cookies.userId,
-            orderTotal=req.body.orderTotal,
-            addressId=req.body.addressId;
-          User.findOne({userId:userId},function(err,doc){
-            if(err){
-              res.json({
-                status:&quot;1&quot;,
-                msg:err.message,
-                result:&apos;&apos;
-              })
-            }else{
-              var address=&apos;&apos;,goodList=[];
-              //获取用户地址信息
-              doc.addressList.forEach((item)=&gt;{
-                if(item.addressId==addressId){
-                    address=item;
-                }
-              });
-              //获取用户购物车的购买信息
-              doc.cartList.forEach((item)=&gt;{
-                if(item.checked==&apos;1&apos;){
-                  goodList.push(item);
-                }
-              });
-              var platform=&apos;622&apos;;
-              var r1=Math.floor(Math.random()*10);
-              var r2=Math.floor(Math.random()*10);
-              var sysDate=new Date().Format(&apos;yyyyMMddhhmmss&apos;);
-              var createDate=new Date().Format(&apos;yyyy-MM-dd hh:mm:ss&apos;);
-              var orderId=platform+r1+sysDate+r2;
-              var order={
-                orderId:orderId,
-                orderTotal:orderTotal,
-                addressInfo:address,
-                goodsList:goodList,
-                orderStatus:&apos;1&apos;,
-                createDate:createDate
-              };
-              doc.orderList.push(order);
-              doc.save(function(err1,doc1){
-                if(err){
-                  res.json({
-                    status:&quot;1&quot;,
-                    msg:err.message,
-                    result:&apos;&apos;
-                  })
-                }else{
-                  res.json({
-                    status:&quot;0&quot;,
-                    msg:&apos;&apos;,
-                    result:&apos;&apos;
-                  })
-                }
-              });
-              res.json({
-                status:&quot;0&quot;,
-                msg:&apos;&apos;,
-                result:{
-                  orderId:order.orderId,
-                  orderTotal:order.orderTotal
-                }
-              })
-            }
-          })
-        })
-
-  前端代码orderConfirm.vue:
-      //点击提交订单按钮
-      payMent(){
-              //获取router-link携带的参数
-              var addressId=this.$route.query.addressId;
-                axios.post(&quot;users/payMent&quot;,{
-                  addressId:addressId,
-                  orderTotal:this.orderTotal
-                }).then((response)=&gt;{
-                  let res=response.data;
-                  if(res.status==&quot;0&quot;){
-                    //提交成功跳转路由
-                   this.$router.push({
-                     path:&apos;/orderSuccess?orderId=&apos;+res.result.orderId
-                   })
-                  }
-                })
-            }
-</code></pre><h2 id="第十四章-订单成功模块实现"><a href="#第十四章-订单成功模块实现" class="headerlink" title="第十四章:订单成功模块实现:"></a>第十四章:订单成功模块实现:</h2><pre><code>实现思路:新建一个订单页面,输出订单id和总金额,在后端创建一个orderDetail页面获取对应订单列表中的id和总金额显示在前端页面
-后端代码:routes/users.js:
-    //订单成功页面
-    router.get(&apos;/orderDetail&apos;,function(req,res,next){
-      var userId=req.cookies.userId,orderId=req.query.orderId;
-      console.log(orderId);
-        User.findOne({userId:userId},function(err,userDoc){
-          if(err){
-            res.json({
-              status:&apos;1&apos;,
-              msg:err.message,
-              result:&apos;&apos;
-            })
-          }else{
-            var orderList=userDoc.orderList;
-            if(orderList.length&gt;0){
-              orderList.forEach((item)=&gt;{
-                if(item.orderId==orderId){
-                  var orderTotal=item.orderTotal;
-                  console.log(orderTotal);
-                  if(orderTotal&gt;0){
-                    res.json({
-                      status:&apos;0&apos;,
-                      msg:&quot;&quot;,
-                      result:{
-                        orderId:orderId,
-                        orderTotal:orderTotal
-                      }
-                    })
-                  }else{
-                    res.json({
-                      status:&apos;120002&apos;,
-                      msg:&quot;此订单无效&quot;,
-                      result:&quot;&quot;
-                    })
-                  }
-                }
-              })
-            }else{
-              res.json({
-                status:&apos;120001&apos;,
-                msg:&quot;当前用户未创建订单&quot;,
-                result:&apos;&apos;
-              })
-            }
-          }
-      })
-    })
-前端页面:OrderSuccess.vue:
-      methods:{
-            init(){
-              var orderId=this.$route.query.orderId;
-              if(!orderId){
-                return;
-              }
-              axios.get(&apos;/users/orderDetail&apos;,{
-                params:{
-                  orderId:orderId
-                }
-              }).then((response)=&gt;{
-                let res=response.data;
-                if(res.status==&apos;0&apos;){
-                  this.orderList=res.result;
-                }
-              })
-            }
-          },
-</code></pre><h2 id="第十五章-基于Vuex改造登录和购物车数量功能"><a href="#第十五章-基于Vuex改造登录和购物车数量功能" class="headerlink" title="第十五章:基于Vuex改造登录和购物车数量功能"></a>第十五章:基于Vuex改造登录和购物车数量功能</h2><h3 id="1-vuex基本介绍"><a href="#1-vuex基本介绍" class="headerlink" title="1.vuex基本介绍:"></a>1.vuex基本介绍:</h3><h4 id="1-什么是vuex"><a href="#1-什么是vuex" class="headerlink" title="1.什么是vuex:"></a>1.什么是vuex:</h4><pre><code>vuex是一个专为Vue.js应用程序开发的状态管理模式.
-每个组件中的data中的数据都是状态,当我们组件较多,data中的状态也较多的时候,为了方便管理某些状态,我们可以使用vuex
-把状态抽离出来存放到vuex中
-</code></pre><h4 id="2-为什么要用vuex"><a href="#2-为什么要用vuex" class="headerlink" title="2.为什么要用vuex"></a>2.为什么要用vuex</h4><pre><code>当我们构建一个中大型的单页面应用程序时,vuex可以更好的帮助我们在组件外部同意管理状态
-</code></pre><h4 id="3-vuex的核心概念"><a href="#3-vuex的核心概念" class="headerlink" title="3.vuex的核心概念:"></a>3.vuex的核心概念:</h4><pre><code>State:
-     Stats是唯一的数据源.
-     单一状态树
-     stats使用示例:
-Getters:(是对状态的延伸,比如过滤)
-    通过Getters可以派生出一些新的状态,例如对列表进行过滤并计数：
-Mutations:(是唯一可以改变store中的状态的方法)
-      更改 Vuex 的 store 中的状态的唯一方法是提交 mutation
-      Mutations无法进行异步操作
-Actions:
-      Action 类似于 mutation，不同在于
-        Action提交的是mutation,而不是直接变更状态
-        Action可以包含任意异步操作
-Modules:
-      面对复杂的应用程序,当管理的状态比较多时,我们需要将vuex的store对象分割成模块(modules)
-</code></pre><h4 id="4-项目结构"><a href="#4-项目结构" class="headerlink" title="4.项目结构:"></a>4.项目结构:</h4><pre><code>Vuex 并不限制你的代码结构。但是，它规定了一些需要遵守的规则
-应用层级的状态应该集中到单个 store 对象中。
-提交 mutation 是更改状态的唯一方法，并且这个过程是同步的。
-异步逻辑都应该封装到 action 里面。
-只要你遵守以上规则，如何组织代码随你便。如果你的 store 文件太大，只需将 action、mutation 和 getter 分割到单独的文件。
-对于大型应用，我们会希望把 Vuex 相关代码分割到模块中。下面是项目结构示例：
-      ├── index.html
-      ├── main.js
-      ├── api
-      │   └── ... # 抽取出API请求
-      ├── components
-      │   ├── App.vue
-      │   └── ...
-      └── store
-          ├── index.js          # 我们组装模块并导出 store 的地方
-          ├── actions.js        # 根级别的 action
-          ├── mutations.js      # 根级别的 mutation
-          └── modules
-              ├── cart.js       # 购物车模块
-              └── products.js   # 产品模块
-</code></pre><h3 id="2-vuex的语法讲解"><a href="#2-vuex的语法讲解" class="headerlink" title="2.vuex的语法讲解:"></a>2.vuex的语法讲解:</h3><pre><code>state示例:
-        &lt;!doctype html&gt;
-        &lt;html lang=&quot;en&quot;&gt;
-        &lt;head&gt;
-          &lt;meta charset=&quot;UTF-8&quot;&gt;
-          &lt;meta name=&quot;viewport&quot;
-                content=&quot;width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0&quot;&gt;
-          &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;ie=edge&quot;&gt;
-          &lt;title&gt;vuex--state&lt;/title&gt;
-          &lt;script src=&quot;../../node_modules/vue/dist/vue.min.js&quot;&gt;&lt;/script&gt;
-          &lt;script src=&quot;../../node_modules/vuex/dist/vuex.min.js&quot;&gt;&lt;/script&gt;
-        &lt;/head&gt;
-        &lt;body&gt;
-          &lt;div id=&quot;app&quot;&gt;
-            &lt;counter&gt;&lt;/counter&gt;
-          &lt;/div&gt;
-        &lt;/body&gt;
-        &lt;script&gt;
-          //通过script引入的vuex不需要vue.use()调用,因为在vuex.min.js已经有调用过
-          //定义组件
-          const counter={
-            template:`
-              &lt;div&gt;{{count}}&lt;/div&gt;
-            `,
-            computed:{
-              count(){
-                return this.$store.state.count;
-              }
-            }
-          };
-          const store=new Vuex.Store({
-            state:{
-              count:15
-            }
-          });
-          new Vue({
-            el:&quot;#app&quot;,
-            store,
-            data:{
-              msg:&apos;vuex的使用&apos;
-            },
-            components:{
-              counter
-            }
-          })
-        &lt;/script&gt;
-        &lt;/html&gt;
-mutations示例:
-        &lt;!doctype html&gt;
-        &lt;html lang=&quot;en&quot;&gt;
-        &lt;head&gt;
-          &lt;meta charset=&quot;UTF-8&quot;&gt;
-          &lt;meta name=&quot;viewport&quot;
-                content=&quot;width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0&quot;&gt;
-          &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;ie=edge&quot;&gt;
-          &lt;title&gt;vuex--mutations&lt;/title&gt;
-          &lt;script src=&quot;../../node_modules/vue/dist/vue.min.js&quot;&gt;&lt;/script&gt;
-          &lt;script src=&quot;../../node_modules/vuex/dist/vuex.min.js&quot;&gt;&lt;/script&gt;
-        &lt;/head&gt;
-        &lt;body&gt;
-        &lt;div id=&quot;app&quot;&gt;
-          &lt;a href=&quot;javascript:;&quot; @click=&quot;add&quot;&gt;add&lt;/a&gt;
-          &lt;counter&gt;&lt;/counter&gt;
-        &lt;/div&gt;
-        &lt;/body&gt;
-        &lt;script&gt;
-          //通过script引入的vuex不需要vue.use()调用,因为在vuex.min.js已经有调用过
-          //定义组件
-          const counter={
-            template:`
-               &lt;div&gt;
-                  &lt;div&gt;state:{{count}}&lt;/div&gt;
-                  &lt;div&gt;name:{{this.$store.state.name}}&lt;/div&gt;
-                &lt;/div&gt;
-            `,
-            computed:{
-              //可以在子组件计算属性先返回结果,然后把计算属性写在子组件页面中
-              //也可以在拿到state值后直接写在页面中,但是建议用上一种方法
-              count(){
-                return this.$store.state.count;
-              }
-            }
-          };
-          const store=new Vuex.Store({
-            state:{
-              count:15,
-              name:&apos;lcl&apos;,
-            },
-            mutations:{
-              increment(state,n){
-                state.count+=n;
-              },
-              updateName(state,value){
-                state.name=value;
-              }
-            }
-          });
-          new Vue({
-            el:&quot;#app&quot;,
-            store,
-            data:{
-              msg:&apos;vuex的使用&apos;
-            },
-            methods:{
-              add(){
-                this.$store.commit(&apos;increment&apos;,10);
-                this.$store.commit(&apos;updateName&apos;,&apos;zxq&apos;);
-              }
-            },
-            components:{
-              counter
-            }
-          })
-        &lt;/script&gt;
-        &lt;/html&gt;
-action和getters示例:
-        &lt;!doctype html&gt;
-        &lt;html lang=&quot;en&quot;&gt;
-        &lt;head&gt;
-          &lt;meta charset=&quot;UTF-8&quot;&gt;
-          &lt;meta name=&quot;viewport&quot;
-                content=&quot;width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0&quot;&gt;
-          &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;ie=edge&quot;&gt;
-          &lt;title&gt;vuex--action&lt;/title&gt;
-          &lt;script src=&quot;../../node_modules/vue/dist/vue.min.js&quot;&gt;&lt;/script&gt;
-          &lt;script src=&quot;../../node_modules/vuex/dist/vuex.min.js&quot;&gt;&lt;/script&gt;
-        &lt;/head&gt;
-        &lt;body&gt;
-        &lt;div id=&quot;app&quot;&gt;
-          &lt;a href=&quot;javascript:;&quot; @click=&quot;add&quot;&gt;add&lt;/a&gt;
-          &lt;counter&gt;&lt;/counter&gt;
-        &lt;/div&gt;
-        &lt;/body&gt;
-        &lt;script&gt;
-          //通过script引入的vuex不需要vue.use()调用,因为在vuex.min.js已经有调用过
-          //定义组件
-          const counter={
-            template:`
-               &lt;div&gt;
-                  &lt;div&gt;state:{{count}}&lt;/div&gt;
-                  &lt;div&gt;name:{{this.$store.state.name}}&lt;/div&gt;
-                  &lt;div&gt;userName:{{userName}}&lt;/div&gt;
-                &lt;/div&gt;
-            `,
-            computed:{
-              //可以在子组件计算属性先返回结果,然后把计算属性写在子组件页面中
-              //也可以在拿到state值后直接写在页面中,但是建议用上一种方法
-              count(){
-                return this.$store.state.count;
-              },
-              userName(){
-                return this.$store.getters.userName;
-              }
-            }
-          };
-          const store=new Vuex.Store({
-            state:{
-              count:15,
-              name:&apos;lcl&apos;,
-            },
-            //getters延伸state的状态,无法改变state的状态
-            getters:{
-              userName(state){
-                return state.name+&apos;  hello world&apos;;
-              }
-            },
-            mutations:{
-              increment(state,n){
-                state.count+=n;
-              },
-              updateName(state,value){
-                state.name=value;
-              }
-            },
-            //actions可有可无,根据是否需要异步操作决定,state和mutations必须要有
-            actions:{
-              incrementAction(context,num){
-                //异步 操作,5秒后加100
-                setTimeout(function(){
-                  context.commit(&apos;increment&apos;,num);
-                },5000);
-              }
-            }
-          });
-          new Vue({
-            el:&quot;#app&quot;,
-            store,
-            data:{
-              msg:&apos;vuex的使用&apos;
-            },
-            methods:{
-              add(){
-                this.$store.commit(&apos;increment&apos;,10);
-                this.$store.commit(&apos;updateName&apos;,&apos;zxq&apos;);
-                this.$store.dispatch(&quot;incrementAction&quot;,100);
-              }
-            },
-            components:{
-              counter
-            }
-          })
-        &lt;/script&gt;
-        &lt;/html&gt;
-</code></pre><h3 id="3-通过vuex实现登录和购物车数量"><a href="#3-通过vuex实现登录和购物车数量" class="headerlink" title="3.通过vuex实现登录和购物车数量:"></a>3.通过vuex实现登录和购物车数量:</h3><pre><code>实现思路:由于本项目并不是很复杂,能用到vuex管理的状态并不多,所以我们选择了nav-header中存在购物车数量显示(cartCount)和登录状态的用户显示(nickName),
-引入vuex后,定义state和mutations,然后在需要使用的调用mutations中的方法,并把state中的值渲染到页面中:
-    1.首先引入vuex:
-        在带有全局注册vue的mian.js中:
-          //引入vuex
-          import Vuex from &apos;vuex&apos;;
-          //调用vuex
-          Vue.use(Vuex);
-          //定义store中state,mutations
-          const store=new Vuex.Store({
-            state:{
-              nickName:&apos;&apos;,
-              cartCount:0
-            },
-            mutations:{
-              //更新nickName
-              updateNickName(state,nickName){
-                state.nickName=nickName;
-              },
-              //更新cartCount
-              updateCartCount(state,cartCount){
-                state.cartCount+=cartCount;
-              },
-              //页面刷新初始化cartCount
-              initCartCount(state,cartCount){
-                state.cartCount=cartCount;
-              }
-            }
-          });
-          //在全局实例化vue时引入store
-          new Vue({
-            el: &apos;#app&apos;,
-            router,
-            store,
-            components: { App },
-            template: &apos;&lt;App/&gt;&apos;
-          })
-    2.在NavHeader.vue页面中调用mutations:
-        由于需要显示购物车总数量,所以我们需要定义一个方法来获取购物车商品总数:
-              在routers/users.js中:
-                    //获取购物车商品总数
-                    router.get(&apos;/getCartCount&apos;,function(req,res,next){
-                      var userId=req.cookies.userId;
-                      User.findOne({userId:userId},function(err,doc){
-                        if(err){
-                          res.json({
-                            status:&apos;1&apos;,
-                            msg:err.message,
-                            result:&apos;&apos;
-                          })
-                        }else{
-                          var cartList=doc.cartList;
-                          let cartCount=0;
-                          cartList.map((item)=&gt;{
-                            cartCount+=parseInt(item.productNum);
-                          });
-                          res.json({
-                            status:&apos;0&apos;,
-                            msg:&apos;&apos;,
-                            result:cartCount
-                          })
-                        }
-                      })
-                    })
-              在NavHeader中:
-                    getCartCount(){
-                          axios.get(&apos;/users/getCartCount&apos;).then((response)=&gt;{
-                            let res=response.data;
-                            if(res.status==&apos;0&apos;){
-                              this.$store.commit(&apos;initCartCount&apos;,res.result);
-                            }
-                          })
-                     }
-        在点击登录,刷新页面和点击登出时都需要调用对应方法来改变state中的值
-        在computed计算state的值,然后在页面中渲染即可:
-        computed:{
-            //利用mapState来解构函数,可以封装函数,减少代码数量等同于下面两个函数的写法
-            ...mapState([&apos;nickName&apos;,&apos;cartCount&apos;])
-            // nickName(){
-            //   return this.$store.state.nickName;
-            // },
-            // cartCount(){
-            //   return this.$store.state.cartCount;
-            // }
-          },
-</code></pre><h2 id="第十六章-webpack的使用"><a href="#第十六章-webpack的使用" class="headerlink" title="第十六章:webpack的使用:"></a>第十六章:webpack的使用:</h2><p><a href="https://welcl.github.io/2018/07/12/webpack/" target="_blank" rel="noopener">webpack参考地址</a></p>
-<pre><code>1.webpack的基础使用:
-     webpack是把所有的文件都打包成js文件,如果遇到css,sass,less等文件时会借助各种loader来转成js文件
-     1.webpack常用插件:
-           //引入html模块插件
-           1.html-webpack-plugin
-           //把css文件从js中分离出来(webpack4.0后这个插件的版本也要对应上)
-           2.extract-text-webpack-plugin
-           //压缩JS代码：
-           3.UglifyJsPlugin/new webpack.opyimize.UglifyJsPlugin();
-           4.CommonsChunkPlugin/new webpack.optimize.CommonsChunkPlugin();
-             //清理/dist文件夹插件
-           5.clean-webpack-plugin
-           //引入打包静态资源的插件
-           6.copy-webpack-plugin
- 2.webpack常用的loader:
-            1.解析css文件  css-loader
-            2.解析sass,less,scss,stylus文件  sass-loader/less-loader/node-sass
-            3.解析图片(png,jpg,svg,gif)  file-loader/url-loader
-            4.给css添加前缀  postcss-loader,autoprefixer
-</code></pre><h2 id="第十七章-线上部署"><a href="#第十七章-线上部署" class="headerlink" title="第十七章:线上部署"></a>第十七章:线上部署</h2><pre><code>1.线上部署,你必须要有一个自己的服务器地址,把代码上传到服务器地址然后进行调试.
-2.本项目为了方便所以把前后端放在了一起,在我们部署代码的时候最好实现前后端分离,前端后端分开部署,然后再利用nginx实现前后端跨域
-3.由于本人并没有自己的服务器,所以这里先搁置了,等有了自己的服务器再进行部署吧
-</code></pre><h2 id="备注-关于arr-map-arr-forEach-each-map-的区别"><a href="#备注-关于arr-map-arr-forEach-each-map-的区别" class="headerlink" title="备注:关于arr.map,arr.forEach(),$.each(),$.map()的区别:"></a>备注:关于arr.map,arr.forEach(),$.each(),$.map()的区别:</h2><h3 id="原生js中的arr-map-和arr-forEach-遍历"><a href="#原生js中的arr-map-和arr-forEach-遍历" class="headerlink" title="原生js中的arr.map()和arr.forEach()遍历:"></a>原生js中的arr.map()和arr.forEach()遍历:</h3><pre><code>相同点:
-    1.都是循环遍历数组中的每一项。
-    2.forEach() 和 map() 里面每一次执行匿名函数都支持3个参数：数组中的当前项item,当前项的索引index,原始数组input。
-    3.匿名函数中的this都是指Window。
-    4.只能遍历数组。    
-不同点:
-    arr.map()有返回值,并不影响原来的数组,结果可以return出来:
-        var arr = [&apos;Jack&apos;,&apos;Tom&apos;,&apos;Json&apos;,&apos;Jerry&apos;,&apos;Danny&apos;]
-        var names = arr.map(function(item,index){
-            return item
-        })
-        console.log(names) //[&apos;Jack&apos;,&apos;Tom&apos;,&apos;Json&apos;,&apos;Jerry&apos;,&apos;Danny&apos;]
-    arr.forEach()没有返回值,没有返回结果
-        var names2 = arr.forEach(function(item,index){
-            return item
-        })
-        console.log(names2)//undefined
-</code></pre><h3 id="jquery的-each-和-map-遍历"><a href="#jquery的-each-和-map-遍历" class="headerlink" title="jquery的$.each()和$.map()遍历"></a>jquery的$.each()和$.map()遍历</h3><pre><code>共同点：
-    即可遍历数组，又可遍历对象。
-不同点:
-    $.each():
-        没有返回值。$.each()里面的匿名函数支持2个参数：当前项的索引i，数组中的当前项v。如果遍历的是对象，k 是键，v 是值。
-        $.each(arr,function(index,value){
-
-            })
-        $.each(object,function(k,v){
-
-            })
-    $.map():
-        有返回值，可以return 出来。.map()里面的匿名函数支持2个参数和.each()里的参数位置相反：数组中的当前项v，当前项的索引 i。如果遍历的是对象，k 是键，v 是值。
-        $.map(arr,function(value,index){
-
-        })    
-        $.map(object,function(v,k){
-
-        })
-</code></pre><h3 id="js中null-undefined-””-即空字符串-0-NaN都为false"><a href="#js中null-undefined-””-即空字符串-0-NaN都为false" class="headerlink" title="js中null,undefined,””  即空字符串,0,NaN都为false"></a>js中null,undefined,””  即空字符串,0,NaN都为false</h3><p><a href="https://github.com/welcl/vue-shopping-demo" target="_blank" rel="noopener">点击获取项目代码地址</a><br><a href="https://www.cnblogs.com/zlxbky/p/7727895.html" target="_blank" rel="noopener">上传本地代码及更新代码到github中教程参考</a><br><a href="https://www.cnblogs.com/zlxbky/p/7727895.html" target="_blank" rel="noopener">https://www.cnblogs.com/zlxbky/p/7727895.html</a></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/13/photoshop/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/07/13/photoshop/" itemprop="url">photoshop</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-13T09:18:30+08:00">
-                2018-07-13
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="前言-photoshop的使用技巧"><a href="#前言-photoshop的使用技巧" class="headerlink" title="前言:photoshop的使用技巧"></a>前言:photoshop的使用技巧</h2><h3 id="一-PS-基本操作-–-简单的工具操作及技巧"><a href="#一-PS-基本操作-–-简单的工具操作及技巧" class="headerlink" title="一:PS 基本操作 – 简单的工具操作及技巧"></a>一:PS 基本操作 – 简单的工具操作及技巧</h3><pre><code>Ctrl + + 放大   Ctrl + - 缩小   按住空格鼠标变为小手：拖拽
-</code></pre><h3 id="二-界面："><a href="#二-界面：" class="headerlink" title="二:界面："></a>二:界面：</h3><pre><code>顶部 -&gt; 【菜单栏】
-顶部第二层 -&gt; 【属性栏】 根据点击左侧工具栏 不同的工具会有不同的属性
-左侧 -&gt; 【工具栏】 
-右侧 -&gt; 【面板】 选择：窗口 -&gt; 工作区 -&gt; 复位基本功能 会恢复默认
-</code></pre><h3 id="三-菜单栏："><a href="#三-菜单栏：" class="headerlink" title="三:菜单栏："></a>三:菜单栏：</h3><h4 id="1-像素移动："><a href="#1-像素移动：" class="headerlink" title="1.像素移动："></a>1.像素移动：</h4><pre><code>在面板中按住Ctrl可以多个图层选中 属性中可以选择对齐方式等
-</code></pre><h4 id="2-选区工具：【快捷键-M】"><a href="#2-选区工具：【快捷键-M】" class="headerlink" title="2.选区工具：【快捷键 M】"></a>2.选区工具：【快捷键 M】</h4><pre><code>一旦有了选区，工具的操作都会针对选区内部，属性中可以进行增减选区等
-Shift键 默认增加选区
-Alt键 默认减少选区
-Shift + M 在扩展中轮流切换图形
-Ctrl+鼠标左键 改变选区图像 矩形 -&gt; 正方形 椭圆 -&gt; 正圆
-Alt找到圆心 Ctrl和Alt两个快捷键可以配合使用 
-注意：先放开鼠标，最后放开快捷键
-</code></pre><h4 id="3-套索工具：【快捷键-L】不规则形状选区"><a href="#3-套索工具：【快捷键-L】不规则形状选区" class="headerlink" title="3.套索工具：【快捷键 L】不规则形状选区"></a>3.套索工具：【快捷键 L】不规则形状选区</h4><pre><code>Shift键 + 鼠标左键 增加选择区域
-Alt键 + 鼠标左键 删除规则的选区区域
-扩展：多边形套索工具、磁性套索工具(会根据颜色进行判断，适合获取不规则图形)
-</code></pre><h4 id="4-快速选择工具：尽量选择闭合的图像-【快捷键-W】"><a href="#4-快速选择工具：尽量选择闭合的图像-【快捷键-W】" class="headerlink" title="4.快速选择工具：尽量选择闭合的图像 【快捷键 W】"></a>4.快速选择工具：尽量选择闭合的图像 【快捷键 W】</h4><pre><code>删除选区：快捷键 Ctrl + D
-属性中用减可以去掉多余的地方，也可以调整工具的大小 快捷键：中括号 花括号
-扩展：魔棒工具 按住Shift键 多选区域
-</code></pre><h4 id="5-裁剪工具：【快捷键-C】裁剪需要的一部分，图片边际会出现可调整的按钮"><a href="#5-裁剪工具：【快捷键-C】裁剪需要的一部分，图片边际会出现可调整的按钮" class="headerlink" title="5.裁剪工具：【快捷键 C】裁剪需要的一部分，图片边际会出现可调整的按钮"></a>5.裁剪工具：【快捷键 C】裁剪需要的一部分，图片边际会出现可调整的按钮</h4><pre><code>属性栏中的对钩：只留下裁剪区域 其他地方被裁掉
-小技巧：按住Ctrl单击需要的图片，按住Ctrl单击右下角的图层，会自动出现选区，这时选择左侧工具栏的裁剪，会默认选区，按回车键完成裁剪 单击对钩或者回车就裁剪好了
-用套索工具选择好不规则图形后点击裁剪，会以最小范围裁剪出图形，按住Alt键单击右下角图层前的眼睛，会把背景变为透明，获取到图层
-</code></pre><h4 id="6-吸管工具："><a href="#6-吸管工具：" class="headerlink" title="6.吸管工具："></a>6.吸管工具：</h4><pre><code>在需要的地方点击，获取颜色
-</code></pre><h4 id="7-污点修复画笔："><a href="#7-污点修复画笔：" class="headerlink" title="7.污点修复画笔："></a>7.污点修复画笔：</h4><pre><code>会将涂抹的去掉。
-</code></pre><h4 id="8-修复画笔："><a href="#8-修复画笔：" class="headerlink" title="8.修复画笔："></a>8.修复画笔：</h4><pre><code>按住alt键取材，松开鼠标，发现刚刚取材的部分有个加号，会以加号涂抹的部分原样复制。
-</code></pre><h4 id="9-修补工具："><a href="#9-修补工具：" class="headerlink" title="9.修补工具："></a>9.修补工具：</h4><pre><code>选中一块儿，按住鼠标左键，拖动，拖到哪个地方，被选部分会被和这个地方的相同的内容覆盖。
-</code></pre><h4 id="10-仿制图章工具："><a href="#10-仿制图章工具：" class="headerlink" title="10.仿制图章工具："></a>10.仿制图章工具：</h4><pre><code>按住alt键，选中区域。点击其他地方，会像修复画笔一样，将选中区域复制。两者区别，仿制图章和原图一模一样。而修复画笔会被背景羽化，即要与周围融合。还有仿制图章被选中的区域，周围都被固定。画笔每次画都是相同选中的东西。这个要试验一下。
-</code></pre><h4 id="11-图案图章工具"><a href="#11-图案图章工具" class="headerlink" title="11.图案图章工具:"></a>11.图案图章工具:</h4><pre><code>右上角，有图案库。
-</code></pre><h4 id="12-画笔历史工具："><a href="#12-画笔历史工具：" class="headerlink" title="12.画笔历史工具："></a>12.画笔历史工具：</h4><pre><code>将图案进行一个历史记录，那么用这个工具会将历史记录画布一点点复原，如图片祛斑。
-</code></pre><h4 id="13-渐变工具"><a href="#13-渐变工具" class="headerlink" title="13.渐变工具:"></a>13.渐变工具:</h4><pre><code>拉一下角度渐变、对称渐变、菱形渐变等。
-</code></pre><h4 id="14-模糊工具："><a href="#14-模糊工具：" class="headerlink" title="14.模糊工具："></a>14.模糊工具：</h4><pre><code>变模糊。锐化工具，变干燥。涂抹工具，如变小工具，然后加长眼睫毛
-</code></pre><h3 id="四-简单工具操作（三）"><a href="#四-简单工具操作（三）" class="headerlink" title="四:简单工具操作（三）"></a>四:简单工具操作（三）</h3><h4 id="钢笔工具（P）："><a href="#钢笔工具（P）：" class="headerlink" title="钢笔工具（Ｐ）："></a>钢笔工具（Ｐ）：</h4><pre><code>可以用来画图和建立选区
-　　自由钢笔工具
-　　转换点工具：等同于钢笔按Alt键
-</code></pre><h4 id="编辑文本工具（T）："><a href="#编辑文本工具（T）：" class="headerlink" title="编辑文本工具（Ｔ）："></a>编辑文本工具（Ｔ）：</h4><pre><code>　　文字无毛边：ｗｉｎｄｏｗｓＬＣＤ
-　　文字可按路径来添加
-</code></pre><h4 id="横排文字蒙版工具（T）："><a href="#横排文字蒙版工具（T）：" class="headerlink" title="横排文字蒙版工具（Ｔ）："></a>横排文字蒙版工具（Ｔ）：</h4><pre><code>　　可填充文字颜色
-</code></pre><h4 id="路径选择工具（A）："><a href="#路径选择工具（A）：" class="headerlink" title="路径选择工具（Ａ）："></a>路径选择工具（Ａ）：</h4><pre><code>　　可选择路径进行移动（移动路径）
-</code></pre><h4 id="直接选择工具（A）："><a href="#直接选择工具（A）：" class="headerlink" title="直接选择工具（Ａ）："></a>直接选择工具（Ａ）：</h4><pre><code>　　可改变路径形状
-</code></pre><h4 id="矩形工具，圆角矩形工具（U）等等："><a href="#矩形工具，圆角矩形工具（U）等等：" class="headerlink" title="矩形工具，圆角矩形工具（Ｕ）等等："></a>矩形工具，圆角矩形工具（Ｕ）等等：</h4><pre><code>　　画矩形，圆角矩形
-</code></pre><h4 id="抓手工具（H）："><a href="#抓手工具（H）：" class="headerlink" title="抓手工具（Ｈ）："></a>抓手工具（Ｈ）：</h4><pre><code>　　移动画布
-</code></pre><h4 id="旋转视图工具（R）"><a href="#旋转视图工具（R）" class="headerlink" title="旋转视图工具（Ｒ）"></a>旋转视图工具（Ｒ）</h4><h4 id="放大工具："><a href="#放大工具：" class="headerlink" title="放大工具："></a>放大工具：</h4><pre><code>　　按住Ａｌｔ进行放大缩小的切换
-　　快捷键Ｈ：按住Ｈ键，单击鼠标左键，出现框，移动到某一位置，松开放大
-</code></pre><h3 id="五-图层原理及操作-五环案例"><a href="#五-图层原理及操作-五环案例" class="headerlink" title="五:图层原理及操作#五环案例"></a>五:图层原理及操作#五环案例<br><br></h3><pre><code>Alt+Delete：前景色填充 &lt;br&gt;&lt;br&gt;
-Ctrl+Delete：背景色填充 &lt;br&gt;&lt;br&gt;
-先建一个图层再画圆&lt;br&gt;
-画圆选区：椭圆选区-&gt;Shift+左键（先放开鼠标再放开shift键），alt+delete填充颜色&lt;br&gt;&lt;br&gt;
-选区-&gt;右键点击选区-&gt;变换选区-&gt;Alt+Shift+鼠标左键：同圆心缩小-&gt;确定-&gt;Delete删掉小圆内部颜色 &lt;br&gt;&lt;br&gt;
-Ctrl+T：自由变换 按住shift 把圆缩小一点 &lt;br&gt;&lt;br&gt;
-移动工具-&gt;Alt+拖动：复制并且自动新建图层 &lt;br&gt;&lt;br&gt;
-CTRL+在图层缩览图中单击：选中图层中环选区。再填充另外颜色&lt;br&gt;&lt;br&gt;
-按住Ctrl键，然后点击图片区域，会自动选中该图层，对该图层进行操作&lt;br&gt;&lt;br&gt;
-按住Shift键，选中第一个和最后一个图层可以把所有这之内的图层全选中，最后一起操作&lt;br&gt;&lt;br&gt;
-裁剪：按住Alt键，以图像为中心建立裁剪区域&lt;br&gt;&lt;br&gt;
-五环相连：CTRL+在图层缩览图中单击蓝色环，再选中黄色环图层，矩形选框-&gt;摁住alt减去黄色环要保留的部分，最后delete,可以去掉黄色部分被选中的小块，如此形成手拉手
-</code></pre><h3 id="六-参考线及辅助-作图时很重要"><a href="#六-参考线及辅助-作图时很重要" class="headerlink" title="六:参考线及辅助# 作图时很重要"></a>六:参考线及辅助# 作图时很重要</h3><pre><code>1.ctrl+R 标尺快捷键 
-2.用鼠标左键从标尺拖动到图片，可以出现参考线 
-3.横向参考线按住 alt 键变成纵向参考线 
-4.删除参考线将其拖回到标尺位置即可 
-5.新建参考线 按Alt\ V 后 E
-6.隐藏\出现参考线 ctrl+；
-网页标准：1920X1080
-选中图层，再新建参考线时，参考线会被吸附到图层边缘，但吸附到文字的边缘时会自动过滤掉虚化的部分
-视图-&gt;显示-&gt;网格：作图中经常会用到
-</code></pre><h3 id="七-传统切图2种方式："><a href="#七-传统切图2种方式：" class="headerlink" title="七:传统切图2种方式："></a>七:传统切图2种方式：</h3><pre><code>参考线切图：数量多，需要去剔除不需要的费时
-
-直接切图：容易切错，需要在移动视图和切图视图切换
-</code></pre><h3 id="八-利用PS的脚本快速切图："><a href="#八-利用PS的脚本快速切图：" class="headerlink" title="八:利用PS的脚本快速切图："></a>八:利用PS的脚本快速切图：</h3><pre><code>选择 文件-&gt;脚本-&gt;将图层导出到文件，然后勾选透明区域、交错、裁切图层
-
-可将图层一个个的切出来
-</code></pre><h3 id="九-图片自动导出生成："><a href="#九-图片自动导出生成：" class="headerlink" title="九:图片自动导出生成："></a>九:图片自动导出生成：</h3><pre><code>1，编辑-&gt;首选项-&gt;增效工具-&gt;勾选启用生成器
-
-2，文件-&gt;生成-&gt;勾选图像资源
-
-3，随后重命名图层/组为xxx.png名称，将会自动生成相应图片到文件夹中
-
-4，其他类型导出：
-
-    将图层/组重命名为.jpg、.png
-
-    retina导出：重命名为200% xxx @2x.jpg
-</code></pre><h3 id="十-ps中的cutterman切图插件"><a href="#十-ps中的cutterman切图插件" class="headerlink" title="十:ps中的cutterman切图插件"></a>十:ps中的cutterman切图插件</h3><pre><code>此插件只有在完整版的ps上才能安装,安装后点击窗户-&gt;扩展功能-&gt;cutterman 点击cutterman,根据自己选择的切图
-或者是选择的图层导出选中图层
-</code></pre><h4 id="点击查看视频教程链接"><a href="#点击查看视频教程链接" class="headerlink" title="点击查看视频教程链接:"></a><a href="https://www.imooc.com/learn/506" target="_blank" rel="noopener">点击查看视频教程链接:</a></h4>
           
         
       
@@ -5374,7 +3049,7 @@ CTRL+在图层缩览图中单击：选中图层中环选区。再填充另外颜
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-count">15</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -5433,7 +3108,7 @@ CTRL+在图层缩览图中单击：选中图层中环选区。再填充另外颜
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
