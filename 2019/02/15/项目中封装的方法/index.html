@@ -79,17 +79,17 @@
 
 
 
-<meta name="description" content="一:格式化后台传过来的&amp;quot;&amp;lt;&amp;gt;等特殊字符有时候后台传入的数据是&amp;amp;quot;&amp;amp;lt;&amp;amp;gt;这种特殊字符,在页面中显示需要转移下 123456789101112131415formatDetails(str)&amp;#123;    if(str.length == 0) return &apos;&apos;;    var obj=&amp;#123;      &apos;&amp;amp;lt;&apos;:">
+<meta name="description" content="一:格式化后台传过来的&amp;quot;&amp;lt;&amp;gt;等特殊字符有时候后台传入的数据是&amp;amp;quot;&amp;amp;lt;&amp;amp;gt;这种特殊字符,在页面中显示需要转译下 123456789101112131415formatDetails(str)&amp;#123;    if(str.length == 0) return &apos;&apos;;    var obj=&amp;#123;      &apos;&amp;amp;lt;&apos;:">
 <meta property="og:type" content="article">
 <meta property="og:title" content="项目中封装的方法">
 <meta property="og:url" content="http://yoursite.com/2019/02/15/项目中封装的方法/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="一:格式化后台传过来的&amp;quot;&amp;lt;&amp;gt;等特殊字符有时候后台传入的数据是&amp;amp;quot;&amp;amp;lt;&amp;amp;gt;这种特殊字符,在页面中显示需要转移下 123456789101112131415formatDetails(str)&amp;#123;    if(str.length == 0) return &apos;&apos;;    var obj=&amp;#123;      &apos;&amp;amp;lt;&apos;:">
+<meta property="og:description" content="一:格式化后台传过来的&amp;quot;&amp;lt;&amp;gt;等特殊字符有时候后台传入的数据是&amp;amp;quot;&amp;amp;lt;&amp;amp;gt;这种特殊字符,在页面中显示需要转译下 123456789101112131415formatDetails(str)&amp;#123;    if(str.length == 0) return &apos;&apos;;    var obj=&amp;#123;      &apos;&amp;amp;lt;&apos;:">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-02-15T03:26:03.553Z">
+<meta property="og:updated_time" content="2019-02-15T03:28:15.941Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="项目中封装的方法">
-<meta name="twitter:description" content="一:格式化后台传过来的&amp;quot;&amp;lt;&amp;gt;等特殊字符有时候后台传入的数据是&amp;amp;quot;&amp;amp;lt;&amp;amp;gt;这种特殊字符,在页面中显示需要转移下 123456789101112131415formatDetails(str)&amp;#123;    if(str.length == 0) return &apos;&apos;;    var obj=&amp;#123;      &apos;&amp;amp;lt;&apos;:">
+<meta name="twitter:description" content="一:格式化后台传过来的&amp;quot;&amp;lt;&amp;gt;等特殊字符有时候后台传入的数据是&amp;amp;quot;&amp;amp;lt;&amp;amp;gt;这种特殊字符,在页面中显示需要转译下 123456789101112131415formatDetails(str)&amp;#123;    if(str.length == 0) return &apos;&apos;;    var obj=&amp;#123;      &apos;&amp;amp;lt;&apos;:">
 
 
 
@@ -299,7 +299,7 @@
       
 
       
-        <h3 id="一-格式化后台传过来的-quot-lt-gt-等特殊字符"><a href="#一-格式化后台传过来的-quot-lt-gt-等特殊字符" class="headerlink" title="一:格式化后台传过来的&quot;&lt;&gt;等特殊字符"></a>一:格式化后台传过来的&quot;&lt;&gt;等特殊字符</h3><pre><code>有时候后台传入的数据是&amp;quot;&amp;lt;&amp;gt;这种特殊字符,在页面中显示需要转移下
+        <h3 id="一-格式化后台传过来的-quot-lt-gt-等特殊字符"><a href="#一-格式化后台传过来的-quot-lt-gt-等特殊字符" class="headerlink" title="一:格式化后台传过来的&quot;&lt;&gt;等特殊字符"></a>一:格式化后台传过来的&quot;&lt;&gt;等特殊字符</h3><pre><code>有时候后台传入的数据是&amp;quot;&amp;lt;&amp;gt;这种特殊字符,在页面中显示需要转译下
 </code></pre><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">formatDetails(str)&#123;</span><br><span class="line">    <span class="keyword">if</span>(str.length == <span class="number">0</span>) <span class="keyword">return</span> <span class="string">''</span>;</span><br><span class="line">    <span class="keyword">var</span> obj=&#123;</span><br><span class="line">      <span class="string">'&amp;lt;'</span>:<span class="string">'&lt;'</span>,</span><br><span class="line">      <span class="string">'&amp;gt;'</span>:<span class="string">'&gt;'</span>,</span><br><span class="line">      <span class="string">'&amp;quot;'</span>:<span class="string">'"'</span></span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> key <span class="keyword">in</span> obj)&#123;</span><br><span class="line">      <span class="keyword">while</span>(str.indexOf(key)!=<span class="number">-1</span>)&#123;</span><br><span class="line">        str=str.replace(key,obj[key]);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> str;</span><br><span class="line">&#125;</span><br><span class="line">formatDetails(res.data);</span><br></pre></td></tr></table></figure>
       
     </div>
