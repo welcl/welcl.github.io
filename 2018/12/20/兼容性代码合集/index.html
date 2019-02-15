@@ -86,7 +86,7 @@
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="这里放的都是关于浏览器兼容性代码的函数封装总结!浏览器兼容性的判断思路:如果这个属性在浏览器中不支持,那么这个属性的类型是undefined 判断这个属性的类型 是不是undefined,就知道浏览器是否支持 一:innerText,textContent,innerHTML的区别和兼容性1.innerText和textContent兼容代码:    设置标签中的文本内容,应该使用innerTex">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-01-08T07:57:40.647Z">
+<meta property="og:updated_time" content="2019-01-09T09:48:13.517Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="兼容性代码合集">
 <meta name="twitter:description" content="这里放的都是关于浏览器兼容性代码的函数封装总结!浏览器兼容性的判断思路:如果这个属性在浏览器中不支持,那么这个属性的类型是undefined 判断这个属性的类型 是不是undefined,就知道浏览器是否支持 一:innerText,textContent,innerHTML的区别和兼容性1.innerText和textContent兼容代码:    设置标签中的文本内容,应该使用innerTex">
@@ -502,6 +502,86 @@ function fnName(){
 * 一般默认都是冒泡阶段,很少用捕获阶段
 * 冒泡阶段:从里向外
 * 捕获阶段:从外向内
+</code></pre><h2 id="六-获取任意一个元素的任意一个样式属性的值"><a href="#六-获取任意一个元素的任意一个样式属性的值" class="headerlink" title="六:获取任意一个元素的任意一个样式属性的值"></a>六:获取任意一个元素的任意一个样式属性的值</h2><h3 id="存在的兼容问题"><a href="#存在的兼容问题" class="headerlink" title="存在的兼容问题:"></a>存在的兼容问题:</h3><pre><code>my$(&quot;btn&quot;).onclick=function () {
+    //获取元素距离左边位置的值
+    console.log(my$(&quot;dv&quot;).offsetLeft);
+    //谷歌,火狐支持
+    console.log(window.getComputedStyle(my$(&quot;dv&quot;),null).left);
+    console.log(window.getComputedStyle(my$(&quot;dv&quot;),null)[&quot;left&quot;]);
+    //IE8支持
+    console.log(my$(&quot;dv&quot;).currentStyle.left);
+};
+</code></pre><h3 id="兼容代码-1"><a href="#兼容代码-1" class="headerlink" title="兼容代码:"></a>兼容代码:</h3><pre><code>代码1:
+function getStyle(element,attr) {
+    //判断浏览器是否支持这个方法
+    if(window.getComputedStyle){
+         return window.getComputedStyle(element,null)[attr];
+    }else{
+        return element.currentStyle[attr];
+    }
+}
+简化版:
+function getStyle(element,attr) {
+    //判断浏览器是否支持这个方法
+   return window.getComputedStyle? window.getComputedStyle(element,null)[attr]:element.currentStyle[attr];
+  }
+</code></pre><h3 id="使用"><a href="#使用" class="headerlink" title="使用:"></a>使用:</h3><pre><code>console.log(getStyle(my$(&quot;dv&quot;),&quot;top&quot;))//获取id为dv的元素的top值
+</code></pre><h2 id="7-e-clientX-pageX-scrollLeft的兼容性总结"><a href="#7-e-clientX-pageX-scrollLeft的兼容性总结" class="headerlink" title="7:e,clientX,pageX,scrollLeft的兼容性总结"></a>7:e,clientX,pageX,scrollLeft的兼容性总结</h2><h3 id="1-window-event和事件参数对象e的兼容"><a href="#1-window-event和事件参数对象e的兼容" class="headerlink" title="1.window.event和事件参数对象e的兼容"></a>1.window.event和事件参数对象e的兼容</h3><pre><code>    ie不支持e值,只支持window.event;
+兼容代码://window.event和事件参数对象e的兼容
+        function getEvent(evt) {
+          return window.event||evt;
+        },
+</code></pre><h3 id="2-clientX-clientY"><a href="#2-clientX-clientY" class="headerlink" title="2.clientX,clientY:"></a>2.clientX,clientY:</h3><pre><code>    主要需要兼容的是e和window.event,
+兼容代码://可视区域的横坐标的兼容代码
+        function getClientX(evt) {
+          return getEvent(evt).clientX;
+        },
+</code></pre><h3 id="3-scrollLeft兼容性"><a href="#3-scrollLeft兼容性" class="headerlink" title="3.scrollLeft兼容性:"></a>3.scrollLeft兼容性:</h3><pre><code>    有的浏览器认为是document卷曲的距离(document.body.scrollLeft),
+    有的浏览器认为是body卷曲的距离()document.documentElement.scrollLeft,
+    有的浏览器认为是window.pageXOffset卷曲的距离
+兼容代码://页面向左卷曲出去的横坐标
+        function getScrollLeft() {
+          return window.pageXOffset||document.body.scrollLeft||document.documentElement.scrollLeft||0;
+        },
+</code></pre><h3 id="4-pageX和pageY在谷歌和火狐可以使用-IE8不能用"><a href="#4-pageX和pageY在谷歌和火狐可以使用-IE8不能用" class="headerlink" title="4.pageX和pageY在谷歌和火狐可以使用,IE8不能用;"></a>4.pageX和pageY在谷歌和火狐可以使用,IE8不能用;</h3><pre><code>    pageX和pageY在谷歌和火狐可以直接使用:
+    在ie要这样使用:
+        可视区域横坐(window.event.clientX+)+向左(上)卷曲出去的横坐标(getScrollLeft())
+兼容代码:
+    //相对于页面的横坐标(pageX或者是clientX+scrollLeft)
+    getPageX:function (evt) {
+      return this.getEvent(evt).pageX? this.getEvent(evt).pageX:this.getClientX(evt)+this.getScrollLeft();
+    },
+</code></pre><h3 id="把这四个方法放到一个对象中封装的代码"><a href="#把这四个方法放到一个对象中封装的代码" class="headerlink" title="把这四个方法放到一个对象中封装的代码:"></a>把这四个方法放到一个对象中封装的代码:</h3><pre><code>//把代码放在一个对象中
+var evt={
+    //window.event和事件参数对象e的兼容
+    getEvent:function (evt) {
+      return window.event||evt;
+    },
+    //可视区域的横坐标的兼容代码
+    getClientX:function (evt) {
+      return this.getEvent(evt).clientX;
+    },
+    //可视区域的纵坐标的兼容代码
+    getClientY:function (evt) {
+      return this.getEvent(evt).clientY;
+    },
+    //页面向左卷曲出去的横坐标
+    getScrollLeft:function () {
+      return window.pageXOffset||document.body.scrollLeft||document.documentElement.scrollLeft||0;
+    },
+    //页面向上卷曲出去的纵坐标
+    getScrollTop:function () {
+      return window.pageYOffset||document.body.scrollTop||document.documentElement.scrollTop||0;
+    },
+    //相对于页面的横坐标(pageX或者是clientX+scrollLeft)
+    getPageX:function (evt) {
+      return this.getEvent(evt).pageX? this.getEvent(evt).pageX:this.getClientX(evt)+this.getScrollLeft();
+    },
+    //相对于页面的纵坐标(pageY或者是clientY+scrollTop)
+    getPageY:function (evt) {
+      return this.getEvent(evt).pageY?this.getEvent(evt).pageY:this.getClientY(evt)+this.getScrollTop();
+    }
+};
 </code></pre>
       
     </div>
@@ -615,7 +695,7 @@ function fnName(){
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-count">16</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -670,7 +750,7 @@ function fnName(){
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#这里放的都是关于浏览器兼容性代码的函数封装总结"><span class="nav-number">1.</span> <span class="nav-text">这里放的都是关于浏览器兼容性代码的函数封装总结!</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#浏览器兼容性的判断思路"><span class="nav-number">1.1.</span> <span class="nav-text">浏览器兼容性的判断思路:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一-innerText-textContent-innerHTML的区别和兼容性"><span class="nav-number">1.2.</span> <span class="nav-text">一:innerText,textContent,innerHTML的区别和兼容性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-innerText和textContent兼容代码"><span class="nav-number">1.2.1.</span> <span class="nav-text">1.innerText和textContent兼容代码:</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二-获取节点和元素的方法以及兼容性代码"><span class="nav-number">1.3.</span> <span class="nav-text">二:获取节点和元素的方法以及兼容性代码</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#兼容代码"><span class="nav-number">1.3.1.</span> <span class="nav-text">兼容代码:</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三-为元素绑定事件写入兼容代码"><span class="nav-number">1.4.</span> <span class="nav-text">三:为元素绑定事件写入兼容代码:</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#绑定事件兼容代码"><span class="nav-number">1.4.1.</span> <span class="nav-text">绑定事件兼容代码:</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四-为元素解绑事件写入兼容代码"><span class="nav-number">1.5.</span> <span class="nav-text">四:为元素解绑事件写入兼容代码:</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#解绑事件兼容代码"><span class="nav-number">1.5.1.</span> <span class="nav-text">解绑事件兼容代码:</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#五-事件冒泡-事件阶段-事件的完整流程及事件冒泡的兼容性代码"><span class="nav-number">1.6.</span> <span class="nav-text">五:事件冒泡,事件阶段,事件的完整流程及事件冒泡的兼容性代码:</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#事件冒泡"><span class="nav-number">1.6.1.</span> <span class="nav-text">事件冒泡:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#事件阶段"><span class="nav-number">1.6.2.</span> <span class="nav-text">事件阶段:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#一个元素绑定事件的完整流程"><span class="nav-number">1.6.3.</span> <span class="nav-text">一个元素绑定事件的完整流程:</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#这里放的都是关于浏览器兼容性代码的函数封装总结"><span class="nav-number">1.</span> <span class="nav-text">这里放的都是关于浏览器兼容性代码的函数封装总结!</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#浏览器兼容性的判断思路"><span class="nav-number">1.1.</span> <span class="nav-text">浏览器兼容性的判断思路:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一-innerText-textContent-innerHTML的区别和兼容性"><span class="nav-number">1.2.</span> <span class="nav-text">一:innerText,textContent,innerHTML的区别和兼容性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-innerText和textContent兼容代码"><span class="nav-number">1.2.1.</span> <span class="nav-text">1.innerText和textContent兼容代码:</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二-获取节点和元素的方法以及兼容性代码"><span class="nav-number">1.3.</span> <span class="nav-text">二:获取节点和元素的方法以及兼容性代码</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#兼容代码"><span class="nav-number">1.3.1.</span> <span class="nav-text">兼容代码:</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三-为元素绑定事件写入兼容代码"><span class="nav-number">1.4.</span> <span class="nav-text">三:为元素绑定事件写入兼容代码:</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#绑定事件兼容代码"><span class="nav-number">1.4.1.</span> <span class="nav-text">绑定事件兼容代码:</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四-为元素解绑事件写入兼容代码"><span class="nav-number">1.5.</span> <span class="nav-text">四:为元素解绑事件写入兼容代码:</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#解绑事件兼容代码"><span class="nav-number">1.5.1.</span> <span class="nav-text">解绑事件兼容代码:</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#五-事件冒泡-事件阶段-事件的完整流程及事件冒泡的兼容性代码"><span class="nav-number">1.6.</span> <span class="nav-text">五:事件冒泡,事件阶段,事件的完整流程及事件冒泡的兼容性代码:</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#事件冒泡"><span class="nav-number">1.6.1.</span> <span class="nav-text">事件冒泡:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#事件阶段"><span class="nav-number">1.6.2.</span> <span class="nav-text">事件阶段:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#一个元素绑定事件的完整流程"><span class="nav-number">1.6.3.</span> <span class="nav-text">一个元素绑定事件的完整流程:</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#六-获取任意一个元素的任意一个样式属性的值"><span class="nav-number">1.7.</span> <span class="nav-text">六:获取任意一个元素的任意一个样式属性的值</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#存在的兼容问题"><span class="nav-number">1.7.1.</span> <span class="nav-text">存在的兼容问题:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#兼容代码-1"><span class="nav-number">1.7.2.</span> <span class="nav-text">兼容代码:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用"><span class="nav-number">1.7.3.</span> <span class="nav-text">使用:</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-e-clientX-pageX-scrollLeft的兼容性总结"><span class="nav-number">1.8.</span> <span class="nav-text">7:e,clientX,pageX,scrollLeft的兼容性总结</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-window-event和事件参数对象e的兼容"><span class="nav-number">1.8.1.</span> <span class="nav-text">1.window.event和事件参数对象e的兼容</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-clientX-clientY"><span class="nav-number">1.8.2.</span> <span class="nav-text">2.clientX,clientY:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-scrollLeft兼容性"><span class="nav-number">1.8.3.</span> <span class="nav-text">3.scrollLeft兼容性:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-pageX和pageY在谷歌和火狐可以使用-IE8不能用"><span class="nav-number">1.8.4.</span> <span class="nav-text">4.pageX和pageY在谷歌和火狐可以使用,IE8不能用;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#把这四个方法放到一个对象中封装的代码"><span class="nav-number">1.8.5.</span> <span class="nav-text">把这四个方法放到一个对象中封装的代码:</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>

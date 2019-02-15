@@ -229,6 +229,126 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/15/项目中封装的方法/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/02/15/项目中封装的方法/" itemprop="url">项目中封装的方法</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-02-15T11:22:14+08:00">
+                2019-02-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="一-格式化后台传过来的-quot-lt-gt-等特殊字符"><a href="#一-格式化后台传过来的-quot-lt-gt-等特殊字符" class="headerlink" title="一:格式化后台传过来的&quot;&lt;&gt;等特殊字符"></a>一:格式化后台传过来的&quot;&lt;&gt;等特殊字符</h3><pre><code>有时候后台传入的数据是&amp;quot;&amp;lt;&amp;gt;这种特殊字符,在页面中显示需要转移下
+</code></pre><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">formatDetails(str)&#123;</span><br><span class="line">    <span class="keyword">if</span>(str.length == <span class="number">0</span>) <span class="keyword">return</span> <span class="string">''</span>;</span><br><span class="line">    <span class="keyword">var</span> obj=&#123;</span><br><span class="line">      <span class="string">'&amp;lt;'</span>:<span class="string">'&lt;'</span>,</span><br><span class="line">      <span class="string">'&amp;gt;'</span>:<span class="string">'&gt;'</span>,</span><br><span class="line">      <span class="string">'&amp;quot;'</span>:<span class="string">'"'</span></span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> key <span class="keyword">in</span> obj)&#123;</span><br><span class="line">      <span class="keyword">while</span>(str.indexOf(key)!=<span class="number">-1</span>)&#123;</span><br><span class="line">        str=str.replace(key,obj[key]);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> str;</span><br><span class="line">&#125;</span><br><span class="line">formatDetails(res.data);</span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/08/js之基础知识/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -767,9 +887,8 @@ var obj={};//复杂类型,对象在堆,地址(引用)在栈
 节点:页面中所有的内容(标签,属性,文本(文字,换行,空格,回车)),Node
 根元素:html标签
 </code></pre><p>###1.节点的属性:<br>        可以使用标签–元素.出来,可以使用属性节点.出来,文本节点.点出来<br>        nodeType:节点的类型:1—-标签,2—属性,3—文本<br>        nodeName:节点的名字:标签节点–大写的标签名字,属性节点–小写的属性名字,文本节点–#text<br>        nodeValue:节点的值:标签节点—null,属性节点—属性值,文本节点—文本内容<br>        使用:<br>          ulObj=my$(“uu”);ulObj.nodeType,ulObj.nodeName,ulObj.nodeValue,<br>          利用nodeType判断是标签是属性还是文本,<br>          利用nodeName获取指定标签,<br>        获取节点的方法:<br>          //12行代码:都是获取节点和元素的<br>          //ul<br>          var ulObj=document.getElementById(“uu”);<br>          var threeObj=document.getElementById(“three”);<br>          //父级节点<br>          console.log(ulObj.parentNode);<br>          //父级元素<br>          console.log(ulObj.parentElement);<br>          //子节点<br>          console.log(ulObj.childNodes);<br>          //子元素<br>          console.log(ulObj.children);<br>          console.log(“==============================================”);<br>          //第一个子节点<br>          console.log(ulObj.firstChild);//————————IE8中是第一个子元素<br>          //第一个子元素<br>          console.log(ulObj.firstElementChild);//—————–IE8中不支持<br>          //最后一个子节点<br>          console.log(ulObj.lastChild);//————————IE8中是第一个子元素<br>          //最后一个子元素<br>          console.log(ulObj.lastElementChild);//—————–IE8中不支持<br>          //某个元素的前一个兄弟节点<br>          console.log(threeObj.previousSibling);//————————IE8中是第一个子元素<br>          //某个元素的前一个兄弟元素<br>          console.log(threeObj.previousElementSibling);//—————–IE8中不支持<br>          //某个元素的后一个兄弟节点<br>          console.log(threeObj.nextSibling);//————————IE8中是第一个子元素<br>          //某个元素的后一个兄弟元素<br>          console.log(threeObj.nextElementSibling);//—————–IE8中不支持<br>          //总结:凡是获取节点的代码在谷歌和火狐得到的都是  相关的节点<br>          //凡是获取元素的代码在谷歌和火狐得到的都是   相关的元素<br>          //从子节点和兄弟节点开始,凡是获取节点的代码在IE8中得到的是元素,获取元素的相关代码,在IE8中得到的是undefined—-元素的代码,iE中不支持</p>
-<h3 id="2-元素的创建"><a href="#2-元素的创建" class="headerlink" title="2.元素的创建:"></a>2.元素的创建:</h3><pre><code>元素创建-----为了提高用户的体验
-元素创建的三种方式:
-1. document.write(&quot;标签的代码及内容&quot;);
+<p>###2.元素的创建:<br>      元素创建—–为了提高用户的体验<br>      元素创建的三种方式:</p>
+<pre><code>1. document.write(&quot;标签的代码及内容&quot;);
   document.write()创建元素,缺陷:如果是在页面加载完毕后,此时通过这种方式创建元素,
   那么页面上存在的所有的内容全部被干掉
 2. 对象.innerHTML=&quot;标签及代码&quot;;
@@ -804,6 +923,79 @@ var obj={};//复杂类型,对象在堆,地址(引用)在栈
 /*通过userAgent可以判断用户浏览器的类型*/
 window.navigator.platform
 /*通过platform可以判断浏览器所在的系统平台类型.*/
+</code></pre><h2 id="三-js三大系列-offset系列-scroll系列-client系列"><a href="#三-js三大系列-offset系列-scroll系列-client系列" class="headerlink" title="三:js三大系列:offset系列,scroll系列,client系列"></a>三:js三大系列:offset系列,scroll系列,client系列</h2><h3 id="offset系列"><a href="#offset系列" class="headerlink" title="offset系列:"></a>offset系列:</h3><pre><code>div如果要移动,就需要脱离文档流,(position:absolute)
+  注意:如果样式的代码是在style的标签中设置,外面是获取不到:
+      &lt;style&gt;
+          #dv{
+              left:50px;
+          }
+      &lt;/style&gt;
+      &lt;script&gt;
+          document.getElementById(&apos;div&apos;).style.left;
+          /*这样是获取不到div设置的left值的,除非div的是内联样式而不是在style中
+         然而document.getElementById(&apos;div&apos;).offsetLeft;是既可以获取到内联样式的属性值也可以
+         获取到style设置的属性值,所以我们要用offset系列的来获取
+          */
+
+      &lt;/script&gt;
+
+* offsetHeight:获取元素的高(有边框)
+* offsetWidth:获取元素的宽(有边框)
+* offsetLeft:获取元素距离左边位置的值
+* offsetTop:获取元素距离上面位置的值
+没有脱离文档流情况下:
+    offsetLeft:父级元素margin+父级元素padding+父级元素的border+自己的margin其实相对于document
+    或者body的位置
+脱离文档流了:
+    主要是自己的left和自己的margin,其实是相对于父级元素的位置
+</code></pre><h3 id="scroll系列"><a href="#scroll系列" class="headerlink" title="scroll系列:"></a>scroll系列:</h3><pre><code>* scroll系列:卷曲---滚出去
+* scrollWidth:元素中内容的实际的宽(没有边框),如果没有内容就是元素的宽
+* scrollHeight:元素中内容的实际的高(没有边框),如果没有内容就是元素的高
+    比如一个div高为200px,里面的内容400px,这时内容会超出div高度,使用scrollHeight就是400px
+* scrollTop:元素向上卷曲的距离
+* scrollLeft:元素向左卷曲的的距离
+</code></pre><h3 id="client系列-可视区域"><a href="#client系列-可视区域" class="headerlink" title="client系列:可视区域"></a>client系列:可视区域</h3><pre><code>* clientWidth:可视区域的宽(没有边框),边框内部的宽度
+* clientHeight:可视区域的高(没有边框),边框内部的高度
+* clientLeft:左边边框的宽度
+* clientTop:上面的边框的宽度
+* clientX:可视区域的横坐标
+* clientY:可视区域的纵坐标
+</code></pre><h2 id="四-元素隐藏的不同方式"><a href="#四-元素隐藏的不同方式" class="headerlink" title="四:元素隐藏的不同方式:"></a>四:元素隐藏的不同方式:</h2><pre><code>1.$(&quot;#dv&quot;).style.display=&quot;none&quot;;//不占位
+2.$(&quot;#dv&quot;).style.visibility=&quot;hidden&quot;;//占位
+3.$(&quot;#dv&quot;).style.opacity=0;//占位
+4.$(&quot;#dv&quot;).style.height=&quot;0px&quot;;//占位
+  $(&quot;#dv&quot;).style.border=&quot;0px solid red&quot;;
+</code></pre><h2 id="五-大量字符串拼接需要注意-优化-的问题"><a href="#五-大量字符串拼接需要注意-优化-的问题" class="headerlink" title="五:大量字符串拼接需要注意(优化)的问题:"></a>五:大量字符串拼接需要注意(优化)的问题:</h2><pre><code>在我们有大量字符串进行拼接的时候,因为字符串具有不可变性,所以每拼接一个字符串的时候都会新开辟内存
+空间,这会极大的占用内存,所以这个时候我们可以把它设置成一个数组,把每个字符串加到数组中然后再拼接在
+一起,这样就不会占用大量的内存了!(据说在新的浏览器中已经优化了这个问题,可能字符串拼接比数组拼接还好?)
+例子:
+    /*点击按钮,把在input输入的字符串拼接起来*/
+    1.用字符串拼接的办法:(不推荐)
+      document.getElementById(&quot;btn&quot;).onclick = function () {
+        var str = &quot;&quot;;//声明一个字符串变量
+        //获取所有的文本框
+        var inputs = document.getElementsByTagName(&quot;input&quot;);
+        //每个文本框的value属性值
+        for (var i = 0; i &lt; inputs.length; i++) {
+          if (inputs[i].type != &quot;button&quot;) {
+            str+=inputs[i].value+&quot;|&quot;;
+          }
+        }
+        console.log(str+inputs[inputs.length-1].value);
+      };
+    2.推荐使用数组的方式拼接大量的字符串
+    document.getElementById(&quot;btn&quot;).onclick = function () {
+        var str = [];
+        //获取所有的文本框
+        var inputs = document.getElementsByTagName(&quot;input&quot;);
+        //每个文本框的value属性值
+        for (var i = 0; i &lt; inputs.length; i++) {
+          if (inputs[i].type != &quot;button&quot;) {
+            str.push(inputs[i].value);
+          }
+        }
+        console.log(str.join(&quot;|&quot;));//字符串
+      };
 </code></pre>
           
         
@@ -1245,6 +1437,86 @@ function fnName(){
 * 一般默认都是冒泡阶段,很少用捕获阶段
 * 冒泡阶段:从里向外
 * 捕获阶段:从外向内
+</code></pre><h2 id="六-获取任意一个元素的任意一个样式属性的值"><a href="#六-获取任意一个元素的任意一个样式属性的值" class="headerlink" title="六:获取任意一个元素的任意一个样式属性的值"></a>六:获取任意一个元素的任意一个样式属性的值</h2><h3 id="存在的兼容问题"><a href="#存在的兼容问题" class="headerlink" title="存在的兼容问题:"></a>存在的兼容问题:</h3><pre><code>my$(&quot;btn&quot;).onclick=function () {
+    //获取元素距离左边位置的值
+    console.log(my$(&quot;dv&quot;).offsetLeft);
+    //谷歌,火狐支持
+    console.log(window.getComputedStyle(my$(&quot;dv&quot;),null).left);
+    console.log(window.getComputedStyle(my$(&quot;dv&quot;),null)[&quot;left&quot;]);
+    //IE8支持
+    console.log(my$(&quot;dv&quot;).currentStyle.left);
+};
+</code></pre><h3 id="兼容代码-1"><a href="#兼容代码-1" class="headerlink" title="兼容代码:"></a>兼容代码:</h3><pre><code>代码1:
+function getStyle(element,attr) {
+    //判断浏览器是否支持这个方法
+    if(window.getComputedStyle){
+         return window.getComputedStyle(element,null)[attr];
+    }else{
+        return element.currentStyle[attr];
+    }
+}
+简化版:
+function getStyle(element,attr) {
+    //判断浏览器是否支持这个方法
+   return window.getComputedStyle? window.getComputedStyle(element,null)[attr]:element.currentStyle[attr];
+  }
+</code></pre><h3 id="使用"><a href="#使用" class="headerlink" title="使用:"></a>使用:</h3><pre><code>console.log(getStyle(my$(&quot;dv&quot;),&quot;top&quot;))//获取id为dv的元素的top值
+</code></pre><h2 id="7-e-clientX-pageX-scrollLeft的兼容性总结"><a href="#7-e-clientX-pageX-scrollLeft的兼容性总结" class="headerlink" title="7:e,clientX,pageX,scrollLeft的兼容性总结"></a>7:e,clientX,pageX,scrollLeft的兼容性总结</h2><h3 id="1-window-event和事件参数对象e的兼容"><a href="#1-window-event和事件参数对象e的兼容" class="headerlink" title="1.window.event和事件参数对象e的兼容"></a>1.window.event和事件参数对象e的兼容</h3><pre><code>    ie不支持e值,只支持window.event;
+兼容代码://window.event和事件参数对象e的兼容
+        function getEvent(evt) {
+          return window.event||evt;
+        },
+</code></pre><h3 id="2-clientX-clientY"><a href="#2-clientX-clientY" class="headerlink" title="2.clientX,clientY:"></a>2.clientX,clientY:</h3><pre><code>    主要需要兼容的是e和window.event,
+兼容代码://可视区域的横坐标的兼容代码
+        function getClientX(evt) {
+          return getEvent(evt).clientX;
+        },
+</code></pre><h3 id="3-scrollLeft兼容性"><a href="#3-scrollLeft兼容性" class="headerlink" title="3.scrollLeft兼容性:"></a>3.scrollLeft兼容性:</h3><pre><code>    有的浏览器认为是document卷曲的距离(document.body.scrollLeft),
+    有的浏览器认为是body卷曲的距离()document.documentElement.scrollLeft,
+    有的浏览器认为是window.pageXOffset卷曲的距离
+兼容代码://页面向左卷曲出去的横坐标
+        function getScrollLeft() {
+          return window.pageXOffset||document.body.scrollLeft||document.documentElement.scrollLeft||0;
+        },
+</code></pre><h3 id="4-pageX和pageY在谷歌和火狐可以使用-IE8不能用"><a href="#4-pageX和pageY在谷歌和火狐可以使用-IE8不能用" class="headerlink" title="4.pageX和pageY在谷歌和火狐可以使用,IE8不能用;"></a>4.pageX和pageY在谷歌和火狐可以使用,IE8不能用;</h3><pre><code>    pageX和pageY在谷歌和火狐可以直接使用:
+    在ie要这样使用:
+        可视区域横坐(window.event.clientX+)+向左(上)卷曲出去的横坐标(getScrollLeft())
+兼容代码:
+    //相对于页面的横坐标(pageX或者是clientX+scrollLeft)
+    getPageX:function (evt) {
+      return this.getEvent(evt).pageX? this.getEvent(evt).pageX:this.getClientX(evt)+this.getScrollLeft();
+    },
+</code></pre><h3 id="把这四个方法放到一个对象中封装的代码"><a href="#把这四个方法放到一个对象中封装的代码" class="headerlink" title="把这四个方法放到一个对象中封装的代码:"></a>把这四个方法放到一个对象中封装的代码:</h3><pre><code>//把代码放在一个对象中
+var evt={
+    //window.event和事件参数对象e的兼容
+    getEvent:function (evt) {
+      return window.event||evt;
+    },
+    //可视区域的横坐标的兼容代码
+    getClientX:function (evt) {
+      return this.getEvent(evt).clientX;
+    },
+    //可视区域的纵坐标的兼容代码
+    getClientY:function (evt) {
+      return this.getEvent(evt).clientY;
+    },
+    //页面向左卷曲出去的横坐标
+    getScrollLeft:function () {
+      return window.pageXOffset||document.body.scrollLeft||document.documentElement.scrollLeft||0;
+    },
+    //页面向上卷曲出去的纵坐标
+    getScrollTop:function () {
+      return window.pageYOffset||document.body.scrollTop||document.documentElement.scrollTop||0;
+    },
+    //相对于页面的横坐标(pageX或者是clientX+scrollLeft)
+    getPageX:function (evt) {
+      return this.getEvent(evt).pageX? this.getEvent(evt).pageX:this.getClientX(evt)+this.getScrollLeft();
+    },
+    //相对于页面的纵坐标(pageY或者是clientY+scrollTop)
+    getPageY:function (evt) {
+      return this.getEvent(evt).pageY?this.getEvent(evt).pageY:this.getClientY(evt)+this.getScrollTop();
+    }
+};
 </code></pre>
           
         
@@ -2637,368 +2909,6 @@ var result=data.filter(function(item){
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/24/js知识点/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/08/24/js知识点/" itemprop="url">js知识点</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-08-24T16:40:34+08:00">
-                2018-08-24
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="一-jsonp实现跨域获取数据"><a href="#一-jsonp实现跨域获取数据" class="headerlink" title="一:jsonp实现跨域获取数据:"></a>一:jsonp实现跨域获取数据:</h3><pre><code>参考:https://blog.csdn.net/hansexploration/article/details/80314948
-参考:https://www.cnblogs.com/chiangchou/p/jsonp.html
-这里列举下实现jsonp跨域的一个demo:
-    首先,你必须要有两个不同的协议,域名,端口都不同的url,只有这样才符合要跨域的基本条件,
-
-    在localhost:8080端口的index.html下:
-        .......
-              &lt;head&gt;
-                &lt;meta charset=&quot;utf-8&quot;&gt;
-                &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width,initial-scale=1.0&quot;&gt;
-                &lt;title&gt;shoppingSystem&lt;/title&gt;
-                &lt;script src=&quot;http://code.jquery.com/jquery-2.1.1.min.js&quot;&gt;&lt;/script&gt;
-                &lt;script type=&quot;text/javascript&quot;&gt;
-                    var localHandler = function(data){
-                        alert(&apos;我是本地函数，可以被跨域的jsonp.js文件调用，远程js带来的数据是：&apos; + data.result);
-                      };
-                      var url = &quot;http://localhost:3000/jsonp.js&quot;;
-                      // 创建script标签，设置其属性
-                      var script = document.createElement(&apos;script&apos;);
-                      script.setAttribute(&apos;src&apos;, url);
-                      // 把script标签加入head，此时调用开始
-                      document.getElementsByTagName(&apos;head&apos;)[0].appendChild(script);
-                    &lt;/script&gt;
-                &lt;!--&lt;/script&gt;--&gt;
-              &lt;/head&gt;
-        ......
-
-    在localhost:3000端口下的jsonp.js下:
-        localHandler({&quot;result&quot;,&quot;我是后端返回的数据&quot;});
-
-    此时页面就会弹出:    我是本地函数，可以被跨域的jsonp.js文件调用，远程js带来的数据是：我是后端返回的数据证明跨域
-    请求成功了!剩下的就是如何把代码封装一下，以便于与用户界面交互，从而实现多次和重复调用,jQuery如何实现jsonp调用？
-
-    在localhost:8080端口的index.html下:
-        jQuery(document).ready(function(){
-                $.ajax({
-                     type: &quot;get&quot;,
-                     async: false,
-                     url: &quot;http://localhost:3000/jsonp.js&quot;,
-                     dataType: &quot;jsonp&quot;,
-                     jsonp: &quot;callback&quot;,//传递给请求处理程序或页面的，用以获得jsonp回调函数名的参数名(一般默认为:callback)
-                     jsonpCallback:&quot;flightHandler&quot;,//自定义的jsonp回调函数名称，默认为jQuery自动生成的随机函数名，也可以写&quot;?&quot;，
-                                                                            //jQuery会自动为你处理数据
-                     success: function(json){
-                         alert(&apos;您查询到航班信息：票价： &apos; + json.price + &apos; 元，余票： &apos; + json.tickets + &apos; 张。&apos;);
-                     },
-                     error: function(){
-                         alert(&apos;fail&apos;);
-                     }
-                 });
-             });
-
-        在localhost:3000端口下的jsonp.js下:
-            flightHandler({
-              &quot;code&quot;: &quot;CA1998&quot;,
-              &quot;price&quot;: 1780,
-              &quot;tickets&quot;: 5
-            });
-
-        当页面中弹出您查询到航班信息：票价： 1780  元，余票： 5 张。
-</code></pre><h3 id="二-冒泡排序-选择排序-插入排序-数组去重"><a href="#二-冒泡排序-选择排序-插入排序-数组去重" class="headerlink" title="二:冒泡排序,选择排序,插入排序,数组去重:"></a>二:冒泡排序,选择排序,插入排序,数组去重:</h3><h4 id="去重排序"><a href="#去重排序" class="headerlink" title="去重排序"></a>去重排序</h4><pre><code>// 方法1:利用indexOf()
-Array.prototype.removeRepeat=function(){
-    var result=[];
-    for(var i=0;i&lt;this.length;i++){
-        if(result.indexOf(this[i])==-1){
-            result.push(this[i]);
-        }
-    }
-    return result;
-};
-var arr=[1,2,2,5,&quot;测试&quot;,&quot;test&quot;,&quot;测试&quot;];
-console.log(arr.removeRepeat());
-
-// 方法2:利用对象的key值是否存在判断
-Array.prototype.removeRepeat=function(){
-    var result=[];
-    var obj={};
-    for(var i=0;i&lt;this.length;i++){
-       if(!obj[this[i]]){
-            result.push(this[i]);
-            obj[this[i]]=1;
-       }
-    }
-    return result;
-};
-var arr=[1,2,2,5,&quot;测试&quot;,&quot;test&quot;,&quot;测试&quot;];
-console.log(arr.removeRepeat());
-</code></pre><h4 id="冒泡排序、插入排序、选择排序合称为简单排序。"><a href="#冒泡排序、插入排序、选择排序合称为简单排序。" class="headerlink" title="冒泡排序、插入排序、选择排序合称为简单排序。"></a>冒泡排序、插入排序、选择排序合称为简单排序。</h4><pre><code>//升序排序:
-方法1:利用sort方法排序
-var quickSort=function(arr){
-    function sortNumber(a,b){
-        return a-b;
-    }
-    return arr.sort(sortNumber);
-};
-arr=[1,4,65,21,2,222,111];
-console.log(quickSort(arr));
-
-//方法2:/***冒泡排序法***/
-//假设从大到小排序:
-//冒泡排序就是第一次循环时:从第一个元素开始和相邻后边元素比较,如果大于后一个元素,则和后一个元素互换位置
-//如果小于后一个元素,则用后一个元素和其相邻的后一个元素再比较,直到最后一个元素为当前数组中最大的元素
-var quickSort=function(arr){
-    var temp;
-    for(var i=0;i&lt;arr.length-1;i++){
-        for(var j=0;j&lt;arr.length-i-1;j++){
-            if(arr[j]&gt;arr[j+1]){
-                temp=arr[j];
-                arr[j]=arr[j+1];
-                arr[j+1]=temp;
-            }
-        }
-    }
-    return arr;
-};
-arr=[1,4,65,21,2,222,111];
-console.log(quickSort(arr));
-</code></pre><h5 id="选择排序"><a href="#选择排序" class="headerlink" title="选择排序"></a>选择排序</h5><pre><code>//选择排序假设从大到小排序:
-// 第一轮:首先先假设第一个元素的下标a[0]为记录的位置,当后边的元素大于这个记录的元素时,
-//更改记录的位置下标为大的元素的下标,以此类推,直到第一次循环找出最大元素的下标,然后把最大元素的和
-// 假设的第一个元素互换位置.
-//第二轮:重复第一轮过程,只不过此时假设第一个元素的下标为a[1],
-var quickSort=function(arr){
-    //因为数组没有直接获取最大值的方法,所以利用apply函数调用Math的max方法(虽然这里没有用到,但是要知道apply用法)
-    // var max=Math.max.apply(null,arr);
-    // console.log(max);
-    var temp;
-    var index;
-    for(var i=0;i&lt;arr.length;i++){
-        index=i;//这个就是假设第一个元素的下标
-            for(var j=i+1;j&lt;arr.length;j++){
-                if(arr[index]&lt;arr[j]){
-                    index=j;//这个就是最大元素的下标
-                }
-            }
-            //互换位置
-            temp=arr[index];
-            arr[index]=arr[i];
-            arr[i]=temp;
-    }
-    return arr;
-};
-arr=[1,4,65,21,2,222,111];
-console.log(quickSort(arr));
-</code></pre><h5 id="插入排序"><a href="#插入排序" class="headerlink" title="插入排序:"></a>插入排序:</h5><pre><code>// 在一个数组中我们不知道哪个是最小值，那么就假定第一个就是最小值，然后取第二个值与第一个值比较,产生排序后的序列，
-// 然后再取第三个值与排序后的序列进行比较插入到对应的位置，依次类推。
-var quickSort=function(arr){
-    var key;
-    for(var i=1;i&lt;arr.length;i++){
-         key=arr[i];
-         var  j=i-1;
-         while(arr[j]&gt;key){
-             arr[j+1]=arr[j];
-             j--;
-         }
-         arr[j+1]=key;
-    }
-    return arr;
-};
-arr=[1,4,65,21,2,222,111];
-console.log(quickSort(arr));
-</code></pre><h3 id="三-阻止冒泡事件和默认事件"><a href="#三-阻止冒泡事件和默认事件" class="headerlink" title="三:阻止冒泡事件和默认事件:"></a>三:阻止冒泡事件和默认事件:</h3><pre><code>        在jQuery中使用return false时，相当于同时使用event.preventDefault(阻止默认事件)和event.stopPropagation(阻止冒泡事件)，
-它会阻止冒泡也会阻止默认行为。但是使用原生js写时，return false只会阻止默认行为。
-</code></pre><h3 id="四-闭包"><a href="#四-闭包" class="headerlink" title="四:闭包:"></a>四:闭包:</h3><pre><code>参考:https://www.cnblogs.com/gitbo/p/6597733.html
-参考:https://www.liaoxuefeng.com/wiki/001434446689867b27157e896e74d51a89c25cc8b43bdb3000/00143449934543461c9d5dfeeb848f5b72bd012e1113d15000
-</code></pre><h4 id="1-什么是闭包"><a href="#1-什么是闭包" class="headerlink" title="1.什么是闭包;"></a>1.什么是闭包;</h4><pre><code>专业说法：
-        当一个内部函数被其外部函数之外的变量引用时，就形成了一个闭包。
-还可以这么理解：
-        闭包就是一个具有封闭功能与包裹功能的结构，是为了实现具有私有访问空间的函数的，函数可以构成闭包，
-        因为函数内部定义的数据函数外部无法访问，即函数具有封闭性；函数可以封装代码即具有包裹性，所以函数
-        可以构成闭包。建闭包的最常见的方式就是在一个函数内创建另一个函数，通过另一个函数访问这个函数的局部变量
- 函数套函数就是闭包吗？不是！，当一个内部函数被其外部函数之外的变量引用时，才会形成了一个闭包。
- 在本质上，闭包就是将函数内部和函数外部连接起来的一座桥梁。
-</code></pre><h4 id="2-闭包的作用"><a href="#2-闭包的作用" class="headerlink" title="2. 闭包的作用:"></a>2. 闭包的作用:</h4><pre><code>1.读取函数内部变量(一般情况下我们没法在函数外读取一个函数内的局部变量)
-2.让变量值始终保持在内存里(可以延长局部变量的生命周期,封装私有变量)
-3.避免污染全局变量(我们在函数内定义的a变量不会污染全局a变量)
-</code></pre><h4 id="3-闭包的缺点"><a href="#3-闭包的缺点" class="headerlink" title="3.闭包的缺点"></a>3.闭包的缺点</h4><pre><code>    闭包的缺点就是常驻内存，会增大内存使用量，使用不当很容易造成内存泄露。
-    删除闭包中保存的变量。函数销毁（主动把函数赋为null或者页面卸载）可以释放内存
-实例:
-有权访问另一个函数作用域内变量的函数都是闭包。
-这里 inc 函数访问了构造函数 a 里面的变量 n，所以形成了一个闭包。
-    function a(){
-        var n = 0;
-        function inc(){
-           n++;
-           console.log(n);
-        }
-        return inc;
-    }
-    var c = a();
-    c();    //控制台输出1
-    c();    //控制台输出2
-看看是怎么执行的：
-var c = a()，这一句 a()返回的是函数 inc，那这句等同于 var c = inc;
-c()，这一句等同于 inc();  注意，函数名只是一个标识（指向函数的指针），而()才是执行函数。
-后面三句翻译过来就是：  var c = inc;  inc();  inc();
- 为啥要这样写呢:
-    我们知道，js的每个函数都是一个个小黑屋，它可以获取外界信息，但是外界却无法直接看到里面的内容。将变量 n 放进小黑屋里，
-    除了 inc 函数之外，没有其他办法能接触到变量 n,而且在函数 a 外定义同名的变量 n 也是互不影响的，这就是所谓的增强“封装性”。
-    而之所以要用 return 返回函数标识 inc，是因为在 a 函数外部无法直接调用 inc 函数，所以 return inc 与外部联系起来.
- 实例:
-    //常见的闭包陷阱:返回10个10
-        function createFunctions(){
-            var result = new Array();
-            for (var i=0; i &lt; 10; i++){
-                result[i] = function(){
-                    return i;
-                };
-            }
-            return result;
-        }
-        var funcs = createFunctions();
-        console.log(funcs);
-        for (var i=0; i &lt; funcs.length; i++){
-            console.log(funcs[i]());
-        }
-        // //正常的闭包:返回0~9
-        function createFunctions1(){
-            var result = new Array();
-            for (var i=0; i &lt; 10; i++){
-                result[i] = (function(n){
-                    return function(){
-                        return n;
-                    };
-                })(i);
-            }
-            return result;
-        }
-        var funcs1= createFunctions1();
-        console.log(funcs1);
-        for (var i=0; i &lt; funcs1.length; i++){
-            console.log(funcs1[i]());
-        }
-</code></pre><h3 id="五-原型和原型链"><a href="#五-原型和原型链" class="headerlink" title="五.原型和原型链:"></a>五.原型和原型链:</h3><pre><code>要了解:构造函数,原型对象,实例对象之间的关系:
-普通对象
-        最普通的对象：有__proto__属性（指向其原型链），没有prototype属性。
-        原型对象(person.prototype 原型对象还有constructor属性（指向构造函数对象）)
-函数对象：
-       凡是通过new Function()创建的都是函数对象。
-       拥有__proto__、prototype属性（指向原型对象）。
-        Function、Object、Array、Date、String、自定义函数
-        特例： Function.prototype(是原型对象，却是函数对象，下面会有解释)
-        参考:https://blog.csdn.net/sinat_21274091/article/details/52741788
-</code></pre>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -3049,7 +2959,7 @@ c()，这一句等同于 inc();  注意，函数名只是一个标识（指向�
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-count">16</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>

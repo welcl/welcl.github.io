@@ -87,7 +87,7 @@
 <meta property="og:description" content="webapi的知识点:一.节点,元素,自定义属性相关知识点:文档:document 元素:页面中所有的标签,元素---element,  标签----元素---对象 节点:页面中所有的内容(标签,属性,文本(文字,换行,空格,回车)),Node 根元素:html标签 ###1.节点的属性:        可以使用标签–元素.出来,可以使用属性节点.出来,文本节点.点出来        nodeTy">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://yoursite.com/2019/01/08/js之webapi/location.jpg">
-<meta property="og:updated_time" content="2019-01-08T07:50:18.225Z">
+<meta property="og:updated_time" content="2019-01-09T10:32:29.042Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="js之webapi">
 <meta name="twitter:description" content="webapi的知识点:一.节点,元素,自定义属性相关知识点:文档:document 元素:页面中所有的标签,元素---element,  标签----元素---对象 节点:页面中所有的内容(标签,属性,文本(文字,换行,空格,回车)),Node 根元素:html标签 ###1.节点的属性:        可以使用标签–元素.出来,可以使用属性节点.出来,文本节点.点出来        nodeTy">
@@ -306,9 +306,8 @@
 节点:页面中所有的内容(标签,属性,文本(文字,换行,空格,回车)),Node
 根元素:html标签
 </code></pre><p>###1.节点的属性:<br>        可以使用标签–元素.出来,可以使用属性节点.出来,文本节点.点出来<br>        nodeType:节点的类型:1—-标签,2—属性,3—文本<br>        nodeName:节点的名字:标签节点–大写的标签名字,属性节点–小写的属性名字,文本节点–#text<br>        nodeValue:节点的值:标签节点—null,属性节点—属性值,文本节点—文本内容<br>        使用:<br>          ulObj=my$(“uu”);ulObj.nodeType,ulObj.nodeName,ulObj.nodeValue,<br>          利用nodeType判断是标签是属性还是文本,<br>          利用nodeName获取指定标签,<br>        获取节点的方法:<br>          //12行代码:都是获取节点和元素的<br>          //ul<br>          var ulObj=document.getElementById(“uu”);<br>          var threeObj=document.getElementById(“three”);<br>          //父级节点<br>          console.log(ulObj.parentNode);<br>          //父级元素<br>          console.log(ulObj.parentElement);<br>          //子节点<br>          console.log(ulObj.childNodes);<br>          //子元素<br>          console.log(ulObj.children);<br>          console.log(“==============================================”);<br>          //第一个子节点<br>          console.log(ulObj.firstChild);//————————IE8中是第一个子元素<br>          //第一个子元素<br>          console.log(ulObj.firstElementChild);//—————–IE8中不支持<br>          //最后一个子节点<br>          console.log(ulObj.lastChild);//————————IE8中是第一个子元素<br>          //最后一个子元素<br>          console.log(ulObj.lastElementChild);//—————–IE8中不支持<br>          //某个元素的前一个兄弟节点<br>          console.log(threeObj.previousSibling);//————————IE8中是第一个子元素<br>          //某个元素的前一个兄弟元素<br>          console.log(threeObj.previousElementSibling);//—————–IE8中不支持<br>          //某个元素的后一个兄弟节点<br>          console.log(threeObj.nextSibling);//————————IE8中是第一个子元素<br>          //某个元素的后一个兄弟元素<br>          console.log(threeObj.nextElementSibling);//—————–IE8中不支持<br>          //总结:凡是获取节点的代码在谷歌和火狐得到的都是  相关的节点<br>          //凡是获取元素的代码在谷歌和火狐得到的都是   相关的元素<br>          //从子节点和兄弟节点开始,凡是获取节点的代码在IE8中得到的是元素,获取元素的相关代码,在IE8中得到的是undefined—-元素的代码,iE中不支持</p>
-<h3 id="2-元素的创建"><a href="#2-元素的创建" class="headerlink" title="2.元素的创建:"></a>2.元素的创建:</h3><pre><code>元素创建-----为了提高用户的体验
-元素创建的三种方式:
-1. document.write(&quot;标签的代码及内容&quot;);
+<p>###2.元素的创建:<br>      元素创建—–为了提高用户的体验<br>      元素创建的三种方式:</p>
+<pre><code>1. document.write(&quot;标签的代码及内容&quot;);
   document.write()创建元素,缺陷:如果是在页面加载完毕后,此时通过这种方式创建元素,
   那么页面上存在的所有的内容全部被干掉
 2. 对象.innerHTML=&quot;标签及代码&quot;;
@@ -343,6 +342,79 @@
 /*通过userAgent可以判断用户浏览器的类型*/
 window.navigator.platform
 /*通过platform可以判断浏览器所在的系统平台类型.*/
+</code></pre><h2 id="三-js三大系列-offset系列-scroll系列-client系列"><a href="#三-js三大系列-offset系列-scroll系列-client系列" class="headerlink" title="三:js三大系列:offset系列,scroll系列,client系列"></a>三:js三大系列:offset系列,scroll系列,client系列</h2><h3 id="offset系列"><a href="#offset系列" class="headerlink" title="offset系列:"></a>offset系列:</h3><pre><code>div如果要移动,就需要脱离文档流,(position:absolute)
+  注意:如果样式的代码是在style的标签中设置,外面是获取不到:
+      &lt;style&gt;
+          #dv{
+              left:50px;
+          }
+      &lt;/style&gt;
+      &lt;script&gt;
+          document.getElementById(&apos;div&apos;).style.left;
+          /*这样是获取不到div设置的left值的,除非div的是内联样式而不是在style中
+         然而document.getElementById(&apos;div&apos;).offsetLeft;是既可以获取到内联样式的属性值也可以
+         获取到style设置的属性值,所以我们要用offset系列的来获取
+          */
+
+      &lt;/script&gt;
+
+* offsetHeight:获取元素的高(有边框)
+* offsetWidth:获取元素的宽(有边框)
+* offsetLeft:获取元素距离左边位置的值
+* offsetTop:获取元素距离上面位置的值
+没有脱离文档流情况下:
+    offsetLeft:父级元素margin+父级元素padding+父级元素的border+自己的margin其实相对于document
+    或者body的位置
+脱离文档流了:
+    主要是自己的left和自己的margin,其实是相对于父级元素的位置
+</code></pre><h3 id="scroll系列"><a href="#scroll系列" class="headerlink" title="scroll系列:"></a>scroll系列:</h3><pre><code>* scroll系列:卷曲---滚出去
+* scrollWidth:元素中内容的实际的宽(没有边框),如果没有内容就是元素的宽
+* scrollHeight:元素中内容的实际的高(没有边框),如果没有内容就是元素的高
+    比如一个div高为200px,里面的内容400px,这时内容会超出div高度,使用scrollHeight就是400px
+* scrollTop:元素向上卷曲的距离
+* scrollLeft:元素向左卷曲的的距离
+</code></pre><h3 id="client系列-可视区域"><a href="#client系列-可视区域" class="headerlink" title="client系列:可视区域"></a>client系列:可视区域</h3><pre><code>* clientWidth:可视区域的宽(没有边框),边框内部的宽度
+* clientHeight:可视区域的高(没有边框),边框内部的高度
+* clientLeft:左边边框的宽度
+* clientTop:上面的边框的宽度
+* clientX:可视区域的横坐标
+* clientY:可视区域的纵坐标
+</code></pre><h2 id="四-元素隐藏的不同方式"><a href="#四-元素隐藏的不同方式" class="headerlink" title="四:元素隐藏的不同方式:"></a>四:元素隐藏的不同方式:</h2><pre><code>1.$(&quot;#dv&quot;).style.display=&quot;none&quot;;//不占位
+2.$(&quot;#dv&quot;).style.visibility=&quot;hidden&quot;;//占位
+3.$(&quot;#dv&quot;).style.opacity=0;//占位
+4.$(&quot;#dv&quot;).style.height=&quot;0px&quot;;//占位
+  $(&quot;#dv&quot;).style.border=&quot;0px solid red&quot;;
+</code></pre><h2 id="五-大量字符串拼接需要注意-优化-的问题"><a href="#五-大量字符串拼接需要注意-优化-的问题" class="headerlink" title="五:大量字符串拼接需要注意(优化)的问题:"></a>五:大量字符串拼接需要注意(优化)的问题:</h2><pre><code>在我们有大量字符串进行拼接的时候,因为字符串具有不可变性,所以每拼接一个字符串的时候都会新开辟内存
+空间,这会极大的占用内存,所以这个时候我们可以把它设置成一个数组,把每个字符串加到数组中然后再拼接在
+一起,这样就不会占用大量的内存了!(据说在新的浏览器中已经优化了这个问题,可能字符串拼接比数组拼接还好?)
+例子:
+    /*点击按钮,把在input输入的字符串拼接起来*/
+    1.用字符串拼接的办法:(不推荐)
+      document.getElementById(&quot;btn&quot;).onclick = function () {
+        var str = &quot;&quot;;//声明一个字符串变量
+        //获取所有的文本框
+        var inputs = document.getElementsByTagName(&quot;input&quot;);
+        //每个文本框的value属性值
+        for (var i = 0; i &lt; inputs.length; i++) {
+          if (inputs[i].type != &quot;button&quot;) {
+            str+=inputs[i].value+&quot;|&quot;;
+          }
+        }
+        console.log(str+inputs[inputs.length-1].value);
+      };
+    2.推荐使用数组的方式拼接大量的字符串
+    document.getElementById(&quot;btn&quot;).onclick = function () {
+        var str = [];
+        //获取所有的文本框
+        var inputs = document.getElementsByTagName(&quot;input&quot;);
+        //每个文本框的value属性值
+        for (var i = 0; i &lt; inputs.length; i++) {
+          if (inputs[i].type != &quot;button&quot;) {
+            str.push(inputs[i].value);
+          }
+        }
+        console.log(str.join(&quot;|&quot;));//字符串
+      };
 </code></pre>
       
     </div>
@@ -456,7 +528,7 @@ window.navigator.platform
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-count">16</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -511,7 +583,7 @@ window.navigator.platform
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#webapi的知识点"><span class="nav-number">1.</span> <span class="nav-text">webapi的知识点:</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#一-节点-元素-自定义属性相关知识点"><span class="nav-number">1.1.</span> <span class="nav-text">一.节点,元素,自定义属性相关知识点:</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-元素的创建"><span class="nav-number">1.1.1.</span> <span class="nav-text">2.元素的创建:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-自定义属性的操作"><span class="nav-number">1.1.2.</span> <span class="nav-text">3.自定义属性的操作</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二-JS浏览器BOM对象中的属性和方法"><span class="nav-number">1.2.</span> <span class="nav-text">二:JS浏览器BOM对象中的属性和方法:</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-location对象"><span class="nav-number">1.2.1.</span> <span class="nav-text">1.location对象:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-history对象"><span class="nav-number">1.2.2.</span> <span class="nav-text">2.history对象:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-navigator对象"><span class="nav-number">1.2.3.</span> <span class="nav-text">3.navigator对象:</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#webapi的知识点"><span class="nav-number">1.</span> <span class="nav-text">webapi的知识点:</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#一-节点-元素-自定义属性相关知识点"><span class="nav-number">1.1.</span> <span class="nav-text">一.节点,元素,自定义属性相关知识点:</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-自定义属性的操作"><span class="nav-number">1.1.1.</span> <span class="nav-text">3.自定义属性的操作</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二-JS浏览器BOM对象中的属性和方法"><span class="nav-number">1.2.</span> <span class="nav-text">二:JS浏览器BOM对象中的属性和方法:</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-location对象"><span class="nav-number">1.2.1.</span> <span class="nav-text">1.location对象:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-history对象"><span class="nav-number">1.2.2.</span> <span class="nav-text">2.history对象:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-navigator对象"><span class="nav-number">1.2.3.</span> <span class="nav-text">3.navigator对象:</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三-js三大系列-offset系列-scroll系列-client系列"><span class="nav-number">1.3.</span> <span class="nav-text">三:js三大系列:offset系列,scroll系列,client系列</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#offset系列"><span class="nav-number">1.3.1.</span> <span class="nav-text">offset系列:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#scroll系列"><span class="nav-number">1.3.2.</span> <span class="nav-text">scroll系列:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#client系列-可视区域"><span class="nav-number">1.3.3.</span> <span class="nav-text">client系列:可视区域</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四-元素隐藏的不同方式"><span class="nav-number">1.4.</span> <span class="nav-text">四:元素隐藏的不同方式:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#五-大量字符串拼接需要注意-优化-的问题"><span class="nav-number">1.5.</span> <span class="nav-text">五:大量字符串拼接需要注意(优化)的问题:</span></a></li></ol></li></ol></div>
             
 
           </div>
