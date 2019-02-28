@@ -1636,9 +1636,73 @@ var evt={
       
         
           
-            <h2 id="一-本次m站开发是基于m站一期进行开发的-涉及的知识点有限-总结下开发流程"><a href="#一-本次m站开发是基于m站一期进行开发的-涉及的知识点有限-总结下开发流程" class="headerlink" title="一:本次m站开发是基于m站一期进行开发的,涉及的知识点有限,总结下开发流程"></a>一:本次m站开发是基于m站一期进行开发的,涉及的知识点有限,总结下开发流程</h2><h3 id="1-首先是下载一个vue脚手架工具作为底层架构-其次进行本地环境-测试环境-预发布环境-生产环境的配置-最后配置完成后即可进行开发"><a href="#1-首先是下载一个vue脚手架工具作为底层架构-其次进行本地环境-测试环境-预发布环境-生产环境的配置-最后配置完成后即可进行开发" class="headerlink" title="1.首先是下载一个vue脚手架工具作为底层架构,其次进行本地环境,测试环境,预发布环境,生产环境的配置,最后配置完成后即可进行开发"></a>1.首先是下载一个vue脚手架工具作为底层架构,其次进行本地环境,测试环境,预发布环境,生产环境的配置,最后配置完成后即可进行开发</h3><h3 id="2-配置和文件介绍"><a href="#2-配置和文件介绍" class="headerlink" title="2.配置和文件介绍:"></a>2.配置和文件介绍:</h3><pre><code>利用vue-cli下载的模板文件夹目录层级如下:
-</code></pre><p><img src="/2018/12/05/vue遇到的问题/mulujiegou.png" alt="Alt text"><br>            本次项目在原有目录基础上会根据需要增加结构如下:<br><img src="/2018/12/05/vue遇到的问题/xiangmujiegou1.jpg" alt="Alt text"><br><img src="/2018/12/05/vue遇到的问题/xiangmujiegou2.jpg" alt="Alt text"><br>            在build目录下:<br>                存放的是package.json中npm run xxx里面调用的js文件如:<br>                  “dev”: “cross-env NODE_ENV=dev webpack-dev-server –inline –progress –config build/webpack.dev.conf.js”,<br>                        执行的就是webpack.dev.conf.js文件夹下的代码,(本地起一个服务<br>                        cross-env能跨平台地设置及使用环境变量<br>                            大多数情况下，在windows平台下使用类似于: NODE_ENV=production的命令行指令会卡住，windows平台与<br>                            POSIX在使用命令行时有许多区别（例如在POSIX，使用$ENV_VAR,在windows，使用%ENV_VAR%。。。）<br>                        NODE_ENV:设置环境变量,在config目录下的xxx.env.js中有定义<br>                   “build”: “cross-env NODE_ENV=prod node build/build.js”,<br>                        执行的是build.js下的代码(用来打包生成dist文件)<br>            在src/api目录下:<br>                app.js是把app有交互的方法封装在了改页面中,<br>                index.js是把h5页面中要调的接口方法封装在了改页面中,<br>            在src/assets目录下:<br>                存放的是css引入的reset.css,用来初始化样式的<br>            在components目录下:<br>                本次存放的是公共的组件,如toast,popup等组件,<br>            在page目录下:<br>                存的都是页面的组件<br>            在public目录下:<br>                 放入引入的css和图片等<br>            在router目录下:<br>                存放的是设置的路由路径<br>            在store目录下:<br>                存放的vuex的变量,<br>                    index.js:设置store中的state值,<br>                    getters.js:获取store中的state值,<br>                    mutations.js:改变store中的值 mutaion提交的是同步函数<br>                    action.js:<br>                        Action 类似于 mutation，不同在于：<br>                        Action 提交的是 mutation，而不是直接变更状态。<br>                        Action 可以包含任意异步操作。<br>            在utils目录下:<br>                    存放的是与app交互的文件或者是封装的公用的js函数<br>            在static目录下:<br>                    可以存放网站的favicon.ico在改目录下<br>            .babelrc:<br>                    babel的配置<br>            .postcssrc.js:<br>                    postcss的配置<br>            package.json:<br>                    vue插件等  </p>
-<h2 id="二-遇到的问题"><a href="#二-遇到的问题" class="headerlink" title="二:遇到的问题:"></a>二:遇到的问题:</h2><h3 id="1-input输入框type-”number”和type-”tel”在移动端都可以唤醒数字键盘-但是他们都还是可以输入小数点-并且"><a href="#1-input输入框type-”number”和type-”tel”在移动端都可以唤醒数字键盘-但是他们都还是可以输入小数点-并且" class="headerlink" title="1. input输入框type=”number”和type=”tel”在移动端都可以唤醒数字键盘,但是他们都还是可以输入小数点,+,-,并且,"></a>1. input输入框type=”number”和type=”tel”在移动端都可以唤醒数字键盘,但是他们都还是可以输入小数点,+,-,并且,</h3><pre><code>type=&quot;number&quot;输入的小数点在视图上可以看到,但是在控制台结果输出是没有的,这个时候如果用正则表达式截取小
+            <h2 id="一-本次m站开发是m站一期和二期的开发-涉及的知识点有限-总结下开发流程"><a href="#一-本次m站开发是m站一期和二期的开发-涉及的知识点有限-总结下开发流程" class="headerlink" title="一:本次m站开发是m站一期和二期的开发,涉及的知识点有限,总结下开发流程"></a>一:本次m站开发是m站一期和二期的开发,涉及的知识点有限,总结下开发流程</h2><h3 id="1-首先是下载一个vue-cli脚手架工具作为底层架构-其次进行本地环境-测试环境-预发布环境-生产环境的配置-最后配置完成后即可进行开发"><a href="#1-首先是下载一个vue-cli脚手架工具作为底层架构-其次进行本地环境-测试环境-预发布环境-生产环境的配置-最后配置完成后即可进行开发" class="headerlink" title="1.首先是下载一个vue-cli脚手架工具作为底层架构,其次进行本地环境,测试环境,预发布环境,生产环境的配置,最后配置完成后即可进行开发"></a>1.首先是下载一个vue-cli脚手架工具作为底层架构,其次进行本地环境,测试环境,预发布环境,生产环境的配置,最后配置完成后即可进行开发</h3><h3 id="2-目录结构分析"><a href="#2-目录结构分析" class="headerlink" title="2.目录结构分析:"></a>2.目录结构分析:</h3><pre><code>利用vue-cli下载的模板文件夹目录层级如下:
+</code></pre><p><img src="/2018/12/05/vue遇到的问题/mulujiegou.png" alt="Alt text"><br>     本次项目在原有目录基础上会根据需要增加结构:<br><img src="/2018/12/05/vue遇到的问题/xiangmujiegou1.jpg" alt="Alt text"><br><img src="/2018/12/05/vue遇到的问题/xiangmujiegou2.jpg" alt="Alt text"><br><img src="/2018/12/05/vue遇到的问题/xiangmujiegou3.jpg" alt="Alt text"></p>
+<pre><code>build目录下:
+    build.js:vue-cli自带的,当我们需要打包的时候可以在package.json中运行它,如:&quot;build&quot;: &quot;node build/build.js&quot;;
+             build.js中写的有清空文件夹的代码等,这就是为什么运行npm run build 会删除dist再重新生成dist
+    weback.base.conf.js:是各种环境公共的有关配置的代码,可以在该文件中写入公共的配置,然后再把该文件引入本地环境(webpack.dev.conf.js),
+            生产环境(webpack.prod.conf.js)等环境的配置,vue-cli默认只有这两种环境的配置,你可根据自己需求增加其他环境文件如
+            预发布环境(webpack.pre.conf.js)
+    webpack.dev.conf.js(webpack.prod.conf.js):写入各自环境需要的配置,然后引入weback.base.conf.js文件,利用
+            const merge = require(&apos;webpack-merge&apos;)合并weback.base.conf.js的配置到各自页面页面中,
+config目录下:
+    (默认生成的文件)
+    dev.env.js:设置本地环境的NODE_ENV  NODE_ENV环境变量可以在package.json中设置,如:
+         &quot;dev&quot;: &quot;cross-env NODE_ENV=dev  webpack-dev-server --inline --progress --config build/webpack.dev.conf.js&quot;,
+         NODE_ENV:设置环境变量,在config目录下的xxx.env.js中有定义
+         cross-env:
+            能跨平台地设置及使用环境变量大多数情况下，在windows平台下使用类似于: NODE_ENV=production的命令行指令会卡住，
+            windows平台与POSIX在使用命令行时有许多区别（例如在POSIX，使用$ENV_VAR,在windows，使用%ENV_VAR%。。。）
+    index.js:该文件放的是各个环境的输出目录,端口,域名,以何种方式打包等配置,会在webpack.xxx.conf.js中引入该文件
+    prod.env.js:设置生产环境的NODE_ENV
+    test.env.js:设置test环境的NODE_ENV
+src目录下:
+    (默认生成的目录及文件)
+    common目录:存放公共的
+    components目录:存放组件和vue页面,也可以为了操作,单独存组件如toast,popup等组件,把vue页面存在自己新建的view视图中
+    router目录:存放路由设置 
+    App.vue:页面级vue组件
+    main.js:页面入口js文件 可以把main.js和app.vue单独放到新建的entry目录下,记得在webpack.base.conf.js中改下entry引入路径就行
+    (可以根据需求加入store目录:)
+    assets目录:
+        存放公共的css,js.images等资源如:reset.css
+    api目录:
+        app.js:h5和app交互的方法,
+        index.js:封装的接口方法,可以把所有的接口都写在里面,也可以把接口分类,然后引入到这个文件中
+    store目录:此目录下存放的是vuex的配置文件
+        index.js:可以把vuex的state(初始化的数据源),getters(对数据源进行操作如(过滤)),mutations(唯一的修改数据源的方法,同步)
+                actions(操作mutations,异步)都写在此页面中,也可以为了管理单独把getters,mutations,actions单独建一个文件夹,然后
+                在index.js引入
+    view目录:
+        根据需求可以把所有的vue页面存到这里,把公用的vue组件存到components中,看起来更语义化,视图和组件分开
+    utils目录:
+        根据自己需求存放文件:
+        request.js:存放的封装的接口请求的方法,
+        jsBridge.js:存放的是和h5和app交互的请求方法
+        platFormType.js:存放的是app和h5交互判断是iso还是安卓
+        utils.js:存放的是自己项目中封装的方法
+        formValidata.js:存放的是数字,字符串转换的方法
+在static目录下:
+        可以存放网站的favicon.ico在改目录下
+.babelrc:
+     babel的配置
+index.html:入口页面
+package.json:
+        项目启动,打包和安装的插件等;
+</code></pre><h3 id="3-代码执行流程"><a href="#3-代码执行流程" class="headerlink" title="3.代码执行流程:"></a>3.代码执行流程:</h3><pre><code>1.在terminal中执行 npm run dev 会先起一个服务,然后把NODE_ENV=dev设置为dev环境,执行webpack.dev.conf.js文件中的内容,
+2.在webpack.dev.conf.js中会引入config目录下的index.js和build目录下的webpack.base.conf.js文件,编译文件入口为entry目录
+   下的index.js
+3.在index.js文件中会引入vue,store,axios,app.vue页面,全局引入的插件(例如:vue-lazyload懒加载),路由文件等,然后实例化一个vue对象
+    const app = new Vue({
+        el: &apos;#app&apos;,
+        router,
+        store,
+        render: h =&gt; h(App)
+    });
+    绑定app.vue中的id=&apos;app&apos;的dom,引入router,和store,有需要全局引入的组件也可以在这里引入,如toast,也可以拦截路由的请求如对
+    404,500进行拦截等
+</code></pre><h2 id="二-遇到的问题"><a href="#二-遇到的问题" class="headerlink" title="二:遇到的问题:"></a>二:遇到的问题:</h2><h3 id="1-input输入框type-”number”和type-”tel”在移动端都可以唤醒数字键盘-但是他们都还是可以输入小数点-并且"><a href="#1-input输入框type-”number”和type-”tel”在移动端都可以唤醒数字键盘-但是他们都还是可以输入小数点-并且" class="headerlink" title="1. input输入框type=”number”和type=”tel”在移动端都可以唤醒数字键盘,但是他们都还是可以输入小数点,+,-,并且,"></a>1. input输入框type=”number”和type=”tel”在移动端都可以唤醒数字键盘,但是他们都还是可以输入小数点,+,-,并且,</h3><pre><code>type=&quot;number&quot;输入的小数点在视图上可以看到,但是在控制台结果输出是没有的,这个时候如果用正则表达式截取小
 数点以前的数字就会出现问题,无法获取到想要的数据,type=&quot;number&quot;输入的小数点在视图上可以看到,在控制
 台结果也是有的,此时用正则表达式截取是完全ok的,
 参考:https://blog.csdn.net/qq_22509715/article/details/78993912
