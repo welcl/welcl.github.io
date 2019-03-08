@@ -99,7 +99,7 @@
 <meta property="og:image" content="http://yoursite.com/2019/03/05/js高级/原型链指向改变.png">
 <meta property="og:image" content="http://yoursite.com/2019/03/05/js高级/原型指向后的图解.png">
 <meta property="og:image" content="http://yoursite.com/2019/03/05/js高级/原型最终的指向.png">
-<meta property="og:updated_time" content="2019-03-08T06:54:29.274Z">
+<meta property="og:updated_time" content="2019-03-08T06:55:10.887Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="js高级">
 <meta name="twitter:description" content="学习目标:  理解面向对象开发思想 掌握 JavaScript 面向对象开发相关模式 掌握在 JavaScript 中使用正则表达式 typora-copy-images-to media   JavaScript 高级; 课程介绍课程大纲在线地址：JavaScript 高级  目标 理解面向对象开发思想 掌握 JavaScript 面向对象开发相关模式 掌握在 JavaScript 中使用正则">
@@ -1282,7 +1282,7 @@
 </tbody>
 </table>
 <h3 id="正则匹配"><a href="#正则匹配" class="headerlink" title="正则匹配"></a>正则匹配</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 匹配日期</span></span><br><span class="line"><span class="keyword">var</span> dateStr = <span class="string">'2015-10-10'</span>;</span><br><span class="line"><span class="keyword">var</span> reg = <span class="regexp">/^\d&#123;4&#125;-\d&#123;1,2&#125;-\d&#123;1,2&#125;$/</span></span><br><span class="line"><span class="built_in">console</span>.log(reg.test(dateStr));</span><br></pre></td></tr></table></figure>
-<p>###匹配正则表达式<br>//        console.log(/./.test(“除了回车换行以为的任意字符”));//true<br>//        console.log(/.*/.test(“0个到多个”));//true<br>//        console.log(/.+/.test(“1个到多个”));//true<br>//        console.log(/.?/.test(“哈哈”));//true<br>//        console.log(/[0-9]/.test(“9527”));//true<br>//        console.log(/[a-z]/.test(“what”));//true<br>//        console.log(/[A-Z]/.test(“Are”));//true<br>//        console.log(/[a-zA-Z]/.test(“干啥子”));//false<br>//        console.log(/[0-9a-zA-Z]/.test(“9ebg”));//true<br>//        console.log(/b|(ara)/.test(“abra”));//true<br>//        console.log(/[a-z]{2,3}/.test(“arfsf”));//true</p>
+<p>###匹配正则表达式<br>//        console.log(/./.test(“除了回车换行以外的任意字符”));//true<br>//        console.log(/.*/.test(“0个到多个”));//true<br>//        console.log(/.+/.test(“1个到多个”));//true<br>//        console.log(/.?/.test(“哈哈”));//true<br>//        console.log(/[0-9]/.test(“9527”));//true<br>//        console.log(/[a-z]/.test(“what”));//true<br>//        console.log(/[A-Z]/.test(“Are”));//true<br>//        console.log(/[a-zA-Z]/.test(“干啥子”));//false<br>//        console.log(/[0-9a-zA-Z]/.test(“9ebg”));//true<br>//        console.log(/b|(ara)/.test(“abra”));//true<br>//        console.log(/[a-z]{2,3}/.test(“arfsf”));//true</p>
 <pre><code>console.log(/\d/.test(&quot;998&quot;));//true
 console.log(/\d*/.test(&quot;998&quot;));//true
 console.log(/\d+/.test(&quot;998&quot;));//true
